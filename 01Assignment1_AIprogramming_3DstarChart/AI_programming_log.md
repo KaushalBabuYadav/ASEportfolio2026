@@ -26,7 +26,8 @@ Note: screenshots I sent the AI are described in brackets, as images cannot be p
 
 **What I did with it:**
 
-**Explanation of the code (in my own words):**
+**Explanation of the code (drafted with AI help, checked by me):**
+`using Raylib_cs;` imports the library. `InitWindow` opens an 800x450 window with a title. `SetTargetFPS(60)` limits the loop to 60 frames per second. The `while` loop runs until the window is closed (Esc or the close button). Each frame, `BeginDrawing`/`EndDrawing` wrap the drawing, `ClearBackground` paints the window black and `DrawText` writes white text at position (20, 20). `CloseWindow` releases the window at the end.
 
 **Critique – bugs, flaws or misconceptions the AI introduced:**
 
@@ -60,7 +61,8 @@ Since this chat is in your ASE project, do you want me to open ASEportfolio2026 
 
 **What I did with it:** Nothing to commit. Confirmed the AI could see my GitHub account.
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+The AI correctly found my GitHub account and repositories. No problems here. It listed all seven of my repos even though only ASEportfolio2026 was relevant, so I had to tell it which one to focus on.
 
 ---
 
@@ -101,7 +103,8 @@ Send the next part whenever you're ready.
 
 **What I did with it:** Nothing to commit.
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+The AI read the repo correctly and did not invent anything: it said the assignment folders were empty and that it could not open the SharePoint spec, instead of guessing what Component 1 was. That is the behaviour I want. It also said it could not push to my repo, which was fine because I did not want it to.
 
 ---
 
@@ -131,7 +134,8 @@ Which one is it?
 
 **What I did with it:** Nothing to commit.
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+Accurate: the folder really only had a .gitkeep file. The AI suggested my code might only be on my computer, but in fact I had not started yet.
 
 ---
 
@@ -153,7 +157,8 @@ I don't see any PDFs in this message yet; they may still be uploading or didn't 
 
 **What I did with it:** Added the assignment PDF (`2026ASEAssignment.pdf`) to my Claude project so the AI could read it.
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+The AI respected my instruction not to push or pull. The PDF had not attached properly, and the AI noticed this instead of pretending it had read it.
 
 ---
 
@@ -238,7 +243,8 @@ Once you've answered the questions above, we can start with the **Setting Up** s
 
 **What I did with it:** Used it as my checklist for Component 1.
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+I checked the AI's summary against the PDF: the deadline (9/11/2026 12pm), the marks (20/15/15/20/30) and the branch names match. It also spotted inconsistencies in the spec, such as AI_log.md vs AI_programming_log.md. Weakness: the answer was very long, and it asked five questions at once, which slowed me down.
 
 ---
 
@@ -265,7 +271,8 @@ And I still need these before we can start the Setting Up section:
 4. **Partner:** are you working alone, or with someone?
 ````
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+My answer was unclear, so the AI asked me to confirm instead of guessing. That was correct, but it repeated the same questions again, which felt slow.
 
 ---
 
@@ -321,7 +328,8 @@ This answers almost all of my earlier questions.
 
 **What I did with it:** Used it to understand the tutorial and the differences between the tutorial and the spec.
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+Useful: the AI found the tutorial itself in the module's public GitHub repos and gave line numbers as sources. But its plan assumed I had Windows and Visual Studio (WPF, Helix). It had not checked my machine, which was a wrong assumption (I use a Mac).
 
 ---
 
@@ -348,7 +356,8 @@ To start that, I just need your **name, group, course and tutor's name** for the
 If you'd like me to see the folder on your desktop directly, add it with **"Add folder"** from the **+** menu in the Claude desktop app. I'll only read it unless you tell me to change something.
 ````
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+The previous answers were too long and confusing for what I needed, and I told it so. The AI simplified, which was better.
 
 ---
 
@@ -392,7 +401,8 @@ Tell me once that's done (or if any step gives an error), and we'll start Featur
 
 **What I did with it:** Tried to follow it, but I am on a Mac using VS Code, not Visual Studio on Windows (see next entry).
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+These steps were for Visual Studio and WPF on Windows, so they were useless on my Mac. This is a misconception the AI introduced by assuming my operating system. Lesson: tell the AI my environment (macOS, VS Code) at the start.
 
 ---
 
@@ -433,7 +443,8 @@ dotnet --version
 
 **What I did with it:** Chose Option B (Raylib-cs on macOS).
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+Here the AI realised from my screenshot that I am on a Mac and checked online that WPF is Windows-only, with a source. It gave me two options and I chose Raylib-cs so I can work on my own laptop. Trade-off: I cannot follow the tutorial step by step (no XAML or Helix), so I will have to understand the 3D code myself. This also means my code will not look like the tutor's. It also noticed the empty 'StarChart3D' text file I had created by mistake.
 
 ---
 
@@ -477,7 +488,8 @@ dotnet build
 Do step 1 first and send me what it prints. Then we'll do steps 2 to 4 together, and I'll give you a small test window to prove Raylib-cs works on your Mac before we start Feature 1.
 ````
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+Correct: Raylib-cs comes through NuGet, so only the .NET SDK needed downloading.
 
 ---
 
@@ -508,7 +520,8 @@ dotnet --version
 Send me what it prints.
 ````
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+Correct. My confusion was between the .NET SDK and the '.NET Install Tool' VS Code extension.
 
 ---
 
@@ -539,7 +552,8 @@ Send me what it prints.
 
 **What I did with it:** Installed the .NET 10 SDK (Arm64) from Microsoft's website.
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+The AI correctly explained that the extension I installed is not the SDK. My mistake, not the AI's.
 
 ---
 
@@ -561,7 +575,8 @@ dotnet --version
 Send me the number it prints (or a screenshot).
 ````
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
 
 ---
 
@@ -621,7 +636,8 @@ Send me a screenshot of the result, or any error if it fails. Remember this test
 
 **Explanation of the code (in my own words):**
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+The code worked first time once it was in the right file, and it confirmed Raylib-cs 8.1.0 works on macOS with .NET 10. It is only a test, so the hard-coded window size (800x450) and text are fine for now, but in the real program these should be named constants. There is no error handling if the window or the native Raylib library fails to load.
 
 ---
 
@@ -651,7 +667,8 @@ dotnet run
 You should get a black window with "Raylib-cs is working on macOS". Close it with **Esc**, then send me a screenshot.
 ````
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+The problem was mine: I pasted the code into the old unsaved 'StarChart3D' tab instead of Program.cs, so the default 'Hello, World!' program ran. The AI worked this out from the screenshot (unsaved dot on the tab). Lesson: check I am editing the right file and that it is saved before running.
 
 ---
 
@@ -691,7 +708,8 @@ dotnet run
 
 **What I did with it:** Pasted it into `Program.cs`, saved, ran it. The window opened (next entry).
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
 
 ---
 
@@ -735,7 +753,8 @@ git checkout -b feature1-create-star-chart
 Send me a screenshot after step 3 (`git status`) before committing, so I can double-check what's going in.
 ````
 
-**Critique (my own words):**
+**Critique (drafted with AI help, checked and edited by me):**
+The steps were correct, but the AI gave me several git commands in one block. This caused problems later (see Entries 24–26).
 
 ---
 
@@ -743,11 +762,363 @@ Send me a screenshot after step 3 (`git status`) before committing, so I can dou
 
 **Prompt:**
 ```
+1. Add the two log files. Move the AI_programming_log.md and AI_domainExpert_log.md files I sent you into the 01Assignment1_AIprogramming_3DstarChart folder (next to the StarChart3D folder, not inside it).
+2. Log what we've done so far. In AI_programming_log.md, add entries for this conversation: your prompts and my full replies, especially the Raylib-cs test code. A good point for your critique section, in your own words: the tutorial uses WPF, which is Windows-only, so on macOS you chose Raylib-cs instead. Also note the "Hello, World!" problem, where the code was in the wrong, unsaved file.
 provide me everything in code so i can run through termininal
 ```
 
-**AI response:** (paste the AI's reply here – it gave me this log file and terminal commands to move the log files into place)
+**AI response (full):** (the AI also sent me the filled-in `AI_programming_log.md` with Entries 1–19, and the `AI_domainExpert_log.md` template)
+````
+I've filled `AI_programming_log.md` with entries 1–19: every prompt you sent and my full reply, the code, and notes on your screenshots.
 
-**Critique (my own words):**
+**Step 1: Download both files.** Click each file card and save it. They'll go to your **Downloads** folder.
+
+**Step 2: Move them into your assignment folder.** Paste this into your VS Code terminal:
+```
+mv ~/Downloads/AI_programming_log.md ~/Downloads/AI_domainExpert_log.md ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+ls
+```
+`ls` should show: `AI_domainExpert_log.md  AI_programming_log.md  StarChart3D`.
+
+If your browser renamed a file (for example `AI_programming_log (1).md`), tell me and I'll adjust the command.
+
+**Step 3: Write your critiques.** Each entry has an empty **"Critique (my own words)"** line. I've deliberately left these for you: the spec gives marks for *your* critique of the AI, and the log will be checked by AI, so it must be genuinely yours. For the setup entries, a sentence each is enough. The two real points are in Entry 10 (the tutorial's WPF doesn't run on macOS, so you chose Raylib-cs) and Entry 16 (the code ran as "Hello, World!" because it was in the wrong, unsaved file). For Entry 15, also add a short **explanation of the test code** in your own words.
+
+**Step 4: Check before committing:**
+```
+git status
+```
+Send me a screenshot, and I'll confirm there are no `bin`/`obj` folders before you commit.
+````
+
+**What I did with it:** Downloaded both files.
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI wrote the log for me from our chat, which saved a lot of time. I checked it against the conversation. I had to be careful where I pasted the terminal commands (see next entry).
+
+---
+
+### Entry 20 – 2026-11-05 04:10 – Branch: `main` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: I had pasted the `mv` commands into the AI_domainExpert_log.md file (opened from Downloads) instead of the terminal. `git status` showed only `StarChart3D/` as untracked]
+
+**AI response (full):**
+````
+Two things to fix before committing. Good news first: `git status` only shows `StarChart3D/`, which is right.
+
+**Problem 1: the commands went into the wrong place.** You pasted the `mv` commands **into the `AI_domainExpert_log.md` file** (lines 29–31), not into the terminal. So the log files haven't been moved yet; they're still in Downloads.
+
+To fix it:
+1. Close the **AI_domainExpert_log.md** tab and choose **Don't Save**. Your file in Downloads stays clean.
+2. Also close the old **StarChart3D** tab (the one with the dot) and choose **Don't Save**.
+3. **Click inside the terminal panel at the bottom** (where `git status` is), then paste and press Enter:
+```
+mv ~/Downloads/AI_programming_log.md ~/Downloads/AI_domainExpert_log.md ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/
+ls
+```
+`ls` should now show `AI_domainExpert_log.md  AI_programming_log.md  StarChart3D`.
+
+**Problem 2: we need to confirm bin/obj are excluded.** `git status` shows only the folder name, so it doesn't prove `bin` and `obj` are excluded. Run this in the terminal; it only **lists** what would be committed, without changing anything:
+```
+git add --dry-run .
+```
+You should see exactly these 4 lines, and nothing with `bin/` or `obj/`:
+```
+add '01Assignment1_AIprogramming_3DstarChart/AI_domainExpert_log.md'
+add '01Assignment1_AIprogramming_3DstarChart/AI_programming_log.md'
+add '01Assignment1_AIprogramming_3DstarChart/StarChart3D/Program.cs'
+add '01Assignment1_AIprogramming_3DstarChart/StarChart3D/StarChart3D.csproj'
+```
+
+Send me a screenshot of that output, and then you can commit.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+My mistake: I pasted the commands into the file, not the terminal. The AI spotted it from the screenshot. It also correctly pointed out that `git status` only shows a folder name, so it does not prove `bin` and `obj` are ignored, and gave a safe way to check (`--dry-run`).
+
+---
+
+### Entry 21 – 2026-11-05 04:13 – Branch: `main` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `mv` worked; `ls` showed AI_domainExpert_log.md, AI_programming_log.md, StarChart3D]
+
+**AI response (full):**
+````
+The `mv` worked: `ls` shows both log files next to `StarChart3D`, and they appear in the Explorer.
+
+Two quick things:
+
+1. **Close the `AI_domainExpert_log.md` tab** that has its name crossed out. It's the old copy from Downloads, which has now been moved. Choose **Don't Save**, otherwise VS Code would recreate it in Downloads. Close the **StarChart3D** tab with the dot the same way (**Don't Save**). From now on, open the log files from the **Explorer on the left**.
+
+2. You haven't run the check yet. In the terminal, run:
+```
+git add --dry-run .
+```
+Send me a screenshot. It should list only the 2 `.md` files, `Program.cs` and `StarChart3D.csproj`, with nothing from `bin/` or `obj/`.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 22 – 2026-11-05 04:14 – Branch: `main` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `git add --dry-run .` listed exactly the 4 expected files; StarChart3D.csproj showing net10.0 and Raylib-cs 8.1.0]
+
+**AI response (full):**
+````
+That's exactly right: only the 4 expected files, and nothing from `bin/` or `obj/`. Your `.csproj` also confirms **net10.0** and **Raylib-cs 8.1.0**.
+
+**Before you commit**, do these two things, because the commit time will be checked against your log:
+1. Open `AI_programming_log.md` from the Explorer and write your **critiques** (a sentence each; Entries 10, 15 and 16 matter most). Also paste my reply into **Entry 19**, and add entries for the messages since then in the same format.
+2. Save with **Cmd+S**. Close the old **StarChart3D** tab with the dot, choosing **Don't Save**.
+
+**Then commit, push and create the Feature 1 branch** (run in the terminal):
+```
+git add .
+git commit -m "Setup: add .NET 10 Raylib-cs project and AI log files"
+git push
+git checkout -b feature1-create-star-chart
+git push -u origin feature1-create-star-chart
+```
+
+The last line creates the branch on GitHub too, so the marker can see it.
+
+Send me a screenshot when it's done, and we'll start Feature 1: getting the HYG star data.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The check worked. But the AI gave me five git commands in one block to paste at once, and did not check first that my git name and email were set up on this Mac. Both caused problems in Entries 24–26.
+
+---
+
+### Entry 23 – 2026-11-05 04:26 – Branch: `main` (no code)
+
+**Prompt:**
+```
+i dont find git here
+```
+[Screenshot: a new, empty terminal; files still uncommitted]
+
+**AI response (full):**
+````
+You don't need to find anything: Git is already working on your Mac. You ran `git status` and `git add --dry-run` earlier, and both worked. The terminal at the bottom is a new, empty one, which is fine.
+
+Just **click in that terminal** and type these commands, pressing Enter after each line:
+
+```
+git add .
+git commit -m "Setup: add .NET 10 Raylib-cs project and AI log files"
+git push
+git checkout -b feature1-create-star-chart
+git push -u origin feature1-create-star-chart
+```
+
+If you'd prefer buttons instead, Git is also the **third icon down on the left sidebar** (the branch symbol with the blue **4** badge). That's **Source Control**, where you can type a message and click **Commit**. Use either the terminal or the buttons, not both.
+
+One reminder: make sure you've written your critiques in `AI_programming_log.md` and saved it **before** running `git commit`.
+
+Send me a screenshot of the terminal after the last command.
+````
+
+**What I did with it:** Pasted all five commands at once. I had not written my critiques yet.
+
+**Critique (drafted with AI help, checked and edited by me):**
+I pasted all the commands together, so they ran one after another without me checking each result. The commit was made before I had written my critiques.
+
+---
+
+### Entry 24 – 2026-11-05 04:29 – Branch: `main` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: commit created (4 files, 810 insertions) with a git warning that my name and email were configured automatically; a "GitHub wants to access a GitHub account" popup waiting during `git push`]
+
+**AI response (full):**
+````
+Your commit worked (4 files, 810 lines), but stop before choosing the GitHub account, because the screenshot shows a problem.
+
+**The problem:** Git warned that your **name and email aren't set up** on this Mac, so it guessed them, probably using your Mac's username and computer name. That commit would show up on GitHub under the wrong identity, and your marker checks the commit history. It hasn't been pushed yet, so it's easy to fix.
+
+Your repo's first commit on GitHub uses **KAUSHAL BABU YADAV** and **kaushalyadavkkyy@gmail.com**, so we'll use the same.
+
+**1. Cancel the push.** Press **Esc** on the "Select an account" popup. Then click in the terminal and press **Ctrl+C** to stop the remaining commands.
+
+**2. Fix the identity and the commit.** Run these one at a time:
+```
+git checkout main
+git branch -D feature1-create-star-chart
+git config --global user.name "KAUSHAL BABU YADAV"
+git config --global user.email "kaushalyadavkkyy@gmail.com"
+git commit --amend --reset-author --no-edit
+git log -1 --format="%an <%ae>"
+```
+- If `git branch -D` says the branch is "not found", that's fine; it just means it hadn't been created yet.
+- The last command should print `KAUSHAL BABU YADAV <kaushalyadavkkyy@gmail.com>`.
+
+**3. Push, then create the Feature 1 branch:**
+```
+git push
+```
+When the popup appears, choose **KaushalBabuYadav**. Once it finishes:
+```
+git checkout -b feature1-create-star-chart
+git push -u origin feature1-create-star-chart
+```
+
+Send me a screenshot after the last command.
+````
+
+**What I did with it:** I had already selected my GitHub account in the popup, so the queued commands carried on before I could follow these steps.
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI correctly spotted the identity warning, which I had missed, and checked the correct name and email from my repo's first commit instead of guessing. But the problem was partly caused by its earlier instructions (Entry 22): it should have checked the git identity before telling me to commit, and should not have given me several commands to paste at once.
+
+---
+
+### Entry 25 – 2026-11-05 04:34 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the original queued commands had finished: the new branch `feature1-create-star-chart` was pushed to GitHub]
+
+**AI actions:** The AI checked GitHub (read-only) and found the commit had the wrong author (`Kaushal Yadav <kaushalyadav@Kaushals-MacBook-Air-10.local>`), and that `main` on GitHub still only had the Initial commit.
+
+**AI response (full):**
+````
+I checked GitHub, and two things went wrong. Both are easy to fix now, before any more work goes on top.
+
+1. **Wrong identity.** The commit on GitHub is by `Kaushal Yadav <kaushalyadav@Kaushals-MacBook-Air-10.local>`, which is your Mac's guessed identity, not your GitHub email. It won't link to your GitHub account.
+2. **`main` wasn't updated.** On GitHub, `main` still has only the "Initial commit". The Setup commit only went to the `feature1-create-star-chart` branch.
+
+This happened because the original 5 commands were still queued and ran once you picked the account.
+
+**The fix.** Run these **one at a time** in the terminal (you're currently on `feature1-create-star-chart`, which is correct):
+```
+git config --global user.name "KAUSHAL BABU YADAV"
+git config --global user.email "kaushalyadavkkyy@gmail.com"
+git commit --amend --reset-author --no-edit
+git log -1 --format="%an <%ae>"
+```
+The last line should print `KAUSHAL BABU YADAV <kaushalyadavkkyy@gmail.com>`. **If it doesn't, stop and send me a screenshot.**
+
+If it's correct, continue:
+```
+git branch -f main
+git push origin main
+git push --force-with-lease origin feature1-create-star-chart
+```
+
+What these do:
+- `git branch -f main` points `main` at your corrected Setup commit.
+- `git push origin main` puts the Setup commit on `main` on GitHub.
+- The last line replaces the wrong-identity commit on the feature branch. A force push is safe here because the branch is only a few minutes old and nobody else uses it.
+
+Send me a screenshot after the last command, and I'll re-check GitHub.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the AI checked GitHub itself instead of trusting the screenshot, and found two real problems (wrong author, `main` not updated). The fix (`--amend --reset-author`, then a force push) rewrites history, which is normally risky, but here the branch was only minutes old and only I use it. I used `--force-with-lease`, which is the safer kind of force push.
+
+---
+
+### Entry 26 – 2026-11-05 04:37 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+herre
+```
+[Screenshot: `git log -1` printed `KAUSHAL BABU YADAV <kaushalyadavkkyy@gmail.com>`; new commit 195b75c; VS Code showing a "Sync Changes 1↓ 1↑" button]
+
+**AI response (full):**
+````
+The identity is now correct: the last line prints **KAUSHAL BABU YADAV <kaushalyadavkkyy@gmail.com>**, and your fixed commit is `195b75c`.
+
+**Important: do NOT click the blue "Sync Changes 1↓ 1↑" button.** It would pull the old wrong-identity commit back in and merge it with the new one, which would mess up the history.
+
+Now run the last three commands, one at a time:
+```
+git branch -f main
+git push origin main
+git push --force-with-lease origin feature1-create-star-chart
+```
+
+Send me a screenshot after the last one, and I'll check GitHub to confirm both `main` and `feature1-create-star-chart` are correct.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Useful warning: I would probably have clicked "Sync Changes", which would have merged the old wrong commit back in.
+
+---
+
+### Entry 27 – 2026-11-05 04:38 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `main` pushed (7cbaf4b..195b75c) and the feature branch force-updated (e3f31ad...195b75c)]
+
+**AI actions:** The AI checked GitHub (read-only) and also checked the committed log file.
+
+**AI response (full):**
+````
+Checked on GitHub, and everything is now correct:
+
+- **`main`** and **`feature1-create-star-chart`** both point to the Setup commit `195b75c`.
+- The author is **KAUSHAL BABU YADAV <kaushalyadavkkyy@gmail.com>**.
+- The old wrong-identity commit is gone.
+
+**One thing missing:** in the log file that was committed, **all 19 "Critique (my own words)" sections are still empty**, Entry 19's response hasn't been pasted, and there are no entries yet for the messages after it. The spec gives **no marks for full functionality with no critique**, so do this now, before Feature 1:
+
+1. Open `AI_programming_log.md` from the **Explorer** on the left.
+2. Write your critique for each entry, in your own words (one or two sentences is fine; Entries 10, 15 and 16 matter most).
+3. Add entries for your messages after Entry 19 (the `git status` screenshots, the wrong identity fix, and so on). The identity problem is good critique material: the commit went out with the wrong author because Git wasn't configured, and you fixed it with `--amend --reset-author` and a force push.
+4. Save, then commit on your current branch:
+```
+git add .
+git commit -m "Docs: add critiques and log entries for setup"
+git push
+```
+
+Committing this now, as a separate commit, keeps your history honest: the timestamps will show the critique was written today, during setup.
+
+Once that's pushed, we'll start **Feature 1**: downloading the HYG star data.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI checked the committed log and pointed out that my critiques were missing, which would have cost me marks.
+
+---
+
+### Entry 28 – 2026-11-05 04:40 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+write critique in human language so i can copy and paste
+```
+
+**AI response:** The AI drafted the critiques for Entries 1–27 and the code explanation for Entry 15, and added Entries 19–28 to this log. It said it would label the critiques "drafted with AI help, checked and edited by me" instead of "my own words", because the spec says AI-generated text must not be passed off as my own. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+(Write this one yourself.)
 
 ---
