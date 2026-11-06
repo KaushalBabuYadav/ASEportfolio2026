@@ -34,6 +34,8 @@ while (!Raylib.WindowShouldClose())
     renderer.DrawStars();
     Raylib.EndMode3D();
 
+    renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
+
     Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
     Raylib.DrawFPS(10, 36);
     Raylib.EndDrawing();
