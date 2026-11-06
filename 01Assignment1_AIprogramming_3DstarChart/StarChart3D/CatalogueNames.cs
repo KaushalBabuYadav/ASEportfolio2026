@@ -7,7 +7,10 @@ namespace StarChart3D;
 /// <remarks>
 /// Order of preference: Bayer letter + constellation, then Flamsteed number + constellation,
 /// then Gliese ID, then Hipparcos number, then the HYG ID as a last resort.
-/// Names use plain ASCII ("Alpha-2", "Bootis") so that Raylib's default font can draw them.
+/// Raylib's default font can draw Latin-1 characters such as "ö" (tested), but not Greek letters
+/// or superscript digits above ³. So Greek letters are written in full ("Alpha" rather than "α"),
+/// and number suffixes are written "-2" ("Alpha-2" rather than "Alpha²"), because the data also
+/// has suffixes 5 and 6, whose superscripts the font cannot draw.
 /// </remarks>
 public static class CatalogueNames
 {
@@ -30,7 +33,7 @@ public static class CatalogueNames
     {
         ["And"] = "Andromedae", ["Ant"] = "Antliae", ["Aps"] = "Apodis", ["Aqr"] = "Aquarii",
         ["Aql"] = "Aquilae", ["Ara"] = "Arae", ["Ari"] = "Arietis", ["Aur"] = "Aurigae",
-        ["Boo"] = "Bootis", ["Cae"] = "Caeli", ["Cam"] = "Camelopardalis", ["Cnc"] = "Cancri",
+        ["Boo"] = "Boötis", ["Cae"] = "Caeli", ["Cam"] = "Camelopardalis", ["Cnc"] = "Cancri",
         ["CVn"] = "Canum Venaticorum", ["CMa"] = "Canis Majoris", ["CMi"] = "Canis Minoris",
         ["Cap"] = "Capricorni", ["Car"] = "Carinae", ["Cas"] = "Cassiopeiae", ["Cen"] = "Centauri",
         ["Cep"] = "Cephei", ["Cet"] = "Ceti", ["Cha"] = "Chamaeleontis", ["Cir"] = "Circini",

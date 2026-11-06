@@ -18,6 +18,9 @@ public class StarRenderer
     /// </summary>
     public const float CatalogueLabelDistance = 8f;
 
+    /// <summary>Minimum gap in pixels kept between labels, so that names do not run into each other.</summary>
+    private const int LabelGap = 4;
+
     private static readonly Color ProperNameColour = new(255, 230, 150, 255);
     private static readonly Color CatalogueNameColour = new(150, 160, 180, 255);
 
@@ -102,7 +105,8 @@ public class StarRenderer
             int fontSize = star.HasProperName ? 14 : 10;
             int x = (int)screen.X + 6;
             int y = (int)screen.Y - fontSize / 2;
-            var area = new Rectangle(x, y, Raylib.MeasureText(star.DisplayName, fontSize), fontSize);
+            // The area is made a little bigger than the text, so that labels keep a gap between them.
+            var area = new Rectangle(x - LabelGap, y - LabelGap / 2, Raylib.MeasureText(star.DisplayName, fontSize) + 2 * LabelGap, fontSize + LabelGap);
 
             if (OverlapsExistingLabel(area))
             {
