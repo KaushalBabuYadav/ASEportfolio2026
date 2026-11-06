@@ -4002,3 +4002,1002 @@ here
 Works on my Mac. The touching labels are a small visual problem to fix together with the Boötis correction.
 
 ---
+
+### Entry 82 – 2026-11-06 02:19 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the star program was still running ("dotnet Star…" in the terminal list); cd, grep, cat and grep commands had been typed behind it]
+
+**AI response (full):**
+````
+Same as before: the star program is **still running** (the terminal list shows "**dotnet Star…**"), so the commands you typed are waiting behind it and **haven't run yet**. The window wasn't closed with Esc.
+
+Do what worked last time:
+1. In the terminal list on the right, **hover over "dotnet Star…"** and click the **bin (trash) icon**. Choose **Terminate** if asked. This closes the program and throws away the queued commands.
+2. Click on the other terminal ("**zsh StarCh…**"), or open a new one with **+**.
+3. Run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+
+Send me a screenshot of the number. I expect **72**. If it's something else, I'll tell you what to do.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Same mistake as Entry 71: I typed commands while the program was still running.
+
+---
+
+### Entry 83 – 2026-11-06 02:21 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: in another terminal, grep printed 72; "dotnet Star…" was still in the terminal list]
+
+**AI response (full):**
+````
+It prints **72**, which is right: nothing has been added yet.
+
+**But one thing first:** the "**dotnet Star…**" terminal is **still in the list**, so the program is still running with your old commands queued behind it, including the `cat` line. If that window closes later, those commands could run and **add the entries a second time**.
+
+1. Hover over "**dotnet Star…**" in the terminal list and click its **bin icon**. Choose **Terminate** if asked. Make sure it disappears from the list.
+2. Then, in this terminal ("zsh"), run these one at a time:
+```
+cat ~/Downloads/log_entries_71_81.md >> AI_programming_log.md
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+It should print **83**.
+```
+git add --dry-run .
+```
+It should list only `AI_programming_log.md`, `StarChart3D/Program.cs` and `StarChart3D/StarRenderer.cs`.
+
+Send me a screenshot before committing.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good catch by the AI: the old terminal still had a queued `cat` command that could have added the log entries a second time later.
+
+---
+
+### Entry 84 – 2026-11-06 02:23 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+hehe
+```
+[Screenshot: "dotnet Star…" had turned into "zsh StarChart3D" in the terminal list (the program had closed); grep in the other terminal still showed 72]
+
+**AI response (full):**
+````
+Look at the terminal list on the right: "**dotnet Star…**" has turned into "**zsh StarChart3D**". That means the star program has **closed**, and the commands that were queued behind it **may have just run in that terminal**, including the `cat` line.
+
+So **don't run `cat` yet**. First check, in the terminal you're in now:
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+- **83**: the queued `cat` already added the entries. Don't run `cat`. Go straight to:
+```
+git add --dry-run .
+```
+- **72**: they weren't added. Run:
+```
+cat ~/Downloads/log_entries_71_81.md >> AI_programming_log.md
+```
+then the `grep` line again (it should print 83), then `git add --dry-run .`.
+- **94**: they were added twice. Stop and tell me; I'll give you a fix.
+
+Send me a screenshot.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI noticed the terminal name change in the screenshot and stopped me from running `cat` before checking, which avoided a possible duplicate.
+
+---
+
+### Entry 85 – 2026-11-06 02:24 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: grep printed 72 twice; git add --dry-run listed only Program.cs and StarRenderer.cs; then cat appended log_entries_71_81.md; the editor showed Entry 81 at the end]
+
+**AI response (full):**
+````
+That sequence is fine:
+- `grep` printed **72** twice, so the queued commands in the other terminal **didn't** add anything.
+- `git add --dry-run` (run before `cat`) listed only `Program.cs` and `StarRenderer.cs`. That's correct, because the log hadn't changed yet.
+- Then `cat` added the entries. The editor now shows **Entry 81** at the end.
+
+Final check before committing, one at a time:
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+It must print **83**.
+```
+git add --dry-run .
+```
+It should now list **3 files**: `AI_programming_log.md`, `StarChart3D/Program.cs` and `StarChart3D/StarRenderer.cs`.
+
+If both match:
+```
+git add .
+```
+```
+git commit -m "Feature 2: render star names next to stars"
+```
+```
+git push
+```
+
+Send me a screenshot after `git push`.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 86 – 2026-11-06 02:27 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: commit 607bb17 "Feature 2: render star names next to stars" (3 files changed, 637 insertions) pushed]
+
+**AI actions:** The AI checked commit 607bb17 on GitHub (read-only): 3 files, 83 headings, no duplicated headings, code identical to what it had tested.
+
+**AI response (full):**
+````
+Part 2 is pushed and checked on GitHub. Commit `607bb17` is on `feature2-visualising-star-chart` with the 3 expected files, and both code files match what I tested. The log has 83 headings with no duplicates, so the terminal mix-up didn't add anything twice.
+
+The yellow ⚠ icons next to two of the terminals are just VS Code saying those terminals could be restarted. They're harmless, so you can ignore them.
+
+Feature 2 so far:
+- Done: stars as small shapes, and star names.
+- Still to do: a small fix (spelling "Boötis" correctly, correcting my wrong comment about the font, and adding a gap so labels don't touch), then spectral colours, the filter for stars without a proper name, and the camera controls.
+
+I've updated the handover note, so we can pick up from here. The next log entry is number 82.
+
+It's 2:27am. Shall I carry on with the small fix now, or stop for tonight?
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI checked GitHub for duplicate log headings as well as the commit, which confirmed the terminal mix-up had not damaged the log.
+
+---
+
+### Entry 87 – 2026-11-06 02:28 – Branch: `feature2-visualising-star-chart` – Fix: Boötis spelling, font comment, gap between labels
+
+**Prompt:**
+```
+yes please
+```
+
+**AI actions:** The AI changed CatalogueNames.cs and StarRenderer.cs in its test copy, built a separate console test that printed the catalogue names of unnamed Boötes stars (Xi Boötis A, Theta Boötis A, 45 Boötis; 0 duplicate names), ran the 3D program on its virtual screen and looked at a screenshot. Before sending, it noticed its new comment claimed ⁵ and ⁶ cannot be drawn without having tested them, so it drew "x¹ x² x³ x⁴ x⁵ x⁶ Boötis": ¹²³ and ö drew correctly, ⁴⁵⁶ showed "?". Program.cs was not changed.
+
+**AI response (full):**
+````
+I'll make the small fix: spell "Boötis" properly, correct my wrong comment, and add a gap between labels. I'll test it first.
+
+Before I send this, one claim in my new comment is still **untested**: I wrote that ⁵ and ⁶ can't be drawn, but I only tested ² and α. Let me check rather than assume:
+
+Confirmed: **¹ ² ³ draw**, while **⁴ ⁵ ⁶ show as "?"**, and **Boötis** draws correctly. So the comment is now accurate and tested.
+
+The small fix is ready, and I tested everything in it before sending:
+- **`CatalogueNames.cs`**: "Bootis" is now **"Boötis"**. A test on your data gives **Xi Boötis A**, **Theta Boötis A** and **45 Boötis**, and all 2,000 names are still unique. My wrong comment about the font is also replaced with what I actually tested: the font draws ö and ¹²³, but not α or ⁴⁵⁶. That's why "Alpha-2" stays.
+- **`StarRenderer.cs`**: labels now keep a **4-pixel gap** between them, so "Wolf 359" and "Ross 614" no longer run together (compare `preview_fix.png` with your last screenshot).
+- **One side effect, which is good critique material:** with the bigger gaps, a few more labels get hidden at the default view. For example, **Sirius** and **Barnard's Star** lose their labels because a nearer star's label is in the way. They'll come back when you zoom in, once the camera controls are done in part 5.
+
+**Steps.** Download the two `.cs` files, then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+mv ~/Downloads/CatalogueNames.cs ~/Downloads/StarRenderer.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Take a screenshot, **press Esc in the star window to close it**, and only then send me the screenshot. After that I'll write log entries 82 onwards.
+````
+
+**What I did with it:** Moved the two files into StarChart3D; `dotnet build` and `dotnet run` worked. On my Mac the labels keep a gap (Entry 88).
+
+**Code sent as files (full):**
+
+`CatalogueNames.cs` (changed – the class comment about the font, and `"Boo"` now maps to `"Boötis"`):
+```csharp
+namespace StarChart3D;
+
+/// <summary>
+/// Creates catalogue names for stars, such as "Tau Ceti", "61 Cygni A" or "Gl 845",
+/// from the Bayer, Flamsteed, Gliese and Hipparcos values in the HYG data.
+/// </summary>
+/// <remarks>
+/// Order of preference: Bayer letter + constellation, then Flamsteed number + constellation,
+/// then Gliese ID, then Hipparcos number, then the HYG ID as a last resort.
+/// Raylib's default font can draw Latin-1 characters such as "ö" (tested), but not Greek letters
+/// or superscript digits above ³. So Greek letters are written in full ("Alpha" rather than "α"),
+/// and number suffixes are written "-2" ("Alpha-2" rather than "Alpha²"), because the data also
+/// has suffixes 5 and 6, whose superscripts the font cannot draw.
+/// </remarks>
+public static class CatalogueNames
+{
+    /// <summary>HYG three-letter Greek letter abbreviations and their full names.</summary>
+    private static readonly Dictionary<string, string> GreekLetters = new()
+    {
+        ["Alp"] = "Alpha", ["Bet"] = "Beta", ["Gam"] = "Gamma", ["Del"] = "Delta",
+        ["Eps"] = "Epsilon", ["Zet"] = "Zeta", ["Eta"] = "Eta", ["The"] = "Theta",
+        ["Iot"] = "Iota", ["Kap"] = "Kappa", ["Lam"] = "Lambda", ["Mu"] = "Mu",
+        ["Nu"] = "Nu", ["Xi"] = "Xi", ["Omi"] = "Omicron", ["Pi"] = "Pi",
+        ["Rho"] = "Rho", ["Sig"] = "Sigma", ["Tau"] = "Tau", ["Ups"] = "Upsilon",
+        ["Phi"] = "Phi", ["Chi"] = "Chi", ["Psi"] = "Psi", ["Ome"] = "Omega"
+    };
+
+    /// <summary>
+    /// The 88 IAU constellation abbreviations and the Latin genitive used in star names
+    /// (e.g. "Cet" → "Ceti"). The abbreviations are case-sensitive: "CMa" is not "Cma".
+    /// </summary>
+    private static readonly Dictionary<string, string> ConstellationGenitives = new()
+    {
+        ["And"] = "Andromedae", ["Ant"] = "Antliae", ["Aps"] = "Apodis", ["Aqr"] = "Aquarii",
+        ["Aql"] = "Aquilae", ["Ara"] = "Arae", ["Ari"] = "Arietis", ["Aur"] = "Aurigae",
+        ["Boo"] = "Boötis", ["Cae"] = "Caeli", ["Cam"] = "Camelopardalis", ["Cnc"] = "Cancri",
+        ["CVn"] = "Canum Venaticorum", ["CMa"] = "Canis Majoris", ["CMi"] = "Canis Minoris",
+        ["Cap"] = "Capricorni", ["Car"] = "Carinae", ["Cas"] = "Cassiopeiae", ["Cen"] = "Centauri",
+        ["Cep"] = "Cephei", ["Cet"] = "Ceti", ["Cha"] = "Chamaeleontis", ["Cir"] = "Circini",
+        ["Col"] = "Columbae", ["Com"] = "Comae Berenices", ["CrA"] = "Coronae Australis",
+        ["CrB"] = "Coronae Borealis", ["Crv"] = "Corvi", ["Crt"] = "Crateris", ["Cru"] = "Crucis",
+        ["Cyg"] = "Cygni", ["Del"] = "Delphini", ["Dor"] = "Doradus", ["Dra"] = "Draconis",
+        ["Equ"] = "Equulei", ["Eri"] = "Eridani", ["For"] = "Fornacis", ["Gem"] = "Geminorum",
+        ["Gru"] = "Gruis", ["Her"] = "Herculis", ["Hor"] = "Horologii", ["Hya"] = "Hydrae",
+        ["Hyi"] = "Hydri", ["Ind"] = "Indi", ["Lac"] = "Lacertae", ["Leo"] = "Leonis",
+        ["LMi"] = "Leonis Minoris", ["Lep"] = "Leporis", ["Lib"] = "Librae", ["Lup"] = "Lupi",
+        ["Lyn"] = "Lyncis", ["Lyr"] = "Lyrae", ["Men"] = "Mensae", ["Mic"] = "Microscopii",
+        ["Mon"] = "Monocerotis", ["Mus"] = "Muscae", ["Nor"] = "Normae", ["Oct"] = "Octantis",
+        ["Oph"] = "Ophiuchi", ["Ori"] = "Orionis", ["Pav"] = "Pavonis", ["Peg"] = "Pegasi",
+        ["Per"] = "Persei", ["Phe"] = "Phoenicis", ["Pic"] = "Pictoris", ["Psc"] = "Piscium",
+        ["PsA"] = "Piscis Austrini", ["Pup"] = "Puppis", ["Pyx"] = "Pyxidis", ["Ret"] = "Reticuli",
+        ["Sge"] = "Sagittae", ["Sgr"] = "Sagittarii", ["Sco"] = "Scorpii", ["Scl"] = "Sculptoris",
+        ["Sct"] = "Scuti", ["Ser"] = "Serpentis", ["Sex"] = "Sextantis", ["Tau"] = "Tauri",
+        ["Tel"] = "Telescopii", ["Tri"] = "Trianguli", ["TrA"] = "Trianguli Australis",
+        ["Tuc"] = "Tucanae", ["UMa"] = "Ursae Majoris", ["UMi"] = "Ursae Minoris",
+        ["Vel"] = "Velorum", ["Vir"] = "Virginis", ["Vol"] = "Volantis", ["Vul"] = "Vulpeculae"
+    };
+
+    /// <summary>
+    /// Returns the best catalogue name for a star, ignoring its proper name.
+    /// </summary>
+    /// <example>Tau Ceti, Alpha-2 Centauri, 61 Cygni A, p Eridani B, Gl 845, HIP 1, HYG 0.</example>
+    public static string Create(Star star)
+    {
+        string constellation = Genitive(star.Constellation);
+
+        if (star.Bayer.Length > 0 && constellation.Length > 0)
+        {
+            return AddComponent($"{BayerName(star.Bayer)} {constellation}", star.GlieseId);
+        }
+
+        if (star.Flamsteed is int flamsteed && constellation.Length > 0)
+        {
+            return AddComponent($"{flamsteed} {constellation}", star.GlieseId);
+        }
+
+        if (star.GlieseId.Length > 0)
+        {
+            return star.GlieseId;
+        }
+
+        if (star.HipparcosId is int hip)
+        {
+            return $"HIP {hip}";
+        }
+
+        return $"HYG {star.Id}";
+    }
+
+    /// <summary>
+    /// Turns a HYG Bayer value into a readable name: "Tau" → "Tau", "Alp-2" → "Alpha-2".
+    /// Values that are not Greek letters (Bayer also used Latin letters, e.g. "p") are kept as they are.
+    /// </summary>
+    private static string BayerName(string bayer)
+    {
+        string letter = bayer;
+        string suffix = string.Empty;
+
+        int dash = bayer.IndexOf('-');
+        if (dash > 0)
+        {
+            letter = bayer[..dash];
+            suffix = bayer[dash..]; // e.g. "-2"
+        }
+
+        return (GreekLetters.TryGetValue(letter, out string? fullName) ? fullName : letter) + suffix;
+    }
+
+    /// <summary>Returns the genitive for a constellation abbreviation, the abbreviation itself if unknown, or "" if empty.</summary>
+    private static string Genitive(string abbreviation)
+    {
+        if (abbreviation.Length == 0)
+        {
+            return string.Empty;
+        }
+
+        return ConstellationGenitives.TryGetValue(abbreviation, out string? genitive) ? genitive : abbreviation;
+    }
+
+    /// <summary>
+    /// Adds the multiple-star component letter from the Gliese ID, e.g. "Gl 820A" → "61 Cygni A",
+    /// so that both stars of a double star do not get the same name.
+    /// </summary>
+    private static string AddComponent(string name, string glieseId)
+    {
+        if (glieseId.Length >= 2 && char.IsUpper(glieseId[^1]) && char.IsDigit(glieseId[^2]))
+        {
+            return $"{name} {glieseId[^1]}";
+        }
+
+        return name;
+    }
+}
+```
+
+`StarRenderer.cs` (changed – new `LabelGap` constant; the rectangle used for the overlap test is made bigger than the text):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// Draws the stars of a <see cref="StarCollection"/> in 3D with Raylib.
+/// One world unit is one parsec, and the Sun is at (0, 0, 0).
+/// </summary>
+public class StarRenderer
+{
+    /// <summary>Radius of the small sphere drawn for each star, in parsecs.</summary>
+    public const float StarRadius = 0.08f;
+
+    /// <summary>
+    /// Stars without a proper name are only labelled when they are closer to the camera than this (in parsecs),
+    /// so that the screen is not covered by 1,900 catalogue names at once.
+    /// </summary>
+    public const float CatalogueLabelDistance = 8f;
+
+    /// <summary>Minimum gap in pixels kept between labels, so that names do not run into each other.</summary>
+    private const int LabelGap = 4;
+
+    private static readonly Color ProperNameColour = new(255, 230, 150, 255);
+    private static readonly Color CatalogueNameColour = new(150, 160, 180, 255);
+
+    private readonly IReadOnlyList<Star> _stars;
+    private readonly Vector3[] _positions;
+    private readonly List<Rectangle> _labelAreas = new(); // screen areas already used by labels this frame
+
+    /// <summary>Creates a renderer and works out each star's 3D position once, so it is not recalculated every frame.</summary>
+    /// <param name="stars">The stars to draw.</param>
+    public StarRenderer(IReadOnlyList<Star> stars)
+    {
+        _stars = stars;
+        _positions = new Vector3[stars.Count];
+        for (int i = 0; i < stars.Count; i++)
+        {
+            _positions[i] = ToWorldPosition(stars[i]);
+        }
+    }
+
+    /// <summary>
+    /// Converts a star's HYG position to Raylib's 3D world.
+    /// HYG uses +Z towards the north celestial pole, but in Raylib +Y is "up",
+    /// so (x, y, z) becomes (x, z, -y). This is a rotation, not a mirror,
+    /// so the sky is not flipped left-to-right.
+    /// </summary>
+    public static Vector3 ToWorldPosition(Star star)
+    {
+        return new Vector3((float)star.X, (float)star.Z, (float)-star.Y);
+    }
+
+    /// <summary>
+    /// Draws every star as a small sphere. Must be called between
+    /// <c>Raylib.BeginMode3D</c> and <c>Raylib.EndMode3D</c>.
+    /// </summary>
+    public void DrawStars()
+    {
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            // Few rings and slices: each star is tiny on screen, and 2,000 detailed spheres would be slow.
+            Raylib.DrawSphereEx(_positions[i], StarRadius, 6, 8, Color.White);
+        }
+    }
+
+    /// <summary>
+    /// Writes star names next to the stars. Must be called after <c>Raylib.EndMode3D</c>,
+    /// because the names are 2D text drawn on top of the 3D scene.
+    /// Stars with a proper name are labelled; other stars get their catalogue name
+    /// only when they are within <see cref="CatalogueLabelDistance"/> of the camera.
+    /// A label is skipped if it would overlap a label already drawn. The stars are in
+    /// nearest-first order, so the nearer star keeps its label.
+    /// </summary>
+    /// <param name="camera">The camera used to draw the 3D scene.</param>
+    public void DrawLabels(Camera3D camera)
+    {
+        Vector3 viewDirection = Vector3.Normalize(camera.Target - camera.Position);
+        int screenWidth = Raylib.GetScreenWidth();
+        int screenHeight = Raylib.GetScreenHeight();
+        _labelAreas.Clear();
+
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            Star star = _stars[i];
+            Vector3 toStar = _positions[i] - camera.Position;
+
+            // Skip stars behind the camera: GetWorldToScreen would still give them a (wrong) screen position.
+            if (Vector3.Dot(toStar, viewDirection) <= 0)
+            {
+                continue;
+            }
+
+            if (!star.HasProperName && toStar.Length() > CatalogueLabelDistance)
+            {
+                continue;
+            }
+
+            Vector2 screen = Raylib.GetWorldToScreen(_positions[i], camera);
+            if (screen.X < 0 || screen.X > screenWidth || screen.Y < 0 || screen.Y > screenHeight)
+            {
+                continue;
+            }
+
+            int fontSize = star.HasProperName ? 14 : 10;
+            int x = (int)screen.X + 6;
+            int y = (int)screen.Y - fontSize / 2;
+            // The area is made a little bigger than the text, so that labels keep a gap between them.
+            var area = new Rectangle(x - LabelGap, y - LabelGap / 2, Raylib.MeasureText(star.DisplayName, fontSize) + 2 * LabelGap, fontSize + LabelGap);
+
+            if (OverlapsExistingLabel(area))
+            {
+                continue;
+            }
+
+            _labelAreas.Add(area);
+            Raylib.DrawText(star.DisplayName, x, y, fontSize, star.HasProperName ? ProperNameColour : CatalogueNameColour);
+        }
+    }
+
+    /// <summary>Returns true if the given screen area overlaps a label already drawn this frame.</summary>
+    private bool OverlapsExistingLabel(Rectangle area)
+    {
+        foreach (Rectangle used in _labelAreas)
+        {
+            if (Raylib.CheckCollisionRecs(area, used))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+```
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- In `CatalogueNames`, only the genitive for Boötes changed. The comment now says what was actually tested: the default font draws Latin-1 characters (ö, ¹, ², ³) but not Greek letters or ⁴–⁹, which is why Greek letters are spelled out and suffixes are written "-2".
+- In `DrawLabels`, the rectangle checked for overlaps is now `LabelGap` (4 px) larger on each side than the text. Two labels therefore count as overlapping if they are closer than about 4 px, so the second one is not drawn. The text itself is still drawn at the same position.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the AI corrected its own earlier mistake (Entry 54) in a separate, clearly named fix commit, and before sending it noticed that its new comment made a claim it had not tested (⁵ and ⁶), so it tested that too. All 2,000 names are still unique. Trade-off: the 4 px gap hides more labels at the default view – in my screenshot Sirius and Barnard's Star are no longer labelled, which is a loss for two of the best-known nearby stars. A better rule would prefer brighter or better-known stars rather than "nearest to the Sun first"; for now zooming in (part 5) will reveal them. Also, strictly, this commit fixes Feature 1 code (CatalogueNames.cs) on the Feature 2 branch; it is small and documented, but ideally it would have been its own branch.
+
+---
+
+### Entry 88 – 2026-11-06 02:32 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the StarChart3D window on my Mac at 56 FPS; "Wolf 359" and "Ross 614" now separated; Sirius not labelled]
+
+**AI response:** The AI confirmed the gap works, reminded me to close the window with Esc before typing, and wrote Entries 82–88 of this log. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+The fix works on my Mac. The missing Sirius label is the expected side effect described in Entry 87.
+
+---
+
+### Entry 89 – 2026-11-06 02:34 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+and why its not in 3d i mean i want to zoom in out in stars like some animation
+```
+
+**AI response (full):**
+````
+It **is** 3D already. Every star is placed at its real position in space, in parsecs around the Sun. It just doesn't look like it yet, because the **camera is fixed**: you always see it from the same spot, so it looks like a flat picture.
+
+What you're asking for is coming, in two stages that the spec asks for separately:
+- **Feature 2, part 5: zoom, pan and rotate with the mouse and keyboard.** You'll be able to scroll to zoom in and out, drag to rotate around the stars, and move around. This is when it'll really *feel* 3D, and when hidden labels like Sirius and the grey catalogue names appear as you get close.
+- **Feature 3: 3D movement (animation).** The camera smoothly **flies** towards a star you click, with a "dust" effect to show motion, plus a list of nearby stars with distance and direction.
+
+**My suggestion:** do the **camera controls next**, before spectral colours and the filter. The spec doesn't fix the order, each part still gets its own commit, and having controls makes it much easier to test and show the later parts in your demo.
+
+So, the order from here:
+1. Commit the small fix (the steps in my last message).
+2. Camera controls (zoom, pan, rotate).
+3. Spectral colours.
+4. Filter for stars without a proper name.
+5. Pull request "Feature 2".
+
+Shall I go ahead in that order? If yes, do step 1 first and send me the screenshot after `git push`. I'll include this question in the log too.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Useful: it explained that the stars are already in 3D but the fixed camera makes them look flat, and suggested doing the camera controls earlier. Changing the order is allowed by the spec (it lists the parts but not the order).
+
+---
+
+### Entry 90 – 2026-11-06 02:37 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+so by doing can i play with it like zoom in into stars and all
+```
+
+**AI response (full):**
+````
+Yes. Once the camera controls (Feature 2, part 5) are in, you'll be able to explore it freely. The plan:
+
+- **Mouse wheel:** zoom in towards the stars, or out to see all 2,000.
+- **Left-drag:** rotate around, so you can look at the star field from any side.
+- **Right-drag, or WASD / arrow keys:** pan (slide the view) so you can move around the chart.
+- **A reset key** (for example R) to jump back to the starting view if you get lost.
+
+As you zoom in, more names appear. Sirius and Barnard's Star get their labels back, and the small grey catalogue names (Tau Ceti, 61 Cygni A…) show up for stars close to you. The stars get bigger as you approach, because they're real 3D spheres.
+
+The **flying animation** (clicking a star and smoothly travelling to it) is Feature 3, and comes after Feature 2.
+
+So: commit the small fix first (the steps in my earlier message, starting with the `grep` that should print **83**), send me the screenshot after `git push`, and then I'll build the camera controls.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues. The planned controls match the spec (zoom, pan and scan with mouse and keyboard).
+
+---
+
+### Entry 91 – 2026-11-06 02:37 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+okay lets do then
+```
+
+**AI response (full):**
+````
+Good. First the fix commit. Make sure the star window is closed (no "**dotnet Star…**" in the terminal list), then run these one at a time:
+
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+It should print **83**. Then:
+```
+cat ~/Downloads/log_entries_82_88.md >> AI_programming_log.md
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+It should print **90**.
+```
+git add --dry-run .
+```
+It should list only `AI_programming_log.md`, `StarChart3D/CatalogueNames.cs` and `StarChart3D/StarRenderer.cs`.
+
+If all that matches:
+```
+git add .
+```
+```
+git commit -m "Fix: spell Boötis correctly and keep a gap between star labels"
+```
+```
+git push
+```
+
+Send me a screenshot after `git push`. Meanwhile, I'll start building the camera controls.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The steps were correct, but I did not run the `cat` line, so the fix commit (02476d6) went to GitHub with only the two code files and without its log entries 82–88. They are added one commit later, together with the camera controls. Lesson: check the `git add --dry-run` list matches before committing.
+
+---
+
+### Entry 92 – 2026-11-06 02:38 – Branch: `feature2-visualising-star-chart` – Feature 2: zoom, pan and scan with mouse and keyboard
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `git push` of the fix commit: 607bb17..02476d6 feature2-visualising-star-chart]
+
+**AI actions:** The AI checked commit 02476d6 on GitHub (read-only): CatalogueNames.cs and StarRenderer.cs only; the log on GitHub still had 83 headings (entries 82–88 missing). It checked Raylib-cs input functions and key names in the library source (GetMouseWheelMove, GetMouseDelta, IsMouseButtonDown, IsKeyDown, IsKeyPressed, GetFrameTime; KeyboardKey.Equal/Minus/PageUp/PageDown/W/A/S/D/Q/E/R/arrows), wrote CameraController.cs and changed Program.cs, then tested on its virtual screen by simulating input with xdotool: 14 wheel notches (zoom), a left-drag (rotate), a right-drag (pan), holding Left and W (keys), and zoom + Up then R (reset). It looked at each screenshot. Fixes after testing: holding W for 1 s flew into the Sun, so PanSpeed was halved (0.6 → 0.3); the info line "Distance to view centre" did not change when panning, so it was replaced by "Camera is N light years from the Sun"; star labels covered the HUD text, so dark panels (alpha 180, then 225) were added behind it.
+
+**AI response (full):**
+````
+The camera controls are ready, and I tested each control on my virtual screen before sending:
+
+| Control | Mouse | Keyboard |
+|---|---|---|
+| Zoom in/out | scroll wheel | **+** / **−** (or PageUp/PageDown) |
+| Rotate around | left-drag | arrow keys |
+| Move (pan) | right-drag | **W A S D** (forward/left/back/right), **Q E** (down/up) |
+| Back to start | | **R** |
+| Quit | | **Esc** |
+
+`preview_camera_zoomed.png` shows what happens after a few scrolls: Sirius, Barnard's Star and Altair get their labels back, and grey catalogue names appear close up.
+
+**What I changed after testing:**
+- **W/A/S/D were too fast.** Holding W for a second and a half flew straight into the Sun, so I halved the speed.
+- The info line said "distance to view centre", which **doesn't change** when you move with W/A/S/D. It now says **"Camera is N light years from the Sun"**.
+- Star labels could cover the info text, so there are now **dark panels** behind the text at the top and bottom.
+
+**Files:** `CameraController.cs` is new (the camera logic), and `Program.cs` uses it each frame and shows the help text. No other files changed.
+
+**First, the log check from before.** Run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+Tell me the number: **83** or **90**.
+
+**Then try it out:**
+```
+cd StarChart3D
+```
+```
+mv ~/Downloads/CameraController.cs ~/Downloads/Program.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Play with it: scroll, drag, press W/A/S/D. When you're done, take a screenshot, **press Esc to close the window**, and send me the screenshot along with the number from `grep`.
+````
+
+**What I did with it:** The `mv` did not run the first time, so I ran the old program (Entries 93–94). After moving the files, `dotnet build` and `dotnet run` worked and the controls work on my Mac (Entry 95).
+
+**Code sent as files (full):**
+
+`CameraController.cs` (new):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// An "orbit" camera that circles around a target point, controlled by mouse and keyboard.
+/// Mouse wheel zooms, left-drag rotates, right-drag pans; keys do the same for keyboard users.
+/// </summary>
+/// <remarks>
+/// The camera position is worked out from three numbers: how far it is from the target (distance),
+/// the angle around the vertical axis (yaw) and the angle up or down (pitch).
+/// This keeps the camera always looking at the target, so the user cannot get "lost" upside down.
+/// </remarks>
+public class CameraController
+{
+    private const float MinDistance = 0.5f;           // parsecs: closest the camera can get to the target
+    private const float MaxDistance = 150f;           // parsecs: far enough to see all 2,000 stars
+    private const float MaxPitch = 1.5f;              // radians (about 86°): stops the camera flipping over the top
+    private const float MouseRotateSpeed = 0.005f;    // radians per pixel of mouse movement
+    private const float KeyRotateSpeed = 1.5f;        // radians per second
+    private const float ZoomStep = 0.1f;              // each wheel notch changes the distance by 10%
+    private const float PanSpeed = 0.3f;              // fraction of the distance moved per second with the keys
+
+    private readonly Vector3 _startTarget;
+    private readonly float _startDistance;
+    private readonly float _startYaw;
+    private readonly float _startPitch;
+
+    private Vector3 _target;
+    private float _distance;
+    private float _yaw;
+    private float _pitch;
+
+    /// <summary>Creates a camera at <paramref name="startPosition"/> looking at <paramref name="startTarget"/>.</summary>
+    public CameraController(Vector3 startPosition, Vector3 startTarget)
+    {
+        Vector3 offset = startPosition - startTarget;
+        _startTarget = startTarget;
+        _startDistance = Math.Clamp(offset.Length(), MinDistance, MaxDistance);
+        _startYaw = MathF.Atan2(offset.Z, offset.X);
+        _startPitch = Math.Clamp(MathF.Asin(offset.Y / offset.Length()), -MaxPitch, MaxPitch);
+        Reset();
+    }
+
+    /// <summary>The Raylib camera to draw the 3D scene with, built from the current distance, yaw, pitch and target.</summary>
+    public Camera3D Camera => new(
+        position: _target + Offset(),
+        target: _target,
+        up: Vector3.UnitY,
+        fovY: 45f,
+        projection: CameraProjection.Perspective);
+
+    /// <summary>How far the camera is from the point it is looking at, in parsecs.</summary>
+    public float Distance => _distance;
+
+    /// <summary>Puts the camera back where it started.</summary>
+    public void Reset()
+    {
+        _target = _startTarget;
+        _distance = _startDistance;
+        _yaw = _startYaw;
+        _pitch = _startPitch;
+    }
+
+    /// <summary>Reads the mouse and keyboard and moves the camera. Call once per frame, before drawing.</summary>
+    public void Update()
+    {
+        float seconds = Raylib.GetFrameTime(); // so keyboard speed is the same at any frame rate
+
+        if (Raylib.IsKeyPressed(KeyboardKey.R))
+        {
+            Reset();
+        }
+
+        // Zoom: mouse wheel, or +/- keys (PageUp/PageDown also work).
+        float zoom = Raylib.GetMouseWheelMove();
+        if (Raylib.IsKeyDown(KeyboardKey.Equal) || Raylib.IsKeyDown(KeyboardKey.PageUp)) zoom += 3f * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Minus) || Raylib.IsKeyDown(KeyboardKey.PageDown)) zoom -= 3f * seconds;
+        _distance = Math.Clamp(_distance * (1f - zoom * ZoomStep), MinDistance, MaxDistance);
+
+        // Rotate: left mouse drag, or the arrow keys.
+        Vector2 mouse = Raylib.GetMouseDelta();
+        if (Raylib.IsMouseButtonDown(MouseButton.Left))
+        {
+            _yaw += mouse.X * MouseRotateSpeed;
+            _pitch += mouse.Y * MouseRotateSpeed;
+        }
+        if (Raylib.IsKeyDown(KeyboardKey.Left)) _yaw -= KeyRotateSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Right)) _yaw += KeyRotateSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Up)) _pitch += KeyRotateSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Down)) _pitch -= KeyRotateSpeed * seconds;
+        _pitch = Math.Clamp(_pitch, -MaxPitch, MaxPitch);
+
+        // Pan (move the point the camera looks at): right mouse drag, or W/A/S/D and Q/E.
+        Vector3 forward = Vector3.Normalize(-Offset());
+        Vector3 right = Vector3.Normalize(Vector3.Cross(forward, Vector3.UnitY));
+        Vector3 up = Vector3.Cross(right, forward);
+
+        if (Raylib.IsMouseButtonDown(MouseButton.Right))
+        {
+            float pixelsToParsecs = _distance * 0.0015f; // pan more when zoomed out, less when zoomed in
+            _target += (-right * mouse.X + up * mouse.Y) * pixelsToParsecs;
+        }
+
+        float step = _distance * PanSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.W)) _target += forward * step;
+        if (Raylib.IsKeyDown(KeyboardKey.S)) _target -= forward * step;
+        if (Raylib.IsKeyDown(KeyboardKey.D)) _target += right * step;
+        if (Raylib.IsKeyDown(KeyboardKey.A)) _target -= right * step;
+        if (Raylib.IsKeyDown(KeyboardKey.E)) _target += Vector3.UnitY * step;
+        if (Raylib.IsKeyDown(KeyboardKey.Q)) _target -= Vector3.UnitY * step;
+    }
+
+    /// <summary>The vector from the target to the camera, worked out from distance, yaw and pitch.</summary>
+    private Vector3 Offset()
+    {
+        return new Vector3(
+            _distance * MathF.Cos(_pitch) * MathF.Cos(_yaw),
+            _distance * MathF.Sin(_pitch),
+            _distance * MathF.Cos(_pitch) * MathF.Sin(_yaw));
+    }
+}
+```
+
+`Program.cs` (changed – uses `CameraController` instead of a fixed camera, shows the camera's distance from the Sun and help text on dark panels):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+using StarChart3D;
+
+// Load the 2,000 nearest stars.
+string dataFile = Path.Combine(AppContext.BaseDirectory, "Data", "stars_local_2000.csv");
+var stars = new StarCollection(dataFile);
+
+// Open a resizable window with anti-aliasing (smoother edges).
+Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint | ConfigFlags.ResizableWindow);
+Raylib.InitWindow(1280, 800, "StarChart3D");
+Raylib.SetTargetFPS(60);
+
+var renderer = new StarRenderer(stars);
+
+// The camera starts outside the star field looking at the Sun, and can then be moved with mouse and keyboard.
+var cameraController = new CameraController(startPosition: new Vector3(30f, 20f, 30f), startTarget: Vector3.Zero);
+
+var spaceColour = new Color(5, 5, 15, 255);
+string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
+const string Help = "Mouse: wheel = zoom, left-drag = rotate, right-drag = pan\n" +
+                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, Esc quit";
+
+while (!Raylib.WindowShouldClose())
+{
+    cameraController.Update();
+    Camera3D camera = cameraController.Camera;
+
+    Raylib.BeginDrawing();
+    Raylib.ClearBackground(spaceColour);
+
+    Raylib.BeginMode3D(camera);
+    Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
+    renderer.DrawStars();
+    Raylib.EndMode3D();
+
+    renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
+
+    // Dark panels behind the text, so star labels underneath do not make it unreadable.
+    var panelColour = new Color(0, 0, 0, 225);
+    Raylib.DrawRectangle(0, 0, 470, 84, panelColour);
+    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, 620, 50, panelColour);
+    Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
+    Raylib.DrawFPS(10, 36);
+    Raylib.DrawText($"Camera is {camera.Position.Length() * Star.LightYearsPerParsec:F1} light years from the Sun", 10, 62, 16, Color.LightGray);
+    Raylib.DrawText(Help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
+    Raylib.EndDrawing();
+}
+
+Raylib.CloseWindow();
+```
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- `CameraController` is an **orbit camera**: it stores the point it looks at (`_target`), how far away it is (`_distance`), the angle around the vertical axis (`_yaw`) and the angle up/down (`_pitch`). `Offset()` turns these into an (x, y, z) vector with sine and cosine (spherical coordinates), and the camera position is `_target + Offset()`, so it always looks at the target.
+- The constructor works out the starting distance, yaw and pitch from the start position with `Atan2` and `Asin`, and remembers them so `Reset()` (key R) can go back.
+- `Update()` runs once per frame. Zoom multiplies the distance by (1 − 0.1 × wheel notches), so each notch is 10% closer or further, clamped between 0.5 and 150 parsecs. Left-drag and arrow keys change yaw and pitch; pitch is clamped to ±1.5 radians (about 86°) so the camera cannot flip over the top. Right-drag and W/A/S/D/Q/E move the target along the camera's forward/right/up directions (worked out with cross products), scaled by the distance so panning feels the same when zoomed in or out.
+- Keyboard movement is multiplied by `GetFrameTime()` (seconds since the last frame), so the speed is the same at 25 FPS or 60 FPS.
+- In `Program.cs`, `cameraController.Update()` is called before drawing each frame, and `cameraController.Camera` gives the `Camera3D` used for the stars and labels.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the AI tested every control by simulating mouse and keyboard input on its virtual screen and looked at the results, which is how it found three real problems in its own first version (W/A/S/D far too fast, a misleading distance read-out that did not change when panning, labels covering the HUD text) and fixed them before sending. The orbit camera with clamped pitch and distance prevents getting lost upside down or flying through the Sun, and R resets the view. Weaknesses: (1) "zoom" moves the camera rather than changing the field of view, so zooming far in on one star means flying right up to the target point, not to the star under the mouse; (2) right-drag panning speed (0.0015 × distance per pixel) was tuned by eye on the AI's screen, not on my Mac; (3) mouse dragging also works over the help text, and there is no on-screen indicator of which mode is active; (4) the dark HUD panels have fixed pixel sizes, so on a much smaller window they may cover stars or not fit the text; (5) this part was done before spectral colours and the filter, a change of order from the spec's list (allowed, but it means the commit order differs from the spec).
+
+---
+
+### Entry 93 – 2026-11-06 03:01 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here but it does not Play with it: scroll, drag, press W/A/S/D.
+```
+[Screenshot: the StarChart3D window at 60 FPS – no "Camera is …" line and no help text at the bottom (the old version)]
+
+**AI response (full):**
+````
+Thanks, that explains it: **this is still the old program, not the new one.** The new version shows a **"Camera is … light years from the Sun"** line under the FPS and **help text at the bottom**, and neither is in your screenshot. So the new `CameraController.cs` and `Program.cs` didn't get into your project, and you're running the previous build.
+
+Let's find out why:
+
+1. **Press Esc in the star window to close it first.**
+2. Then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+ls
+```
+```
+ls ~/Downloads | grep -i -E "camera|program"
+```
+
+Send me a screenshot of the output. The first `ls` shows whether `CameraController.cs` is in your project. The second shows whether the files are still in Downloads, possibly with a slightly different name such as `Program (1).cs`, which would explain why the `mv` didn't pick them up.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI worked out from missing on-screen text that I was running the old build, instead of assuming its code was broken.
+
+---
+
+### Entry 94 – 2026-11-06 03:03 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `ls` in StarChart3D showed no CameraController.cs; `ls ~/Downloads | grep` showed CameraController.cs, Program.cs and the two preview PNGs still in Downloads]
+
+**AI response (full):**
+````
+Found it: both files are **still in Downloads**, and `CameraController.cs` isn't in your project. The `mv` command never ran. You're already in the right folder (`StarChart3D`), so run these one at a time:
+
+```
+mv ~/Downloads/CameraController.cs ~/Downloads/Program.cs .
+```
+```
+ls
+```
+`CameraController.cs` should now appear in the list.
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+The new window should show **"Camera is 153.0 light years from the Sun"** under the FPS, and the help text at the bottom. Then try scrolling, left-dragging and W/A/S/D.
+
+When you're done, take a screenshot, **press Esc to close the window**, then run this and include it in your screenshot:
+```
+grep -c "^### Entry" ../AI_programming_log.md
+```
+(I still need that number, **83** or **90**, to sort out the log.)
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+My mistake: I had skipped the `mv` step.
+
+---
+
+### Entry 95 – 2026-11-06 03:04 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the new StarChart3D window at 56 FPS, zoomed out and rotated so the whole ball of stars is visible; "Camera is 252.5 light years from the Sun"; help text at the bottom]
+
+**AI response (full):**
+````
+**It works.** This is the new version: you've zoomed out and rotated, so you can now see the whole ball of 2,000 stars around the Sun, with the camera **252.5 light years** away. The info panel and help text are showing, at 56 FPS.
+
+Try scrolling **in** (towards you) to fly back into the stars and watch more names appear. Press **R** to jump back to the start.
+
+When you're done:
+1. **Press Esc in the star window to close it.**
+2. Then run this in the terminal and send me a screenshot:
+```
+grep -c "^### Entry" ../AI_programming_log.md
+```
+
+I need that number (**83** or **90**) because the log entries 82–88 weren't in the last commit. Once I know, I'll write the remaining log entries and give you the commit steps for the camera controls.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The camera controls work on my Mac: zooming out shows the whole 67-light-year sphere of stars, which really shows it is 3D.
+
+---
+
+### Entry 96 – 2026-11-06 03:05 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+and here
+```
+[Screenshot: the window closed normally; `grep -c "^### Entry" ../AI_programming_log.md` printed 83]
+
+**AI response:** The AI explained that 83 meant Entries 82–88 had never been added, so the fix commit 02476d6 went to GitHub without its log entries. It wrote Entries 89–96 and combined them with 82–88 into one file to add once, and gave the commit steps for the camera controls. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+Honest note for the marker: the log entries for the fix commit (82–88) are in this commit instead of 02476d6, because I skipped the `cat` step. Their timestamps still show when each conversation happened.
+
+---

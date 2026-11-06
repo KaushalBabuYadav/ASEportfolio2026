@@ -13,19 +13,19 @@ Raylib.SetTargetFPS(60);
 
 var renderer = new StarRenderer(stars);
 
-// A fixed camera looking at the Sun from outside the star field (camera controls come later in Feature 2).
-var camera = new Camera3D(
-    position: new Vector3(30f, 20f, 30f),
-    target: Vector3.Zero,
-    up: Vector3.UnitY,
-    fovY: 45f,
-    projection: CameraProjection.Perspective);
+// The camera starts outside the star field looking at the Sun, and can then be moved with mouse and keyboard.
+var cameraController = new CameraController(startPosition: new Vector3(30f, 20f, 30f), startTarget: Vector3.Zero);
 
 var spaceColour = new Color(5, 5, 15, 255);
 string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
+const string Help = "Mouse: wheel = zoom, left-drag = rotate, right-drag = pan\n" +
+                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, Esc quit";
 
 while (!Raylib.WindowShouldClose())
 {
+    cameraController.Update();
+    Camera3D camera = cameraController.Camera;
+
     Raylib.BeginDrawing();
     Raylib.ClearBackground(spaceColour);
 
@@ -36,8 +36,14 @@ while (!Raylib.WindowShouldClose())
 
     renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
 
+    // Dark panels behind the text, so star labels underneath do not make it unreadable.
+    var panelColour = new Color(0, 0, 0, 225);
+    Raylib.DrawRectangle(0, 0, 470, 84, panelColour);
+    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, 620, 50, panelColour);
     Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
     Raylib.DrawFPS(10, 36);
+    Raylib.DrawText($"Camera is {camera.Position.Length() * Star.LightYearsPerParsec:F1} light years from the Sun", 10, 62, 16, Color.LightGray);
+    Raylib.DrawText(Help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
     Raylib.EndDrawing();
 }
 
