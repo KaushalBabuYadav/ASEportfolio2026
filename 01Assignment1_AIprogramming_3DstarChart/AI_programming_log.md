@@ -2016,3 +2016,356 @@ here
 Star.cs compiles. It is not used by any code yet; `StarCollection.cs` (next step) will create `Star` objects from the CSV file, and that will be the real test of the class.
 
 ---
+
+### Entry 51 – 2026-11-06 00:42 – Branch: `feature1-create-star-chart` – StarCollection.cs
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `git push` of commit f60fba2 (Star.cs) to feature1-create-star-chart]
+
+**AI actions:** The AI checked commit f60fba2 on GitHub (read-only). It then installed the .NET 10 SDK (10.0.114) in its own environment so it could compile code, wrote StarCollection.cs, and ran it against my real data file. NuGet was blocked in its environment, so it built a copy of my project with the Raylib-cs reference removed. It also tested bad lines, a quoted comma, a missing file and a German culture setting (de-DE).
+
+**AI response (full):**
+````
+**Star.cs is committed and checked on GitHub** (commit `f60fba2`, with Entries 38–50 in the log).
+
+Now **`StarCollection.cs`**, which reads all 2,000 stars from the file. This time **I compiled and ran it myself** before sending it: I installed .NET 10 in my environment and tested against your real data file.
+
+```
+Loaded 2000 stars
+Skipped lines: 0
+First star: Sol (0.00 ly)
+Second star: Proxima Centauri (4.23 ly)
+Last star: HYG 119045 (66.97 ly)
+Stars with a proper name: 89
+Star 8087: HYG 8087 (11.91 ly), Bayer=Tau, Flamsteed=52, Constellation=Cet
+```
+This also confirms this morning's correction: the farthest star really is about **67 light years** away.
+
+I also tested the awkward cases: a bad number (skipped with a message), a line with too few values (skipped), a name containing a comma inside quotes (read correctly), a missing file (clear error), and a **German-language computer**, where `1.2959` could be misread because Germans use a comma as the decimal point (read correctly).
+
+**One limit:** NuGet is blocked in my environment, so I tested with the Raylib reference removed. The new code doesn't use Raylib, but **your `dotnet build` is still the final check.**
+
+**What each file is:**
+- **`StarCollection.cs`** (new): finds columns **by their header name** (like `dist`), not by counting. That's exactly the mistake I made reading your screenshot, now prevented in code. It handles quoted values like `"52"`, skips bad lines instead of crashing, and lists them in `SkippedLines`.
+- **`Program.cs`** (replaced): a temporary test that prints the summary above. The Raylib window comes back in Feature 2.
+- **`StarChart3D.csproj`** (one addition): copies the data file next to the program when it builds, so it can find it.
+
+**Steps.** Download all three files, then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+mv ~/Downloads/StarCollection.cs ~/Downloads/Program.cs ~/Downloads/StarChart3D.csproj .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Send me a screenshot of the `dotnet run` output. It should match the lines above. Then I'll write the log entries before you commit.
+````
+
+**Code sent as files (full):**
+
+`StarCollection.cs` (new):
+```csharp
+using System.Collections;
+using System.Globalization;
+using System.Text;
+
+namespace StarChart3D;
+
+/// <summary>
+/// All the stars read from a HYG star database CSV file.
+/// Columns are found by their header names (e.g. "dist"), not by fixed positions,
+/// so the code still works if the column order changes.
+/// </summary>
+public class StarCollection : IReadOnlyList<Star>
+{
+    /// <summary>The HYG columns this class reads. The file must contain all of them.</summary>
+    private static readonly string[] RequiredColumns =
+    {
+        "id", "hip", "gl", "proper", "dist", "mag", "spect",
+        "x", "y", "z", "bayer", "flam", "con"
+    };
+
+    private readonly List<Star> _stars = new();
+    private readonly List<string> _skippedLines = new();
+
+    /// <summary>
+    /// Reads every star from a HYG CSV file. The first line must be the header row.
+    /// Lines that cannot be read are skipped and listed in <see cref="SkippedLines"/>.
+    /// </summary>
+    /// <param name="csvFilePath">Path to the CSV file.</param>
+    /// <exception cref="FileNotFoundException">The file does not exist.</exception>
+    /// <exception cref="InvalidDataException">The file is empty or a required column is missing.</exception>
+    public StarCollection(string csvFilePath)
+    {
+        if (!File.Exists(csvFilePath))
+        {
+            throw new FileNotFoundException("Star data file not found.", csvFilePath);
+        }
+
+        using var reader = new StreamReader(csvFilePath);
+
+        string? headerLine = reader.ReadLine();
+        if (headerLine is null)
+        {
+            throw new InvalidDataException($"Star data file is empty: {csvFilePath}");
+        }
+
+        string[] headers = SplitCsvLine(headerLine);
+        Dictionary<string, int> columns = FindColumns(headers);
+
+        int lineNumber = 1;
+        string? line;
+        while ((line = reader.ReadLine()) is not null)
+        {
+            lineNumber++;
+            if (string.IsNullOrWhiteSpace(line))
+            {
+                continue;
+            }
+
+            string[] fields = SplitCsvLine(line);
+            if (fields.Length != headers.Length)
+            {
+                _skippedLines.Add($"Line {lineNumber}: expected {headers.Length} values but found {fields.Length}.");
+                continue;
+            }
+
+            try
+            {
+                _stars.Add(CreateStar(fields, columns));
+            }
+            catch (FormatException ex)
+            {
+                _skippedLines.Add($"Line {lineNumber}: {ex.Message}");
+            }
+        }
+    }
+
+    /// <summary>Number of stars that were read successfully.</summary>
+    public int Count => _stars.Count;
+
+    /// <summary>Gets the star at the given position (stars are kept in file order).</summary>
+    public Star this[int index] => _stars[index];
+
+    /// <summary>A message for every line that was skipped because it could not be read.</summary>
+    public IReadOnlyList<string> SkippedLines => _skippedLines;
+
+    /// <summary>Finds a star by its HYG database ID, or returns null if there is none.</summary>
+    public Star? FindById(int id) => _stars.Find(star => star.Id == id);
+
+    /// <summary>Returns an enumerator that goes through all the stars.</summary>
+    public IEnumerator<Star> GetEnumerator() => _stars.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    /// <summary>
+    /// Splits one CSV line into values. Handles values in double quotes, such as "52" or "",
+    /// including commas and doubled quotes ("") inside a quoted value.
+    /// </summary>
+    internal static string[] SplitCsvLine(string line)
+    {
+        var values = new List<string>();
+        var current = new StringBuilder();
+        bool inQuotes = false;
+
+        for (int i = 0; i < line.Length; i++)
+        {
+            char c = line[i];
+
+            if (inQuotes)
+            {
+                if (c == '"' && i + 1 < line.Length && line[i + 1] == '"')
+                {
+                    current.Append('"'); // a doubled quote inside quotes is one quote character
+                    i++;
+                }
+                else if (c == '"')
+                {
+                    inQuotes = false;
+                }
+                else
+                {
+                    current.Append(c);
+                }
+            }
+            else if (c == '"')
+            {
+                inQuotes = true;
+            }
+            else if (c == ',')
+            {
+                values.Add(current.ToString());
+                current.Clear();
+            }
+            else
+            {
+                current.Append(c);
+            }
+        }
+
+        values.Add(current.ToString());
+        return values.ToArray();
+    }
+
+    /// <summary>Maps each required column name to its position in the header row.</summary>
+    private static Dictionary<string, int> FindColumns(string[] headers)
+    {
+        var positions = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        for (int i = 0; i < headers.Length; i++)
+        {
+            positions[headers[i].Trim()] = i;
+        }
+
+        var missing = RequiredColumns.Where(name => !positions.ContainsKey(name)).ToList();
+        if (missing.Count > 0)
+        {
+            throw new InvalidDataException("Star data file is missing columns: " + string.Join(", ", missing));
+        }
+
+        return positions;
+    }
+
+    /// <summary>Creates one <see cref="Star"/> from the values of one CSV line.</summary>
+    /// <exception cref="FormatException">A number in the line is not valid.</exception>
+    private static Star CreateStar(string[] fields, Dictionary<string, int> columns)
+    {
+        string Text(string column) => fields[columns[column]].Trim();
+
+        return new Star
+        {
+            Id = ParseInt(Text("id"), "id"),
+            HipparcosId = ParseOptionalInt(Text("hip"), "hip"),
+            GlieseId = Text("gl"),
+            ProperName = Text("proper"),
+            DistanceParsecs = ParseDouble(Text("dist"), "dist"),
+            Magnitude = ParseDouble(Text("mag"), "mag"),
+            SpectralType = Text("spect"),
+            X = ParseDouble(Text("x"), "x"),
+            Y = ParseDouble(Text("y"), "y"),
+            Z = ParseDouble(Text("z"), "z"),
+            Bayer = Text("bayer"),
+            Flamsteed = ParseOptionalInt(Text("flam"), "flam"),
+            Constellation = Text("con")
+        };
+    }
+
+    /// <summary>Reads a whole number that must be present.</summary>
+    private static int ParseInt(string value, string column)
+    {
+        if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int result))
+        {
+            return result;
+        }
+
+        throw new FormatException($"column '{column}' is not a whole number: '{value}'.");
+    }
+
+    /// <summary>Reads a whole number that may be missing (empty), returning null if it is.</summary>
+    private static int? ParseOptionalInt(string value, string column)
+    {
+        return value.Length == 0 ? null : ParseInt(value, column);
+    }
+
+    /// <summary>
+    /// Reads a decimal number that must be present. Always uses "." as the decimal point
+    /// (invariant culture), whatever the computer's language settings are.
+    /// </summary>
+    private static double ParseDouble(string value, string column)
+    {
+        if (double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out double result))
+        {
+            return result;
+        }
+
+        throw new FormatException($"column '{column}' is not a number: '{value}'.");
+    }
+}
+```
+
+`Program.cs` (replaced – temporary test):
+```csharp
+using StarChart3D;
+
+// Temporary test for StarCollection: loads the star data and prints a summary.
+// (The Raylib window test from setup is replaced; the 3D window comes back in Feature 2.)
+string dataFile = Path.Combine(AppContext.BaseDirectory, "Data", "stars_local_2000.csv");
+var stars = new StarCollection(dataFile);
+
+Console.WriteLine($"Loaded {stars.Count} stars from {dataFile}");
+Console.WriteLine($"Skipped lines: {stars.SkippedLines.Count}");
+foreach (string message in stars.SkippedLines)
+{
+    Console.WriteLine("  " + message);
+}
+
+Console.WriteLine($"First star: {stars[0]}");
+Console.WriteLine($"Second star: {stars[1]}");
+Console.WriteLine($"Last star: {stars[stars.Count - 1]}");
+Console.WriteLine($"Stars with a proper name: {stars.Count(star => star.HasProperName)}");
+
+Star? tauCeti = stars.FindById(8087);
+Console.WriteLine($"Star 8087: {tauCeti}, Bayer={tauCeti?.Bayer}, Flamsteed={tauCeti?.Flamsteed}, Constellation={tauCeti?.Constellation}");
+```
+
+`StarChart3D.csproj` (one new `ItemGroup` added):
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Raylib-cs" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Data/stars_local_2000.csv" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
+```
+
+**What I did with it:** Moved the three files into the StarChart3D folder. `dotnet build` succeeded and `dotnet run` printed exactly the same output as the AI's test (Entry 52).
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- The constructor opens the CSV file, reads the **header row** and builds a dictionary from column name to position (`FindColumns`). If any column the class needs is missing, it throws `InvalidDataException` listing the missing names. If the file does not exist, it throws `FileNotFoundException`.
+- Each following line is split by `SplitCsvLine`, which walks through the characters and tracks whether it is inside double quotes. So `"52"` becomes `52`, `""` becomes empty, and a comma inside quotes stays part of the value.
+- A line with the wrong number of values, or with a value that is not a valid number, is **skipped** and a message is added to `SkippedLines`, so one bad line does not crash the whole program.
+- `CreateStar` builds a `Star` using the column dictionary, so the code says `Text("dist")` instead of `fields[9]`.
+- Numbers are parsed with `CultureInfo.InvariantCulture`, so "." is always the decimal point, even on a computer set to a language that uses ",".
+- `StarCollection` implements `IReadOnlyList<Star>`, so it can be used in `foreach` and with LINQ (e.g. `stars.Count(star => star.HasProperName)`), but other code cannot add or remove stars.
+- `FindById` returns the star with a given HYG id, or null.
+- The `.csproj` change copies `Data/stars_local_2000.csv` into the build output folder; `Program.cs` finds it with `AppContext.BaseDirectory`, so it works whatever folder the program is started from.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: this time the AI compiled and tested the code before giving it to me, against my real data and against deliberately broken input, which is much stronger than "it should work". Reading columns by header name is a direct fix for the AI's own Entry 36 mistake (misreading columns by position) and for the column-number bug in the tutor's example. Limitations: (1) the AI could not test with Raylib-cs because NuGet was blocked for it, so my own build was the real check; (2) `Program.cs` replaced the Raylib test window, so the program is console-only until Feature 2; (3) skipped lines are only reported, not logged anywhere permanent; (4) `FindById` searches the whole list each time (fine for 2,000 stars, slow for 100,000 – a dictionary would be better if it is called often); (5) `SplitCsvLine` does not handle a quoted value that continues onto the next line, which the HYG file never has.
+
+---
+
+### Entry 52 – 2026-11-06 00:49 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: on my Mac `dotnet build` succeeded; `dotnet run` printed: Loaded 2000 stars; Skipped lines: 0; First star: Sol (0.00 ly); Second star: Proxima Centauri (4.23 ly); Last star: HYG 119045 (66.97 ly); Stars with a proper name: 89; Star 8087: HYG 8087 (11.91 ly), Bayer=Tau, Flamsteed=52, Constellation=Cet]
+
+**AI response:** The AI confirmed the output matched its own test exactly, and wrote Entries 51–52 of this log. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+The results on my Mac (with Raylib-cs) matched the AI's test line for line. "Last star 66.97 ly" also confirms the correction in Entry 45.
+
+---
