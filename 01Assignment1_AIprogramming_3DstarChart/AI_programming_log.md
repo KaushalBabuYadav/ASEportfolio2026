@@ -2369,3 +2369,466 @@ here
 The results on my Mac (with Raylib-cs) matched the AI's test line for line. "Last star 66.97 ly" also confirms the correction in Entry 45.
 
 ---
+
+### Entry 53 – 2026-11-06 00:52 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: commit a164859 (StarCollection) pushed to feature1-create-star-chart]
+
+**AI actions:** The AI checked commit a164859 on GitHub (read-only).
+
+**AI response (full):**
+````
+Checked on GitHub: commit **`a164859`** has the 4 expected files, and the log has 53 headings (template + Entries 1–52). Feature 1 is now two-thirds done.
+
+**Last part of Feature 1: catalogue names** for the 1,911 stars without a proper name.
+
+The spec wants astronomy questions in **`AI_domainExpert_log.md`**, from a **separate chat**, and it's still empty. So this time you ask the domain expert first, before we write code.
+
+**Step 1: Open a new chat.** In the Claude app, click **+ New**, inside your **ASE** project. Paste this question exactly:
+
+```
+I'm building a 3D star chart using the HYG v4.4 star database. Most stars have no proper (common) name. How do astronomers name stars that don't have a proper name? Please explain:
+1. Bayer designations (e.g. "Tau" + "Cet") – how they are written in full, and what suffixes like "Alp-2" mean.
+2. Flamsteed numbers (e.g. 61 + "Cyg" → "61 Cygni").
+3. Gliese catalogue IDs (e.g. "Gl 551", "GJ 3925A").
+4. Hipparcos numbers (e.g. "HIP 1").
+5. If a star has several of these, which one is normally used first?
+6. The Latin genitive form of all 88 constellation abbreviations (e.g. Cet → Ceti, Cyg → Cygni, Cen → Centauri).
+```
+
+**Step 2: Copy the answer into your domain log.** Open `AI_domainExpert_log.md`, and under `## Log` add:
+```
+### Entry 1 – 2026-11-06 HH:MM
+
+**Prompt:**
+(paste the question above)
+
+**AI response (full):**
+(paste the whole answer)
+
+**How I checked it / what I used it for:**
+I'll check it in the next step against the HYG data, and use it to write the catalogue-name code.
+```
+(Replace `HH:MM` with the time you asked.)
+
+**Step 3: Send me the answer here** (copy and paste, or a screenshot). I'll check it against the real data before we write the naming code. For example, I'll check that the genitive table covers every constellation in your 2,000 stars, since the AI's answer may contain mistakes. Spotting those is good marks for the domain log too.
+````
+
+**What I did with it:** Asked the question in a new, separate Claude chat in my ASE project. The question and full answer are in `AI_domainExpert_log.md`, Entry 1.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the AI made me ask the domain expert before writing the code, so the naming rules came from a documented domain source, and it warned that the answer could contain mistakes. Note: the domain question itself was written by the programming AI, which I say in the domain log.
+
+---
+
+### Entry 54 – 2026-11-06 00:57 – Branch: `feature1-create-star-chart` – CatalogueNames.cs
+
+**Prompt:**
+```
+@"/mnt/user-data/attachments/.../ed4a1463-attachment.txt" i did step 1 and this is the resullts
+```
+[Attached: the domain expert's full answer, saved as a text file. The full answer is in AI_domainExpert_log.md, Entry 1]
+
+**AI actions:** The AI compared the expert answer with my data file and the IAU list of 88 constellations using a Python script; counted Bayer values, Gliese prefixes and possible duplicate names; web-searched who assigned Flamsteed numbers (Wikipedia: Flamsteed designation); then wrote CatalogueNames.cs, changed Star.cs and Program.cs, and compiled and ran them on my data (with the Raylib-cs reference removed in its copy, because NuGet was blocked for it).
+
+**AI response (full):**
+````
+I checked the expert answer line by line against your data and the official list of 88 constellations.
+
+**Correct:**
+- The constellation table has **exactly 88 entries**, matching the official IAU list (none missing, none extra), and covers **every constellation in your 2,000 stars**. The only blank is Sol (the Sun), which has no constellation.
+- All 38 Bayer values in your data match its Greek letter table, including suffixes like `Alp-2`, `Omi-2`, `Pi-3`.
+- Your Gliese IDs use only `Gl` (1,036) and `GJ` (850), as it described.
+
+**Found in your data, which the answer only mentioned in passing:**
+- 2 stars use a **Latin letter**: `p` Eridani (Gl 66A and Gl 66B). The code must not assume Bayer is always Greek.
+- **5 names would be duplicated** if we only follow its suggested rule: `61 Cyg`, `p Eri`, `Gam CrA`, `Eta CrB`, `53 Aqr`. Each is a **double star** (A and B), for example 61 Cygni A and B. Adding the component letter from the Gliese ID (`Gl 820A` → "A") makes **all 2,000 names unique**; I tested this.
+
+**An error in the expert answer (worth putting in your domain log):**
+- It says Flamsteed's 1725 catalogue numbered the stars. In fact, [Flamsteed's 1725 catalogue left the numbers out, and the numbers used today were assigned by Lalande in his 1783 almanac](https://en.wikipedia.org/wiki/Flamsteed_designation). It doesn't affect the code, but it's a real AI factual mistake.
+
+**Not checked:** the exact GJ number ranges (1001–1294 and so on). The code doesn't depend on them, so we only display Gliese IDs as they appear.
+
+Now I'll write and test the naming code.
+
+The catalogue-name code is ready, compiled and tested on your data. Result of my test run:
+
+```
+HYG 8087: Tau Ceti
+HYG 15419: Kappa-1 Ceti
+HYG 27844: Chi-1 Orionis A
+HYG 103879: 61 Cygni A
+HYG 103883: 61 Cygni B
+HYG 7736: p Eridani A
+HYG 118541: GJ 1111
+HYG 82472: HIP 82724
+HYG 70666: Proxima Centauri (catalogue name: Gl 551)
+Names used by more than one star: 0
+Unnamed stars that still only have a HYG number: 0
+```
+**Every one of the 1,911 unnamed stars now has a real catalogue name, and all 2,000 names are unique.**
+
+**What changed:**
+- **`CatalogueNames.cs`** (new): the Greek letter and 88-constellation tables from the domain expert, plus the naming rule: Bayer → Flamsteed → Gliese → Hipparcos → HYG number. It adds A/B for double stars. Names use plain letters ("Alpha-2", "Bootis" rather than "Boötis") because Raylib's default font can't draw special characters.
+- **`Star.cs`**: two new properties. `CatalogueName` is worked out once and remembered, which matters later when 2,000 labels are drawn every frame. `DisplayName` is the proper name if the star has one, otherwise the catalogue name.
+- **`Program.cs`**: an updated test.
+
+**Step 1: Finish your domain log entry.** In `AI_domainExpert_log.md`, under "How I checked it / what I used it for", paste:
+```
+I checked the answer against my 2,000-star data and the IAU list of 88 constellations (with help from the programming AI). The genitive table has exactly 88 entries and covers every constellation in my data; all Bayer values match the Greek letter table. My data also has a Latin-letter Bayer star (p Eridani), which the answer only mentioned briefly. Using only the suggested rule, 5 names were duplicated (61 Cyg, p Eri, Gam CrA, Eta CrB, 53 Aqr) because they are double stars, so I add the A/B letter from the Gliese ID. Error found: the answer says Flamsteed's 1725 catalogue numbered the stars, but the numbers were assigned by Lalande in 1783 (https://en.wikipedia.org/wiki/Flamsteed_designation). The GJ number ranges were not checked. I used the tables to write CatalogueNames.cs.
+```
+Save it.
+
+**Step 2: Put the files in place and test.** Download the 3 files, then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+mv ~/Downloads/CatalogueNames.cs ~/Downloads/Star.cs ~/Downloads/Program.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Send me a screenshot of the `dotnet run` output, and I'll write the log entries before you commit.
+````
+
+**Code sent as files (full):**
+
+`CatalogueNames.cs` (new):
+```csharp
+namespace StarChart3D;
+
+/// <summary>
+/// Creates catalogue names for stars, such as "Tau Ceti", "61 Cygni A" or "Gl 845",
+/// from the Bayer, Flamsteed, Gliese and Hipparcos values in the HYG data.
+/// </summary>
+/// <remarks>
+/// Order of preference: Bayer letter + constellation, then Flamsteed number + constellation,
+/// then Gliese ID, then Hipparcos number, then the HYG ID as a last resort.
+/// Names use plain ASCII ("Alpha-2", "Bootis") so that Raylib's default font can draw them.
+/// </remarks>
+public static class CatalogueNames
+{
+    /// <summary>HYG three-letter Greek letter abbreviations and their full names.</summary>
+    private static readonly Dictionary<string, string> GreekLetters = new()
+    {
+        ["Alp"] = "Alpha", ["Bet"] = "Beta", ["Gam"] = "Gamma", ["Del"] = "Delta",
+        ["Eps"] = "Epsilon", ["Zet"] = "Zeta", ["Eta"] = "Eta", ["The"] = "Theta",
+        ["Iot"] = "Iota", ["Kap"] = "Kappa", ["Lam"] = "Lambda", ["Mu"] = "Mu",
+        ["Nu"] = "Nu", ["Xi"] = "Xi", ["Omi"] = "Omicron", ["Pi"] = "Pi",
+        ["Rho"] = "Rho", ["Sig"] = "Sigma", ["Tau"] = "Tau", ["Ups"] = "Upsilon",
+        ["Phi"] = "Phi", ["Chi"] = "Chi", ["Psi"] = "Psi", ["Ome"] = "Omega"
+    };
+
+    /// <summary>
+    /// The 88 IAU constellation abbreviations and the Latin genitive used in star names
+    /// (e.g. "Cet" → "Ceti"). The abbreviations are case-sensitive: "CMa" is not "Cma".
+    /// </summary>
+    private static readonly Dictionary<string, string> ConstellationGenitives = new()
+    {
+        ["And"] = "Andromedae", ["Ant"] = "Antliae", ["Aps"] = "Apodis", ["Aqr"] = "Aquarii",
+        ["Aql"] = "Aquilae", ["Ara"] = "Arae", ["Ari"] = "Arietis", ["Aur"] = "Aurigae",
+        ["Boo"] = "Bootis", ["Cae"] = "Caeli", ["Cam"] = "Camelopardalis", ["Cnc"] = "Cancri",
+        ["CVn"] = "Canum Venaticorum", ["CMa"] = "Canis Majoris", ["CMi"] = "Canis Minoris",
+        ["Cap"] = "Capricorni", ["Car"] = "Carinae", ["Cas"] = "Cassiopeiae", ["Cen"] = "Centauri",
+        ["Cep"] = "Cephei", ["Cet"] = "Ceti", ["Cha"] = "Chamaeleontis", ["Cir"] = "Circini",
+        ["Col"] = "Columbae", ["Com"] = "Comae Berenices", ["CrA"] = "Coronae Australis",
+        ["CrB"] = "Coronae Borealis", ["Crv"] = "Corvi", ["Crt"] = "Crateris", ["Cru"] = "Crucis",
+        ["Cyg"] = "Cygni", ["Del"] = "Delphini", ["Dor"] = "Doradus", ["Dra"] = "Draconis",
+        ["Equ"] = "Equulei", ["Eri"] = "Eridani", ["For"] = "Fornacis", ["Gem"] = "Geminorum",
+        ["Gru"] = "Gruis", ["Her"] = "Herculis", ["Hor"] = "Horologii", ["Hya"] = "Hydrae",
+        ["Hyi"] = "Hydri", ["Ind"] = "Indi", ["Lac"] = "Lacertae", ["Leo"] = "Leonis",
+        ["LMi"] = "Leonis Minoris", ["Lep"] = "Leporis", ["Lib"] = "Librae", ["Lup"] = "Lupi",
+        ["Lyn"] = "Lyncis", ["Lyr"] = "Lyrae", ["Men"] = "Mensae", ["Mic"] = "Microscopii",
+        ["Mon"] = "Monocerotis", ["Mus"] = "Muscae", ["Nor"] = "Normae", ["Oct"] = "Octantis",
+        ["Oph"] = "Ophiuchi", ["Ori"] = "Orionis", ["Pav"] = "Pavonis", ["Peg"] = "Pegasi",
+        ["Per"] = "Persei", ["Phe"] = "Phoenicis", ["Pic"] = "Pictoris", ["Psc"] = "Piscium",
+        ["PsA"] = "Piscis Austrini", ["Pup"] = "Puppis", ["Pyx"] = "Pyxidis", ["Ret"] = "Reticuli",
+        ["Sge"] = "Sagittae", ["Sgr"] = "Sagittarii", ["Sco"] = "Scorpii", ["Scl"] = "Sculptoris",
+        ["Sct"] = "Scuti", ["Ser"] = "Serpentis", ["Sex"] = "Sextantis", ["Tau"] = "Tauri",
+        ["Tel"] = "Telescopii", ["Tri"] = "Trianguli", ["TrA"] = "Trianguli Australis",
+        ["Tuc"] = "Tucanae", ["UMa"] = "Ursae Majoris", ["UMi"] = "Ursae Minoris",
+        ["Vel"] = "Velorum", ["Vir"] = "Virginis", ["Vol"] = "Volantis", ["Vul"] = "Vulpeculae"
+    };
+
+    /// <summary>
+    /// Returns the best catalogue name for a star, ignoring its proper name.
+    /// </summary>
+    /// <example>Tau Ceti, Alpha-2 Centauri, 61 Cygni A, p Eridani B, Gl 845, HIP 1, HYG 0.</example>
+    public static string Create(Star star)
+    {
+        string constellation = Genitive(star.Constellation);
+
+        if (star.Bayer.Length > 0 && constellation.Length > 0)
+        {
+            return AddComponent($"{BayerName(star.Bayer)} {constellation}", star.GlieseId);
+        }
+
+        if (star.Flamsteed is int flamsteed && constellation.Length > 0)
+        {
+            return AddComponent($"{flamsteed} {constellation}", star.GlieseId);
+        }
+
+        if (star.GlieseId.Length > 0)
+        {
+            return star.GlieseId;
+        }
+
+        if (star.HipparcosId is int hip)
+        {
+            return $"HIP {hip}";
+        }
+
+        return $"HYG {star.Id}";
+    }
+
+    /// <summary>
+    /// Turns a HYG Bayer value into a readable name: "Tau" → "Tau", "Alp-2" → "Alpha-2".
+    /// Values that are not Greek letters (Bayer also used Latin letters, e.g. "p") are kept as they are.
+    /// </summary>
+    private static string BayerName(string bayer)
+    {
+        string letter = bayer;
+        string suffix = string.Empty;
+
+        int dash = bayer.IndexOf('-');
+        if (dash > 0)
+        {
+            letter = bayer[..dash];
+            suffix = bayer[dash..]; // e.g. "-2"
+        }
+
+        return (GreekLetters.TryGetValue(letter, out string? fullName) ? fullName : letter) + suffix;
+    }
+
+    /// <summary>Returns the genitive for a constellation abbreviation, the abbreviation itself if unknown, or "" if empty.</summary>
+    private static string Genitive(string abbreviation)
+    {
+        if (abbreviation.Length == 0)
+        {
+            return string.Empty;
+        }
+
+        return ConstellationGenitives.TryGetValue(abbreviation, out string? genitive) ? genitive : abbreviation;
+    }
+
+    /// <summary>
+    /// Adds the multiple-star component letter from the Gliese ID, e.g. "Gl 820A" → "61 Cygni A",
+    /// so that both stars of a double star do not get the same name.
+    /// </summary>
+    private static string AddComponent(string name, string glieseId)
+    {
+        if (glieseId.Length >= 2 && char.IsUpper(glieseId[^1]) && char.IsDigit(glieseId[^2]))
+        {
+            return $"{name} {glieseId[^1]}";
+        }
+
+        return name;
+    }
+}
+```
+
+`Star.cs` (changed – new `CatalogueName` and `DisplayName` properties; `ToString()` now uses `DisplayName`):
+```csharp
+namespace StarChart3D;
+
+/// <summary>
+/// One star from the HYG v4.4 star database (one row of the CSV file).
+/// Positions and distances are in parsecs, with the Sun at (0, 0, 0).
+/// </summary>
+public class Star
+{
+    /// <summary>Number of light years in one parsec.</summary>
+    public const double LightYearsPerParsec = 3.26156;
+
+    /// <summary>HYG database ID (column "id"). The Sun is 0.</summary>
+    public int Id { get; init; }
+
+    /// <summary>Proper (common) name, e.g. "Sirius" (column "proper"). Empty if the star has none.</summary>
+    public string ProperName { get; init; } = string.Empty;
+
+    /// <summary>Hipparcos catalogue number (column "hip"), or null if the star has none.</summary>
+    public int? HipparcosId { get; init; }
+
+    /// <summary>Gliese catalogue ID, e.g. "Gl 551" (column "gl"). Empty if the star has none.</summary>
+    public string GlieseId { get; init; } = string.Empty;
+
+    /// <summary>Bayer designation, e.g. "Alp" or "Alp-2" (column "bayer"). Empty if the star has none.</summary>
+    public string Bayer { get; init; } = string.Empty;
+
+    /// <summary>Flamsteed number, e.g. 61 for 61 Cygni (column "flam"), or null if the star has none.</summary>
+    public int? Flamsteed { get; init; }
+
+    /// <summary>Three-letter constellation abbreviation, e.g. "Cen" (column "con"). Empty if unknown.</summary>
+    public string Constellation { get; init; } = string.Empty;
+
+    /// <summary>Distance from the Sun in parsecs (column "dist").</summary>
+    public double DistanceParsecs { get; init; }
+
+    /// <summary>X position in parsecs (column "x"). +X points towards the vernal equinox.</summary>
+    public double X { get; init; }
+
+    /// <summary>Y position in parsecs (column "y"). +Y points towards right ascension 6 hours.</summary>
+    public double Y { get; init; }
+
+    /// <summary>Z position in parsecs (column "z"). +Z points towards the north celestial pole.</summary>
+    public double Z { get; init; }
+
+    /// <summary>Apparent visual magnitude as seen from Earth (column "mag"). Smaller numbers are brighter.</summary>
+    public double Magnitude { get; init; }
+
+    /// <summary>Spectral type, e.g. "G2V" (column "spect"). Empty if unknown.</summary>
+    public string SpectralType { get; init; } = string.Empty;
+
+    /// <summary>Distance from the Sun in light years.</summary>
+    public double DistanceLightYears => DistanceParsecs * LightYearsPerParsec;
+
+    /// <summary>True if the star has a proper (common) name.</summary>
+    public bool HasProperName => !string.IsNullOrWhiteSpace(ProperName);
+
+    private string? _catalogueName;
+
+    /// <summary>
+    /// Catalogue name made from the star's catalogue IDs, e.g. "Tau Ceti", "61 Cygni A" or "Gl 845".
+    /// Created the first time it is needed and then remembered.
+    /// </summary>
+    public string CatalogueName => _catalogueName ??= CatalogueNames.Create(this);
+
+    /// <summary>The name to show for the star: its proper name if it has one, otherwise its catalogue name.</summary>
+    public string DisplayName => HasProperName ? ProperName : CatalogueName;
+
+    /// <summary>Returns the star's name and distance, for debugging.</summary>
+    public override string ToString() => $"{DisplayName} ({DistanceLightYears:F2} ly)";
+}
+```
+
+`Program.cs` (changed – temporary test):
+```csharp
+using StarChart3D;
+
+// Temporary test for StarCollection: loads the star data and prints a summary.
+// (The Raylib window test from setup is replaced; the 3D window comes back in Feature 2.)
+string dataFile = Path.Combine(AppContext.BaseDirectory, "Data", "stars_local_2000.csv");
+var stars = new StarCollection(dataFile);
+
+Console.WriteLine($"Loaded {stars.Count} stars from {dataFile}");
+Console.WriteLine($"Skipped lines: {stars.SkippedLines.Count}");
+foreach (string message in stars.SkippedLines)
+{
+    Console.WriteLine("  " + message);
+}
+
+Console.WriteLine($"First star: {stars[0]}");
+Console.WriteLine($"Second star: {stars[1]}");
+Console.WriteLine($"Last star: {stars[stars.Count - 1]}");
+Console.WriteLine($"Stars with a proper name: {stars.Count(star => star.HasProperName)}");
+
+// Catalogue names for stars without a proper name (one example of each kind).
+int[] exampleIds = { 8087, 15419, 27844, 103879, 103883, 7736, 118084, 118541, 82472, 70666, 0 };
+foreach (int id in exampleIds)
+{
+    Star? star = stars.FindById(id);
+    if (star is not null)
+    {
+        Console.WriteLine($"  HYG {star.Id}: {star.DisplayName} (catalogue name: {star.CatalogueName})");
+    }
+}
+
+// Every star should now have its own name.
+int duplicateNames = stars.GroupBy(star => star.DisplayName).Count(group => group.Count() > 1);
+Console.WriteLine($"Names used by more than one star: {duplicateNames}");
+Console.WriteLine($"Unnamed stars that still only have a HYG number: {stars.Count(star => !star.HasProperName && star.CatalogueName.StartsWith("HYG"))}");
+```
+
+**What I did with it:** Added Entry 1 to AI_domainExpert_log.md (see Entry 55), moved the three files into StarChart3D, `dotnet build` succeeded, and `dotnet run` printed the same results as the AI's test (Entry 56).
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- `CatalogueNames` is a `static` class: it only has helper methods and two lookup tables, so no object is needed.
+- `GreekLetters` maps HYG's three-letter abbreviations to full names (`Alp` → `Alpha`). `ConstellationGenitives` maps the 88 IAU abbreviations to the Latin genitive (`Cet` → `Ceti`). The dictionary keys are case-sensitive, which matters because `CMa` (Canis Major) is not the same as `Cma`.
+- `Create(Star)` tries each naming method in order of preference and returns the first one that works: Bayer + constellation → Flamsteed + constellation → Gliese ID → `HIP` number → `HYG` id.
+- `BayerName` splits off a suffix (`Alp-2` → `Alpha` + `-2`). Values that are not Greek letters, like the Latin letter `p`, are kept as they are.
+- `AddComponent` adds the multiple-star letter from the end of the Gliese ID (`Gl 820A` → `A`), so the two stars of a double star get different names (61 Cygni A and B).
+- In `Star`, `CatalogueName` uses `??=`: the first time it is read, it calls `CatalogueNames.Create(this)` and stores the result in `_catalogueName`; after that it returns the stored value. `DisplayName` returns the proper name if there is one, otherwise the catalogue name.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the AI checked the expert answer against the real data before using it, and found three things the answer did not cover well: Latin-letter Bayer stars (p Eridani), 5 duplicate names caused by double stars (fixed with the A/B letter), and a historical error (Flamsteed numbers were assigned by Lalande in 1783, not in 1725). All tables were tested against my data: 0 duplicate names and 0 stars left with only a HYG number. Weaknesses: (1) the A/B letter only comes from the Gliese ID, so a double star without a Gliese ID could still get a duplicate name (none in my 2,000 stars, but possible with other data); (2) the names use ASCII ("Alpha-2", "Bootis") instead of the correct superscript and "Boötis", because of Raylib's default font – a font with more characters would fix this; (3) HD numbers are not stored, so they are never used, even though the expert ranked them before HIP (in my data no unnamed star depends on them); (4) the cached `CatalogueName` is not thread-safe, which does not matter in this single-threaded program; (5) as before, the AI could not test with Raylib-cs.
+
+---
+
+### Entry 55 – 2026-11-06 01:01 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+i dont understand step 1 where and how to do it?
+```
+
+**AI actions:** The AI wrote my complete domain log entry (question, full answer, checking notes) as a file, `domain_entry_1.md`.
+
+**AI response (full):**
+````
+Sorry, that was confusing. I'll make it simple: I'll prepare the **whole domain log entry** as a file (your question, the full answer, and the checking notes), and you add it with one command, like we did with the other log.
+
+`domain_entry_1.md` has everything for your domain log: your question, the expert's **full** answer (copied exactly from the file you sent me), and the checking notes, including the Flamsteed error.
+
+One question first: **did you already paste anything into `AI_domainExpert_log.md` yourself?**
+- **If no** (it's still the empty template), just follow the steps below.
+- **If yes,** tell me before running anything, otherwise the entry would appear twice.
+
+**Steps.** Download the file, then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+cat ~/Downloads/domain_entry_1.md >> AI_domainExpert_log.md
+```
+```
+tail -5 AI_domainExpert_log.md
+```
+The last command should show the end of the entry, finishing with a line about Raylib's font and `---`.
+
+Then continue with the code:
+```
+cd StarChart3D
+```
+```
+mv ~/Downloads/CatalogueNames.cs ~/Downloads/Star.cs ~/Downloads/Program.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Send me a screenshot of the `dotnet run` output.
+````
+
+**What I did with it:** I had not pasted anything into AI_domainExpert_log.md yet, so I appended domain_entry_1.md to it, then moved the three code files and ran the program.
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI's earlier instruction was unclear (it told me to paste text "under 'How I checked it'" in an entry I had not created yet). Giving me the whole entry as a file was simpler and avoided copy-and-paste mistakes. It also asked whether I had already added anything, to avoid a duplicate entry.
+
+---
+
+### Entry 56 – 2026-11-06 01:04 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `dotnet run` on my Mac printed: Last star: GJ 3925A (66.97 ly); Tau Ceti; Kappa-1 Ceti; Chi-1 Orionis A; 61 Cygni A; 61 Cygni B; p Eridani A; p Eridani B; GJ 1111; HIP 82724; Proxima Centauri (catalogue name: Gl 551); Sol (catalogue name: HYG 0); Names used by more than one star: 0; Unnamed stars that still only have a HYG number: 0]
+
+**AI response:** The AI confirmed my output matched its test exactly, wrote Entries 53–56 of this log, and gave me the commands to commit and then open the Feature 1 pull request. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+Matches the AI's test. The last star is now shown by its catalogue name (GJ 3925A) instead of "HYG 119045", which shows the new DisplayName working through ToString().
+
+---

@@ -54,10 +54,17 @@ public class Star
     /// <summary>True if the star has a proper (common) name.</summary>
     public bool HasProperName => !string.IsNullOrWhiteSpace(ProperName);
 
+    private string? _catalogueName;
+
+    /// <summary>
+    /// Catalogue name made from the star's catalogue IDs, e.g. "Tau Ceti", "61 Cygni A" or "Gl 845".
+    /// Created the first time it is needed and then remembered.
+    /// </summary>
+    public string CatalogueName => _catalogueName ??= CatalogueNames.Create(this);
+
+    /// <summary>The name to show for the star: its proper name if it has one, otherwise its catalogue name.</summary>
+    public string DisplayName => HasProperName ? ProperName : CatalogueName;
+
     /// <summary>Returns the star's name and distance, for debugging.</summary>
-    public override string ToString()
-    {
-        string name = HasProperName ? ProperName : $"HYG {Id}";
-        return $"{name} ({DistanceLightYears:F2} ly)";
-    }
+    public override string ToString() => $"{DisplayName} ({DistanceLightYears:F2} ly)";
 }
