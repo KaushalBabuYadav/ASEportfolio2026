@@ -12,6 +12,7 @@ Raylib.InitWindow(1280, 800, "StarChart3D");
 Raylib.SetTargetFPS(60);
 
 var renderer = new StarRenderer(stars);
+var dust = new DustField();
 
 // The camera starts far outside the star field and then flies in to the first star system (the Sun).
 // After that it can be moved with mouse and keyboard.
@@ -36,6 +37,7 @@ while (!Raylib.WindowShouldClose())
         renderer.ShowOnlyNamedStars = !renderer.ShowOnlyNamedStars;
     }
     Camera3D camera = cameraController.Camera;
+    dust.Update(camera, cameraController.Distance);
 
     Raylib.BeginDrawing();
     Raylib.ClearBackground(spaceColour);
@@ -43,6 +45,7 @@ while (!Raylib.WindowShouldClose())
     Raylib.BeginMode3D(camera);
     Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
     renderer.DrawStars();
+    dust.Draw(camera, cameraController.Distance); // faint particles that streak past when the camera moves
     Raylib.EndMode3D();
 
     renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene

@@ -6706,3 +6706,424 @@ here
 The screenshots prove the camera flies in from about 92 light years to 6.5 light years and the Sol label is no longer hidden. Two weaknesses seen: (1) mid-flight the frame rate fell to 25 FPS, probably because many labels and catalogue names are being checked and drawn while the camera passes through the star field; (2) star labels are drawn before the "Flying to..." text but can still show through or crowd it – the message should have its own dark background like the other HUD text.
 
 ---
+
+### Entry 115 – 2026-11-08 04:34 – Branch: `feature3-3d_movement` – Feature 3: dust animation for the illusion of motion
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `git push`: 984d525..5dc5de6 feature3-3d_movement]
+
+**AI actions:** The AI checked commit 5dc5de6 on GitHub (read-only): 4 files, code identical to what it tested, 116 headings, no duplicates, no stray StarChart3D/AI_programming_log.md. It checked DrawLine3D, DrawPoint3D and ColorAlpha in the Raylib-cs source, wrote DustField.cs, added 3 lines to Program.cs, built and captured frames at 2, 4 and 9 seconds. The 9-second frame (camera still) showed parallel lines, so it logged the camera speed every frame to a file (one attempt failed because of a quoting mistake in its own test script): the speed was 0.000 after the flight ended at about 6.2 s. It then downloaded raylib 6.0 rmodels.c from GitHub and found DrawPoint3D draws a line from (0,0,0) to (0,0,0.1). It replaced DrawPoint3D with a speck drawn by DrawLine3D (drift direction × 0.006 of the box), re-tested a moving and a still frame, and tested holding W after arrival.
+
+**AI response (full):**
+````
+The fly-in is verified on GitHub. Commit `5dc5de6` contains the 4 correct files, all matching what I tested; the log has 116 headings with no duplicates; and there's no stray log file inside `StarChart3D`.
+
+Now **part 2, the dust animation**. I'll write it and test it.
+
+In the middle frame (mid-flight) I can see faint streaks. Let me zoom in to check they're visible enough:
+
+Mid-flight, the streaks look right (left image). But in the right image, taken after arrival when the camera should be still, there are **still streaks**. That's wrong: a still camera should show only small drifting dots. I'll find out why rather than guess:
+
+My debug line had a quoting mistake in my own test script (not your code). Retrying properly:
+
+The camera speed log shows it **is** zero after arrival, so my code draws "points", not streaks. That means the leftover lines come from Raylib's `DrawPoint3D` itself. All the lines in that frame point the same way, which suggests `DrawPoint3D` actually draws a short line. Let me check that in the library:
+
+Confirmed from Raylib's own source: `DrawPoint3D` is ["a point in 3D space, actually a small line"](https://raw.githubusercontent.com/raysan5/raylib/6.0/src/rmodels.c), always **0.1 units long along the Z axis**. In this program one unit is a parsec, so each "point" was a 0.1-parsec line, all pointing the same way. I'll replace it with a tiny speck scaled to the view:
+
+Fixed. Moving produces streaks (left), and standing still shows only tiny faint specks (right). I'll also check that moving with **W** after arriving makes streaks too:
+
+Holding **W** makes streaks fan out from the centre, which gives the "flying forwards" effect. Packaging part 2:
+
+The fly-in commit is verified on GitHub, and **Feature 3 part 2, the dust animation**, is ready and tested. In my test run, faint blue streaks fly past while the camera moves (during the fly-in, or when you hold **W**), and when you stop, only tiny specks remain, drifting slowly.
+
+**What changed:**
+- **`DustField.cs`** (new): 400 dust particles in a box that travels with the camera. The box grows and shrinks with your zoom level, so the dust is visible whether you're zoomed in or out.
+- **`Program.cs`**: 3 new lines, to create, update and draw the dust.
+
+**A bug I found and fixed, which is good critique material:** my first version drew "still" dust using Raylib's `DrawPoint3D`, but standing still still showed long lines. Logging the camera speed proved it really was zero, so the cause was elsewhere. Raylib's own source code shows that `DrawPoint3D` is ["actually a small line"](https://raw.githubusercontent.com/raysan5/raylib/6.0/src/rmodels.c) **0.1 units long**. In this program that's 0.1 parsecs, so every "point" became a long line. I replaced it with tiny specks scaled to the view.
+
+**Steps.** Download the two `.cs` files, then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+mv ~/Downloads/DustField.cs ~/Downloads/Program.cs .
+```
+```
+ls
+```
+`DustField.cs` should be in the list. Then:
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+During the fly-in, press **Cmd+Shift+3**. After it arrives, hold **W** for a second and press **Cmd+Shift+3** again. Then press **Esc** and send me both screenshots.
+
+I still need the domain expert's answer about **bearing and path** for part 3. That's the stars list with distances, so please ask it if you haven't yet.
+````
+
+**What I did with it:** Moved DustField.cs and Program.cs into StarChart3D; built and ran it. Screenshots in Entries 118–119; `grep -c "DrawPoint3D(" DustField.cs` printed 0, so I have the fixed version (Entry 120).
+
+**Code sent as files (full):**
+
+`DustField.cs` (new):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// "Space dust": faint particles in a box that moves with the camera. They drift slowly all the time,
+/// and when the camera moves they are drawn as short streaks pointing back along the movement,
+/// which gives the feeling of travelling through space.
+/// </summary>
+/// <remarks>
+/// The dust is purely visual and is not real data. The box is sized relative to how far the camera is
+/// from what it is looking at, so the dust stays visible whether the user is zoomed in or out.
+/// </remarks>
+public class DustField
+{
+    private const int ParticleCount = 400;
+    private const float BoxFraction = 0.5f;     // half the box width, as a fraction of the camera's viewing distance
+    private const float DriftFraction = 0.02f;  // slow drift speed, as a fraction of the box size per second
+    private const float StreakSeconds = 0.12f;  // a streak shows where a particle appeared to be this long ago
+    private const float MaxStreakFraction = 0.4f; // streaks are never longer than this fraction of the box
+    private const float SpeckFraction = 0.006f;   // length of a still dust speck, as a fraction of the box
+
+    private readonly Vector3[] _offsets = new Vector3[ParticleCount]; // position relative to the camera, as a fraction of the box (-1 to 1)
+    private readonly Vector3[] _drift = new Vector3[ParticleCount];   // each particle's own slow drift direction
+    private Vector3 _lastCameraPosition;
+    private Vector3 _cameraVelocity;
+    private bool _hasLastPosition;
+
+    /// <summary>Creates the dust with a fixed random seed, so it looks the same each time the program runs.</summary>
+    public DustField(int seed = 12345)
+    {
+        var random = new Random(seed);
+        for (int i = 0; i < ParticleCount; i++)
+        {
+            _offsets[i] = new Vector3(RandomUnit(random), RandomUnit(random), RandomUnit(random));
+            _drift[i] = Vector3.Normalize(new Vector3(RandomUnit(random), RandomUnit(random), RandomUnit(random)) + new Vector3(0.001f));
+        }
+    }
+
+    /// <summary>Camera speed at the last update, in parsecs per second.</summary>
+    public float CameraSpeed => _cameraVelocity.Length();
+
+    /// <summary>
+    /// Moves the dust for this frame. Particles that move out of the box (because the camera moved past them)
+    /// wrap around to the other side, so there is always dust around the camera.
+    /// </summary>
+    /// <param name="camera">The camera used this frame.</param>
+    /// <param name="viewingDistance">How far the camera is from the point it looks at, in parsecs.</param>
+    public void Update(Camera3D camera, float viewingDistance)
+    {
+        float seconds = Raylib.GetFrameTime();
+        float boxHalf = MathF.Max(viewingDistance * BoxFraction, 0.2f);
+
+        if (_hasLastPosition && seconds > 0f)
+        {
+            _cameraVelocity = (camera.Position - _lastCameraPosition) / seconds;
+
+            // Moving the camera forward makes the dust move backwards relative to the camera.
+            Vector3 cameraMoveInBoxUnits = (camera.Position - _lastCameraPosition) / boxHalf;
+            for (int i = 0; i < ParticleCount; i++)
+            {
+                _offsets[i] += _drift[i] * DriftFraction * seconds - cameraMoveInBoxUnits;
+                _offsets[i] = Wrap(_offsets[i]);
+            }
+        }
+
+        _lastCameraPosition = camera.Position;
+        _hasLastPosition = true;
+    }
+
+    /// <summary>
+    /// Draws the dust. Must be called between <c>Raylib.BeginMode3D</c> and <c>Raylib.EndMode3D</c>.
+    /// Particles further from the camera are fainter.
+    /// </summary>
+    public void Draw(Camera3D camera, float viewingDistance)
+    {
+        float boxHalf = MathF.Max(viewingDistance * BoxFraction, 0.2f);
+        Vector3 streak = -_cameraVelocity * StreakSeconds;
+        float maxStreak = boxHalf * MaxStreakFraction;
+        if (streak.Length() > maxStreak)
+        {
+            streak = Vector3.Normalize(streak) * maxStreak;
+        }
+
+        for (int i = 0; i < ParticleCount; i++)
+        {
+            Vector3 position = camera.Position + _offsets[i] * boxHalf;
+            float nearness = 1f - Math.Clamp(_offsets[i].Length() / 1.7f, 0f, 1f); // 1 at the camera, 0 at the box corner
+            var colour = new Color(180, 200, 255, (int)(40 + 120 * nearness));
+
+            // A speck is always drawn as a tiny line in the particle's own drift direction. (Raylib's DrawPoint3D
+            // is not used: it is "actually a small line" 0.1 units long along Z, which is 0.1 parsecs here,
+            // so every "point" became a long line pointing the same way.) When the camera moves, the streak is added.
+            Vector3 speck = _drift[i] * boxHalf * SpeckFraction;
+            Raylib.DrawLine3D(position, position + speck + streak, colour);
+        }
+    }
+
+    /// <summary>Wraps each coordinate back into the range -1 to 1.</summary>
+    private static Vector3 Wrap(Vector3 offset)
+    {
+        return new Vector3(WrapOne(offset.X), WrapOne(offset.Y), WrapOne(offset.Z));
+    }
+
+    private static float WrapOne(float value)
+    {
+        // Shift to 0..2, take the remainder, shift back to -1..1. The extra + 2 handles negative values.
+        return ((value + 1f) % 2f + 2f) % 2f - 1f;
+    }
+
+    private static float RandomUnit(Random random) => (float)(random.NextDouble() * 2.0 - 1.0);
+}
+```
+
+`Program.cs` (changed – 3 new lines: `var dust = new DustField();`, `dust.Update(...)` after the camera is updated, and `dust.Draw(...)` inside `BeginMode3D`/`EndMode3D`):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+using StarChart3D;
+
+// Load the 2,000 nearest stars.
+string dataFile = Path.Combine(AppContext.BaseDirectory, "Data", "stars_local_2000.csv");
+var stars = new StarCollection(dataFile);
+
+// Open a resizable window with anti-aliasing (smoother edges).
+Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint | ConfigFlags.ResizableWindow);
+Raylib.InitWindow(1280, 800, "StarChart3D");
+Raylib.SetTargetFPS(60);
+
+var renderer = new StarRenderer(stars);
+var dust = new DustField();
+
+// The camera starts far outside the star field and then flies in to the first star system (the Sun).
+// After that it can be moved with mouse and keyboard.
+var cameraController = new CameraController(startPosition: new Vector3(90f, 60f, 90f), startTarget: Vector3.Zero);
+Star home = stars.FindById(0) ?? stars[0]; // HYG id 0 is the Sun
+const float ArrivalDistance = 2f;          // parsecs from the star when the camera arrives
+const float FlightSeconds = 6f;
+cameraController.FlyTo(StarRenderer.ToWorldPosition(home), ArrivalDistance, FlightSeconds);
+
+var spaceColour = new Color(5, 5, 15, 255);
+string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
+const string Help = "Mouse: wheel = zoom, left-drag = rotate, right-drag = pan\n" +
+                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, F filter named stars, Esc quit";
+
+while (!Raylib.WindowShouldClose())
+{
+    cameraController.Update();
+
+    // F switches between all stars and only the stars that have a proper name.
+    if (Raylib.IsKeyPressed(KeyboardKey.F))
+    {
+        renderer.ShowOnlyNamedStars = !renderer.ShowOnlyNamedStars;
+    }
+    Camera3D camera = cameraController.Camera;
+    dust.Update(camera, cameraController.Distance);
+
+    Raylib.BeginDrawing();
+    Raylib.ClearBackground(spaceColour);
+
+    Raylib.BeginMode3D(camera);
+    Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
+    renderer.DrawStars();
+    dust.Draw(camera, cameraController.Distance); // faint particles that streak past when the camera moves
+    Raylib.EndMode3D();
+
+    renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
+
+    // Dark panels behind the text, so star labels underneath do not make it unreadable.
+    var panelColour = new Color(0, 0, 0, 225);
+    Raylib.DrawRectangle(0, 0, 520, 104, panelColour);
+    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, 760, 50, panelColour);
+    Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
+    Raylib.DrawFPS(10, 36);
+    Raylib.DrawText($"Camera is {camera.Position.Length() * Star.LightYearsPerParsec:F1} light years from the Sun", 10, 62, 16, Color.LightGray);
+    string filterText = renderer.ShowOnlyNamedStars
+        ? $"Filter ON: showing {renderer.VisibleStarCount} named stars (F to show all)"
+        : $"Showing all {renderer.VisibleStarCount} stars (F to show only named stars)";
+    Raylib.DrawText(filterText, 10, 82, 16, renderer.ShowOnlyNamedStars ? Color.Yellow : Color.LightGray);
+
+    if (cameraController.IsFlying)
+    {
+        string flying = $"Flying to {home.DisplayName}...";
+        Raylib.DrawText(flying, (Raylib.GetScreenWidth() - Raylib.MeasureText(flying, 30)) / 2, 120, 30, Color.SkyBlue);
+    }
+    Raylib.DrawText(Help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
+    renderer.DrawLegend();
+    Raylib.EndDrawing();
+}
+
+Raylib.CloseWindow();
+```
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- `DustField` keeps 400 particles as offsets from the camera, each between −1 and 1 on every axis (a box around the camera). The real size of the box is half of the camera's viewing distance, so the dust is the same on screen whether I am zoomed in or out.
+- `Update` works out how far the camera moved since the last frame and moves every particle the opposite way (so the camera seems to fly through the dust), plus a small random drift. `Wrap` puts any particle that leaves the box back in on the other side, so the dust never runs out.
+- `Draw` draws each particle as a short line: a tiny speck in its own drift direction, plus a streak of length camera velocity × 0.12 s pointing backwards (capped at 40% of the box). When the camera is still, only the specks remain. Particles nearer the camera are drawn brighter (alpha 40–160).
+- The random generator has a fixed seed (12345), so the dust looks the same every run.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the AI tested a still frame as well as a moving one, which is how it found that the dust was wrong when the camera was not moving. Instead of guessing, it logged the camera speed (proving its own code was behaving), then read Raylib's source and found that `DrawPoint3D` is really a line 0.1 units long along Z – 0.1 parsecs in my scale, so every "point" was a long line. This is a misconception the AI introduced by trusting a function's name; the fix (drawing scaled specks itself) is explained in a code comment. Weaknesses: (1) the dust is decoration, not real interstellar dust; (2) when the camera rotates around the Sun the dust streaks sideways, which is technically right (the camera really moves sideways) but looks like a side wind; (3) at very small zoom distances the box is only 0.2 pc, so the streak lengths and numbers are tuned by eye; (4) 400 separate DrawLine3D calls per frame is fine here but not the fastest method.
+
+---
+
+### Entry 116 – 2026-11-08 04:42 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+lets run it again
+```
+
+**AI response (full):**
+````
+Sure. Run these one at a time. First, make sure the new dust files are in the project:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+ls ~/Downloads | grep -E "DustField|Program"
+```
+- **If it lists `DustField.cs` and `Program.cs`**, they're still in Downloads, so move them in:
+```
+mv ~/Downloads/DustField.cs ~/Downloads/Program.cs .
+```
+- **If it lists nothing**, they've probably already been moved, so skip that step.
+
+Then check and run:
+```
+ls
+```
+`DustField.cs` must be in the list.
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+While it runs:
+1. **During the fly-in:** press **Cmd+Shift+3**. You should see faint blue streaks flying past.
+2. **After it arrives:** hold **W** for a second and press **Cmd+Shift+3** again while still holding it. The streaks should fan out from the centre.
+3. Press **Esc** in the star window, then send me both screenshots.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI added checks (is the file still in Downloads? is DustField.cs in the folder?) because of the earlier `mv` mistakes.
+
+---
+
+### Entry 117 – 2026-11-08 04:44 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+i run it and and close it i forget to take some screenshot
+```
+
+**AI response (full):**
+````
+No problem. It plays the fly-in every time you start it, so just run it again:
+```
+dotnet run
+```
+
+**Get the screenshots ready before it opens:**
+1. As soon as the window appears, the fly-in starts. Press **Cmd+Shift+3** straight away, while "Flying to Sol..." is showing.
+2. Wait until it arrives at the Sun (about 6 seconds). Then **hold W** and, while still holding it, press **Cmd+Shift+3** again.
+3. Press **Esc** in the star window.
+
+The screenshots save to your **Desktop**. Send me both.
+
+And while you were running it the first time, **did you see the faint blue streaks** during the fly-in?
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 118 – 2026-11-08 04:45 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: arrived at the Sun, "Camera is 6.5 light years from the Sun", 59 FPS; faint streaks all running in the same diagonal direction]
+
+**AI response (full):**
+````
+The dust is showing. You arrived at the Sun (6.5 light years, 59 FPS), and faint streaks are visible across the screen.
+
+But I can't tell from this screenshot alone whether it's working **correctly**. All the streaks run in the **same direction** (diagonally). That's what should happen if the camera was moving **sideways**, for example while dragging with the mouse or using the arrow keys or A/D. But it's also exactly what my **first, buggy version** looked like when standing still.
+
+So I need two quick things:
+1. **What were you doing when you took this?** Holding W, dragging the mouse, pressing keys, or nothing?
+2. To confirm you have the fixed version, run this in the terminal:
+```
+grep -c "DrawPoint3D(" DustField.cs
+```
+- **0**: you have the fixed version.
+- **1**: you have the old version, and the files need moving again.
+
+If it's 0, run it once more (`dotnet run`), and after it arrives **don't touch anything** for 2 seconds and take a screenshot. With the fixed version, the long streaks should disappear and leave only tiny specks.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI did not claim success from an ambiguous screenshot: parallel streaks could mean correct sideways movement or the old DrawPoint3D bug, so it asked for a check that can tell them apart.
+
+---
+
+### Entry 119 – 2026-11-08 04:48 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+here
+```
+[6 screenshots: (1) flying in at 294.2 light years, "Flying to Sol...", streaks spreading out from the centre; (2) flying in at 16.8 light years, streaks; (3)–(6) camera 7.9 light years from the Sun while rotating: streaks horizontal in (3), diagonal in (4), vertical in (5) and (6); in (6) the grid seen edge-on as a thick line through the Sun]
+
+**AI response (full):**
+````
+These show the dust **reacting to how you move**, which is what I wanted to check:
+- **1–2 (flying in, 294 → 17 light years):** streaks spread out from the centre, the "flying forwards" effect.
+- **3–6 (camera 7.9 light years away, rotating around the Sun):** the streaks turn **horizontal** when you rotate left or right, **diagonal** when you rotate at an angle, and **vertical** when you rotate up or down. The distance stays at 7.9, which shows you were rotating, not moving forwards.
+
+In screenshot 6 the thick white line through the Sun is just the grid seen edge-on, when the camera is level with it. That's normal.
+
+**One thing I still can't confirm:** none of these shows the camera **completely still**, and that's the case my bug affected. Please run this one command (the star window must be closed):
+```
+grep -c "DrawPoint3D(" DustField.cs
+```
+- **0**: you have the fixed version, and I'll write the log entries straight away so you can commit.
+- **1**: the old file is still in place, and we'll swap it.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The screenshots show the streak direction follows the camera's movement (forwards, sideways, up/down), which is the intended behaviour. The AI also explained the grid edge-on artefact.
+
+---
+
+### Entry 120 – 2026-11-08 04:49 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `grep -c "DrawPoint3D(" DustField.cs` printed 0]
+
+**AI response:** The AI confirmed 0 means I have the fixed DustField.cs and that, together with the 6 screenshots, the dust works. It wrote Entries 115–120 and gave me the commit steps. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+Confirmed I am running the fixed version. I did not send a screenshot of the camera completely still, so that case was only tested on the AI's virtual screen.
+
+---
