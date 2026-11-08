@@ -30,6 +30,18 @@ public class StarRenderer
     private readonly Dictionary<SpectralClass, int> _classCounts = new();
     private readonly List<Rectangle> _labelAreas = new(); // screen areas already used by labels this frame
 
+    /// <summary>
+    /// When true, only stars with a proper name are drawn and labelled; stars that only have a
+    /// catalogue name are hidden. Toggled by the user (F key in Program.cs).
+    /// </summary>
+    public bool ShowOnlyNamedStars { get; set; }
+
+    /// <summary>Number of stars currently shown, taking <see cref="ShowOnlyNamedStars"/> into account.</summary>
+    public int VisibleStarCount => ShowOnlyNamedStars ? _stars.Count(star => star.HasProperName) : _stars.Count;
+
+    /// <summary>True if the star at this position in the list should be drawn with the current filter.</summary>
+    private bool IsVisible(int index) => !ShowOnlyNamedStars || _stars[index].HasProperName;
+
     /// <summary>Creates a renderer and works out each star's 3D position and colour once, so they are not recalculated every frame.</summary>
     /// <param name="stars">The stars to draw.</param>
     public StarRenderer(IReadOnlyList<Star> stars)
@@ -60,13 +72,19 @@ public class StarRenderer
     }
 
     /// <summary>
-    /// Draws every star as a small sphere in the colour of its spectral class. Must be called between
+    /// Draws every visible star as a small sphere in the colour of its spectral class
+    /// (all stars, or only named stars when <see cref="ShowOnlyNamedStars"/> is on). Must be called between
     /// <c>Raylib.BeginMode3D</c> and <c>Raylib.EndMode3D</c>.
     /// </summary>
     public void DrawStars()
     {
         for (int i = 0; i < _positions.Length; i++)
         {
+            if (!IsVisible(i))
+            {
+                continue;
+            }
+
             // Few rings and slices: each star is tiny on screen, and 2,000 detailed spheres would be slow.
             Raylib.DrawSphereEx(_positions[i], StarRadius, 6, 8, _colours[i]);
         }
@@ -90,6 +108,11 @@ public class StarRenderer
 
         for (int i = 0; i < _positions.Length; i++)
         {
+            if (!IsVisible(i))
+            {
+                continue;
+            }
+
             Star star = _stars[i];
             Vector3 toStar = _positions[i] - camera.Position;
 

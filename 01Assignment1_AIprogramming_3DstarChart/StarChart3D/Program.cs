@@ -19,11 +19,17 @@ var cameraController = new CameraController(startPosition: new Vector3(30f, 20f,
 var spaceColour = new Color(5, 5, 15, 255);
 string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
 const string Help = "Mouse: wheel = zoom, left-drag = rotate, right-drag = pan\n" +
-                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, Esc quit";
+                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, F filter named stars, Esc quit";
 
 while (!Raylib.WindowShouldClose())
 {
     cameraController.Update();
+
+    // F switches between all stars and only the stars that have a proper name.
+    if (Raylib.IsKeyPressed(KeyboardKey.F))
+    {
+        renderer.ShowOnlyNamedStars = !renderer.ShowOnlyNamedStars;
+    }
     Camera3D camera = cameraController.Camera;
 
     Raylib.BeginDrawing();
@@ -38,11 +44,15 @@ while (!Raylib.WindowShouldClose())
 
     // Dark panels behind the text, so star labels underneath do not make it unreadable.
     var panelColour = new Color(0, 0, 0, 225);
-    Raylib.DrawRectangle(0, 0, 470, 84, panelColour);
-    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, 620, 50, panelColour);
+    Raylib.DrawRectangle(0, 0, 520, 104, panelColour);
+    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, 760, 50, panelColour);
     Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
     Raylib.DrawFPS(10, 36);
     Raylib.DrawText($"Camera is {camera.Position.Length() * Star.LightYearsPerParsec:F1} light years from the Sun", 10, 62, 16, Color.LightGray);
+    string filterText = renderer.ShowOnlyNamedStars
+        ? $"Filter ON: showing {renderer.VisibleStarCount} named stars (F to show all)"
+        : $"Showing all {renderer.VisibleStarCount} stars (F to show only named stars)";
+    Raylib.DrawText(filterText, 10, 82, 16, renderer.ShowOnlyNamedStars ? Color.Yellow : Color.LightGray);
     Raylib.DrawText(Help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
     renderer.DrawLegend();
     Raylib.EndDrawing();
