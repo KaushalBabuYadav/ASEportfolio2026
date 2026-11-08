@@ -170,3 +170,81 @@ I checked the answer against my 2,000-star data file and the IAU list of 88 cons
 Used for: the Greek letter table, the 88 genitives and the naming order in CatalogueNames.cs. I used plain ASCII ("Alpha-2", "Bootis") instead of superscripts and "Boötis", because Raylib's default font cannot draw those characters.
 
 ---
+
+### Entry 2 – 2026-11-08 (between 04:56 and 04:58)
+
+Asked in my separate domain-expert chat ("Star naming conventions and catalogues", Claude Opus 5.5, ASE project). The question was drafted for me by the programming AI (see AI_programming_log.md, Entries 109 and 122).
+
+**Prompt:**
+```
+For a 3D star chart using the HYG database (x, y, z in parsecs, Sun at the origin, +x towards the vernal equinox, +z towards the north celestial pole): when travelling from one star to another, what do "bearing" and "path" (in degrees) usually mean, and how would you calculate them from the two stars' x, y, z positions?
+```
+
+**AI response (full):**
+`````
+There’s no official astronomical standard for “bearing” and “path”. They come from navigation, games and science fiction rather than from astronomy. In a chart built on HYG’s equatorial x, y, z, the most natural and common meaning is a pair of spherical angles describing the direction of travel:
+
+* Bearing is the horizontal angle, 0–360°, measured in the equatorial plane anticlockwise from +x (the vernal equinox) towards +y. It’s the same thing as right ascension, but in degrees rather than hours.
+* Path (also called “mark”, “elevation” or “inclination”) is the vertical angle, −90° to +90°, above or below the equatorial plane, positive towards +z (celestial north). It’s the same thing as declination.
+
+So “bearing 120, path 15” means: face the vernal equinox, turn 120° anticlockwise (seen from the north), then tilt 15° northwards. Because the axes don’t rotate as you move, this is simply the RA/Dec at which the destination star would appear from the starting star.
+Calculation
+Given start A = (x₁, y₁, z₁) and destination B = (x₂, y₂, z₂):
+
+```
+dx = x2 - x1
+dy = y2 - y1
+dz = z2 - z1
+
+distance = sqrt(dx² + dy² + dz²)                    // parsecs (× 3.26156 for light years)
+bearing  = atan2(dy, dx)  in degrees, wrapped to 0–360
+path     = atan2(dz, sqrt(dx² + dy²))  in degrees   // same as asin(dz / distance)
+```
+
+js
+
+```js
+function course(a, b) {
+  const dx = b.x - a.x, dy = b.y - a.y, dz = b.z - a.z;
+  const dist = Math.hypot(dx, dy, dz);
+  const deg = 180 / Math.PI;
+  let bearing = Math.atan2(dy, dx) * deg;
+  if (bearing < 0) bearing += 360;
+  const path = Math.atan2(dz, Math.hypot(dx, dy)) * deg;
+  return { dist, bearing, path };
+}
+```
+
+Notes:
+
+* Sanity check: with A as the Sun (0, 0, 0), you should get bearing = `ra × 15` and path = `dec` for star B, matching HYG’s own columns.
+* Use `atan2`, not `atan`. It gets the quadrant right, and it doesn’t divide by zero when dx = dy = 0. If you’re travelling exactly along ±z, the bearing is undefined, so display it as 0 or “—”.
+* The reverse trip has bearing + 180° (mod 360) and path negated.
+
+A galactic alternative
+Some science fiction and space-sim conventions measure bearing and path relative to the galactic plane, with bearing 0° pointing at the galactic centre. To use that convention, rotate (dx, dy, dz) into galactic coordinates first using the standard J2000 matrix, then apply the same two formulas:
+
+```
+gx = -0.0548755604*dx - 0.8734370902*dy - 0.4838350155*dz
+gy =  0.4941094279*dx - 0.4448296300*dy + 0.7469822445*dz
+gz = -0.8676661490*dx - 0.1980763734*dy + 0.4559837762*dz
+
+bearing = atan2(gy, gx)              // galactic longitude l, 0–360
+path    = atan2(gz, hypot(gx, gy))   // galactic latitude b
+```
+
+This gives galactic longitude and latitude, which feel more “physical” for a 3D map: the Milky Way’s disc becomes the horizontal plane.
+If you mean a heading relative to the ship
+If “bearing” should mean “how far to turn from where I’m pointing now”, you need the ship’s current orientation as forward/up/right vectors. Project the direction vector onto that frame, then use the same atan2 formulas. The total turn angle is `acos(dot(currentDir, newDir))`, using unit vectors.
+For a static star chart, the equatorial version is the clearest choice and lines up with HYG’s RA/Dec columns. Use the galactic version if you want the Milky Way to be “level”.
+`````
+
+**How I checked it / what I used it for:**
+I checked the answer against my 2,000-star data file (with help from the programming AI, AI_programming_log.md, Entry 124):
+- Its sanity check works: computing bearing and path from the Sun with its formulas gives HYG's own right ascension × 15 and declination for all 1,999 stars, to within 0.13° (the largest difference is Gl 699.1 near the celestial pole at declination +82.8°, where small rounding in x and y makes a bigger angle difference). Examples: Proxima Centauri bearing 217.43° (RA×15 = 217.44°), path −62.68° (Dec −62.68°); Sirius 101.29° / −16.72°; Barnard's Star 269.45° / +4.69°.
+- I also checked its galactic matrix: it maps the galactic centre (RA 266.405°, Dec −28.936°) to longitude 0°, latitude 0°, and the north galactic pole (RA 192.859°, Dec +27.128°) to latitude 90°, so the matrix is correct.
+- The answer is honest that "bearing" and "path" have no official astronomy definition – they come from navigation, games and science fiction. The spec does not define them either, so this is a design choice.
+
+Used for: I used the equatorial definition it recommends for a static star chart (bearing 0–360° from +x towards +y; path −90° to +90° towards +z) in Course.cs. I did not use the galactic version or the ship-relative version.
+
+---

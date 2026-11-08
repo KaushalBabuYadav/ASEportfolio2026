@@ -7127,3 +7127,428 @@ here
 Confirmed I am running the fixed version. I did not send a screenshot of the camera completely still, so that case was only tested on the AI's virtual screen.
 
 ---
+
+### Entry 121 – 2026-11-08 04:54 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: grep printed 116 then 122; `git add --dry-run .` listed AI_programming_log.md, StarChart3D/Program.cs, StarChart3D/DustField.cs]
+
+**AI response (full):**
+````
+All three checks pass:
+- The log went from **116 to 122** headings.
+- Exactly the **3 correct files** are listed.
+- `AI_programming_log.md` is in the right place.
+
+Commit and push, one at a time:
+```
+git add .
+```
+```
+git commit -m "Feature 3: add dust particles that streak past to show motion"
+```
+```
+git push
+```
+
+Send me a screenshot after `git push`.
+
+**Then please ask the domain expert the bearing/path question** (it's in my previous message). Part 3, the nearby-stars list, can't be built properly without it, and the deadline is tomorrow at 12pm.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 122 – 2026-11-08 04:55 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `git push`: 5dc5de6..757c107 feature3-3d_movement]
+
+**AI actions:** The AI checked commit 757c107 on GitHub (read-only): 3 files, code identical to what it tested, 122 headings, no duplicates.
+
+**AI response (full):**
+````
+The dust is committed and verified on GitHub: commit `757c107` has the 3 correct files, matching what I tested, and the log has 122 headings with no duplicates.
+
+**Feature 3 progress:**
+- ✅ Fly-in to the Sun
+- ✅ Dust animation
+- ⬜ List of nearby stars with distance, bearing and path
+- ⬜ Click a star to fly there, and the list updates
+- ⬜ Pull request "Feature 3 3D movement"
+
+**I need the domain expert's answer before I can write the next part.** The spec asks for "bearing (degrees)" and "path (degrees)" but never says what they mean, and there's more than one sensible definition. If I picked one myself, it wouldn't be in your domain log, and the log is part of the marks.
+
+Open your **separate domain-expert chat** and paste this exactly:
+```
+For a 3D star chart using the HYG database (x, y, z in parsecs, Sun at the origin, +x towards the vernal equinox, +z towards the north celestial pole): when travelling from one star to another, what do "bearing" and "path" (in degrees) usually mean, and how would you calculate them from the two stars' x, y, z positions?
+```
+Then send me the full answer here (copy and paste, a file, or screenshots). I'll check it, write it up as Entry 2 in your domain log, and build the stars list from it.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI refused to guess the meaning of "bearing" and "path" because the spec does not define them, and sent the question to the domain expert so the decision is documented.
+
+---
+
+### Entry 123 – 2026-11-08 04:56 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the Claude app with a new, empty chat open (not inside my existing domain-expert chat)]
+
+**AI response (full):**
+````
+You've opened a blank new chat. It's better to use your **existing domain-expert chat**, so all the astronomy questions stay together:
+
+1. On the left, under **ASE**, click **"Star naming conventions and catalogues"**. That's the chat where you asked about star names.
+2. Paste this into its message box and press Enter:
+```
+For a 3D star chart using the HYG database (x, y, z in parsecs, Sun at the origin, +x towards the vernal equinox, +z towards the north celestial pole): when travelling from one star to another, what do "bearing" and "path" (in degrees) usually mean, and how would you calculate them from the two stars' x, y, z positions?
+```
+3. When it answers, click the **copy** icon under its reply and paste it here. A screenshot works too, but copied text is better because it has to go into the log word for word.
+
+Don't ask it here in this chat. This one is the programming chat, and the spec wants domain questions kept separate.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Keeping all domain questions in one separate chat keeps the two logs clean, as the tutorial asks.
+
+---
+
+### Entry 124 – 2026-11-08 04:58 – Branch: `feature3-3d_movement` – Feature 3: list of nearby stars with distance, bearing and path
+
+**Prompt:**
+```
+here what it says [the domain expert's full answer about bearing and path – the full text is in AI_domainExpert_log.md, Entry 2]
+```
+
+**AI actions:** The AI used a Python script to compute bearing (atan2(y, x), 0–360) and path (atan2(z, hypot(x, y))) from the Sun for all 1,999 stars in my data and compared them with HYG's ra × 15 and dec columns (largest difference 0.13°, Gl 699.1 at Dec +82.8°). It also checked the expert's galactic matrix with the galactic centre and north galactic pole. It then wrote Course.cs and NearbyStarsPanel.cs, added 2 lines to Program.cs, built and captured a screenshot after the fly-in, and checked the table values (Proxima 4.23 ly 217.4° −62.7°, Barnard's Star 5.95 ly 269.5° +4.7°, Sirius 8.60 ly 101.3° −16.7°). It wrote my domain log Entry 2 with the expert's answer copied word for word.
+
+**AI response (full):**
+````
+I'll check the expert's answer against your real data before using it.
+
+The expert's answer checks out against your data:
+- **Bearing and path from the Sun match HYG's own right ascension × 15 and declination** for all 1,999 stars, to within 0.13°. The largest difference is for a star near the celestial pole, where tiny rounding has a big effect. For example, Proxima Centauri comes out at bearing 217.43° (HYG: 217.44°), path −62.68° (HYG: −62.68°), 4.23 light years.
+- I also checked its galactic matrix: it correctly puts the galactic centre at (0°, 0°) and the galactic north pole at latitude 90°.
+
+I'll use the expert's **recommended equatorial version**. Building the nearby-stars list now:
+
+The table works and matches known values, for example Proxima Centauri 4.23 light years, Barnard's Star 5.95 light years at bearing 269.5°, and Sirius 8.60 light years at bearing 101.3°, path −16.7°. Packaging:
+
+Now your domain log Entry 2, with the expert's answer word for word:
+
+I checked the expert's answer against your data and it holds up, so I've built **Feature 3 part 3: a table of the 10 nearest stars**. In my test run (`preview_nearest_stars.png`), the table appears on the right under the colour key, titled "Nearest stars to Sol". For each star it shows the **distance in light years, the bearing and the path**, for example Proxima Centauri at 4.23 light years, 217.4°, −62.7°.
+
+**How I checked the expert's answer:**
+- **Bearing and path are correct.** From the Sun, the expert's formulas give the same angles that HYG itself lists (right ascension × 15 and declination) for all 1,999 stars, within 0.13°.
+- **Its galactic formula is also correct**, but I didn't use it. I went with the version the expert recommends for a star chart.
+- **The expert says openly that "bearing" and "path" have no official astronomy definition**, so using them this way is a design choice. That's worth saying in your demo.
+
+**What changed:**
+- **`Course.cs`** (new) works out the distance, bearing and path from one star to another, and finds the nearest stars.
+- **`NearbyStarsPanel.cs`** (new) draws the table. The rows are numbered 1–9 and 0, ready for part 4, where pressing a number or clicking a row flies you to that star.
+- **`Program.cs`** has 2 new lines.
+
+**Steps (the star window must be closed).** Download the files, then run these one at a time.
+
+1. Add the expert's answer to your domain log:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+cat ~/Downloads/domain_entry_2.md >> AI_domainExpert_log.md
+```
+```
+grep -c "^### Entry [12] " AI_domainExpert_log.md
+```
+The last line should print **2**.
+
+2. Put the code in and run it:
+```
+cd StarChart3D
+```
+```
+mv ~/Downloads/Course.cs ~/Downloads/NearbyStarsPanel.cs ~/Downloads/Program.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+After the fly-in arrives, take a screenshot showing the table (**Cmd+Shift+3**), press **Esc**, and send me the screenshot. Then I'll write the programming log entries for this part.
+````
+
+**What I did with it:** Added domain log Entry 2, moved the three code files into StarChart3D, built and ran it. The table shows on my Mac during and after the fly-in (Entry 125).
+
+**Code sent as files (full):**
+
+`Course.cs` (new):
+```csharp
+namespace StarChart3D;
+
+/// <summary>
+/// The course from one star to another: distance, bearing and path.
+/// </summary>
+/// <remarks>
+/// "Bearing" and "path" are not official astronomy terms. Following the domain expert's advice
+/// (AI_domainExpert_log.md, Entry 2), they are measured in the equatorial frame of the HYG data,
+/// so the angles do not change as you travel:
+/// <list type="bullet">
+/// <item><b>Bearing</b>: 0–360°, measured in the equatorial plane anticlockwise from +X (vernal equinox) towards +Y.</item>
+/// <item><b>Path</b>: −90° to +90°, the angle above (+, towards celestial north) or below the equatorial plane.</item>
+/// </list>
+/// From the Sun, bearing equals the destination's right ascension in degrees and path equals its declination.
+/// </remarks>
+/// <param name="Destination">The star being travelled to.</param>
+/// <param name="DistanceLightYears">Straight-line distance in light years.</param>
+/// <param name="BearingDegrees">Horizontal angle, 0 to 360.</param>
+/// <param name="PathDegrees">Vertical angle, −90 to +90.</param>
+public readonly record struct Course(Star Destination, double DistanceLightYears, double BearingDegrees, double PathDegrees)
+{
+    /// <summary>Works out the course from <paramref name="from"/> to <paramref name="to"/> using their HYG x, y, z (parsecs).</summary>
+    public static Course Between(Star from, Star to)
+    {
+        double dx = to.X - from.X;
+        double dy = to.Y - from.Y;
+        double dz = to.Z - from.Z;
+
+        double distanceParsecs = Math.Sqrt(dx * dx + dy * dy + dz * dz);
+
+        // Atan2 gets the quarter of the circle right and does not divide by zero.
+        double bearing = Math.Atan2(dy, dx) * 180.0 / Math.PI;
+        if (bearing < 0)
+        {
+            bearing += 360.0;
+        }
+
+        double path = Math.Atan2(dz, Math.Sqrt(dx * dx + dy * dy)) * 180.0 / Math.PI;
+
+        return new Course(to, distanceParsecs * Star.LightYearsPerParsec, bearing, path);
+    }
+
+    /// <summary>
+    /// Returns the courses from <paramref name="from"/> to its <paramref name="count"/> nearest stars,
+    /// nearest first. The starting star itself is not included.
+    /// </summary>
+    public static IReadOnlyList<Course> ToNearest(Star from, IEnumerable<Star> stars, int count)
+    {
+        return stars
+            .Where(star => star.Id != from.Id)
+            .Select(star => Between(from, star))
+            .OrderBy(course => course.DistanceLightYears)
+            .Take(count)
+            .ToList();
+    }
+}
+```
+
+`NearbyStarsPanel.cs` (new):
+```csharp
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// An on-screen table of the stars nearest to the current location, with the
+/// distance (light years), bearing (degrees) and path (degrees) to each one.
+/// </summary>
+public class NearbyStarsPanel
+{
+    /// <summary>How many nearby stars are listed.</summary>
+    public const int StarCount = 10;
+
+    private const int Width = 470;
+    private const int RowHeight = 22;
+    private const int FontSize = 16;
+    private const int Top = 236;              // just below the spectral class key
+    private const int RightMargin = 10;
+
+    private readonly IReadOnlyList<Star> _allStars;
+    private IReadOnlyList<Course> _courses = Array.Empty<Course>();
+
+    /// <summary>Creates the panel and works out the list for the starting star.</summary>
+    public NearbyStarsPanel(IReadOnlyList<Star> allStars, Star startingStar)
+    {
+        _allStars = allStars;
+        SetLocation(startingStar);
+    }
+
+    /// <summary>The star the list is measured from.</summary>
+    public Star Location { get; private set; } = null!;
+
+    /// <summary>The courses currently listed, nearest first.</summary>
+    public IReadOnlyList<Course> Courses => _courses;
+
+    /// <summary>Changes the current location and recalculates the list of nearest stars.</summary>
+    public void SetLocation(Star star)
+    {
+        Location = star;
+        _courses = Course.ToNearest(star, _allStars, StarCount);
+    }
+
+    /// <summary>Draws the table in the right-hand side of the window.</summary>
+    public void Draw()
+    {
+        int x = Raylib.GetScreenWidth() - Width - RightMargin;
+        int height = 58 + _courses.Count * RowHeight;
+        Raylib.DrawRectangle(x, Top, Width, height, new Color(0, 0, 0, 225));
+
+        Raylib.DrawText($"Nearest stars to {Location.DisplayName}", x + 10, Top + 8, 18, Color.RayWhite);
+
+        int headerY = Top + 32;
+        DrawRow(x, headerY, "#", "Star", "Dist (ly)", "Bearing", "Path", Color.Gray);
+
+        for (int i = 0; i < _courses.Count; i++)
+        {
+            Course course = _courses[i];
+            int rowY = headerY + (i + 1) * RowHeight;
+            DrawRow(
+                x,
+                rowY,
+                ((i + 1) % 10).ToString(),           // 1–9, then 0 for the tenth star (matches the number keys)
+                Shorten(course.Destination.DisplayName, 16),
+                $"{course.DistanceLightYears:F2}",
+                $"{course.BearingDegrees:F1}",
+                $"{course.PathDegrees:+0.0;-0.0;0.0}",
+                Color.LightGray);
+        }
+    }
+
+    /// <summary>Draws one row of the table with fixed column positions.</summary>
+    private static void DrawRow(int x, int y, string number, string name, string distance, string bearing, string path, Color colour)
+    {
+        Raylib.DrawText(number, x + 10, y, FontSize, colour);
+        Raylib.DrawText(name, x + 32, y, FontSize, colour);
+        Raylib.DrawText(distance, x + 220, y, FontSize, colour);
+        Raylib.DrawText(bearing, x + 315, y, FontSize, colour);
+        Raylib.DrawText(path, x + 400, y, FontSize, colour);
+    }
+
+    /// <summary>Cuts long names so they do not run into the next column.</summary>
+    private static string Shorten(string text, int maxLength)
+    {
+        return text.Length <= maxLength ? text : text[..(maxLength - 1)] + ".";
+    }
+}
+```
+
+`Program.cs` (changed – 2 new lines: `var nearbyPanel = new NearbyStarsPanel(stars, home);` and `nearbyPanel.Draw();`):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+using StarChart3D;
+
+// Load the 2,000 nearest stars.
+string dataFile = Path.Combine(AppContext.BaseDirectory, "Data", "stars_local_2000.csv");
+var stars = new StarCollection(dataFile);
+
+// Open a resizable window with anti-aliasing (smoother edges).
+Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint | ConfigFlags.ResizableWindow);
+Raylib.InitWindow(1280, 800, "StarChart3D");
+Raylib.SetTargetFPS(60);
+
+var renderer = new StarRenderer(stars);
+var dust = new DustField();
+
+// The camera starts far outside the star field and then flies in to the first star system (the Sun).
+// After that it can be moved with mouse and keyboard.
+var cameraController = new CameraController(startPosition: new Vector3(90f, 60f, 90f), startTarget: Vector3.Zero);
+Star home = stars.FindById(0) ?? stars[0]; // HYG id 0 is the Sun
+const float ArrivalDistance = 2f;          // parsecs from the star when the camera arrives
+const float FlightSeconds = 6f;
+cameraController.FlyTo(StarRenderer.ToWorldPosition(home), ArrivalDistance, FlightSeconds);
+var nearbyPanel = new NearbyStarsPanel(stars, home); // the 10 nearest stars to the current location
+
+var spaceColour = new Color(5, 5, 15, 255);
+string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
+const string Help = "Mouse: wheel = zoom, left-drag = rotate, right-drag = pan\n" +
+                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, F filter named stars, Esc quit";
+
+while (!Raylib.WindowShouldClose())
+{
+    cameraController.Update();
+
+    // F switches between all stars and only the stars that have a proper name.
+    if (Raylib.IsKeyPressed(KeyboardKey.F))
+    {
+        renderer.ShowOnlyNamedStars = !renderer.ShowOnlyNamedStars;
+    }
+    Camera3D camera = cameraController.Camera;
+    dust.Update(camera, cameraController.Distance);
+
+    Raylib.BeginDrawing();
+    Raylib.ClearBackground(spaceColour);
+
+    Raylib.BeginMode3D(camera);
+    Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
+    renderer.DrawStars();
+    dust.Draw(camera, cameraController.Distance); // faint particles that streak past when the camera moves
+    Raylib.EndMode3D();
+
+    renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
+
+    // Dark panels behind the text, so star labels underneath do not make it unreadable.
+    var panelColour = new Color(0, 0, 0, 225);
+    Raylib.DrawRectangle(0, 0, 520, 104, panelColour);
+    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, 760, 50, panelColour);
+    Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
+    Raylib.DrawFPS(10, 36);
+    Raylib.DrawText($"Camera is {camera.Position.Length() * Star.LightYearsPerParsec:F1} light years from the Sun", 10, 62, 16, Color.LightGray);
+    string filterText = renderer.ShowOnlyNamedStars
+        ? $"Filter ON: showing {renderer.VisibleStarCount} named stars (F to show all)"
+        : $"Showing all {renderer.VisibleStarCount} stars (F to show only named stars)";
+    Raylib.DrawText(filterText, 10, 82, 16, renderer.ShowOnlyNamedStars ? Color.Yellow : Color.LightGray);
+
+    if (cameraController.IsFlying)
+    {
+        string flying = $"Flying to {home.DisplayName}...";
+        Raylib.DrawText(flying, (Raylib.GetScreenWidth() - Raylib.MeasureText(flying, 30)) / 2, 120, 30, Color.SkyBlue);
+    }
+    Raylib.DrawText(Help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
+    renderer.DrawLegend();
+    nearbyPanel.Draw();
+    Raylib.EndDrawing();
+}
+
+Raylib.CloseWindow();
+```
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- `Course` is a `readonly record struct`: a small value holding the destination star, distance (light years), bearing and path. `Between(from, to)` subtracts the two stars' HYG x, y, z (parsecs), works out the distance with Pythagoras, the bearing with `Atan2(dy, dx)` (made positive by adding 360 if needed) and the path with `Atan2(dz, horizontal distance)`. It uses the HYG coordinates, not the Raylib (x, z, −y) world coordinates, so the angles match the expert's definition and HYG's RA/Dec.
+- `ToNearest` works out the course to every other star with LINQ, sorts by distance and keeps the first 10. It leaves out the starting star itself.
+- `NearbyStarsPanel` remembers the current location (starting at Sol) and its 10 courses. `SetLocation` will be used in part 4 to move to another star and recalculate the list. `Draw` draws a dark box under the colour key with a title and columns # / Star / Dist (ly) / Bearing / Path. Rows are numbered 1–9 then 0, matching the keyboard number keys for part 4. Long names are shortened with `Shorten`.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the definitions of bearing and path come from the domain expert, not from a guess, and both the expert's main formulas and its galactic matrix were tested against real data before use (bearing/path from the Sun match HYG's RA×15/Dec for all 1,999 stars to within 0.13°). The calculation is in its own small class (`Course`) separate from the drawing, so it could be unit-tested. Weaknesses: (1) "bearing" and "path" have no official definition – another reader of the spec might expect a heading relative to the camera or the galactic plane; (2) double stars appear as two rows with the same distance and angles (Toliman and Rigil Kentaurus; Gl 65A and Gl 65B; Sirius and Gl 244B), which uses up rows in a 10-star list; (3) the panel has fixed pixel sizes and covers part of the star field on the right; (4) the bearing is undefined if the destination is exactly above or below (dx = dy = 0) – Atan2 returns 0 there, which the expert said is acceptable; (5) the list is calculated once per location change, but `ToNearest` checks all 1,999 stars each time, which is fine at this size.
+
+---
+
+### Entry 125 – 2026-11-08 05:03 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot 1: during the fly-in ("Flying to Sol...", camera 254.0 light years from the Sun) with the "Nearest stars to Sol" table on the right]
+[Screenshot 2: after arrival (camera 6.5 light years from the Sun, 58 FPS) with the same table: 1 Proxima Centauri 4.23 / 217.4 / −62.7; 2 Toliman 4.32 / 219.9 / −60.8; 3 Rigil Kentaurus 4.32 / 219.9 / −60.8; 4 Barnard's Star 5.95 / 269.5 / +4.7; 5 Wolf 359 7.80 / 164.1 / +7.0; 6 Lalande 21185 8.30 / 165.8 / +36.0; 7 Gl 65A 8.57 / 24.8 / −17.9; 8 Gl 65B 8.57 / 24.8 / −17.9; 9 Sirius 8.60 / 101.3 / −16.7; 0 Gl 244B 8.60 / 101.3 / −16.7]
+
+**AI response:** The AI confirmed the table works on my Mac and the values match its test, wrote Entries 121–125 and gave me the commit steps. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+The nearest-stars list works on my Mac. The table also shows during the fly-in, which is fine, but it covers part of the star field.
+
+---

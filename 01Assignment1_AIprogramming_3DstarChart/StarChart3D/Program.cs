@@ -21,6 +21,7 @@ Star home = stars.FindById(0) ?? stars[0]; // HYG id 0 is the Sun
 const float ArrivalDistance = 2f;          // parsecs from the star when the camera arrives
 const float FlightSeconds = 6f;
 cameraController.FlyTo(StarRenderer.ToWorldPosition(home), ArrivalDistance, FlightSeconds);
+var nearbyPanel = new NearbyStarsPanel(stars, home); // the 10 nearest stars to the current location
 
 var spaceColour = new Color(5, 5, 15, 255);
 string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
@@ -69,6 +70,7 @@ while (!Raylib.WindowShouldClose())
     }
     Raylib.DrawText(Help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
     renderer.DrawLegend();
+    nearbyPanel.Draw();
     Raylib.EndDrawing();
 }
 
