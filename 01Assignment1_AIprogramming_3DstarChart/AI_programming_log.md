@@ -2832,3 +2832,3075 @@ here
 Matches the AI's test. The last star is now shown by its catalogue name (GJ 3925A) instead of "HYG 119045", which shows the new DisplayName working through ToString().
 
 ---
+
+### Entry 57 – 2026-11-06 01:08 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: commit 3825d35 (catalogue names) pushed]
+
+**AI actions:** The AI checked commit 3825d35 on GitHub (read-only).
+
+**AI response (full):**
+````
+Checked on GitHub: commit **`3825d35`** has the 5 expected files. The programming log has 58 headings, as predicted, and the domain log has its Entry 1. **All three parts of Feature 1 are now done.** The branch has these commits:
+
+```
+3825d35 Feature 1: generate catalogue names for stars without proper names
+a164859 Feature 1: add StarCollection to read the star data file by column name
+f60fba2 Feature 1: add Star class to hold one star from the HYG data
+0ef1c57 Feature 1: add 2000 nearest stars from HYG v4.4 database (CC BY-SA 4.0)
+4f579af Docs: add critiques and log entries for setup
+```
+
+**Last step: the pull request.** You do this on the GitHub website; I won't touch it.
+
+1. Open **github.com/KaushalBabuYadav/ASEportfolio2026** in your browser.
+2. Click the **Pull requests** tab → **New pull request**.
+3. Set **base: `main`** and **compare: `feature1-create-star-chart`**. It should show "Able to merge" and the 5 commits above.
+4. Click **Create pull request**.
+   - **Title:** `Feature 1 Star Chart`
+   - **Description:** paste this:
+```
+Feature 1 – The Star Chart
+
+- Star.cs: holds one star from the HYG v4.4 database (position, distance, magnitude, spectral type, catalogue IDs).
+- StarCollection.cs: reads the 2,000 nearest stars from Data/stars_local_2000.csv, finding columns by header name; bad lines are skipped and reported.
+- CatalogueNames.cs: generates catalogue names for stars without proper names (Bayer → Flamsteed → Gliese → HIP), with A/B for double stars. All 2,000 names are unique.
+
+Data: HYG v4.4 (astronexus, CC BY-SA 4.0).
+AI use: all prompts, responses, code and critiques are in AI_programming_log.md (Entries 1–56) and AI_domainExpert_log.md (Entry 1).
+```
+   Then click **Create pull request**.
+5. Click **Merge pull request**. **Before confirming**, change the commit message box to exactly:
+```
+Feature 1 Star Chart
+```
+   The spec requires this exact message. Then click **Confirm merge**.
+6. **Don't click "Delete branch"** afterwards. The tutor's guide says to keep all branches.
+
+Send me a screenshot after the merge, and I'll check `main` on GitHub. Then we start **Feature 2**: drawing the stars in 3D.
+````
+
+**What I did with it:** Opened the pull request on GitHub.
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI checked the commit itself before moving on, and its predicted heading count (58) was right this time. It gave the exact merge message the spec requires.
+
+---
+
+### Entry 58 – 2026-11-06 01:31 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+now tell me what to write in every blocks??
+```
+[Screenshot: GitHub "Open a pull request" page, base: main, compare: feature1-create-star-chart, "Able to merge"; title box pre-filled "Feature1 create star chart"]
+
+**AI response (full):**
+````
+You're on the right page: **base: main**, **compare: feature1-create-star-chart**, and **"Able to merge"** shows. Fill it in like this.
+
+**1. "Add a title":** delete "Feature1 create star chart" and type exactly:
+```
+Feature 1 Star Chart
+```
+
+**2. "Add a description":** click in the big box and paste:
+```
+Feature 1 – The Star Chart
+
+- Star.cs: holds one star from the HYG v4.4 database (position, distance, magnitude, spectral type, catalogue IDs).
+- StarCollection.cs: reads the 2,000 nearest stars from Data/stars_local_2000.csv, finding columns by header name; bad lines are skipped and reported.
+- CatalogueNames.cs: generates catalogue names for stars without proper names (Bayer → Flamsteed → Gliese → HIP), with A/B for double stars. All 2,000 names are unique.
+
+Data: HYG v4.4 (astronexus, CC BY-SA 4.0).
+AI use: all prompts, responses, code and critiques are in AI_programming_log.md (Entries 1–56) and AI_domainExpert_log.md (Entry 1).
+```
+
+**3. The right-hand side** (Reviewers, Assignees, Labels, Projects, Milestone): leave it all **empty**. It's optional and not needed for marks.
+
+**4.** Click the green **Create pull request** button. Click the main part of the button, not the small ▼ arrow.
+
+**5.** On the next page, scroll down and click **Merge pull request**. A box opens with a commit message. **Change the first line to exactly:**
+```
+Feature 1 Star Chart
+```
+You can leave the box below it as it is. Then click **Confirm merge**.
+
+**6.** If a **Delete branch** button appears afterwards, **don't click it**. Keep the branch.
+
+Send me a screenshot after **Confirm merge**, or of the merge box before you confirm if you're unsure.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 59 – 2026-11-06 01:34 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the merge box; "Commit message" still said "Merge pull request #1 from KaushalBabuYadav/feature1-create-star-chart"; "Extended description" said "Feature 1 Star Chart"]
+
+**AI response (full):**
+````
+Stop before confirming: the **"Commit message"** box still says `Merge pull request #1 from KaushalBabuYadav/feature1-create-star-chart`. The spec needs the merge commit message to be **"Feature 1 Star Chart"**, and that box is the commit message.
+
+1. Click in the **Commit message** box, select everything (**Cmd+A**), and type exactly:
+```
+Feature 1 Star Chart
+```
+2. **Extended description:** it already says "Feature 1 Star Chart". You can leave it, or replace it with something more useful:
+```
+Merge pull request #1 from KaushalBabuYadav/feature1-create-star-chart
+```
+That keeps a record of which pull request and branch were merged.
+3. Check that "This commit will be authored by kaushalyadavkkyy@gmail.com" still shows. It does in your screenshot, which is correct.
+4. Click **Confirm merge**.
+5. If **Delete branch** appears afterwards, **don't click it**.
+
+Send me a screenshot after confirming.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+I had put the required message in the wrong box. The AI spotted it before I confirmed, which mattered because the spec requires that exact merge commit message.
+
+---
+
+### Entry 60 – 2026-11-06 01:36 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: Commit message "Feature 1 Star Chart"; Extended description "Merge pull request #1 from KaushalBabuYadav/feature1-create-star-chart"]
+
+**AI response (full):**
+````
+That's exactly right:
+- **Commit message:** `Feature 1 Star Chart`
+- **Extended description:** `Merge pull request #1 from KaushalBabuYadav/feature1-create-star-chart`
+- **Author:** kaushalyadavkkyy@gmail.com
+
+Click **Confirm merge** now. If a **Delete branch** button appears afterwards, **don't click it**.
+
+Send me a screenshot after that, and I'll check `main` on GitHub.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 61 – 2026-11-06 01:36 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: pull request #1 "Merged"; merge commit 9455fb4 into main; "Delete branch" button shown (not clicked)]
+
+**AI actions:** The AI checked main on GitHub (read-only): merge commit 9455fb4 with parents 195b75c and 3825d35; no file differences between main and the feature1 branch.
+
+**AI response (full):**
+````
+**Feature 1 is complete.** I checked GitHub:
+- `main` now has the merge commit **`9455fb4`**, message **"Feature 1 Star Chart"**, by **KAUSHAL BABU YADAV**, merging all 5 Feature 1 commits.
+- `main` and `feature1-create-star-chart` now contain identical files, so nothing was lost.
+- The **feature1 branch is still on GitHub**. You correctly didn't click "Delete branch". Leave that button alone.
+
+**Next: Feature 2 (15 marks)**, branch `feature2-visualising-star-chart`. From the spec:
+1. Render stars as points or small shapes
+2. Render star names
+3. Colour stars by spectral class
+4. Filter out stars without a proper name
+5. Zoom, pan and scan with mouse and keyboard
+
+Each one gets its own commit.
+
+**Prepare your Mac for Feature 2.** Run these one at a time:
+```
+git checkout main
+```
+```
+git pull
+```
+This brings the merge from GitHub onto your Mac. `git pull` is fine here, because nothing has been rewritten.
+```
+git log --oneline -1
+```
+It should show `9455fb4 Feature 1 Star Chart`. If so:
+```
+git checkout -b feature2-visualising-star-chart
+```
+```
+git push -u origin feature2-visualising-star-chart
+```
+
+Send me a screenshot after the last command. It's 1:37am, so tell me if you'd like to continue tonight or stop here. Either way, I'll write the log entries for the pull request steps as the first part of Feature 2's first commit.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI verified the merge on GitHub instead of trusting the screenshot. Feature 1 is merged with the exact message the spec asks for, and the branch is kept.
+
+---
+
+### Entry 62 – 2026-11-06 01:38 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+lets check git status through terminal
+```
+
+**AI response (full):**
+````
+Sure. In the VS Code terminal, run these one at a time:
+
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+git status
+```
+
+Send me a screenshot. Here's what I expect to see:
+- **On branch feature1-create-star-chart**, which is still where your Mac is.
+- **"Your branch is up to date with 'origin/feature1-create-star-chart'"**.
+- The only untracked file is **`../.DS_Store`**, the macOS file we're ignoring.
+
+If you see anything else, such as modified files, don't switch branches yet. Send me the screenshot first.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Checking `git status` before switching branches was a good habit: uncommitted changes could have been carried onto the wrong branch.
+
+---
+
+### Entry 63 – 2026-11-06 01:39 – Branch: `feature1-create-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: git status: on branch feature1-create-star-chart, up to date, only ../.DS_Store untracked]
+
+**AI response (full):**
+````
+It's **exactly as expected**:
+- **On branch feature1-create-star-chart**
+- **Up to date with origin/feature1-create-star-chart**
+- The only untracked file is `../.DS_Store` (macOS junk, ignore it)
+
+So there's nothing uncommitted, and it's safe to switch to `main` and start Feature 2. Run these one at a time:
+
+```
+git checkout main
+```
+```
+git pull
+```
+```
+git log --oneline -1
+```
+It should show **`9455fb4 Feature 1 Star Chart`**. If so:
+```
+git checkout -b feature2-visualising-star-chart
+```
+```
+git push -u origin feature2-visualising-star-chart
+```
+
+Send me a screenshot after the last command.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 64 – 2026-11-06 01:41 – Branch: `main` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: git pull fast-forwarded main (8 files changed); git log --oneline -1 showed 9455fb4 (HEAD -> main, origin/main, origin/HEAD) Feature 1 Star Chart]
+
+**AI response (full):**
+````
+`git pull` worked: your Mac's `main` now has all the Feature 1 files, and `git log` shows **`9455fb4 (HEAD -> main, origin/main) Feature 1 Star Chart`**. That's exactly right.
+
+Now create the Feature 2 branch. Run these one at a time:
+```
+git checkout -b feature2-visualising-star-chart
+```
+```
+git push -u origin feature2-visualising-star-chart
+```
+
+Send me a screenshot after the second command. Also tell me whether you're continuing tonight or stopping, since it's 1:41am.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 65 – 2026-11-06 01:42 – Branch: `feature2-visualising-star-chart` – Feature 2 part 1: render stars as small shapes
+
+**Prompt:**
+```
+here
+```
+[Screenshot: git checkout -b feature2-visualising-star-chart; git push -u origin feature2-visualising-star-chart → [new branch]]
+
+**AI actions:** The AI cloned the Raylib-cs v8.1.0 source from GitHub and downloaded the native raylib 6.0 Linux library from the raylib GitHub releases (NuGet was blocked for it). It installed a virtual screen (Xvfb, Mesa software OpenGL), xdotool and ImageMagick, and compiled a copy of my project with Raylib-cs built from source (test copy only; my .csproj was not changed). It checked Raylib-cs function names (Camera3D, DrawSphereEx, DrawGrid, ConfigFlags, Color) in the real source, wrote StarRenderer.cs and a new Program.cs, ran them on the virtual screen and looked at screenshots. After the first screenshot it moved the per-frame title calculation out of the loop and changed the grid from DrawGrid(40, 1f) to DrawGrid(20, 2f) because it was too busy, then re-tested. It sent me the code and a preview screenshot.
+
+**AI response (full):**
+````
+Branch **`feature2-visualising-star-chart`** is created and on GitHub, and VS Code's status bar shows it. Ready for Feature 2.
+
+Feature 2 is the first real Raylib (3D) code, and NuGet is blocked for me. So I'll try to get Raylib-cs another way (GitHub is allowed) so I can compile, and ideally *run and screenshot*, the 3D code before you get it.
+
+Everything works in my environment now: I compiled Raylib-cs 8.1.0 from its GitHub source, used the native Raylib 6.0 library, and ran a window on a virtual screen with a working screenshot. So for Feature 2 I can **run the 3D program and look at the result before you get it**.
+
+Let me check a few Raylib-cs API names in the real source rather than from memory:
+
+All confirmed. Now the code for Feature 2, part 1 (render stars as small shapes):
+
+It works. 2,000 stars render in 3D around the Sun. The grid is a bit busy, though, so I'll halve the number of lines (a 2-parsec grid) and check again:
+
+**Feature 2, part 1 (render stars as small shapes)** is ready. This time I **ran it myself** and looked at the result: `preview_step1.png` is a screenshot from my test run. All 2,000 stars appear as small white spheres around the Sun, with a grid to help judge depth.
+
+**How I could test it:** NuGet is blocked for me, so I compiled Raylib-cs 8.1.0 from its source code on GitHub, used the official Raylib library, and ran the window on a virtual screen. My screenshot shows **25 FPS** only because my virtual screen has no graphics card; your Mac should reach 60.
+
+**What the code does:**
+- **`StarRenderer.cs`** (new) works out each star's 3D position **once**, then draws a small sphere for each star every frame. One unit is one parsec, and the Sun is at the centre.
+  - **An important detail for your critique:** the data's "up" is the Z axis (towards the north celestial pole), but Raylib's "up" is Y. So positions are converted from `(x, y, z)` to `(x, z, -y)`. That's a **rotation**. Simply swapping Y and Z would **mirror** the whole sky, a classic mistake.
+- **`Program.cs`** (replaced): loads the stars, opens a 1280×800 window, and draws them from a **fixed camera**. Mouse and keyboard controls are part 5. The text at the top is worked out **once, before the loop**. My first version recalculated it every frame, which was wasteful, so I fixed it.
+
+**Steps.** Download the two `.cs` files (the PNG is just for you to look at), then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+mv ~/Downloads/StarRenderer.cs ~/Downloads/Program.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+A window like my screenshot should open. Close it with **Esc**. Send me a screenshot of your window, including the FPS number in the top left. Then I'll write the log entries (57 onwards, including the pull request steps) before you commit.
+````
+
+**What I did with it:** Moved StarRenderer.cs and Program.cs into StarChart3D; `dotnet build` and `dotnet run` worked. The window first opened behind VS Code (Entries 68–70). On my Mac it shows "2000 stars within 67 light years" at 59 FPS.
+
+**Code sent as files (full):**
+
+`StarRenderer.cs` (new):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// Draws the stars of a <see cref="StarCollection"/> in 3D with Raylib.
+/// One world unit is one parsec, and the Sun is at (0, 0, 0).
+/// </summary>
+public class StarRenderer
+{
+    /// <summary>Radius of the small sphere drawn for each star, in parsecs.</summary>
+    public const float StarRadius = 0.08f;
+
+    private readonly IReadOnlyList<Star> _stars;
+    private readonly Vector3[] _positions;
+
+    /// <summary>Creates a renderer and works out each star's 3D position once, so it is not recalculated every frame.</summary>
+    /// <param name="stars">The stars to draw.</param>
+    public StarRenderer(IReadOnlyList<Star> stars)
+    {
+        _stars = stars;
+        _positions = new Vector3[stars.Count];
+        for (int i = 0; i < stars.Count; i++)
+        {
+            _positions[i] = ToWorldPosition(stars[i]);
+        }
+    }
+
+    /// <summary>
+    /// Converts a star's HYG position to Raylib's 3D world.
+    /// HYG uses +Z towards the north celestial pole, but in Raylib +Y is "up",
+    /// so (x, y, z) becomes (x, z, -y). This is a rotation, not a mirror,
+    /// so the sky is not flipped left-to-right.
+    /// </summary>
+    public static Vector3 ToWorldPosition(Star star)
+    {
+        return new Vector3((float)star.X, (float)star.Z, (float)-star.Y);
+    }
+
+    /// <summary>
+    /// Draws every star as a small sphere. Must be called between
+    /// <c>Raylib.BeginMode3D</c> and <c>Raylib.EndMode3D</c>.
+    /// </summary>
+    public void DrawStars()
+    {
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            // Few rings and slices: each star is tiny on screen, and 2,000 detailed spheres would be slow.
+            Raylib.DrawSphereEx(_positions[i], StarRadius, 6, 8, Color.White);
+        }
+    }
+}
+```
+
+`Program.cs` (replaced – the temporary console test is gone; it now opens the 3D window):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+using StarChart3D;
+
+// Load the 2,000 nearest stars.
+string dataFile = Path.Combine(AppContext.BaseDirectory, "Data", "stars_local_2000.csv");
+var stars = new StarCollection(dataFile);
+
+// Open a resizable window with anti-aliasing (smoother edges).
+Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint | ConfigFlags.ResizableWindow);
+Raylib.InitWindow(1280, 800, "StarChart3D");
+Raylib.SetTargetFPS(60);
+
+var renderer = new StarRenderer(stars);
+
+// A fixed camera looking at the Sun from outside the star field (camera controls come later in Feature 2).
+var camera = new Camera3D(
+    position: new Vector3(30f, 20f, 30f),
+    target: Vector3.Zero,
+    up: Vector3.UnitY,
+    fovY: 45f,
+    projection: CameraProjection.Perspective);
+
+var spaceColour = new Color(5, 5, 15, 255);
+string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
+
+while (!Raylib.WindowShouldClose())
+{
+    Raylib.BeginDrawing();
+    Raylib.ClearBackground(spaceColour);
+
+    Raylib.BeginMode3D(camera);
+    Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
+    renderer.DrawStars();
+    Raylib.EndMode3D();
+
+    Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
+    Raylib.DrawFPS(10, 36);
+    Raylib.EndDrawing();
+}
+
+Raylib.CloseWindow();
+```
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- `StarRenderer`'s constructor converts every star's position to a `Vector3` once and stores them in an array, so the 60-frames-per-second drawing loop only reads the array.
+- `ToWorldPosition` turns HYG's (x, y, z) into Raylib's (x, z, -y). HYG's "up" is +Z (north celestial pole) but Raylib's "up" is +Y. Swapping only y and z would be a reflection (a mirror image of the sky); using -y as well makes it a 90° rotation about the x axis, which keeps the sky the right way round.
+- `DrawStars` draws a sphere of radius 0.08 parsecs per star with `DrawSphereEx`, using only 6 rings and 8 slices, because detailed spheres for 2,000 tiny stars would be slow.
+- In `Program.cs`: `SetConfigFlags` turns on 4× anti-aliasing and a resizable window before `InitWindow`; `Camera3D` is a perspective camera at (30, 20, 30) looking at the Sun; each frame, `BeginMode3D`/`EndMode3D` wrap the 3D drawing (grid and stars) and then the 2D text and FPS counter are drawn on top.
+- `DrawGrid(20, 2f)` draws 20 lines 2 parsecs apart on the y = 0 plane, which after the conversion is the plane of the celestial equator.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the AI found a way to compile and actually run Raylib code (source build, virtual screen) instead of guessing, checked the API names in the library's real source, and looked at the output. That is how it found two problems in its own first version: the title text was being recalculated every frame (going through 2,000 stars each time), and the grid was too busy. The coordinate conversion was explained as a rotation rather than a mirror. Weaknesses: (1) the camera is fixed, so the chart cannot be explored until part 5; (2) every star is the same size and colour – brightness (magnitude) is not shown, and colour is part 3; (3) 2,000 separate `DrawSphereEx` calls per frame is fine at 2,000 stars but would not scale to the full 119,614-star file (instancing or points would be needed); (4) the AI's virtual screen had no graphics card, so its 25 FPS said nothing about real performance – my Mac's 59 FPS was the real test; (5) the AI's test project compiled Raylib-cs 8.1.0 from source with the native raylib 6.0 library, while my project uses the NuGet package – they should be the same library, but my run was the final check.
+
+---
+
+### Entry 66 – 2026-11-06 01:47 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+what is helixtoolkit
+```
+
+**AI response (full):**
+````
+**Helix Toolkit** is a free, open-source 3D graphics library for .NET (MIT licence). It's the one your tutor's tutorial uses.
+
+- It adds ready-made 3D controls to **WPF**, Microsoft's Windows desktop UI framework. The main one is a 3D viewport with **built-in mouse rotation, zoom and pan**, plus helpers for drawing spheres, lines and text labels in 3D.
+- So in the tutorial, a lot of Feature 2's "zoom in and out, pan and scan" comes almost for free from Helix's viewport.
+- The usual package, `HelixToolkit.Wpf`, is built on WPF, so it **only runs on Windows**.
+
+**Why we're not using it:** you're on a Mac, and WPF doesn't run on macOS (we found this on day one, log Entry 10). **Raylib-cs** does the same job for us. The difference is that Raylib doesn't give us a ready-made mouse-controlled viewport, so in Feature 2 part 5 we'll write the camera controls ourselves. That's more work, but it's also something you can explain properly in your demo, and it makes your code clearly different from the tutor's.
+
+This counts as a programming question to the AI, so it'll go in your log too (I'll include it in the next entries).
+
+When you're ready, carry on with the steps from my previous message (move the two files, `dotnet build`, `dotnet run`) and send me a screenshot of the window.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Useful for my README: it explains what I lose by not using Helix (a ready-made mouse viewport) and that I will write the camera controls myself. The AI answered from its own knowledge without giving a source, so the details (e.g. the licence) are not verified here.
+
+---
+
+### Entry 67 – 2026-11-06 01:48 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+okay lets move on then
+```
+
+**AI response (full):**
+````
+Go ahead. Run these one at a time in the VS Code terminal:
+
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+mv ~/Downloads/StarRenderer.cs ~/Downloads/Program.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+A window with the stars and grid should open. Take a screenshot of it (**Cmd+Shift+4**, then press **Space** and click the window), close it with **Esc**, and send me the screenshot.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 68 – 2026-11-06 01:49 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: terminal after dotnet run: "PLATFORM: DESKTOP (GLFW - Cocoa): Initialized successfully", font loaded, "TIMER: Target time per frame: 16.667 milliseconds" – the window itself was not visible]
+
+**AI response (full):**
+````
+The program **is running**. The terminal shows Raylib started on your Mac ("GLFW - Cocoa: Initialized successfully"), loaded the font, and began its frame timer. The window has probably opened **behind VS Code**.
+
+To find it:
+- Press **Cmd+Tab** and look for a new icon (often a generic or terminal-like one, named "StarChart3D" or "dotnet"), or look in the **Dock** for a new icon and click it.
+- Or move VS Code aside to look behind it.
+
+Once you can see the star window, take a screenshot of it (**Cmd+Shift+4**, then **Space**, then click the window) and send it to me. After that, close the window with **Esc**.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI read the Raylib log correctly: the program was running, but the window had opened behind VS Code.
+
+---
+
+### Entry 69 – 2026-11-06 01:52 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: terminal showing the window had closed normally ("Window closed successfully"), no errors]
+
+**AI response (full):**
+````
+The window opened and **closed normally** ("Window closed successfully", no errors), so the program works on your Mac.
+
+But I can't see what the window showed, and I'd rather not assume. Did you see the white stars and the grid, like my preview image?
+
+It's worth seeing it once: your screenshot will go in the log as evidence, and the **FPS number** on your Mac matters for the critique. Please run it once more:
+```
+dotnet run
+```
+When the window appears (use **Cmd+Tab** if it's hidden), press **Cmd+Shift+4**, then **Space**, then click the star window. The screenshot saves to your Desktop. Close the window with **Esc**, then send me the screenshot.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI did not assume the window looked right just because it closed without errors; it asked to see it.
+
+---
+
+### Entry 70 – 2026-11-06 01:53 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the StarChart3D window on my Mac: "2000 stars within 67 light years", "59 FPS", white stars above and around a grid]
+
+**AI response:** The AI confirmed the window matches its preview and that 59 FPS is as expected (the program is capped at 60), and wrote Entries 57–70 of this log. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+Feature 2 part 1 works on my Mac at 59 FPS, much faster than the AI's virtual screen (25 FPS), which confirms its performance numbers were not meaningful.
+
+---
+
+### Entry 71 – 2026-11-06 01:58 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the second `dotnet run` was still running; the commands `cd ..`, `cat ... >> AI_programming_log.md`, `grep -c ...` and `git add --dry-run .` had been typed into the terminal while the program was running, so they had not run]
+
+**AI response (full):**
+````
+The program is **still running** from your second `dotnet run`. The star window is open somewhere, so the commands you typed went to the running program instead of being run. Also, the green-button menu ("Exit Full Screen…") is open at the top left; click anywhere to close it.
+
+Let's be careful here, so the log entries don't get added twice:
+
+1. Click in the terminal and press **Ctrl+C**. This stops the star program and usually throws away the commands you typed while it was running.
+2. Check whether the log was changed. Run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+- If it prints **58**, the entries **weren't added yet**. Then run:
+```
+cat ~/Downloads/log_entries_57_70.md >> AI_programming_log.md
+```
+and run the `grep` line again. It should now print **72**.
+- If it already prints **72**, they were added. **Don't run `cat` again.**
+- If it prints **86**, they were added twice. Stop and tell me.
+
+3. Then run:
+```
+git add --dry-run .
+```
+It should list only `AI_programming_log.md`, `StarChart3D/Program.cs` and `StarChart3D/StarRenderer.cs`.
+
+Send me a screenshot at that point, before you commit.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI spotted that my commands were queued behind the running program, and gave checks (the heading count) so the log entries could not be added twice by accident.
+
+---
+
+### Entry 72 – 2026-11-06 01:59 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the program was still running and more commands had been queued behind it]
+
+**AI response (full):**
+````
+The program is **still running**, and the extra commands are still waiting behind it (none of them have run yet, so nothing has changed). Let's get rid of that terminal completely. That stops the program and throws away all the queued commands.
+
+1. In the terminal list on the right, **hover over the highlighted "StarChart3…" terminal**. A **bin (trash) icon** appears next to it. Click it. If VS Code asks whether to terminate the process, choose **Terminate**.
+   - If you can't find the bin icon, find the star window with **Cmd+Tab** and press **Esc** in it instead.
+2. Click the **+** at the top right of the terminal panel to open a fresh terminal.
+3. In the new terminal, run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+
+Send me a screenshot of the number. Expect **58**, but if you closed the window with Esc, the queued commands may have run, so it could be **72** (or more). I'll tell you exactly what to do next based on the number.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI's first suggestion (Ctrl+C) did not work for me, so it suggested deleting the terminal, which stops the program and discards the queued commands safely.
+
+---
+
+### Entry 73 – 2026-11-06 02:01 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the running terminal was deleted; an older terminal was showing earlier output; the log in the editor still ended at line 2835 (Entry 56)]
+
+**AI response (full):**
+````
+The running program is gone: the "StarChart3…" terminal has been removed. The terminal you're looking at now is an **older one**, showing earlier output (that `git status` is from 1:39). That's fine; it's ready to use. The log in your editor still ends at line 2835 (Entry 56), so **nothing was added yet**.
+
+In this terminal, run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+It should print **58**. If so:
+```
+cat ~/Downloads/log_entries_57_70.md >> AI_programming_log.md
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+Now it should print **72**.
+```
+git add --dry-run .
+```
+It should list only `AI_programming_log.md`, `StarChart3D/Program.cs` and `StarChart3D/StarRenderer.cs`.
+
+Send me a screenshot before committing.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 74 – 2026-11-06 02:02 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `grep -c "^### Entry" AI_programming_log.md` printed 58]
+
+**AI response (full):**
+````
+It prints **58**, so nothing was added twice. Now add the entries. Run these one at a time:
+
+```
+cat ~/Downloads/log_entries_57_70.md >> AI_programming_log.md
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+It should now print **72**.
+```
+git add --dry-run .
+```
+It should list only `AI_programming_log.md`, `StarChart3D/Program.cs` and `StarChart3D/StarRenderer.cs`.
+
+Send me a screenshot, then you can commit.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 75 – 2026-11-06 02:03 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: grep printed 72; `git add --dry-run .` listed AI_programming_log.md, StarChart3D/Program.cs and StarChart3D/StarRenderer.cs]
+
+**AI response (full):**
+````
+Both checks pass: **72** headings, and exactly the **3 expected files**. The log now ends at Entry 70.
+
+Commit and push, one at a time:
+```
+git add .
+```
+```
+git commit -m "Feature 2: render stars as small spheres in a 3D Raylib window"
+```
+```
+git push
+```
+
+Send me a screenshot after `git push`. It's 2am, so after this tell me whether you want to do **part 2 (star names)** now or stop. Everything will be saved in the handover note either way.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 76 – 2026-11-06 02:04 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `git push`: 9455fb4..12238b5 feature2-visualising-star-chart -> feature2-visualising-star-chart]
+
+**AI actions:** The AI checked commit 12238b5 on GitHub (read-only) and updated the handover note in my Claude project.
+
+**AI response (full):**
+````
+Feature 2 part 1 is committed and pushed. I checked GitHub: commit `12238b5` by KAUSHAL BABU YADAV is on `feature2-visualising-star-chart`, with the 3 expected files, and the log has 72 headings.
+
+Where things stand:
+- **Feature 1:** done and merged into `main` with the message "Feature 1 Star Chart".
+- **Feature 2:** part 1 of 5 done. Still to do: star names, spectral colours, filtering out stars without a proper name, and mouse/keyboard camera controls.
+
+I've updated the handover note in your ASE project with this, so we can carry on from exactly here. The next log entry will be number 71.
+
+One tip for next time: close the star window with **Esc** before typing any more commands, otherwise they wait behind the running program like they did tonight.
+
+Do you want to do **part 2 (star names)** now, or stop for tonight? The deadline is **Monday 12pm**, so there's still time, but you've been at it for a while.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI verified the commit on GitHub. Its note "the next log entry will be number 71" was correct in number, but it did not say that Entries 71–76 would be about the terminal mix-up rather than code.
+
+---
+
+### Entry 77 – 2026-11-06 02:06 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+what is the output here
+```
+
+**AI response (full):**
+````
+Your last screenshot shows the output of **`git push`**, and it means the push worked. Line by line:
+
+- **"Enumerating / Counting / Compressing / Writing objects… 100%"**: Git packaged your new commit (the log, `Program.cs` and `StarRenderer.cs`) and sent it to GitHub, about 11 KB.
+- **"remote: Resolving deltas: 100%"**: GitHub received it and stored it.
+- **`9455fb4..12238b5  feature2-visualising-star-chart -> feature2-visualising-star-chart`**: the important line. Your branch on GitHub moved from `9455fb4` (the Feature 1 merge) to your new commit `12238b5`.
+
+If you meant **what the program shows** right now: running it opens a window with 2,000 white stars around the Sun, a grid, "2000 stars within 67 light years" and the FPS at the top, all from a fixed camera. Names, colours, the filter and camera controls are the next four parts.
+
+If you meant something else, send me a screenshot of what you're looking at.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+My question was unclear; the AI answered the two likely meanings and asked for a screenshot instead of guessing.
+
+---
+
+### Entry 78 – 2026-11-06 02:08 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+i want to see my output
+```
+
+**AI response (full):**
+````
+To see your program, run these in the terminal one at a time:
+
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+dotnet run
+```
+
+Then:
+- The **StarChart3D** window opens. If you can't see it, press **Cmd+Tab** and pick it, because it often opens behind VS Code.
+- You'll see what you saw earlier: 2,000 white stars around a grid, "2000 stars within 67 light years" and the FPS at the top. You can't move the camera yet; that comes in part 5.
+- When you've finished looking, press **Esc** in the star window to close it, **before** typing anything else in the terminal.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 79 – 2026-11-06 02:10 – Branch: `feature2-visualising-star-chart` – Feature 2 part 2: render stars with names
+
+**Prompt:**
+```
+okay lets start next part now continiuw
+```
+
+**AI actions:** The AI checked Raylib-cs function names (GetScreenHeight, MeasureText, CheckCollisionRecs, Rectangle) in the library source, wrote the labelling code, built it and took screenshots on its virtual screen. After the first screenshot showed overlapping labels in the centre, it added overlap checking and re-tested. It then temporarily moved the camera to (4, 2.5, 4) in its test copy to check that catalogue names appear close up, and restored the camera. Because the screenshot showed "Añañuca" drawn correctly, it drew a test string ("Bootis / Boötis / Añañuca / Alpha² / α") to check which characters the default font supports: ö, ñ and ² drew correctly; α was shown as "?". It also checked my data: Bayer suffixes are 1, 2, 3, 5 and 6, and 3 unnamed stars in Boötes use the genitive.
+
+**AI response (full):**
+````
+Part 2: **render stars with names**. One design question first: drawing all 2,000 names at once would be an unreadable mess. So the plan is:
+- The **89 stars with proper names** (Sol, Sirius, Proxima Centauri…) are always labelled.
+- **Catalogue names** (Tau Ceti, 61 Cygni A, GJ 1111…) appear only for stars **close to the camera**, so they show up as you fly in (the camera controls come in part 5).
+
+I'll write it, run it and check the screenshot first.
+
+It works: every named star is labelled. But the **centre is a mess**: the nearest named stars (Sol, Proxima Centauri, Barnard's Star…) overlap, because from this far away they're all bunched together. I'll add a simple rule: **don't draw a label where it would overlap one already drawn.** Stars are in nearest-first order, so the nearest star keeps its label.
+
+Much better. The labels are now readable: Sol, Sirius, Proxima Centauri, Vega, Kapteyn's Star and so on. Catalogue names don't show here because the camera is about 46 parsecs away. To make sure that part works too, I'll temporarily move the camera close to the Sun, just for a test:
+
+Catalogue names now appear close up: the small grey labels **61 Cygni A**, **Tau Ceti**, **Gl 65A** and **Gl 54.1**, alongside proper names like Barnard's Star and Proxima Centauri.
+
+**But this screenshot shows a mistake I made earlier.** The proper name **"Añañuca"** is drawn correctly, including the **ñ**. Yesterday I said Raylib's default font can't draw special characters, so I wrote "Bootis" instead of "Boötis". Let me test that claim properly instead of guessing:
+
+**Feature 2 part 2 (star names)** is ready. I tested it in two ways:
+- **`preview_step2.png`**: the normal view. All named stars are labelled in yellow (Sol, Sirius, Proxima Centauri, Vega, Kapteyn's Star and so on), with no overlapping text.
+- **`preview_step2_closeup.png`**: a test with the camera moved close to the Sun (not part of your code). It shows the small grey **catalogue names** appearing close up: 61 Cygni A, Tau Ceti, Gl 65A.
+
+**What changed:**
+- **`StarRenderer.cs`** has a new `DrawLabels` method, drawn as 2D text on top of the 3D scene:
+  - **Proper names** are always labelled. **Catalogue names** only appear for stars within **8 parsecs of the camera**. Otherwise 1,900 names would cover the screen.
+  - It skips stars **behind the camera**. Raylib would still give them a screen position, which would put wrong labels on screen.
+  - It **skips a label if it would overlap** one already drawn. My first version didn't have this, and the centre was unreadable; you can see the before and after in my test.
+- **`Program.cs`**: one new line calling `DrawLabels` after the 3D drawing.
+
+**A correction to my own earlier claim (good critique material):** yesterday I wrote "Bootis" instead of "Boötis" because I said Raylib's default font can't draw special characters. I've now tested it: **ö, ñ and ² do draw correctly; only Greek letters like α don't.** So:
+- "Alpha-2" is still the right choice, because your data also has suffixes 5 and 6, and ⁵ and ⁶ **can't** be drawn.
+- "Boötis" **can** be used. I'll give you a small separate fix for that **after** this commit, so each commit does one thing.
+
+**Steps.** Download the two `.cs` files (the PNGs are just previews), then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+mv ~/Downloads/StarRenderer.cs ~/Downloads/Program.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Take a screenshot of the window, then **close it with Esc before typing anything else**, and send it to me. Then I'll write the log entries.
+````
+
+**What I did with it:** Moved the two files into StarChart3D; `dotnet build` and `dotnet run` worked. On my Mac the named stars are labelled at 59 FPS (Entries 80–81).
+
+**Code sent as files (full):**
+
+`StarRenderer.cs` (changed – new `CatalogueLabelDistance`, label colours, `DrawLabels` and `OverlapsExistingLabel`):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// Draws the stars of a <see cref="StarCollection"/> in 3D with Raylib.
+/// One world unit is one parsec, and the Sun is at (0, 0, 0).
+/// </summary>
+public class StarRenderer
+{
+    /// <summary>Radius of the small sphere drawn for each star, in parsecs.</summary>
+    public const float StarRadius = 0.08f;
+
+    /// <summary>
+    /// Stars without a proper name are only labelled when they are closer to the camera than this (in parsecs),
+    /// so that the screen is not covered by 1,900 catalogue names at once.
+    /// </summary>
+    public const float CatalogueLabelDistance = 8f;
+
+    private static readonly Color ProperNameColour = new(255, 230, 150, 255);
+    private static readonly Color CatalogueNameColour = new(150, 160, 180, 255);
+
+    private readonly IReadOnlyList<Star> _stars;
+    private readonly Vector3[] _positions;
+    private readonly List<Rectangle> _labelAreas = new(); // screen areas already used by labels this frame
+
+    /// <summary>Creates a renderer and works out each star's 3D position once, so it is not recalculated every frame.</summary>
+    /// <param name="stars">The stars to draw.</param>
+    public StarRenderer(IReadOnlyList<Star> stars)
+    {
+        _stars = stars;
+        _positions = new Vector3[stars.Count];
+        for (int i = 0; i < stars.Count; i++)
+        {
+            _positions[i] = ToWorldPosition(stars[i]);
+        }
+    }
+
+    /// <summary>
+    /// Converts a star's HYG position to Raylib's 3D world.
+    /// HYG uses +Z towards the north celestial pole, but in Raylib +Y is "up",
+    /// so (x, y, z) becomes (x, z, -y). This is a rotation, not a mirror,
+    /// so the sky is not flipped left-to-right.
+    /// </summary>
+    public static Vector3 ToWorldPosition(Star star)
+    {
+        return new Vector3((float)star.X, (float)star.Z, (float)-star.Y);
+    }
+
+    /// <summary>
+    /// Draws every star as a small sphere. Must be called between
+    /// <c>Raylib.BeginMode3D</c> and <c>Raylib.EndMode3D</c>.
+    /// </summary>
+    public void DrawStars()
+    {
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            // Few rings and slices: each star is tiny on screen, and 2,000 detailed spheres would be slow.
+            Raylib.DrawSphereEx(_positions[i], StarRadius, 6, 8, Color.White);
+        }
+    }
+
+    /// <summary>
+    /// Writes star names next to the stars. Must be called after <c>Raylib.EndMode3D</c>,
+    /// because the names are 2D text drawn on top of the 3D scene.
+    /// Stars with a proper name are labelled; other stars get their catalogue name
+    /// only when they are within <see cref="CatalogueLabelDistance"/> of the camera.
+    /// A label is skipped if it would overlap a label already drawn. The stars are in
+    /// nearest-first order, so the nearer star keeps its label.
+    /// </summary>
+    /// <param name="camera">The camera used to draw the 3D scene.</param>
+    public void DrawLabels(Camera3D camera)
+    {
+        Vector3 viewDirection = Vector3.Normalize(camera.Target - camera.Position);
+        int screenWidth = Raylib.GetScreenWidth();
+        int screenHeight = Raylib.GetScreenHeight();
+        _labelAreas.Clear();
+
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            Star star = _stars[i];
+            Vector3 toStar = _positions[i] - camera.Position;
+
+            // Skip stars behind the camera: GetWorldToScreen would still give them a (wrong) screen position.
+            if (Vector3.Dot(toStar, viewDirection) <= 0)
+            {
+                continue;
+            }
+
+            if (!star.HasProperName && toStar.Length() > CatalogueLabelDistance)
+            {
+                continue;
+            }
+
+            Vector2 screen = Raylib.GetWorldToScreen(_positions[i], camera);
+            if (screen.X < 0 || screen.X > screenWidth || screen.Y < 0 || screen.Y > screenHeight)
+            {
+                continue;
+            }
+
+            int fontSize = star.HasProperName ? 14 : 10;
+            int x = (int)screen.X + 6;
+            int y = (int)screen.Y - fontSize / 2;
+            var area = new Rectangle(x, y, Raylib.MeasureText(star.DisplayName, fontSize), fontSize);
+
+            if (OverlapsExistingLabel(area))
+            {
+                continue;
+            }
+
+            _labelAreas.Add(area);
+            Raylib.DrawText(star.DisplayName, x, y, fontSize, star.HasProperName ? ProperNameColour : CatalogueNameColour);
+        }
+    }
+
+    /// <summary>Returns true if the given screen area overlaps a label already drawn this frame.</summary>
+    private bool OverlapsExistingLabel(Rectangle area)
+    {
+        foreach (Rectangle used in _labelAreas)
+        {
+            if (Raylib.CheckCollisionRecs(area, used))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+```
+
+`Program.cs` (changed – one new line after `EndMode3D`: `renderer.DrawLabels(camera);`):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+using StarChart3D;
+
+// Load the 2,000 nearest stars.
+string dataFile = Path.Combine(AppContext.BaseDirectory, "Data", "stars_local_2000.csv");
+var stars = new StarCollection(dataFile);
+
+// Open a resizable window with anti-aliasing (smoother edges).
+Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint | ConfigFlags.ResizableWindow);
+Raylib.InitWindow(1280, 800, "StarChart3D");
+Raylib.SetTargetFPS(60);
+
+var renderer = new StarRenderer(stars);
+
+// A fixed camera looking at the Sun from outside the star field (camera controls come later in Feature 2).
+var camera = new Camera3D(
+    position: new Vector3(30f, 20f, 30f),
+    target: Vector3.Zero,
+    up: Vector3.UnitY,
+    fovY: 45f,
+    projection: CameraProjection.Perspective);
+
+var spaceColour = new Color(5, 5, 15, 255);
+string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
+
+while (!Raylib.WindowShouldClose())
+{
+    Raylib.BeginDrawing();
+    Raylib.ClearBackground(spaceColour);
+
+    Raylib.BeginMode3D(camera);
+    Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
+    renderer.DrawStars();
+    Raylib.EndMode3D();
+
+    renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
+
+    Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
+    Raylib.DrawFPS(10, 36);
+    Raylib.EndDrawing();
+}
+
+Raylib.CloseWindow();
+```
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- `DrawLabels` is called after `EndMode3D`, because names are 2D text drawn on top of the 3D picture.
+- For each star it works out `toStar`, the vector from the camera to the star. `Vector3.Dot(toStar, viewDirection) <= 0` means the star is behind the camera, so it is skipped (Raylib's `GetWorldToScreen` would otherwise still return a screen position for it).
+- Stars without a proper name are skipped unless `toStar.Length()` is less than `CatalogueLabelDistance` (8 parsecs), so catalogue names only appear when the camera is near them.
+- `GetWorldToScreen` turns the star's 3D position into a 2D pixel position; stars off the edge of the window are skipped.
+- `MeasureText` gives the width of the label in pixels, which makes a `Rectangle` for the label. `OverlapsExistingLabel` uses `CheckCollisionRecs` to test it against every label already drawn this frame (`_labelAreas`); if it overlaps, the label is not drawn. The stars are in nearest-first order (from the data file), so nearer stars win.
+- Proper names are drawn larger (14 px) in pale yellow; catalogue names smaller (10 px) in grey.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the AI tested the labels on screen and found its own first version unreadable (overlapping names in the centre), then fixed it. It also tested the catalogue-name path with a temporary close camera instead of assuming it worked. Most importantly, a screenshot ("Añañuca") showed that one of its earlier claims was wrong: in Entry 54 it said Raylib's default font cannot draw special characters, so it used "Bootis" instead of "Boötis". Its test showed ö, ñ and ² do draw; only Greek letters (α) do not. The "Alpha-2" style is still justified because my data has suffixes 5 and 6 (⁵ and ⁶ are not in the font), but "Boötis" could be used, and the comment in CatalogueNames.cs is wrong – a separate fix commit is planned. Weaknesses in this part: (1) labels can still touch each other without overlapping (e.g. "Wolf 359Ross 614" in my screenshot), because the overlap test has no gap/padding; (2) "nearest star wins" is by distance from the Sun (file order), not from the camera, so after moving the camera a farther star can block a nearer one's label; (3) the overlap check compares each label with every earlier label, which is fine for about 100 labels but slow for thousands; (4) 8 parsecs is a guess, not tested with real camera movement yet (that comes in part 5).
+
+---
+
+### Entry 80 – 2026-11-06 02:16 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: terminal after `dotnet run`: Raylib initialised; the terminal list showed "dotnet Star…"; the window was not visible]
+
+**AI response (full):**
+````
+The program is **running**: the terminal shows Raylib started, and the terminal list now shows "**dotnet Star…**". As before, the window has opened **behind VS Code**.
+
+1. Press **Cmd+Tab** and choose the StarChart3D window, or click its icon in the Dock.
+2. Take a screenshot of it: **Cmd+Shift+4**, then **Space**, then click the window.
+3. Press **Esc** in the star window to close it.
+4. Send me the screenshot.
+
+Don't type in the terminal until the window is closed.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 81 – 2026-11-06 02:17 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the StarChart3D window on my Mac at 59 FPS with yellow labels for the named stars (Sol, Sirius, Proxima Centauri, Vega, Castor, Pollux, Fomalhaut and others); "Wolf 359" and "Ross 614" touching]
+
+**AI response:** The AI confirmed it works at 59 FPS without overlapping labels, pointed out that some labels touch (e.g. "Wolf 359Ross 614") because the overlap check has no gap, and wrote Entries 71–81 of this log. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+Works on my Mac. The touching labels are a small visual problem to fix together with the Boötis correction.
+
+---
+
+### Entry 82 – 2026-11-06 02:19 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the star program was still running ("dotnet Star…" in the terminal list); cd, grep, cat and grep commands had been typed behind it]
+
+**AI response (full):**
+````
+Same as before: the star program is **still running** (the terminal list shows "**dotnet Star…**"), so the commands you typed are waiting behind it and **haven't run yet**. The window wasn't closed with Esc.
+
+Do what worked last time:
+1. In the terminal list on the right, **hover over "dotnet Star…"** and click the **bin (trash) icon**. Choose **Terminate** if asked. This closes the program and throws away the queued commands.
+2. Click on the other terminal ("**zsh StarCh…**"), or open a new one with **+**.
+3. Run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+
+Send me a screenshot of the number. I expect **72**. If it's something else, I'll tell you what to do.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Same mistake as Entry 71: I typed commands while the program was still running.
+
+---
+
+### Entry 83 – 2026-11-06 02:21 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: in another terminal, grep printed 72; "dotnet Star…" was still in the terminal list]
+
+**AI response (full):**
+````
+It prints **72**, which is right: nothing has been added yet.
+
+**But one thing first:** the "**dotnet Star…**" terminal is **still in the list**, so the program is still running with your old commands queued behind it, including the `cat` line. If that window closes later, those commands could run and **add the entries a second time**.
+
+1. Hover over "**dotnet Star…**" in the terminal list and click its **bin icon**. Choose **Terminate** if asked. Make sure it disappears from the list.
+2. Then, in this terminal ("zsh"), run these one at a time:
+```
+cat ~/Downloads/log_entries_71_81.md >> AI_programming_log.md
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+It should print **83**.
+```
+git add --dry-run .
+```
+It should list only `AI_programming_log.md`, `StarChart3D/Program.cs` and `StarChart3D/StarRenderer.cs`.
+
+Send me a screenshot before committing.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good catch by the AI: the old terminal still had a queued `cat` command that could have added the log entries a second time later.
+
+---
+
+### Entry 84 – 2026-11-06 02:23 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+hehe
+```
+[Screenshot: "dotnet Star…" had turned into "zsh StarChart3D" in the terminal list (the program had closed); grep in the other terminal still showed 72]
+
+**AI response (full):**
+````
+Look at the terminal list on the right: "**dotnet Star…**" has turned into "**zsh StarChart3D**". That means the star program has **closed**, and the commands that were queued behind it **may have just run in that terminal**, including the `cat` line.
+
+So **don't run `cat` yet**. First check, in the terminal you're in now:
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+- **83**: the queued `cat` already added the entries. Don't run `cat`. Go straight to:
+```
+git add --dry-run .
+```
+- **72**: they weren't added. Run:
+```
+cat ~/Downloads/log_entries_71_81.md >> AI_programming_log.md
+```
+then the `grep` line again (it should print 83), then `git add --dry-run .`.
+- **94**: they were added twice. Stop and tell me; I'll give you a fix.
+
+Send me a screenshot.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI noticed the terminal name change in the screenshot and stopped me from running `cat` before checking, which avoided a possible duplicate.
+
+---
+
+### Entry 85 – 2026-11-06 02:24 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: grep printed 72 twice; git add --dry-run listed only Program.cs and StarRenderer.cs; then cat appended log_entries_71_81.md; the editor showed Entry 81 at the end]
+
+**AI response (full):**
+````
+That sequence is fine:
+- `grep` printed **72** twice, so the queued commands in the other terminal **didn't** add anything.
+- `git add --dry-run` (run before `cat`) listed only `Program.cs` and `StarRenderer.cs`. That's correct, because the log hadn't changed yet.
+- Then `cat` added the entries. The editor now shows **Entry 81** at the end.
+
+Final check before committing, one at a time:
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+It must print **83**.
+```
+git add --dry-run .
+```
+It should now list **3 files**: `AI_programming_log.md`, `StarChart3D/Program.cs` and `StarChart3D/StarRenderer.cs`.
+
+If both match:
+```
+git add .
+```
+```
+git commit -m "Feature 2: render star names next to stars"
+```
+```
+git push
+```
+
+Send me a screenshot after `git push`.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 86 – 2026-11-06 02:27 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: commit 607bb17 "Feature 2: render star names next to stars" (3 files changed, 637 insertions) pushed]
+
+**AI actions:** The AI checked commit 607bb17 on GitHub (read-only): 3 files, 83 headings, no duplicated headings, code identical to what it had tested.
+
+**AI response (full):**
+````
+Part 2 is pushed and checked on GitHub. Commit `607bb17` is on `feature2-visualising-star-chart` with the 3 expected files, and both code files match what I tested. The log has 83 headings with no duplicates, so the terminal mix-up didn't add anything twice.
+
+The yellow ⚠ icons next to two of the terminals are just VS Code saying those terminals could be restarted. They're harmless, so you can ignore them.
+
+Feature 2 so far:
+- Done: stars as small shapes, and star names.
+- Still to do: a small fix (spelling "Boötis" correctly, correcting my wrong comment about the font, and adding a gap so labels don't touch), then spectral colours, the filter for stars without a proper name, and the camera controls.
+
+I've updated the handover note, so we can pick up from here. The next log entry is number 82.
+
+It's 2:27am. Shall I carry on with the small fix now, or stop for tonight?
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI checked GitHub for duplicate log headings as well as the commit, which confirmed the terminal mix-up had not damaged the log.
+
+---
+
+### Entry 87 – 2026-11-06 02:28 – Branch: `feature2-visualising-star-chart` – Fix: Boötis spelling, font comment, gap between labels
+
+**Prompt:**
+```
+yes please
+```
+
+**AI actions:** The AI changed CatalogueNames.cs and StarRenderer.cs in its test copy, built a separate console test that printed the catalogue names of unnamed Boötes stars (Xi Boötis A, Theta Boötis A, 45 Boötis; 0 duplicate names), ran the 3D program on its virtual screen and looked at a screenshot. Before sending, it noticed its new comment claimed ⁵ and ⁶ cannot be drawn without having tested them, so it drew "x¹ x² x³ x⁴ x⁵ x⁶ Boötis": ¹²³ and ö drew correctly, ⁴⁵⁶ showed "?". Program.cs was not changed.
+
+**AI response (full):**
+````
+I'll make the small fix: spell "Boötis" properly, correct my wrong comment, and add a gap between labels. I'll test it first.
+
+Before I send this, one claim in my new comment is still **untested**: I wrote that ⁵ and ⁶ can't be drawn, but I only tested ² and α. Let me check rather than assume:
+
+Confirmed: **¹ ² ³ draw**, while **⁴ ⁵ ⁶ show as "?"**, and **Boötis** draws correctly. So the comment is now accurate and tested.
+
+The small fix is ready, and I tested everything in it before sending:
+- **`CatalogueNames.cs`**: "Bootis" is now **"Boötis"**. A test on your data gives **Xi Boötis A**, **Theta Boötis A** and **45 Boötis**, and all 2,000 names are still unique. My wrong comment about the font is also replaced with what I actually tested: the font draws ö and ¹²³, but not α or ⁴⁵⁶. That's why "Alpha-2" stays.
+- **`StarRenderer.cs`**: labels now keep a **4-pixel gap** between them, so "Wolf 359" and "Ross 614" no longer run together (compare `preview_fix.png` with your last screenshot).
+- **One side effect, which is good critique material:** with the bigger gaps, a few more labels get hidden at the default view. For example, **Sirius** and **Barnard's Star** lose their labels because a nearer star's label is in the way. They'll come back when you zoom in, once the camera controls are done in part 5.
+
+**Steps.** Download the two `.cs` files, then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+mv ~/Downloads/CatalogueNames.cs ~/Downloads/StarRenderer.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Take a screenshot, **press Esc in the star window to close it**, and only then send me the screenshot. After that I'll write log entries 82 onwards.
+````
+
+**What I did with it:** Moved the two files into StarChart3D; `dotnet build` and `dotnet run` worked. On my Mac the labels keep a gap (Entry 88).
+
+**Code sent as files (full):**
+
+`CatalogueNames.cs` (changed – the class comment about the font, and `"Boo"` now maps to `"Boötis"`):
+```csharp
+namespace StarChart3D;
+
+/// <summary>
+/// Creates catalogue names for stars, such as "Tau Ceti", "61 Cygni A" or "Gl 845",
+/// from the Bayer, Flamsteed, Gliese and Hipparcos values in the HYG data.
+/// </summary>
+/// <remarks>
+/// Order of preference: Bayer letter + constellation, then Flamsteed number + constellation,
+/// then Gliese ID, then Hipparcos number, then the HYG ID as a last resort.
+/// Raylib's default font can draw Latin-1 characters such as "ö" (tested), but not Greek letters
+/// or superscript digits above ³. So Greek letters are written in full ("Alpha" rather than "α"),
+/// and number suffixes are written "-2" ("Alpha-2" rather than "Alpha²"), because the data also
+/// has suffixes 5 and 6, whose superscripts the font cannot draw.
+/// </remarks>
+public static class CatalogueNames
+{
+    /// <summary>HYG three-letter Greek letter abbreviations and their full names.</summary>
+    private static readonly Dictionary<string, string> GreekLetters = new()
+    {
+        ["Alp"] = "Alpha", ["Bet"] = "Beta", ["Gam"] = "Gamma", ["Del"] = "Delta",
+        ["Eps"] = "Epsilon", ["Zet"] = "Zeta", ["Eta"] = "Eta", ["The"] = "Theta",
+        ["Iot"] = "Iota", ["Kap"] = "Kappa", ["Lam"] = "Lambda", ["Mu"] = "Mu",
+        ["Nu"] = "Nu", ["Xi"] = "Xi", ["Omi"] = "Omicron", ["Pi"] = "Pi",
+        ["Rho"] = "Rho", ["Sig"] = "Sigma", ["Tau"] = "Tau", ["Ups"] = "Upsilon",
+        ["Phi"] = "Phi", ["Chi"] = "Chi", ["Psi"] = "Psi", ["Ome"] = "Omega"
+    };
+
+    /// <summary>
+    /// The 88 IAU constellation abbreviations and the Latin genitive used in star names
+    /// (e.g. "Cet" → "Ceti"). The abbreviations are case-sensitive: "CMa" is not "Cma".
+    /// </summary>
+    private static readonly Dictionary<string, string> ConstellationGenitives = new()
+    {
+        ["And"] = "Andromedae", ["Ant"] = "Antliae", ["Aps"] = "Apodis", ["Aqr"] = "Aquarii",
+        ["Aql"] = "Aquilae", ["Ara"] = "Arae", ["Ari"] = "Arietis", ["Aur"] = "Aurigae",
+        ["Boo"] = "Boötis", ["Cae"] = "Caeli", ["Cam"] = "Camelopardalis", ["Cnc"] = "Cancri",
+        ["CVn"] = "Canum Venaticorum", ["CMa"] = "Canis Majoris", ["CMi"] = "Canis Minoris",
+        ["Cap"] = "Capricorni", ["Car"] = "Carinae", ["Cas"] = "Cassiopeiae", ["Cen"] = "Centauri",
+        ["Cep"] = "Cephei", ["Cet"] = "Ceti", ["Cha"] = "Chamaeleontis", ["Cir"] = "Circini",
+        ["Col"] = "Columbae", ["Com"] = "Comae Berenices", ["CrA"] = "Coronae Australis",
+        ["CrB"] = "Coronae Borealis", ["Crv"] = "Corvi", ["Crt"] = "Crateris", ["Cru"] = "Crucis",
+        ["Cyg"] = "Cygni", ["Del"] = "Delphini", ["Dor"] = "Doradus", ["Dra"] = "Draconis",
+        ["Equ"] = "Equulei", ["Eri"] = "Eridani", ["For"] = "Fornacis", ["Gem"] = "Geminorum",
+        ["Gru"] = "Gruis", ["Her"] = "Herculis", ["Hor"] = "Horologii", ["Hya"] = "Hydrae",
+        ["Hyi"] = "Hydri", ["Ind"] = "Indi", ["Lac"] = "Lacertae", ["Leo"] = "Leonis",
+        ["LMi"] = "Leonis Minoris", ["Lep"] = "Leporis", ["Lib"] = "Librae", ["Lup"] = "Lupi",
+        ["Lyn"] = "Lyncis", ["Lyr"] = "Lyrae", ["Men"] = "Mensae", ["Mic"] = "Microscopii",
+        ["Mon"] = "Monocerotis", ["Mus"] = "Muscae", ["Nor"] = "Normae", ["Oct"] = "Octantis",
+        ["Oph"] = "Ophiuchi", ["Ori"] = "Orionis", ["Pav"] = "Pavonis", ["Peg"] = "Pegasi",
+        ["Per"] = "Persei", ["Phe"] = "Phoenicis", ["Pic"] = "Pictoris", ["Psc"] = "Piscium",
+        ["PsA"] = "Piscis Austrini", ["Pup"] = "Puppis", ["Pyx"] = "Pyxidis", ["Ret"] = "Reticuli",
+        ["Sge"] = "Sagittae", ["Sgr"] = "Sagittarii", ["Sco"] = "Scorpii", ["Scl"] = "Sculptoris",
+        ["Sct"] = "Scuti", ["Ser"] = "Serpentis", ["Sex"] = "Sextantis", ["Tau"] = "Tauri",
+        ["Tel"] = "Telescopii", ["Tri"] = "Trianguli", ["TrA"] = "Trianguli Australis",
+        ["Tuc"] = "Tucanae", ["UMa"] = "Ursae Majoris", ["UMi"] = "Ursae Minoris",
+        ["Vel"] = "Velorum", ["Vir"] = "Virginis", ["Vol"] = "Volantis", ["Vul"] = "Vulpeculae"
+    };
+
+    /// <summary>
+    /// Returns the best catalogue name for a star, ignoring its proper name.
+    /// </summary>
+    /// <example>Tau Ceti, Alpha-2 Centauri, 61 Cygni A, p Eridani B, Gl 845, HIP 1, HYG 0.</example>
+    public static string Create(Star star)
+    {
+        string constellation = Genitive(star.Constellation);
+
+        if (star.Bayer.Length > 0 && constellation.Length > 0)
+        {
+            return AddComponent($"{BayerName(star.Bayer)} {constellation}", star.GlieseId);
+        }
+
+        if (star.Flamsteed is int flamsteed && constellation.Length > 0)
+        {
+            return AddComponent($"{flamsteed} {constellation}", star.GlieseId);
+        }
+
+        if (star.GlieseId.Length > 0)
+        {
+            return star.GlieseId;
+        }
+
+        if (star.HipparcosId is int hip)
+        {
+            return $"HIP {hip}";
+        }
+
+        return $"HYG {star.Id}";
+    }
+
+    /// <summary>
+    /// Turns a HYG Bayer value into a readable name: "Tau" → "Tau", "Alp-2" → "Alpha-2".
+    /// Values that are not Greek letters (Bayer also used Latin letters, e.g. "p") are kept as they are.
+    /// </summary>
+    private static string BayerName(string bayer)
+    {
+        string letter = bayer;
+        string suffix = string.Empty;
+
+        int dash = bayer.IndexOf('-');
+        if (dash > 0)
+        {
+            letter = bayer[..dash];
+            suffix = bayer[dash..]; // e.g. "-2"
+        }
+
+        return (GreekLetters.TryGetValue(letter, out string? fullName) ? fullName : letter) + suffix;
+    }
+
+    /// <summary>Returns the genitive for a constellation abbreviation, the abbreviation itself if unknown, or "" if empty.</summary>
+    private static string Genitive(string abbreviation)
+    {
+        if (abbreviation.Length == 0)
+        {
+            return string.Empty;
+        }
+
+        return ConstellationGenitives.TryGetValue(abbreviation, out string? genitive) ? genitive : abbreviation;
+    }
+
+    /// <summary>
+    /// Adds the multiple-star component letter from the Gliese ID, e.g. "Gl 820A" → "61 Cygni A",
+    /// so that both stars of a double star do not get the same name.
+    /// </summary>
+    private static string AddComponent(string name, string glieseId)
+    {
+        if (glieseId.Length >= 2 && char.IsUpper(glieseId[^1]) && char.IsDigit(glieseId[^2]))
+        {
+            return $"{name} {glieseId[^1]}";
+        }
+
+        return name;
+    }
+}
+```
+
+`StarRenderer.cs` (changed – new `LabelGap` constant; the rectangle used for the overlap test is made bigger than the text):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// Draws the stars of a <see cref="StarCollection"/> in 3D with Raylib.
+/// One world unit is one parsec, and the Sun is at (0, 0, 0).
+/// </summary>
+public class StarRenderer
+{
+    /// <summary>Radius of the small sphere drawn for each star, in parsecs.</summary>
+    public const float StarRadius = 0.08f;
+
+    /// <summary>
+    /// Stars without a proper name are only labelled when they are closer to the camera than this (in parsecs),
+    /// so that the screen is not covered by 1,900 catalogue names at once.
+    /// </summary>
+    public const float CatalogueLabelDistance = 8f;
+
+    /// <summary>Minimum gap in pixels kept between labels, so that names do not run into each other.</summary>
+    private const int LabelGap = 4;
+
+    private static readonly Color ProperNameColour = new(255, 230, 150, 255);
+    private static readonly Color CatalogueNameColour = new(150, 160, 180, 255);
+
+    private readonly IReadOnlyList<Star> _stars;
+    private readonly Vector3[] _positions;
+    private readonly List<Rectangle> _labelAreas = new(); // screen areas already used by labels this frame
+
+    /// <summary>Creates a renderer and works out each star's 3D position once, so it is not recalculated every frame.</summary>
+    /// <param name="stars">The stars to draw.</param>
+    public StarRenderer(IReadOnlyList<Star> stars)
+    {
+        _stars = stars;
+        _positions = new Vector3[stars.Count];
+        for (int i = 0; i < stars.Count; i++)
+        {
+            _positions[i] = ToWorldPosition(stars[i]);
+        }
+    }
+
+    /// <summary>
+    /// Converts a star's HYG position to Raylib's 3D world.
+    /// HYG uses +Z towards the north celestial pole, but in Raylib +Y is "up",
+    /// so (x, y, z) becomes (x, z, -y). This is a rotation, not a mirror,
+    /// so the sky is not flipped left-to-right.
+    /// </summary>
+    public static Vector3 ToWorldPosition(Star star)
+    {
+        return new Vector3((float)star.X, (float)star.Z, (float)-star.Y);
+    }
+
+    /// <summary>
+    /// Draws every star as a small sphere. Must be called between
+    /// <c>Raylib.BeginMode3D</c> and <c>Raylib.EndMode3D</c>.
+    /// </summary>
+    public void DrawStars()
+    {
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            // Few rings and slices: each star is tiny on screen, and 2,000 detailed spheres would be slow.
+            Raylib.DrawSphereEx(_positions[i], StarRadius, 6, 8, Color.White);
+        }
+    }
+
+    /// <summary>
+    /// Writes star names next to the stars. Must be called after <c>Raylib.EndMode3D</c>,
+    /// because the names are 2D text drawn on top of the 3D scene.
+    /// Stars with a proper name are labelled; other stars get their catalogue name
+    /// only when they are within <see cref="CatalogueLabelDistance"/> of the camera.
+    /// A label is skipped if it would overlap a label already drawn. The stars are in
+    /// nearest-first order, so the nearer star keeps its label.
+    /// </summary>
+    /// <param name="camera">The camera used to draw the 3D scene.</param>
+    public void DrawLabels(Camera3D camera)
+    {
+        Vector3 viewDirection = Vector3.Normalize(camera.Target - camera.Position);
+        int screenWidth = Raylib.GetScreenWidth();
+        int screenHeight = Raylib.GetScreenHeight();
+        _labelAreas.Clear();
+
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            Star star = _stars[i];
+            Vector3 toStar = _positions[i] - camera.Position;
+
+            // Skip stars behind the camera: GetWorldToScreen would still give them a (wrong) screen position.
+            if (Vector3.Dot(toStar, viewDirection) <= 0)
+            {
+                continue;
+            }
+
+            if (!star.HasProperName && toStar.Length() > CatalogueLabelDistance)
+            {
+                continue;
+            }
+
+            Vector2 screen = Raylib.GetWorldToScreen(_positions[i], camera);
+            if (screen.X < 0 || screen.X > screenWidth || screen.Y < 0 || screen.Y > screenHeight)
+            {
+                continue;
+            }
+
+            int fontSize = star.HasProperName ? 14 : 10;
+            int x = (int)screen.X + 6;
+            int y = (int)screen.Y - fontSize / 2;
+            // The area is made a little bigger than the text, so that labels keep a gap between them.
+            var area = new Rectangle(x - LabelGap, y - LabelGap / 2, Raylib.MeasureText(star.DisplayName, fontSize) + 2 * LabelGap, fontSize + LabelGap);
+
+            if (OverlapsExistingLabel(area))
+            {
+                continue;
+            }
+
+            _labelAreas.Add(area);
+            Raylib.DrawText(star.DisplayName, x, y, fontSize, star.HasProperName ? ProperNameColour : CatalogueNameColour);
+        }
+    }
+
+    /// <summary>Returns true if the given screen area overlaps a label already drawn this frame.</summary>
+    private bool OverlapsExistingLabel(Rectangle area)
+    {
+        foreach (Rectangle used in _labelAreas)
+        {
+            if (Raylib.CheckCollisionRecs(area, used))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+```
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- In `CatalogueNames`, only the genitive for Boötes changed. The comment now says what was actually tested: the default font draws Latin-1 characters (ö, ¹, ², ³) but not Greek letters or ⁴–⁹, which is why Greek letters are spelled out and suffixes are written "-2".
+- In `DrawLabels`, the rectangle checked for overlaps is now `LabelGap` (4 px) larger on each side than the text. Two labels therefore count as overlapping if they are closer than about 4 px, so the second one is not drawn. The text itself is still drawn at the same position.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the AI corrected its own earlier mistake (Entry 54) in a separate, clearly named fix commit, and before sending it noticed that its new comment made a claim it had not tested (⁵ and ⁶), so it tested that too. All 2,000 names are still unique. Trade-off: the 4 px gap hides more labels at the default view – in my screenshot Sirius and Barnard's Star are no longer labelled, which is a loss for two of the best-known nearby stars. A better rule would prefer brighter or better-known stars rather than "nearest to the Sun first"; for now zooming in (part 5) will reveal them. Also, strictly, this commit fixes Feature 1 code (CatalogueNames.cs) on the Feature 2 branch; it is small and documented, but ideally it would have been its own branch.
+
+---
+
+### Entry 88 – 2026-11-06 02:32 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the StarChart3D window on my Mac at 56 FPS; "Wolf 359" and "Ross 614" now separated; Sirius not labelled]
+
+**AI response:** The AI confirmed the gap works, reminded me to close the window with Esc before typing, and wrote Entries 82–88 of this log. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+The fix works on my Mac. The missing Sirius label is the expected side effect described in Entry 87.
+
+---
+
+### Entry 89 – 2026-11-06 02:34 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+and why its not in 3d i mean i want to zoom in out in stars like some animation
+```
+
+**AI response (full):**
+````
+It **is** 3D already. Every star is placed at its real position in space, in parsecs around the Sun. It just doesn't look like it yet, because the **camera is fixed**: you always see it from the same spot, so it looks like a flat picture.
+
+What you're asking for is coming, in two stages that the spec asks for separately:
+- **Feature 2, part 5: zoom, pan and rotate with the mouse and keyboard.** You'll be able to scroll to zoom in and out, drag to rotate around the stars, and move around. This is when it'll really *feel* 3D, and when hidden labels like Sirius and the grey catalogue names appear as you get close.
+- **Feature 3: 3D movement (animation).** The camera smoothly **flies** towards a star you click, with a "dust" effect to show motion, plus a list of nearby stars with distance and direction.
+
+**My suggestion:** do the **camera controls next**, before spectral colours and the filter. The spec doesn't fix the order, each part still gets its own commit, and having controls makes it much easier to test and show the later parts in your demo.
+
+So, the order from here:
+1. Commit the small fix (the steps in my last message).
+2. Camera controls (zoom, pan, rotate).
+3. Spectral colours.
+4. Filter for stars without a proper name.
+5. Pull request "Feature 2".
+
+Shall I go ahead in that order? If yes, do step 1 first and send me the screenshot after `git push`. I'll include this question in the log too.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Useful: it explained that the stars are already in 3D but the fixed camera makes them look flat, and suggested doing the camera controls earlier. Changing the order is allowed by the spec (it lists the parts but not the order).
+
+---
+
+### Entry 90 – 2026-11-06 02:37 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+so by doing can i play with it like zoom in into stars and all
+```
+
+**AI response (full):**
+````
+Yes. Once the camera controls (Feature 2, part 5) are in, you'll be able to explore it freely. The plan:
+
+- **Mouse wheel:** zoom in towards the stars, or out to see all 2,000.
+- **Left-drag:** rotate around, so you can look at the star field from any side.
+- **Right-drag, or WASD / arrow keys:** pan (slide the view) so you can move around the chart.
+- **A reset key** (for example R) to jump back to the starting view if you get lost.
+
+As you zoom in, more names appear. Sirius and Barnard's Star get their labels back, and the small grey catalogue names (Tau Ceti, 61 Cygni A…) show up for stars close to you. The stars get bigger as you approach, because they're real 3D spheres.
+
+The **flying animation** (clicking a star and smoothly travelling to it) is Feature 3, and comes after Feature 2.
+
+So: commit the small fix first (the steps in my earlier message, starting with the `grep` that should print **83**), send me the screenshot after `git push`, and then I'll build the camera controls.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues. The planned controls match the spec (zoom, pan and scan with mouse and keyboard).
+
+---
+
+### Entry 91 – 2026-11-06 02:37 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+okay lets do then
+```
+
+**AI response (full):**
+````
+Good. First the fix commit. Make sure the star window is closed (no "**dotnet Star…**" in the terminal list), then run these one at a time:
+
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+It should print **83**. Then:
+```
+cat ~/Downloads/log_entries_82_88.md >> AI_programming_log.md
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+It should print **90**.
+```
+git add --dry-run .
+```
+It should list only `AI_programming_log.md`, `StarChart3D/CatalogueNames.cs` and `StarChart3D/StarRenderer.cs`.
+
+If all that matches:
+```
+git add .
+```
+```
+git commit -m "Fix: spell Boötis correctly and keep a gap between star labels"
+```
+```
+git push
+```
+
+Send me a screenshot after `git push`. Meanwhile, I'll start building the camera controls.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The steps were correct, but I did not run the `cat` line, so the fix commit (02476d6) went to GitHub with only the two code files and without its log entries 82–88. They are added one commit later, together with the camera controls. Lesson: check the `git add --dry-run` list matches before committing.
+
+---
+
+### Entry 92 – 2026-11-06 02:38 – Branch: `feature2-visualising-star-chart` – Feature 2: zoom, pan and scan with mouse and keyboard
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `git push` of the fix commit: 607bb17..02476d6 feature2-visualising-star-chart]
+
+**AI actions:** The AI checked commit 02476d6 on GitHub (read-only): CatalogueNames.cs and StarRenderer.cs only; the log on GitHub still had 83 headings (entries 82–88 missing). It checked Raylib-cs input functions and key names in the library source (GetMouseWheelMove, GetMouseDelta, IsMouseButtonDown, IsKeyDown, IsKeyPressed, GetFrameTime; KeyboardKey.Equal/Minus/PageUp/PageDown/W/A/S/D/Q/E/R/arrows), wrote CameraController.cs and changed Program.cs, then tested on its virtual screen by simulating input with xdotool: 14 wheel notches (zoom), a left-drag (rotate), a right-drag (pan), holding Left and W (keys), and zoom + Up then R (reset). It looked at each screenshot. Fixes after testing: holding W for 1 s flew into the Sun, so PanSpeed was halved (0.6 → 0.3); the info line "Distance to view centre" did not change when panning, so it was replaced by "Camera is N light years from the Sun"; star labels covered the HUD text, so dark panels (alpha 180, then 225) were added behind it.
+
+**AI response (full):**
+````
+The camera controls are ready, and I tested each control on my virtual screen before sending:
+
+| Control | Mouse | Keyboard |
+|---|---|---|
+| Zoom in/out | scroll wheel | **+** / **−** (or PageUp/PageDown) |
+| Rotate around | left-drag | arrow keys |
+| Move (pan) | right-drag | **W A S D** (forward/left/back/right), **Q E** (down/up) |
+| Back to start | | **R** |
+| Quit | | **Esc** |
+
+`preview_camera_zoomed.png` shows what happens after a few scrolls: Sirius, Barnard's Star and Altair get their labels back, and grey catalogue names appear close up.
+
+**What I changed after testing:**
+- **W/A/S/D were too fast.** Holding W for a second and a half flew straight into the Sun, so I halved the speed.
+- The info line said "distance to view centre", which **doesn't change** when you move with W/A/S/D. It now says **"Camera is N light years from the Sun"**.
+- Star labels could cover the info text, so there are now **dark panels** behind the text at the top and bottom.
+
+**Files:** `CameraController.cs` is new (the camera logic), and `Program.cs` uses it each frame and shows the help text. No other files changed.
+
+**First, the log check from before.** Run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+Tell me the number: **83** or **90**.
+
+**Then try it out:**
+```
+cd StarChart3D
+```
+```
+mv ~/Downloads/CameraController.cs ~/Downloads/Program.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Play with it: scroll, drag, press W/A/S/D. When you're done, take a screenshot, **press Esc to close the window**, and send me the screenshot along with the number from `grep`.
+````
+
+**What I did with it:** The `mv` did not run the first time, so I ran the old program (Entries 93–94). After moving the files, `dotnet build` and `dotnet run` worked and the controls work on my Mac (Entry 95).
+
+**Code sent as files (full):**
+
+`CameraController.cs` (new):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// An "orbit" camera that circles around a target point, controlled by mouse and keyboard.
+/// Mouse wheel zooms, left-drag rotates, right-drag pans; keys do the same for keyboard users.
+/// </summary>
+/// <remarks>
+/// The camera position is worked out from three numbers: how far it is from the target (distance),
+/// the angle around the vertical axis (yaw) and the angle up or down (pitch).
+/// This keeps the camera always looking at the target, so the user cannot get "lost" upside down.
+/// </remarks>
+public class CameraController
+{
+    private const float MinDistance = 0.5f;           // parsecs: closest the camera can get to the target
+    private const float MaxDistance = 150f;           // parsecs: far enough to see all 2,000 stars
+    private const float MaxPitch = 1.5f;              // radians (about 86°): stops the camera flipping over the top
+    private const float MouseRotateSpeed = 0.005f;    // radians per pixel of mouse movement
+    private const float KeyRotateSpeed = 1.5f;        // radians per second
+    private const float ZoomStep = 0.1f;              // each wheel notch changes the distance by 10%
+    private const float PanSpeed = 0.3f;              // fraction of the distance moved per second with the keys
+
+    private readonly Vector3 _startTarget;
+    private readonly float _startDistance;
+    private readonly float _startYaw;
+    private readonly float _startPitch;
+
+    private Vector3 _target;
+    private float _distance;
+    private float _yaw;
+    private float _pitch;
+
+    /// <summary>Creates a camera at <paramref name="startPosition"/> looking at <paramref name="startTarget"/>.</summary>
+    public CameraController(Vector3 startPosition, Vector3 startTarget)
+    {
+        Vector3 offset = startPosition - startTarget;
+        _startTarget = startTarget;
+        _startDistance = Math.Clamp(offset.Length(), MinDistance, MaxDistance);
+        _startYaw = MathF.Atan2(offset.Z, offset.X);
+        _startPitch = Math.Clamp(MathF.Asin(offset.Y / offset.Length()), -MaxPitch, MaxPitch);
+        Reset();
+    }
+
+    /// <summary>The Raylib camera to draw the 3D scene with, built from the current distance, yaw, pitch and target.</summary>
+    public Camera3D Camera => new(
+        position: _target + Offset(),
+        target: _target,
+        up: Vector3.UnitY,
+        fovY: 45f,
+        projection: CameraProjection.Perspective);
+
+    /// <summary>How far the camera is from the point it is looking at, in parsecs.</summary>
+    public float Distance => _distance;
+
+    /// <summary>Puts the camera back where it started.</summary>
+    public void Reset()
+    {
+        _target = _startTarget;
+        _distance = _startDistance;
+        _yaw = _startYaw;
+        _pitch = _startPitch;
+    }
+
+    /// <summary>Reads the mouse and keyboard and moves the camera. Call once per frame, before drawing.</summary>
+    public void Update()
+    {
+        float seconds = Raylib.GetFrameTime(); // so keyboard speed is the same at any frame rate
+
+        if (Raylib.IsKeyPressed(KeyboardKey.R))
+        {
+            Reset();
+        }
+
+        // Zoom: mouse wheel, or +/- keys (PageUp/PageDown also work).
+        float zoom = Raylib.GetMouseWheelMove();
+        if (Raylib.IsKeyDown(KeyboardKey.Equal) || Raylib.IsKeyDown(KeyboardKey.PageUp)) zoom += 3f * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Minus) || Raylib.IsKeyDown(KeyboardKey.PageDown)) zoom -= 3f * seconds;
+        _distance = Math.Clamp(_distance * (1f - zoom * ZoomStep), MinDistance, MaxDistance);
+
+        // Rotate: left mouse drag, or the arrow keys.
+        Vector2 mouse = Raylib.GetMouseDelta();
+        if (Raylib.IsMouseButtonDown(MouseButton.Left))
+        {
+            _yaw += mouse.X * MouseRotateSpeed;
+            _pitch += mouse.Y * MouseRotateSpeed;
+        }
+        if (Raylib.IsKeyDown(KeyboardKey.Left)) _yaw -= KeyRotateSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Right)) _yaw += KeyRotateSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Up)) _pitch += KeyRotateSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Down)) _pitch -= KeyRotateSpeed * seconds;
+        _pitch = Math.Clamp(_pitch, -MaxPitch, MaxPitch);
+
+        // Pan (move the point the camera looks at): right mouse drag, or W/A/S/D and Q/E.
+        Vector3 forward = Vector3.Normalize(-Offset());
+        Vector3 right = Vector3.Normalize(Vector3.Cross(forward, Vector3.UnitY));
+        Vector3 up = Vector3.Cross(right, forward);
+
+        if (Raylib.IsMouseButtonDown(MouseButton.Right))
+        {
+            float pixelsToParsecs = _distance * 0.0015f; // pan more when zoomed out, less when zoomed in
+            _target += (-right * mouse.X + up * mouse.Y) * pixelsToParsecs;
+        }
+
+        float step = _distance * PanSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.W)) _target += forward * step;
+        if (Raylib.IsKeyDown(KeyboardKey.S)) _target -= forward * step;
+        if (Raylib.IsKeyDown(KeyboardKey.D)) _target += right * step;
+        if (Raylib.IsKeyDown(KeyboardKey.A)) _target -= right * step;
+        if (Raylib.IsKeyDown(KeyboardKey.E)) _target += Vector3.UnitY * step;
+        if (Raylib.IsKeyDown(KeyboardKey.Q)) _target -= Vector3.UnitY * step;
+    }
+
+    /// <summary>The vector from the target to the camera, worked out from distance, yaw and pitch.</summary>
+    private Vector3 Offset()
+    {
+        return new Vector3(
+            _distance * MathF.Cos(_pitch) * MathF.Cos(_yaw),
+            _distance * MathF.Sin(_pitch),
+            _distance * MathF.Cos(_pitch) * MathF.Sin(_yaw));
+    }
+}
+```
+
+`Program.cs` (changed – uses `CameraController` instead of a fixed camera, shows the camera's distance from the Sun and help text on dark panels):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+using StarChart3D;
+
+// Load the 2,000 nearest stars.
+string dataFile = Path.Combine(AppContext.BaseDirectory, "Data", "stars_local_2000.csv");
+var stars = new StarCollection(dataFile);
+
+// Open a resizable window with anti-aliasing (smoother edges).
+Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint | ConfigFlags.ResizableWindow);
+Raylib.InitWindow(1280, 800, "StarChart3D");
+Raylib.SetTargetFPS(60);
+
+var renderer = new StarRenderer(stars);
+
+// The camera starts outside the star field looking at the Sun, and can then be moved with mouse and keyboard.
+var cameraController = new CameraController(startPosition: new Vector3(30f, 20f, 30f), startTarget: Vector3.Zero);
+
+var spaceColour = new Color(5, 5, 15, 255);
+string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
+const string Help = "Mouse: wheel = zoom, left-drag = rotate, right-drag = pan\n" +
+                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, Esc quit";
+
+while (!Raylib.WindowShouldClose())
+{
+    cameraController.Update();
+    Camera3D camera = cameraController.Camera;
+
+    Raylib.BeginDrawing();
+    Raylib.ClearBackground(spaceColour);
+
+    Raylib.BeginMode3D(camera);
+    Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
+    renderer.DrawStars();
+    Raylib.EndMode3D();
+
+    renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
+
+    // Dark panels behind the text, so star labels underneath do not make it unreadable.
+    var panelColour = new Color(0, 0, 0, 225);
+    Raylib.DrawRectangle(0, 0, 470, 84, panelColour);
+    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, 620, 50, panelColour);
+    Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
+    Raylib.DrawFPS(10, 36);
+    Raylib.DrawText($"Camera is {camera.Position.Length() * Star.LightYearsPerParsec:F1} light years from the Sun", 10, 62, 16, Color.LightGray);
+    Raylib.DrawText(Help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
+    Raylib.EndDrawing();
+}
+
+Raylib.CloseWindow();
+```
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- `CameraController` is an **orbit camera**: it stores the point it looks at (`_target`), how far away it is (`_distance`), the angle around the vertical axis (`_yaw`) and the angle up/down (`_pitch`). `Offset()` turns these into an (x, y, z) vector with sine and cosine (spherical coordinates), and the camera position is `_target + Offset()`, so it always looks at the target.
+- The constructor works out the starting distance, yaw and pitch from the start position with `Atan2` and `Asin`, and remembers them so `Reset()` (key R) can go back.
+- `Update()` runs once per frame. Zoom multiplies the distance by (1 − 0.1 × wheel notches), so each notch is 10% closer or further, clamped between 0.5 and 150 parsecs. Left-drag and arrow keys change yaw and pitch; pitch is clamped to ±1.5 radians (about 86°) so the camera cannot flip over the top. Right-drag and W/A/S/D/Q/E move the target along the camera's forward/right/up directions (worked out with cross products), scaled by the distance so panning feels the same when zoomed in or out.
+- Keyboard movement is multiplied by `GetFrameTime()` (seconds since the last frame), so the speed is the same at 25 FPS or 60 FPS.
+- In `Program.cs`, `cameraController.Update()` is called before drawing each frame, and `cameraController.Camera` gives the `Camera3D` used for the stars and labels.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the AI tested every control by simulating mouse and keyboard input on its virtual screen and looked at the results, which is how it found three real problems in its own first version (W/A/S/D far too fast, a misleading distance read-out that did not change when panning, labels covering the HUD text) and fixed them before sending. The orbit camera with clamped pitch and distance prevents getting lost upside down or flying through the Sun, and R resets the view. Weaknesses: (1) "zoom" moves the camera rather than changing the field of view, so zooming far in on one star means flying right up to the target point, not to the star under the mouse; (2) right-drag panning speed (0.0015 × distance per pixel) was tuned by eye on the AI's screen, not on my Mac; (3) mouse dragging also works over the help text, and there is no on-screen indicator of which mode is active; (4) the dark HUD panels have fixed pixel sizes, so on a much smaller window they may cover stars or not fit the text; (5) this part was done before spectral colours and the filter, a change of order from the spec's list (allowed, but it means the commit order differs from the spec).
+
+---
+
+### Entry 93 – 2026-11-06 03:01 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here but it does not Play with it: scroll, drag, press W/A/S/D.
+```
+[Screenshot: the StarChart3D window at 60 FPS – no "Camera is …" line and no help text at the bottom (the old version)]
+
+**AI response (full):**
+````
+Thanks, that explains it: **this is still the old program, not the new one.** The new version shows a **"Camera is … light years from the Sun"** line under the FPS and **help text at the bottom**, and neither is in your screenshot. So the new `CameraController.cs` and `Program.cs` didn't get into your project, and you're running the previous build.
+
+Let's find out why:
+
+1. **Press Esc in the star window to close it first.**
+2. Then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+ls
+```
+```
+ls ~/Downloads | grep -i -E "camera|program"
+```
+
+Send me a screenshot of the output. The first `ls` shows whether `CameraController.cs` is in your project. The second shows whether the files are still in Downloads, possibly with a slightly different name such as `Program (1).cs`, which would explain why the `mv` didn't pick them up.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI worked out from missing on-screen text that I was running the old build, instead of assuming its code was broken.
+
+---
+
+### Entry 94 – 2026-11-06 03:03 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `ls` in StarChart3D showed no CameraController.cs; `ls ~/Downloads | grep` showed CameraController.cs, Program.cs and the two preview PNGs still in Downloads]
+
+**AI response (full):**
+````
+Found it: both files are **still in Downloads**, and `CameraController.cs` isn't in your project. The `mv` command never ran. You're already in the right folder (`StarChart3D`), so run these one at a time:
+
+```
+mv ~/Downloads/CameraController.cs ~/Downloads/Program.cs .
+```
+```
+ls
+```
+`CameraController.cs` should now appear in the list.
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+The new window should show **"Camera is 153.0 light years from the Sun"** under the FPS, and the help text at the bottom. Then try scrolling, left-dragging and W/A/S/D.
+
+When you're done, take a screenshot, **press Esc to close the window**, then run this and include it in your screenshot:
+```
+grep -c "^### Entry" ../AI_programming_log.md
+```
+(I still need that number, **83** or **90**, to sort out the log.)
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+My mistake: I had skipped the `mv` step.
+
+---
+
+### Entry 95 – 2026-11-06 03:04 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the new StarChart3D window at 56 FPS, zoomed out and rotated so the whole ball of stars is visible; "Camera is 252.5 light years from the Sun"; help text at the bottom]
+
+**AI response (full):**
+````
+**It works.** This is the new version: you've zoomed out and rotated, so you can now see the whole ball of 2,000 stars around the Sun, with the camera **252.5 light years** away. The info panel and help text are showing, at 56 FPS.
+
+Try scrolling **in** (towards you) to fly back into the stars and watch more names appear. Press **R** to jump back to the start.
+
+When you're done:
+1. **Press Esc in the star window to close it.**
+2. Then run this in the terminal and send me a screenshot:
+```
+grep -c "^### Entry" ../AI_programming_log.md
+```
+
+I need that number (**83** or **90**) because the log entries 82–88 weren't in the last commit. Once I know, I'll write the remaining log entries and give you the commit steps for the camera controls.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The camera controls work on my Mac: zooming out shows the whole 67-light-year sphere of stars, which really shows it is 3D.
+
+---
+
+### Entry 96 – 2026-11-06 03:05 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+and here
+```
+[Screenshot: the window closed normally; `grep -c "^### Entry" ../AI_programming_log.md` printed 83]
+
+**AI response:** The AI explained that 83 meant Entries 82–88 had never been added, so the fix commit 02476d6 went to GitHub without its log entries. It wrote Entries 89–96 and combined them with 82–88 into one file to add once, and gave the commit steps for the camera controls. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+Honest note for the marker: the log entries for the fix commit (82–88) are in this commit instead of 02476d6, because I skipped the `cat` step. Their timestamps still show when each conversation happened.
+
+---
+
+### Entry 97 – 2026-11-06 03:10 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `git push`: 02476d6..2f07949 feature2-visualising-star-chart]
+
+**AI actions:** The AI checked commit 2f07949 on GitHub (read-only).
+
+**AI response (full):**
+````
+The camera controls are pushed, and I checked them on GitHub. Commit `2f07949` by KAUSHAL BABU YADAV contains the 3 expected files, and both code files match what I tested. The log now has 98 headings, including the missing Entries 82–88, with no duplicates.
+
+**Feature 2 progress (3 of 5 parts done, plus the fix):**
+- ✅ Stars as small shapes
+- ✅ Star names
+- ✅ Zoom, pan and rotate with mouse and keyboard
+- ⬜ Spectral colours
+- ⬜ Filter out stars without a proper name
+- ⬜ Pull request "Feature 2"
+
+**Time check:** it's 3:10am Friday, and the deadline is **Monday 12pm**. After Feature 2, there's still **Feature 3** (20 marks), the **README** (part of the 20 Setting Up marks), the **YouTube demo** and the **Google Form**. Feature 2's last two parts are fairly quick, so we could finish Feature 2 tonight, or stop now with everything saved.
+
+The handover note is updated, and the next log entry is number 97.
+
+Shall I carry on with **spectral colours**, or stop for tonight?
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI verified the commit on GitHub (files, code, heading count, no duplicates).
+
+---
+
+### Entry 98 – 2026-11-06 03:11 – Branch: `feature2-visualising-star-chart` – Feature 2: render stars in spectral class colour
+
+**Prompt:**
+```
+lets do it
+```
+
+**AI actions:** The AI counted the spectral type codes in my 2,000-star file (M 620, K 360, lowercase m 346, G 151, empty 150, D 114, F 99, lowercase d 79, lowercase k 54, A 16, plus a few s/g/p/B/S codes) and looked at the unusual ones (sdM4, sdG0, g, pec, Se, Capella "M1: comp" with colour index 0.795). It web-searched Capella and read Wikipedia (Capella Aa G8III, Ab G0III, 42.9 ly). It tried to open published star colour tables (vendian.org "What color are the stars", Wikipedia "Stellar classification"), but both were blocked for it, so the colours are its own choice. It checked Raylib-cs DrawCircle in the source, wrote SpectralClass.cs and changed StarRenderer.cs and Program.cs, built and ran them on its virtual screen (default view and after 9 wheel notches), and checked the class counts add up to 2,000.
+
+**AI response (full):**
+````
+For spectral colours I want real reference values rather than guesses, so I'll check what spectral types your data actually contains and look up a published star colour table.
+
+The data has more variety than I expected: older Gliese codes like `dM4` and `sdM4`, lowercase estimates like `m` and `k-m`, white dwarfs (`DA`, `DC`…), and 150 stars with no type at all. I also found a **data error**: HYG lists **Capella** as `M1` (a red star), but [Capella is actually a pair of yellow giants, G8III and G0III](https://en.wikipedia.org/wiki/Capella). That's good critique material. Writing and testing the colour code now.
+
+I've added colours for each spectral class and tested them on your star data. `preview_colours.png` shows the zoomed-in view: Sol is yellow, Sirius and Vega are blue-white, Proxima Centauri and Barnard's Star are red, and white dwarfs are pale blue. A colour key in the top-right corner shows how many stars fall into each class:
+
+| O | B | A | F | G | K | M | White dwarf | Unknown |
+|---|---|---|---|---|---|---|---|---|
+| 0 | 1 | 16 | 99 | 155 | 417 | 1,044 | 114 | 154 |
+
+These add up to exactly 2,000. Most nearby stars are red M dwarfs.
+
+**What changed:**
+- **`SpectralClass.cs`** (new) reads each star's spectral type and picks its colour. Your data writes spectral types in several older styles (for example "dM4" and "sdM4"), and the code handles all of them. The 150 stars with no type, plus a few unclear codes such as "g" and "pec", count as **Unknown** and show grey.
+- **`StarRenderer.cs`** works out each star's colour once at the start, not every frame, then draws each star in its colour and draws the colour key.
+- **`Program.cs`** has one new line that draws the colour key.
+
+**Two honest points for your critique:**
+- **I chose these colours myself, and they aren't from a published table.** They follow the real order (hot stars blue, cool stars red) but are brighter than true star colours, so the classes are easy to tell apart. I couldn't open a reference colour table from here. If you want, ask your separate domain-expert chat: *"What colours are stars of spectral classes O, B, A, F, G, K and M?"* and log the answer.
+- **The star data has a mistake.** It lists **Capella** as type M1, so the program draws it red. In reality [Capella is two yellow giant stars, types G8III and G0III](https://en.wikipedia.org/wiki/Capella). The code is right; the data is wrong.
+
+**Steps.** Download the three `.cs` files, then run these one at a time from the `StarChart3D` folder:
+```
+mv ~/Downloads/SpectralClass.cs ~/Downloads/StarRenderer.cs ~/Downloads/Program.cs .
+```
+```
+ls
+```
+`SpectralClass.cs` should appear in the list. If it doesn't, stop and tell me.
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Take a screenshot, **press Esc in the star window**, and send me the screenshot.
+````
+
+**What I did with it:** Moved the files from Downloads, but I was in the wrong folder (Entry 99).
+
+**Code sent as files (full):**
+
+`SpectralClass.cs` (new):
+```csharp
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// The main spectral classes of stars, from hottest (O, blue) to coolest (M, red),
+/// plus white dwarfs and stars whose spectral type is unknown.
+/// </summary>
+public enum SpectralClass
+{
+    O, B, A, F, G, K, M, WhiteDwarf, Unknown
+}
+
+/// <summary>Works out a star's <see cref="SpectralClass"/> from its HYG "spect" text, and the colour used to draw it.</summary>
+public static class SpectralClasses
+{
+    /// <summary>
+    /// Display colours for each class. They follow the real order (hot stars blue-white, cool stars orange-red)
+    /// but are made more saturated than true star colours, so that the classes are easy to tell apart on screen.
+    /// </summary>
+    private static readonly Dictionary<SpectralClass, Color> Colours = new()
+    {
+        [SpectralClass.O] = new Color(110, 140, 255, 255),
+        [SpectralClass.B] = new Color(150, 180, 255, 255),
+        [SpectralClass.A] = new Color(215, 225, 255, 255),
+        [SpectralClass.F] = new Color(255, 255, 230, 255),
+        [SpectralClass.G] = new Color(255, 235, 150, 255),
+        [SpectralClass.K] = new Color(255, 180, 95, 255),
+        [SpectralClass.M] = new Color(255, 110, 80, 255),
+        [SpectralClass.WhiteDwarf] = new Color(200, 230, 255, 255),
+        [SpectralClass.Unknown] = new Color(130, 130, 130, 255)
+    };
+
+    /// <summary>Order in which the classes are shown in the on-screen colour key.</summary>
+    public static readonly SpectralClass[] LegendOrder =
+    {
+        SpectralClass.O, SpectralClass.B, SpectralClass.A, SpectralClass.F, SpectralClass.G,
+        SpectralClass.K, SpectralClass.M, SpectralClass.WhiteDwarf, SpectralClass.Unknown
+    };
+
+    /// <summary>Returns the colour used to draw stars of the given class.</summary>
+    public static Color ColourOf(SpectralClass spectralClass) => Colours[spectralClass];
+
+    /// <summary>Returns a short name for the colour key, e.g. "M" or "White dwarf".</summary>
+    public static string NameOf(SpectralClass spectralClass) => spectralClass switch
+    {
+        SpectralClass.WhiteDwarf => "White dwarf",
+        SpectralClass.Unknown => "Unknown",
+        _ => spectralClass.ToString()
+    };
+
+    /// <summary>
+    /// Works out the spectral class from HYG "spect" text. Handles the different styles found in the data:
+    /// "G2V", "M5Ve" (normal); "dM4", "sdM4", "sdG0" (older dwarf/subdwarf prefixes in lower case);
+    /// "m", "k", "k-m" (lower-case estimates – the first letter is used); "DA7", "DC9" (white dwarfs);
+    /// "Se" (S-type, a cool star treated as M); and "" or unclear codes such as "g" or "pec" (unknown).
+    /// </summary>
+    public static SpectralClass Parse(string spectralType)
+    {
+        string text = spectralType.Trim();
+        if (text.Length == 0)
+        {
+            return SpectralClass.Unknown;
+        }
+
+        if (text[0] == 'D')
+        {
+            return SpectralClass.WhiteDwarf;
+        }
+
+        // Lower-case only (e.g. "m", "k-m"): an estimate. Only "k" and "m" are used this way in the data;
+        // other lower-case codes such as "g" (giant, no class given) or "pec" (peculiar) are unclear.
+        if (!text.Any(char.IsUpper))
+        {
+            return text[0] switch
+            {
+                'k' => SpectralClass.K,
+                'm' => SpectralClass.M,
+                _ => SpectralClass.Unknown
+            };
+        }
+
+        // Skip lower-case prefixes such as "d" (dwarf) or "sd" (subdwarf) and use the first capital letter.
+        char letter = text.First(char.IsUpper);
+        return letter switch
+        {
+            'O' => SpectralClass.O,
+            'B' => SpectralClass.B,
+            'A' => SpectralClass.A,
+            'F' => SpectralClass.F,
+            'G' => SpectralClass.G,
+            'K' => SpectralClass.K,
+            'M' or 'S' => SpectralClass.M,
+            _ => SpectralClass.Unknown
+        };
+    }
+}
+```
+
+`StarRenderer.cs` (changed – `_colours` and `_classCounts` worked out in the constructor; `DrawStars` uses the colours; new `DrawLegend`):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// Draws the stars of a <see cref="StarCollection"/> in 3D with Raylib.
+/// One world unit is one parsec, and the Sun is at (0, 0, 0).
+/// </summary>
+public class StarRenderer
+{
+    /// <summary>Radius of the small sphere drawn for each star, in parsecs.</summary>
+    public const float StarRadius = 0.08f;
+
+    /// <summary>
+    /// Stars without a proper name are only labelled when they are closer to the camera than this (in parsecs),
+    /// so that the screen is not covered by 1,900 catalogue names at once.
+    /// </summary>
+    public const float CatalogueLabelDistance = 8f;
+
+    /// <summary>Minimum gap in pixels kept between labels, so that names do not run into each other.</summary>
+    private const int LabelGap = 4;
+
+    private static readonly Color ProperNameColour = new(255, 230, 150, 255);
+    private static readonly Color CatalogueNameColour = new(150, 160, 180, 255);
+
+    private readonly IReadOnlyList<Star> _stars;
+    private readonly Vector3[] _positions;
+    private readonly Color[] _colours;
+    private readonly Dictionary<SpectralClass, int> _classCounts = new();
+    private readonly List<Rectangle> _labelAreas = new(); // screen areas already used by labels this frame
+
+    /// <summary>Creates a renderer and works out each star's 3D position and colour once, so they are not recalculated every frame.</summary>
+    /// <param name="stars">The stars to draw.</param>
+    public StarRenderer(IReadOnlyList<Star> stars)
+    {
+        _stars = stars;
+        _positions = new Vector3[stars.Count];
+        _colours = new Color[stars.Count];
+        for (int i = 0; i < stars.Count; i++)
+        {
+            _positions[i] = ToWorldPosition(stars[i]);
+
+            // Spectral class and colour are also worked out once, not every frame.
+            SpectralClass spectralClass = SpectralClasses.Parse(stars[i].SpectralType);
+            _colours[i] = SpectralClasses.ColourOf(spectralClass);
+            _classCounts[spectralClass] = _classCounts.GetValueOrDefault(spectralClass) + 1;
+        }
+    }
+
+    /// <summary>
+    /// Converts a star's HYG position to Raylib's 3D world.
+    /// HYG uses +Z towards the north celestial pole, but in Raylib +Y is "up",
+    /// so (x, y, z) becomes (x, z, -y). This is a rotation, not a mirror,
+    /// so the sky is not flipped left-to-right.
+    /// </summary>
+    public static Vector3 ToWorldPosition(Star star)
+    {
+        return new Vector3((float)star.X, (float)star.Z, (float)-star.Y);
+    }
+
+    /// <summary>
+    /// Draws every star as a small sphere in the colour of its spectral class. Must be called between
+    /// <c>Raylib.BeginMode3D</c> and <c>Raylib.EndMode3D</c>.
+    /// </summary>
+    public void DrawStars()
+    {
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            // Few rings and slices: each star is tiny on screen, and 2,000 detailed spheres would be slow.
+            Raylib.DrawSphereEx(_positions[i], StarRadius, 6, 8, _colours[i]);
+        }
+    }
+
+    /// <summary>
+    /// Writes star names next to the stars. Must be called after <c>Raylib.EndMode3D</c>,
+    /// because the names are 2D text drawn on top of the 3D scene.
+    /// Stars with a proper name are labelled; other stars get their catalogue name
+    /// only when they are within <see cref="CatalogueLabelDistance"/> of the camera.
+    /// A label is skipped if it would overlap a label already drawn. The stars are in
+    /// nearest-first order, so the nearer star keeps its label.
+    /// </summary>
+    /// <param name="camera">The camera used to draw the 3D scene.</param>
+    public void DrawLabels(Camera3D camera)
+    {
+        Vector3 viewDirection = Vector3.Normalize(camera.Target - camera.Position);
+        int screenWidth = Raylib.GetScreenWidth();
+        int screenHeight = Raylib.GetScreenHeight();
+        _labelAreas.Clear();
+
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            Star star = _stars[i];
+            Vector3 toStar = _positions[i] - camera.Position;
+
+            // Skip stars behind the camera: GetWorldToScreen would still give them a (wrong) screen position.
+            if (Vector3.Dot(toStar, viewDirection) <= 0)
+            {
+                continue;
+            }
+
+            if (!star.HasProperName && toStar.Length() > CatalogueLabelDistance)
+            {
+                continue;
+            }
+
+            Vector2 screen = Raylib.GetWorldToScreen(_positions[i], camera);
+            if (screen.X < 0 || screen.X > screenWidth || screen.Y < 0 || screen.Y > screenHeight)
+            {
+                continue;
+            }
+
+            int fontSize = star.HasProperName ? 14 : 10;
+            int x = (int)screen.X + 6;
+            int y = (int)screen.Y - fontSize / 2;
+            // The area is made a little bigger than the text, so that labels keep a gap between them.
+            var area = new Rectangle(x - LabelGap, y - LabelGap / 2, Raylib.MeasureText(star.DisplayName, fontSize) + 2 * LabelGap, fontSize + LabelGap);
+
+            if (OverlapsExistingLabel(area))
+            {
+                continue;
+            }
+
+            _labelAreas.Add(area);
+            Raylib.DrawText(star.DisplayName, x, y, fontSize, star.HasProperName ? ProperNameColour : CatalogueNameColour);
+        }
+    }
+
+    /// <summary>
+    /// Draws a colour key in the top-right corner: one coloured dot per spectral class,
+    /// with how many of the loaded stars are in that class.
+    /// </summary>
+    public void DrawLegend()
+    {
+        const int rowHeight = 20;
+        int width = 190;
+        int x = Raylib.GetScreenWidth() - width - 10;
+        int y = 10;
+        int height = 30 + SpectralClasses.LegendOrder.Length * rowHeight;
+
+        Raylib.DrawRectangle(x, y, width, height, new Color(0, 0, 0, 225));
+        Raylib.DrawText("Spectral class", x + 10, y + 8, 16, Color.RayWhite);
+
+        for (int i = 0; i < SpectralClasses.LegendOrder.Length; i++)
+        {
+            SpectralClass spectralClass = SpectralClasses.LegendOrder[i];
+            int rowY = y + 30 + i * rowHeight;
+            Raylib.DrawCircle(x + 18, rowY + 7, 6, SpectralClasses.ColourOf(spectralClass));
+            string text = $"{SpectralClasses.NameOf(spectralClass)}: {_classCounts.GetValueOrDefault(spectralClass)}";
+            Raylib.DrawText(text, x + 32, rowY, 16, Color.LightGray);
+        }
+    }
+
+    /// <summary>Returns true if the given screen area overlaps a label already drawn this frame.</summary>
+    private bool OverlapsExistingLabel(Rectangle area)
+    {
+        foreach (Rectangle used in _labelAreas)
+        {
+            if (Raylib.CheckCollisionRecs(area, used))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+```
+
+`Program.cs` (changed – one new line: `renderer.DrawLegend();`):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+using StarChart3D;
+
+// Load the 2,000 nearest stars.
+string dataFile = Path.Combine(AppContext.BaseDirectory, "Data", "stars_local_2000.csv");
+var stars = new StarCollection(dataFile);
+
+// Open a resizable window with anti-aliasing (smoother edges).
+Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint | ConfigFlags.ResizableWindow);
+Raylib.InitWindow(1280, 800, "StarChart3D");
+Raylib.SetTargetFPS(60);
+
+var renderer = new StarRenderer(stars);
+
+// The camera starts outside the star field looking at the Sun, and can then be moved with mouse and keyboard.
+var cameraController = new CameraController(startPosition: new Vector3(30f, 20f, 30f), startTarget: Vector3.Zero);
+
+var spaceColour = new Color(5, 5, 15, 255);
+string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
+const string Help = "Mouse: wheel = zoom, left-drag = rotate, right-drag = pan\n" +
+                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, Esc quit";
+
+while (!Raylib.WindowShouldClose())
+{
+    cameraController.Update();
+    Camera3D camera = cameraController.Camera;
+
+    Raylib.BeginDrawing();
+    Raylib.ClearBackground(spaceColour);
+
+    Raylib.BeginMode3D(camera);
+    Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
+    renderer.DrawStars();
+    Raylib.EndMode3D();
+
+    renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
+
+    // Dark panels behind the text, so star labels underneath do not make it unreadable.
+    var panelColour = new Color(0, 0, 0, 225);
+    Raylib.DrawRectangle(0, 0, 470, 84, panelColour);
+    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, 620, 50, panelColour);
+    Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
+    Raylib.DrawFPS(10, 36);
+    Raylib.DrawText($"Camera is {camera.Position.Length() * Star.LightYearsPerParsec:F1} light years from the Sun", 10, 62, 16, Color.LightGray);
+    Raylib.DrawText(Help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
+    renderer.DrawLegend();
+    Raylib.EndDrawing();
+}
+
+Raylib.CloseWindow();
+```
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- `SpectralClass` is an `enum` (a fixed list of named values): O, B, A, F, G, K, M, WhiteDwarf and Unknown.
+- `SpectralClasses.Parse` turns HYG's spectral type text into one of those values: empty → Unknown; starting with "D" → WhiteDwarf; text with no capital letter (e.g. "m", "k-m") → the first letter if it is k or m, otherwise Unknown; otherwise the first capital letter is used, which skips prefixes like "d" (dwarf) and "sd" (subdwarf). "S" (S-type stars) is treated as M.
+- `ColourOf` looks the colour up in a dictionary; `NameOf` gives the text for the colour key.
+- `StarRenderer`'s constructor parses each star once, stores its colour in `_colours` and counts how many stars are in each class in `_classCounts`. `DrawStars` passes `_colours[i]` to `DrawSphereEx` instead of white.
+- `DrawLegend` draws a dark box in the top-right corner with a coloured dot and the count for each class.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the AI looked at the real spectral codes in my data before writing the parser, so it handles the older Gliese styles (dM, sdM, lowercase estimates) and white dwarfs, and it checked that the class counts add up to exactly 2,000. It also found a real error in the HYG data: Capella is listed as M1 (drawn red) but is really two G-type yellow giants (G8III and G0III, Wikipedia), which its colour index of 0.795 also suggests. Weaknesses: (1) the colours are the AI's own choice, not a published table (it could not open one), and they are deliberately exaggerated for visibility, so they are not true star colours; (2) a star's colour comes only from the first letter, so data errors like Capella are shown wrongly – the colour index (ci column) could be used to cross-check or as a fallback for the 154 unknown stars; (3) the parser treats "g" (Mount Wilson giant prefix with no class) and "pec" as Unknown, which is a judgement call; (4) S-type stars are drawn as M; (5) the legend box has a fixed size and position.
+
+---
+
+### Entry 99 – 2026-11-06 03:16 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: in 01Assignment1_AIprogramming_3DstarChart, `ls` showed Program.cs, SpectralClass.cs and StarRenderer.cs next to the log files; `dotnet build` gave MSB1003 (no project file in this folder) and `dotnet run` could not find a project]
+
+**AI response (full):**
+````
+The files went into the **wrong folder**. You were one level up (`01Assignment1_AIprogramming_3DstarChart`), so `Program.cs`, `SpectralClass.cs` and `StarRenderer.cs` landed next to the log files instead of inside `StarChart3D`. That's also why `dotnet build` couldn't find a project there.
+
+These three are the **new** versions, so move them into `StarChart3D`, replacing the old ones. Run these one at a time:
+```
+mv Program.cs SpectralClass.cs StarRenderer.cs StarChart3D/
+```
+```
+ls
+```
+This should now show only `AI_domainExpert_log.md`, `AI_programming_log.md` and `StarChart3D`.
+```
+cd StarChart3D
+```
+```
+ls
+```
+This should include `SpectralClass.cs`.
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Take a screenshot, **press Esc in the star window**, and send me the screenshot.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+My mistake: I ran the `mv` from the parent folder. The AI read the error (MSB1003) and the `ls` output correctly.
+
+---
+
+### Entry 100 – 2026-11-06 03:58 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+okay thats it for now lets continue tomorrow and remember each and everything and lets continue tomorrow
+```
+
+**AI response:** The AI wrote Entries 97–100 of this log and updated the handover note in my Claude "ASE" project, so the next session continues from exactly here. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+Stopped for the night before testing and committing the spectral colours.
+
+---
+
+### Entry 101 – 2026-11-08 03:58 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+lets start now
+```
+
+**AI actions:** The AI checked that its saved handover files were still available and checked GitHub (read-only): no new commits since 2f07949 on Friday; log on GitHub has 98 headings.
+
+**AI response (full):**
+````
+GitHub is exactly as we left it on Friday: the last commit is `2f07949` (camera controls), and my saved files are all still here.
+
+**Time check:** it's Sunday 4am, and the deadline is **Monday 12pm**, about 32 hours away. Still to do, in priority order:
+1. Spectral colours: test and commit (the code is ready).
+2. The filter for stars without a proper name, then the **Feature 2** pull request.
+3. **Feature 3** (20 marks): the flying animation, dust effect and nearby-stars list.
+4. The **README** (part of the 20 Setting Up marks).
+5. The **YouTube demo**, **Google Form** and **MyBeckett hand-in**. Leave several hours for these, and don't leave them until Monday morning.
+
+Feature 4 (30 marks) only if there's time left over.
+
+**Step 1: check where your files are.** In the VS Code terminal, run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+git status
+```
+```
+ls StarChart3D
+```
+
+Send me a screenshot. I need to know whether `Program.cs`, `SpectralClass.cs` and `StarRenderer.cs` are **inside** `StarChart3D` or still loose next to the log files, which is where they were on Friday night.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Useful: the AI checked the real state on GitHub first, and gave a priority order with the hand-in steps in it, because the deadline is close.
+
+---
+
+### Entry 102 – 2026-11-08 04:00 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+herre
+```
+[Screenshot: `git status` "no changes added to commit"; `ls StarChart3D` listed CameraController.cs, CatalogueNames.cs, Data, Program.cs, SpectralClass.cs, Star.cs, StarChart3D.csproj, StarCollection.cs, StarRenderer.cs, bin, obj]
+
+**AI response (full):**
+````
+All three files are **inside `StarChart3D`** now, including `SpectralClass.cs`, so Friday's `mv` worked. Let's test the colours. Run these one at a time:
+
+```
+cd StarChart3D
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+You should see coloured stars (yellow Sol, red Proxima, blue-white Sirius) and a **"Spectral class"** key in the top-right corner. Take a screenshot, **press Esc in the star window**, and send me the screenshot.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues: the files from Entry 99 had been moved into the right folder.
+
+---
+
+### Entry 103 – 2026-11-08 04:01 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+yes seen it
+```
+
+**AI response:** The AI noted that the spectral colours work on my Mac, wrote Entries 101–103 and combined them with Entries 97–100 into one file, and gave me the commit steps. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+The colours work on my Mac: coloured stars and the "Spectral class" key in the top-right corner. I did not send a screenshot this time, so there is no screenshot evidence in this entry.
+
+---
+
+### Entry 104 – 2026-11-08 04:03 – Branch: `feature2-visualising-star-chart` – Feature 2: filter stars without proper name
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `git push`: 2f07949..58ab3eb feature2-visualising-star-chart]
+
+**AI actions:** The AI checked commit 58ab3eb on GitHub (read-only): 4 files, code identical to what it had tested, log 105 headings, no duplicates. It checked its test copy matched the commit, added the filter to StarRenderer.cs and Program.cs, built it and took screenshots with the filter off and on. The first "filter on" screenshot looked unchanged because its simulated key press (xdotool "key f") was too quick; with a longer press (keydown, 0.3 s, keyup) the filter worked.
+
+**AI response (full):**
+````
+Spectral colours are committed and verified: commit `58ab3eb` has the 4 expected files, all matching what I tested, and the log has 105 headings with no duplicates.
+
+Now the last Feature 2 part: **filtering out stars without a proper name.** I'll make it a key you press (**F**) to switch between all 2,000 stars and only the 89 named ones.
+
+The second screenshot should show only the named stars, but it looks the same as the first. Either my test's key press was too short, or the code is wrong. I'll check with a longer key press:
+
+That works. The earlier test failed only because my simulated key press was too quick for the program to notice; the code was fine. With **F** pressed, only the **89 named stars** remain, the info line turns yellow with "Filter ON: showing 89 named stars", and my test reaches 60 FPS because far fewer spheres are drawn.
+
+The filter is ready, the last part of Feature 2.
+
+**What it does:** press **F** to switch between all 2,000 stars and only the **89 named stars**. Unnamed stars and their grey labels disappear, and a yellow line at the top says "Filter ON: showing 89 named stars". Press F again to bring everything back. `preview_filter_on.png` shows my test run with the filter on.
+
+**What changed:**
+- **`StarRenderer.cs`**: a new on/off setting for the filter, used when drawing both the stars and the labels.
+- **`Program.cs`**: the F key, the new info line, the help text, and slightly wider dark panels so the longer text fits.
+
+**One weakness for your critique:** the colour key still shows counts for all 2,000 stars, even when the filter is on.
+
+**Steps.** Download the two `.cs` files, then make sure you're in the right folder. Run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+mv ~/Downloads/StarRenderer.cs ~/Downloads/Program.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Press **F** in the star window to test the filter. Take a screenshot with the filter on, **press Esc to close the window**, and send me the screenshot.
+````
+
+**Code sent as files (full):**
+
+`StarRenderer.cs` (changed – new `ShowOnlyNamedStars`, `VisibleStarCount` and `IsVisible`; `DrawStars` and `DrawLabels` skip hidden stars):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// Draws the stars of a <see cref="StarCollection"/> in 3D with Raylib.
+/// One world unit is one parsec, and the Sun is at (0, 0, 0).
+/// </summary>
+public class StarRenderer
+{
+    /// <summary>Radius of the small sphere drawn for each star, in parsecs.</summary>
+    public const float StarRadius = 0.08f;
+
+    /// <summary>
+    /// Stars without a proper name are only labelled when they are closer to the camera than this (in parsecs),
+    /// so that the screen is not covered by 1,900 catalogue names at once.
+    /// </summary>
+    public const float CatalogueLabelDistance = 8f;
+
+    /// <summary>Minimum gap in pixels kept between labels, so that names do not run into each other.</summary>
+    private const int LabelGap = 4;
+
+    private static readonly Color ProperNameColour = new(255, 230, 150, 255);
+    private static readonly Color CatalogueNameColour = new(150, 160, 180, 255);
+
+    private readonly IReadOnlyList<Star> _stars;
+    private readonly Vector3[] _positions;
+    private readonly Color[] _colours;
+    private readonly Dictionary<SpectralClass, int> _classCounts = new();
+    private readonly List<Rectangle> _labelAreas = new(); // screen areas already used by labels this frame
+
+    /// <summary>
+    /// When true, only stars with a proper name are drawn and labelled; stars that only have a
+    /// catalogue name are hidden. Toggled by the user (F key in Program.cs).
+    /// </summary>
+    public bool ShowOnlyNamedStars { get; set; }
+
+    /// <summary>Number of stars currently shown, taking <see cref="ShowOnlyNamedStars"/> into account.</summary>
+    public int VisibleStarCount => ShowOnlyNamedStars ? _stars.Count(star => star.HasProperName) : _stars.Count;
+
+    /// <summary>True if the star at this position in the list should be drawn with the current filter.</summary>
+    private bool IsVisible(int index) => !ShowOnlyNamedStars || _stars[index].HasProperName;
+
+    /// <summary>Creates a renderer and works out each star's 3D position and colour once, so they are not recalculated every frame.</summary>
+    /// <param name="stars">The stars to draw.</param>
+    public StarRenderer(IReadOnlyList<Star> stars)
+    {
+        _stars = stars;
+        _positions = new Vector3[stars.Count];
+        _colours = new Color[stars.Count];
+        for (int i = 0; i < stars.Count; i++)
+        {
+            _positions[i] = ToWorldPosition(stars[i]);
+
+            // Spectral class and colour are also worked out once, not every frame.
+            SpectralClass spectralClass = SpectralClasses.Parse(stars[i].SpectralType);
+            _colours[i] = SpectralClasses.ColourOf(spectralClass);
+            _classCounts[spectralClass] = _classCounts.GetValueOrDefault(spectralClass) + 1;
+        }
+    }
+
+    /// <summary>
+    /// Converts a star's HYG position to Raylib's 3D world.
+    /// HYG uses +Z towards the north celestial pole, but in Raylib +Y is "up",
+    /// so (x, y, z) becomes (x, z, -y). This is a rotation, not a mirror,
+    /// so the sky is not flipped left-to-right.
+    /// </summary>
+    public static Vector3 ToWorldPosition(Star star)
+    {
+        return new Vector3((float)star.X, (float)star.Z, (float)-star.Y);
+    }
+
+    /// <summary>
+    /// Draws every visible star as a small sphere in the colour of its spectral class
+    /// (all stars, or only named stars when <see cref="ShowOnlyNamedStars"/> is on). Must be called between
+    /// <c>Raylib.BeginMode3D</c> and <c>Raylib.EndMode3D</c>.
+    /// </summary>
+    public void DrawStars()
+    {
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            if (!IsVisible(i))
+            {
+                continue;
+            }
+
+            // Few rings and slices: each star is tiny on screen, and 2,000 detailed spheres would be slow.
+            Raylib.DrawSphereEx(_positions[i], StarRadius, 6, 8, _colours[i]);
+        }
+    }
+
+    /// <summary>
+    /// Writes star names next to the stars. Must be called after <c>Raylib.EndMode3D</c>,
+    /// because the names are 2D text drawn on top of the 3D scene.
+    /// Stars with a proper name are labelled; other stars get their catalogue name
+    /// only when they are within <see cref="CatalogueLabelDistance"/> of the camera.
+    /// A label is skipped if it would overlap a label already drawn. The stars are in
+    /// nearest-first order, so the nearer star keeps its label.
+    /// </summary>
+    /// <param name="camera">The camera used to draw the 3D scene.</param>
+    public void DrawLabels(Camera3D camera)
+    {
+        Vector3 viewDirection = Vector3.Normalize(camera.Target - camera.Position);
+        int screenWidth = Raylib.GetScreenWidth();
+        int screenHeight = Raylib.GetScreenHeight();
+        _labelAreas.Clear();
+
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            if (!IsVisible(i))
+            {
+                continue;
+            }
+
+            Star star = _stars[i];
+            Vector3 toStar = _positions[i] - camera.Position;
+
+            // Skip stars behind the camera: GetWorldToScreen would still give them a (wrong) screen position.
+            if (Vector3.Dot(toStar, viewDirection) <= 0)
+            {
+                continue;
+            }
+
+            if (!star.HasProperName && toStar.Length() > CatalogueLabelDistance)
+            {
+                continue;
+            }
+
+            Vector2 screen = Raylib.GetWorldToScreen(_positions[i], camera);
+            if (screen.X < 0 || screen.X > screenWidth || screen.Y < 0 || screen.Y > screenHeight)
+            {
+                continue;
+            }
+
+            int fontSize = star.HasProperName ? 14 : 10;
+            int x = (int)screen.X + 6;
+            int y = (int)screen.Y - fontSize / 2;
+            // The area is made a little bigger than the text, so that labels keep a gap between them.
+            var area = new Rectangle(x - LabelGap, y - LabelGap / 2, Raylib.MeasureText(star.DisplayName, fontSize) + 2 * LabelGap, fontSize + LabelGap);
+
+            if (OverlapsExistingLabel(area))
+            {
+                continue;
+            }
+
+            _labelAreas.Add(area);
+            Raylib.DrawText(star.DisplayName, x, y, fontSize, star.HasProperName ? ProperNameColour : CatalogueNameColour);
+        }
+    }
+
+    /// <summary>
+    /// Draws a colour key in the top-right corner: one coloured dot per spectral class,
+    /// with how many of the loaded stars are in that class.
+    /// </summary>
+    public void DrawLegend()
+    {
+        const int rowHeight = 20;
+        int width = 190;
+        int x = Raylib.GetScreenWidth() - width - 10;
+        int y = 10;
+        int height = 30 + SpectralClasses.LegendOrder.Length * rowHeight;
+
+        Raylib.DrawRectangle(x, y, width, height, new Color(0, 0, 0, 225));
+        Raylib.DrawText("Spectral class", x + 10, y + 8, 16, Color.RayWhite);
+
+        for (int i = 0; i < SpectralClasses.LegendOrder.Length; i++)
+        {
+            SpectralClass spectralClass = SpectralClasses.LegendOrder[i];
+            int rowY = y + 30 + i * rowHeight;
+            Raylib.DrawCircle(x + 18, rowY + 7, 6, SpectralClasses.ColourOf(spectralClass));
+            string text = $"{SpectralClasses.NameOf(spectralClass)}: {_classCounts.GetValueOrDefault(spectralClass)}";
+            Raylib.DrawText(text, x + 32, rowY, 16, Color.LightGray);
+        }
+    }
+
+    /// <summary>Returns true if the given screen area overlaps a label already drawn this frame.</summary>
+    private bool OverlapsExistingLabel(Rectangle area)
+    {
+        foreach (Rectangle used in _labelAreas)
+        {
+            if (Raylib.CheckCollisionRecs(area, used))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+```
+
+`Program.cs` (changed – F key toggles the filter; new info line; help text mentions F; wider HUD panels):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+using StarChart3D;
+
+// Load the 2,000 nearest stars.
+string dataFile = Path.Combine(AppContext.BaseDirectory, "Data", "stars_local_2000.csv");
+var stars = new StarCollection(dataFile);
+
+// Open a resizable window with anti-aliasing (smoother edges).
+Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint | ConfigFlags.ResizableWindow);
+Raylib.InitWindow(1280, 800, "StarChart3D");
+Raylib.SetTargetFPS(60);
+
+var renderer = new StarRenderer(stars);
+
+// The camera starts outside the star field looking at the Sun, and can then be moved with mouse and keyboard.
+var cameraController = new CameraController(startPosition: new Vector3(30f, 20f, 30f), startTarget: Vector3.Zero);
+
+var spaceColour = new Color(5, 5, 15, 255);
+string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
+const string Help = "Mouse: wheel = zoom, left-drag = rotate, right-drag = pan\n" +
+                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, F filter named stars, Esc quit";
+
+while (!Raylib.WindowShouldClose())
+{
+    cameraController.Update();
+
+    // F switches between all stars and only the stars that have a proper name.
+    if (Raylib.IsKeyPressed(KeyboardKey.F))
+    {
+        renderer.ShowOnlyNamedStars = !renderer.ShowOnlyNamedStars;
+    }
+    Camera3D camera = cameraController.Camera;
+
+    Raylib.BeginDrawing();
+    Raylib.ClearBackground(spaceColour);
+
+    Raylib.BeginMode3D(camera);
+    Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
+    renderer.DrawStars();
+    Raylib.EndMode3D();
+
+    renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
+
+    // Dark panels behind the text, so star labels underneath do not make it unreadable.
+    var panelColour = new Color(0, 0, 0, 225);
+    Raylib.DrawRectangle(0, 0, 520, 104, panelColour);
+    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, 760, 50, panelColour);
+    Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
+    Raylib.DrawFPS(10, 36);
+    Raylib.DrawText($"Camera is {camera.Position.Length() * Star.LightYearsPerParsec:F1} light years from the Sun", 10, 62, 16, Color.LightGray);
+    string filterText = renderer.ShowOnlyNamedStars
+        ? $"Filter ON: showing {renderer.VisibleStarCount} named stars (F to show all)"
+        : $"Showing all {renderer.VisibleStarCount} stars (F to show only named stars)";
+    Raylib.DrawText(filterText, 10, 82, 16, renderer.ShowOnlyNamedStars ? Color.Yellow : Color.LightGray);
+    Raylib.DrawText(Help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
+    renderer.DrawLegend();
+    Raylib.EndDrawing();
+}
+
+Raylib.CloseWindow();
+```
+
+**What I did with it:** Moved the two files into StarChart3D; `dotnet build` and `dotnet run` worked. Pressing F shows only the named stars (Entry 105).
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- `ShowOnlyNamedStars` is a property that `Program.cs` switches on and off when F is pressed (`IsKeyPressed` is true only on the frame the key goes down, so one press toggles once).
+- `IsVisible(i)` returns true if the filter is off, or if star `i` has a proper name. `DrawStars` and `DrawLabels` both `continue` (skip) stars that are not visible, so hidden stars lose both their sphere and their label.
+- `VisibleStarCount` counts the stars that are shown (89 named or all 2,000) for the info line.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the filter is simple, hides stars and their labels together, and the on-screen line makes it obvious whether it is on. The AI noticed its first test did not show the change and tested again instead of assuming the code was right or wrong; the cause was its test tool, not the code. Weaknesses: (1) the colour key still counts all 2,000 stars when the filter is on; (2) `VisibleStarCount` counts the named stars every frame (fine for 2,000 stars, but it could be worked out once); (3) "named" means only stars with a proper name in HYG – a star with a well-known catalogue name such as Tau Ceti counts as unnamed and is hidden; (4) the HUD panel sizes are still fixed pixel values.
+
+---
+
+### Entry 105 – 2026-11-08 04:08 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+and when i press f its only shows star with name
+```
+[Screenshot: the StarChart3D window at 57 FPS with coloured stars, "Showing all 2000 stars (F to show only named stars)", the spectral class key and the new help text]
+
+**AI response:** The AI confirmed the filter works and that all five Feature 2 parts are done, wrote Entries 104–105, and gave me the commit steps and then the Feature 2 pull request steps. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+All Feature 2 requirements now work on my Mac: stars as small shapes, names, spectral class colours, filter for stars without a proper name, and zoom/pan/rotate with mouse and keyboard.
+
+---
