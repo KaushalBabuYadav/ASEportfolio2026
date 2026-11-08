@@ -44,6 +44,7 @@ while (!Raylib.WindowShouldClose())
     Raylib.DrawFPS(10, 36);
     Raylib.DrawText($"Camera is {camera.Position.Length() * Star.LightYearsPerParsec:F1} light years from the Sun", 10, 62, 16, Color.LightGray);
     Raylib.DrawText(Help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
+    renderer.DrawLegend();
     Raylib.EndDrawing();
 }
 

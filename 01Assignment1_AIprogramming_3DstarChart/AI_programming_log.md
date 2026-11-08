@@ -5001,3 +5001,571 @@ and here
 Honest note for the marker: the log entries for the fix commit (82–88) are in this commit instead of 02476d6, because I skipped the `cat` step. Their timestamps still show when each conversation happened.
 
 ---
+
+### Entry 97 – 2026-11-06 03:10 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `git push`: 02476d6..2f07949 feature2-visualising-star-chart]
+
+**AI actions:** The AI checked commit 2f07949 on GitHub (read-only).
+
+**AI response (full):**
+````
+The camera controls are pushed, and I checked them on GitHub. Commit `2f07949` by KAUSHAL BABU YADAV contains the 3 expected files, and both code files match what I tested. The log now has 98 headings, including the missing Entries 82–88, with no duplicates.
+
+**Feature 2 progress (3 of 5 parts done, plus the fix):**
+- ✅ Stars as small shapes
+- ✅ Star names
+- ✅ Zoom, pan and rotate with mouse and keyboard
+- ⬜ Spectral colours
+- ⬜ Filter out stars without a proper name
+- ⬜ Pull request "Feature 2"
+
+**Time check:** it's 3:10am Friday, and the deadline is **Monday 12pm**. After Feature 2, there's still **Feature 3** (20 marks), the **README** (part of the 20 Setting Up marks), the **YouTube demo** and the **Google Form**. Feature 2's last two parts are fairly quick, so we could finish Feature 2 tonight, or stop now with everything saved.
+
+The handover note is updated, and the next log entry is number 97.
+
+Shall I carry on with **spectral colours**, or stop for tonight?
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI verified the commit on GitHub (files, code, heading count, no duplicates).
+
+---
+
+### Entry 98 – 2026-11-06 03:11 – Branch: `feature2-visualising-star-chart` – Feature 2: render stars in spectral class colour
+
+**Prompt:**
+```
+lets do it
+```
+
+**AI actions:** The AI counted the spectral type codes in my 2,000-star file (M 620, K 360, lowercase m 346, G 151, empty 150, D 114, F 99, lowercase d 79, lowercase k 54, A 16, plus a few s/g/p/B/S codes) and looked at the unusual ones (sdM4, sdG0, g, pec, Se, Capella "M1: comp" with colour index 0.795). It web-searched Capella and read Wikipedia (Capella Aa G8III, Ab G0III, 42.9 ly). It tried to open published star colour tables (vendian.org "What color are the stars", Wikipedia "Stellar classification"), but both were blocked for it, so the colours are its own choice. It checked Raylib-cs DrawCircle in the source, wrote SpectralClass.cs and changed StarRenderer.cs and Program.cs, built and ran them on its virtual screen (default view and after 9 wheel notches), and checked the class counts add up to 2,000.
+
+**AI response (full):**
+````
+For spectral colours I want real reference values rather than guesses, so I'll check what spectral types your data actually contains and look up a published star colour table.
+
+The data has more variety than I expected: older Gliese codes like `dM4` and `sdM4`, lowercase estimates like `m` and `k-m`, white dwarfs (`DA`, `DC`…), and 150 stars with no type at all. I also found a **data error**: HYG lists **Capella** as `M1` (a red star), but [Capella is actually a pair of yellow giants, G8III and G0III](https://en.wikipedia.org/wiki/Capella). That's good critique material. Writing and testing the colour code now.
+
+I've added colours for each spectral class and tested them on your star data. `preview_colours.png` shows the zoomed-in view: Sol is yellow, Sirius and Vega are blue-white, Proxima Centauri and Barnard's Star are red, and white dwarfs are pale blue. A colour key in the top-right corner shows how many stars fall into each class:
+
+| O | B | A | F | G | K | M | White dwarf | Unknown |
+|---|---|---|---|---|---|---|---|---|
+| 0 | 1 | 16 | 99 | 155 | 417 | 1,044 | 114 | 154 |
+
+These add up to exactly 2,000. Most nearby stars are red M dwarfs.
+
+**What changed:**
+- **`SpectralClass.cs`** (new) reads each star's spectral type and picks its colour. Your data writes spectral types in several older styles (for example "dM4" and "sdM4"), and the code handles all of them. The 150 stars with no type, plus a few unclear codes such as "g" and "pec", count as **Unknown** and show grey.
+- **`StarRenderer.cs`** works out each star's colour once at the start, not every frame, then draws each star in its colour and draws the colour key.
+- **`Program.cs`** has one new line that draws the colour key.
+
+**Two honest points for your critique:**
+- **I chose these colours myself, and they aren't from a published table.** They follow the real order (hot stars blue, cool stars red) but are brighter than true star colours, so the classes are easy to tell apart. I couldn't open a reference colour table from here. If you want, ask your separate domain-expert chat: *"What colours are stars of spectral classes O, B, A, F, G, K and M?"* and log the answer.
+- **The star data has a mistake.** It lists **Capella** as type M1, so the program draws it red. In reality [Capella is two yellow giant stars, types G8III and G0III](https://en.wikipedia.org/wiki/Capella). The code is right; the data is wrong.
+
+**Steps.** Download the three `.cs` files, then run these one at a time from the `StarChart3D` folder:
+```
+mv ~/Downloads/SpectralClass.cs ~/Downloads/StarRenderer.cs ~/Downloads/Program.cs .
+```
+```
+ls
+```
+`SpectralClass.cs` should appear in the list. If it doesn't, stop and tell me.
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Take a screenshot, **press Esc in the star window**, and send me the screenshot.
+````
+
+**What I did with it:** Moved the files from Downloads, but I was in the wrong folder (Entry 99).
+
+**Code sent as files (full):**
+
+`SpectralClass.cs` (new):
+```csharp
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// The main spectral classes of stars, from hottest (O, blue) to coolest (M, red),
+/// plus white dwarfs and stars whose spectral type is unknown.
+/// </summary>
+public enum SpectralClass
+{
+    O, B, A, F, G, K, M, WhiteDwarf, Unknown
+}
+
+/// <summary>Works out a star's <see cref="SpectralClass"/> from its HYG "spect" text, and the colour used to draw it.</summary>
+public static class SpectralClasses
+{
+    /// <summary>
+    /// Display colours for each class. They follow the real order (hot stars blue-white, cool stars orange-red)
+    /// but are made more saturated than true star colours, so that the classes are easy to tell apart on screen.
+    /// </summary>
+    private static readonly Dictionary<SpectralClass, Color> Colours = new()
+    {
+        [SpectralClass.O] = new Color(110, 140, 255, 255),
+        [SpectralClass.B] = new Color(150, 180, 255, 255),
+        [SpectralClass.A] = new Color(215, 225, 255, 255),
+        [SpectralClass.F] = new Color(255, 255, 230, 255),
+        [SpectralClass.G] = new Color(255, 235, 150, 255),
+        [SpectralClass.K] = new Color(255, 180, 95, 255),
+        [SpectralClass.M] = new Color(255, 110, 80, 255),
+        [SpectralClass.WhiteDwarf] = new Color(200, 230, 255, 255),
+        [SpectralClass.Unknown] = new Color(130, 130, 130, 255)
+    };
+
+    /// <summary>Order in which the classes are shown in the on-screen colour key.</summary>
+    public static readonly SpectralClass[] LegendOrder =
+    {
+        SpectralClass.O, SpectralClass.B, SpectralClass.A, SpectralClass.F, SpectralClass.G,
+        SpectralClass.K, SpectralClass.M, SpectralClass.WhiteDwarf, SpectralClass.Unknown
+    };
+
+    /// <summary>Returns the colour used to draw stars of the given class.</summary>
+    public static Color ColourOf(SpectralClass spectralClass) => Colours[spectralClass];
+
+    /// <summary>Returns a short name for the colour key, e.g. "M" or "White dwarf".</summary>
+    public static string NameOf(SpectralClass spectralClass) => spectralClass switch
+    {
+        SpectralClass.WhiteDwarf => "White dwarf",
+        SpectralClass.Unknown => "Unknown",
+        _ => spectralClass.ToString()
+    };
+
+    /// <summary>
+    /// Works out the spectral class from HYG "spect" text. Handles the different styles found in the data:
+    /// "G2V", "M5Ve" (normal); "dM4", "sdM4", "sdG0" (older dwarf/subdwarf prefixes in lower case);
+    /// "m", "k", "k-m" (lower-case estimates – the first letter is used); "DA7", "DC9" (white dwarfs);
+    /// "Se" (S-type, a cool star treated as M); and "" or unclear codes such as "g" or "pec" (unknown).
+    /// </summary>
+    public static SpectralClass Parse(string spectralType)
+    {
+        string text = spectralType.Trim();
+        if (text.Length == 0)
+        {
+            return SpectralClass.Unknown;
+        }
+
+        if (text[0] == 'D')
+        {
+            return SpectralClass.WhiteDwarf;
+        }
+
+        // Lower-case only (e.g. "m", "k-m"): an estimate. Only "k" and "m" are used this way in the data;
+        // other lower-case codes such as "g" (giant, no class given) or "pec" (peculiar) are unclear.
+        if (!text.Any(char.IsUpper))
+        {
+            return text[0] switch
+            {
+                'k' => SpectralClass.K,
+                'm' => SpectralClass.M,
+                _ => SpectralClass.Unknown
+            };
+        }
+
+        // Skip lower-case prefixes such as "d" (dwarf) or "sd" (subdwarf) and use the first capital letter.
+        char letter = text.First(char.IsUpper);
+        return letter switch
+        {
+            'O' => SpectralClass.O,
+            'B' => SpectralClass.B,
+            'A' => SpectralClass.A,
+            'F' => SpectralClass.F,
+            'G' => SpectralClass.G,
+            'K' => SpectralClass.K,
+            'M' or 'S' => SpectralClass.M,
+            _ => SpectralClass.Unknown
+        };
+    }
+}
+```
+
+`StarRenderer.cs` (changed – `_colours` and `_classCounts` worked out in the constructor; `DrawStars` uses the colours; new `DrawLegend`):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// Draws the stars of a <see cref="StarCollection"/> in 3D with Raylib.
+/// One world unit is one parsec, and the Sun is at (0, 0, 0).
+/// </summary>
+public class StarRenderer
+{
+    /// <summary>Radius of the small sphere drawn for each star, in parsecs.</summary>
+    public const float StarRadius = 0.08f;
+
+    /// <summary>
+    /// Stars without a proper name are only labelled when they are closer to the camera than this (in parsecs),
+    /// so that the screen is not covered by 1,900 catalogue names at once.
+    /// </summary>
+    public const float CatalogueLabelDistance = 8f;
+
+    /// <summary>Minimum gap in pixels kept between labels, so that names do not run into each other.</summary>
+    private const int LabelGap = 4;
+
+    private static readonly Color ProperNameColour = new(255, 230, 150, 255);
+    private static readonly Color CatalogueNameColour = new(150, 160, 180, 255);
+
+    private readonly IReadOnlyList<Star> _stars;
+    private readonly Vector3[] _positions;
+    private readonly Color[] _colours;
+    private readonly Dictionary<SpectralClass, int> _classCounts = new();
+    private readonly List<Rectangle> _labelAreas = new(); // screen areas already used by labels this frame
+
+    /// <summary>Creates a renderer and works out each star's 3D position and colour once, so they are not recalculated every frame.</summary>
+    /// <param name="stars">The stars to draw.</param>
+    public StarRenderer(IReadOnlyList<Star> stars)
+    {
+        _stars = stars;
+        _positions = new Vector3[stars.Count];
+        _colours = new Color[stars.Count];
+        for (int i = 0; i < stars.Count; i++)
+        {
+            _positions[i] = ToWorldPosition(stars[i]);
+
+            // Spectral class and colour are also worked out once, not every frame.
+            SpectralClass spectralClass = SpectralClasses.Parse(stars[i].SpectralType);
+            _colours[i] = SpectralClasses.ColourOf(spectralClass);
+            _classCounts[spectralClass] = _classCounts.GetValueOrDefault(spectralClass) + 1;
+        }
+    }
+
+    /// <summary>
+    /// Converts a star's HYG position to Raylib's 3D world.
+    /// HYG uses +Z towards the north celestial pole, but in Raylib +Y is "up",
+    /// so (x, y, z) becomes (x, z, -y). This is a rotation, not a mirror,
+    /// so the sky is not flipped left-to-right.
+    /// </summary>
+    public static Vector3 ToWorldPosition(Star star)
+    {
+        return new Vector3((float)star.X, (float)star.Z, (float)-star.Y);
+    }
+
+    /// <summary>
+    /// Draws every star as a small sphere in the colour of its spectral class. Must be called between
+    /// <c>Raylib.BeginMode3D</c> and <c>Raylib.EndMode3D</c>.
+    /// </summary>
+    public void DrawStars()
+    {
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            // Few rings and slices: each star is tiny on screen, and 2,000 detailed spheres would be slow.
+            Raylib.DrawSphereEx(_positions[i], StarRadius, 6, 8, _colours[i]);
+        }
+    }
+
+    /// <summary>
+    /// Writes star names next to the stars. Must be called after <c>Raylib.EndMode3D</c>,
+    /// because the names are 2D text drawn on top of the 3D scene.
+    /// Stars with a proper name are labelled; other stars get their catalogue name
+    /// only when they are within <see cref="CatalogueLabelDistance"/> of the camera.
+    /// A label is skipped if it would overlap a label already drawn. The stars are in
+    /// nearest-first order, so the nearer star keeps its label.
+    /// </summary>
+    /// <param name="camera">The camera used to draw the 3D scene.</param>
+    public void DrawLabels(Camera3D camera)
+    {
+        Vector3 viewDirection = Vector3.Normalize(camera.Target - camera.Position);
+        int screenWidth = Raylib.GetScreenWidth();
+        int screenHeight = Raylib.GetScreenHeight();
+        _labelAreas.Clear();
+
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            Star star = _stars[i];
+            Vector3 toStar = _positions[i] - camera.Position;
+
+            // Skip stars behind the camera: GetWorldToScreen would still give them a (wrong) screen position.
+            if (Vector3.Dot(toStar, viewDirection) <= 0)
+            {
+                continue;
+            }
+
+            if (!star.HasProperName && toStar.Length() > CatalogueLabelDistance)
+            {
+                continue;
+            }
+
+            Vector2 screen = Raylib.GetWorldToScreen(_positions[i], camera);
+            if (screen.X < 0 || screen.X > screenWidth || screen.Y < 0 || screen.Y > screenHeight)
+            {
+                continue;
+            }
+
+            int fontSize = star.HasProperName ? 14 : 10;
+            int x = (int)screen.X + 6;
+            int y = (int)screen.Y - fontSize / 2;
+            // The area is made a little bigger than the text, so that labels keep a gap between them.
+            var area = new Rectangle(x - LabelGap, y - LabelGap / 2, Raylib.MeasureText(star.DisplayName, fontSize) + 2 * LabelGap, fontSize + LabelGap);
+
+            if (OverlapsExistingLabel(area))
+            {
+                continue;
+            }
+
+            _labelAreas.Add(area);
+            Raylib.DrawText(star.DisplayName, x, y, fontSize, star.HasProperName ? ProperNameColour : CatalogueNameColour);
+        }
+    }
+
+    /// <summary>
+    /// Draws a colour key in the top-right corner: one coloured dot per spectral class,
+    /// with how many of the loaded stars are in that class.
+    /// </summary>
+    public void DrawLegend()
+    {
+        const int rowHeight = 20;
+        int width = 190;
+        int x = Raylib.GetScreenWidth() - width - 10;
+        int y = 10;
+        int height = 30 + SpectralClasses.LegendOrder.Length * rowHeight;
+
+        Raylib.DrawRectangle(x, y, width, height, new Color(0, 0, 0, 225));
+        Raylib.DrawText("Spectral class", x + 10, y + 8, 16, Color.RayWhite);
+
+        for (int i = 0; i < SpectralClasses.LegendOrder.Length; i++)
+        {
+            SpectralClass spectralClass = SpectralClasses.LegendOrder[i];
+            int rowY = y + 30 + i * rowHeight;
+            Raylib.DrawCircle(x + 18, rowY + 7, 6, SpectralClasses.ColourOf(spectralClass));
+            string text = $"{SpectralClasses.NameOf(spectralClass)}: {_classCounts.GetValueOrDefault(spectralClass)}";
+            Raylib.DrawText(text, x + 32, rowY, 16, Color.LightGray);
+        }
+    }
+
+    /// <summary>Returns true if the given screen area overlaps a label already drawn this frame.</summary>
+    private bool OverlapsExistingLabel(Rectangle area)
+    {
+        foreach (Rectangle used in _labelAreas)
+        {
+            if (Raylib.CheckCollisionRecs(area, used))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+```
+
+`Program.cs` (changed – one new line: `renderer.DrawLegend();`):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+using StarChart3D;
+
+// Load the 2,000 nearest stars.
+string dataFile = Path.Combine(AppContext.BaseDirectory, "Data", "stars_local_2000.csv");
+var stars = new StarCollection(dataFile);
+
+// Open a resizable window with anti-aliasing (smoother edges).
+Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint | ConfigFlags.ResizableWindow);
+Raylib.InitWindow(1280, 800, "StarChart3D");
+Raylib.SetTargetFPS(60);
+
+var renderer = new StarRenderer(stars);
+
+// The camera starts outside the star field looking at the Sun, and can then be moved with mouse and keyboard.
+var cameraController = new CameraController(startPosition: new Vector3(30f, 20f, 30f), startTarget: Vector3.Zero);
+
+var spaceColour = new Color(5, 5, 15, 255);
+string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
+const string Help = "Mouse: wheel = zoom, left-drag = rotate, right-drag = pan\n" +
+                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, Esc quit";
+
+while (!Raylib.WindowShouldClose())
+{
+    cameraController.Update();
+    Camera3D camera = cameraController.Camera;
+
+    Raylib.BeginDrawing();
+    Raylib.ClearBackground(spaceColour);
+
+    Raylib.BeginMode3D(camera);
+    Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
+    renderer.DrawStars();
+    Raylib.EndMode3D();
+
+    renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
+
+    // Dark panels behind the text, so star labels underneath do not make it unreadable.
+    var panelColour = new Color(0, 0, 0, 225);
+    Raylib.DrawRectangle(0, 0, 470, 84, panelColour);
+    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, 620, 50, panelColour);
+    Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
+    Raylib.DrawFPS(10, 36);
+    Raylib.DrawText($"Camera is {camera.Position.Length() * Star.LightYearsPerParsec:F1} light years from the Sun", 10, 62, 16, Color.LightGray);
+    Raylib.DrawText(Help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
+    renderer.DrawLegend();
+    Raylib.EndDrawing();
+}
+
+Raylib.CloseWindow();
+```
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- `SpectralClass` is an `enum` (a fixed list of named values): O, B, A, F, G, K, M, WhiteDwarf and Unknown.
+- `SpectralClasses.Parse` turns HYG's spectral type text into one of those values: empty → Unknown; starting with "D" → WhiteDwarf; text with no capital letter (e.g. "m", "k-m") → the first letter if it is k or m, otherwise Unknown; otherwise the first capital letter is used, which skips prefixes like "d" (dwarf) and "sd" (subdwarf). "S" (S-type stars) is treated as M.
+- `ColourOf` looks the colour up in a dictionary; `NameOf` gives the text for the colour key.
+- `StarRenderer`'s constructor parses each star once, stores its colour in `_colours` and counts how many stars are in each class in `_classCounts`. `DrawStars` passes `_colours[i]` to `DrawSphereEx` instead of white.
+- `DrawLegend` draws a dark box in the top-right corner with a coloured dot and the count for each class.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the AI looked at the real spectral codes in my data before writing the parser, so it handles the older Gliese styles (dM, sdM, lowercase estimates) and white dwarfs, and it checked that the class counts add up to exactly 2,000. It also found a real error in the HYG data: Capella is listed as M1 (drawn red) but is really two G-type yellow giants (G8III and G0III, Wikipedia), which its colour index of 0.795 also suggests. Weaknesses: (1) the colours are the AI's own choice, not a published table (it could not open one), and they are deliberately exaggerated for visibility, so they are not true star colours; (2) a star's colour comes only from the first letter, so data errors like Capella are shown wrongly – the colour index (ci column) could be used to cross-check or as a fallback for the 154 unknown stars; (3) the parser treats "g" (Mount Wilson giant prefix with no class) and "pec" as Unknown, which is a judgement call; (4) S-type stars are drawn as M; (5) the legend box has a fixed size and position.
+
+---
+
+### Entry 99 – 2026-11-06 03:16 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: in 01Assignment1_AIprogramming_3DstarChart, `ls` showed Program.cs, SpectralClass.cs and StarRenderer.cs next to the log files; `dotnet build` gave MSB1003 (no project file in this folder) and `dotnet run` could not find a project]
+
+**AI response (full):**
+````
+The files went into the **wrong folder**. You were one level up (`01Assignment1_AIprogramming_3DstarChart`), so `Program.cs`, `SpectralClass.cs` and `StarRenderer.cs` landed next to the log files instead of inside `StarChart3D`. That's also why `dotnet build` couldn't find a project there.
+
+These three are the **new** versions, so move them into `StarChart3D`, replacing the old ones. Run these one at a time:
+```
+mv Program.cs SpectralClass.cs StarRenderer.cs StarChart3D/
+```
+```
+ls
+```
+This should now show only `AI_domainExpert_log.md`, `AI_programming_log.md` and `StarChart3D`.
+```
+cd StarChart3D
+```
+```
+ls
+```
+This should include `SpectralClass.cs`.
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Take a screenshot, **press Esc in the star window**, and send me the screenshot.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+My mistake: I ran the `mv` from the parent folder. The AI read the error (MSB1003) and the `ls` output correctly.
+
+---
+
+### Entry 100 – 2026-11-06 03:58 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+okay thats it for now lets continue tomorrow and remember each and everything and lets continue tomorrow
+```
+
+**AI response:** The AI wrote Entries 97–100 of this log and updated the handover note in my Claude "ASE" project, so the next session continues from exactly here. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+Stopped for the night before testing and committing the spectral colours.
+
+---
+
+### Entry 101 – 2026-11-08 03:58 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+lets start now
+```
+
+**AI actions:** The AI checked that its saved handover files were still available and checked GitHub (read-only): no new commits since 2f07949 on Friday; log on GitHub has 98 headings.
+
+**AI response (full):**
+````
+GitHub is exactly as we left it on Friday: the last commit is `2f07949` (camera controls), and my saved files are all still here.
+
+**Time check:** it's Sunday 4am, and the deadline is **Monday 12pm**, about 32 hours away. Still to do, in priority order:
+1. Spectral colours: test and commit (the code is ready).
+2. The filter for stars without a proper name, then the **Feature 2** pull request.
+3. **Feature 3** (20 marks): the flying animation, dust effect and nearby-stars list.
+4. The **README** (part of the 20 Setting Up marks).
+5. The **YouTube demo**, **Google Form** and **MyBeckett hand-in**. Leave several hours for these, and don't leave them until Monday morning.
+
+Feature 4 (30 marks) only if there's time left over.
+
+**Step 1: check where your files are.** In the VS Code terminal, run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+git status
+```
+```
+ls StarChart3D
+```
+
+Send me a screenshot. I need to know whether `Program.cs`, `SpectralClass.cs` and `StarRenderer.cs` are **inside** `StarChart3D` or still loose next to the log files, which is where they were on Friday night.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Useful: the AI checked the real state on GitHub first, and gave a priority order with the hand-in steps in it, because the deadline is close.
+
+---
+
+### Entry 102 – 2026-11-08 04:00 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+herre
+```
+[Screenshot: `git status` "no changes added to commit"; `ls StarChart3D` listed CameraController.cs, CatalogueNames.cs, Data, Program.cs, SpectralClass.cs, Star.cs, StarChart3D.csproj, StarCollection.cs, StarRenderer.cs, bin, obj]
+
+**AI response (full):**
+````
+All three files are **inside `StarChart3D`** now, including `SpectralClass.cs`, so Friday's `mv` worked. Let's test the colours. Run these one at a time:
+
+```
+cd StarChart3D
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+You should see coloured stars (yellow Sol, red Proxima, blue-white Sirius) and a **"Spectral class"** key in the top-right corner. Take a screenshot, **press Esc in the star window**, and send me the screenshot.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues: the files from Entry 99 had been moved into the right folder.
+
+---
+
+### Entry 103 – 2026-11-08 04:01 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+yes seen it
+```
+
+**AI response:** The AI noted that the spectral colours work on my Mac, wrote Entries 101–103 and combined them with Entries 97–100 into one file, and gave me the commit steps. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+The colours work on my Mac: coloured stars and the "Spectral class" key in the top-right corner. I did not send a screenshot this time, so there is no screenshot evidence in this entry.
+
+---

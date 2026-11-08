@@ -26,17 +26,25 @@ public class StarRenderer
 
     private readonly IReadOnlyList<Star> _stars;
     private readonly Vector3[] _positions;
+    private readonly Color[] _colours;
+    private readonly Dictionary<SpectralClass, int> _classCounts = new();
     private readonly List<Rectangle> _labelAreas = new(); // screen areas already used by labels this frame
 
-    /// <summary>Creates a renderer and works out each star's 3D position once, so it is not recalculated every frame.</summary>
+    /// <summary>Creates a renderer and works out each star's 3D position and colour once, so they are not recalculated every frame.</summary>
     /// <param name="stars">The stars to draw.</param>
     public StarRenderer(IReadOnlyList<Star> stars)
     {
         _stars = stars;
         _positions = new Vector3[stars.Count];
+        _colours = new Color[stars.Count];
         for (int i = 0; i < stars.Count; i++)
         {
             _positions[i] = ToWorldPosition(stars[i]);
+
+            // Spectral class and colour are also worked out once, not every frame.
+            SpectralClass spectralClass = SpectralClasses.Parse(stars[i].SpectralType);
+            _colours[i] = SpectralClasses.ColourOf(spectralClass);
+            _classCounts[spectralClass] = _classCounts.GetValueOrDefault(spectralClass) + 1;
         }
     }
 
@@ -52,7 +60,7 @@ public class StarRenderer
     }
 
     /// <summary>
-    /// Draws every star as a small sphere. Must be called between
+    /// Draws every star as a small sphere in the colour of its spectral class. Must be called between
     /// <c>Raylib.BeginMode3D</c> and <c>Raylib.EndMode3D</c>.
     /// </summary>
     public void DrawStars()
@@ -60,7 +68,7 @@ public class StarRenderer
         for (int i = 0; i < _positions.Length; i++)
         {
             // Few rings and slices: each star is tiny on screen, and 2,000 detailed spheres would be slow.
-            Raylib.DrawSphereEx(_positions[i], StarRadius, 6, 8, Color.White);
+            Raylib.DrawSphereEx(_positions[i], StarRadius, 6, 8, _colours[i]);
         }
     }
 
@@ -115,6 +123,31 @@ public class StarRenderer
 
             _labelAreas.Add(area);
             Raylib.DrawText(star.DisplayName, x, y, fontSize, star.HasProperName ? ProperNameColour : CatalogueNameColour);
+        }
+    }
+
+    /// <summary>
+    /// Draws a colour key in the top-right corner: one coloured dot per spectral class,
+    /// with how many of the loaded stars are in that class.
+    /// </summary>
+    public void DrawLegend()
+    {
+        const int rowHeight = 20;
+        int width = 190;
+        int x = Raylib.GetScreenWidth() - width - 10;
+        int y = 10;
+        int height = 30 + SpectralClasses.LegendOrder.Length * rowHeight;
+
+        Raylib.DrawRectangle(x, y, width, height, new Color(0, 0, 0, 225));
+        Raylib.DrawText("Spectral class", x + 10, y + 8, 16, Color.RayWhite);
+
+        for (int i = 0; i < SpectralClasses.LegendOrder.Length; i++)
+        {
+            SpectralClass spectralClass = SpectralClasses.LegendOrder[i];
+            int rowY = y + 30 + i * rowHeight;
+            Raylib.DrawCircle(x + 18, rowY + 7, 6, SpectralClasses.ColourOf(spectralClass));
+            string text = $"{SpectralClasses.NameOf(spectralClass)}: {_classCounts.GetValueOrDefault(spectralClass)}";
+            Raylib.DrawText(text, x + 32, rowY, 16, Color.LightGray);
         }
     }
 
