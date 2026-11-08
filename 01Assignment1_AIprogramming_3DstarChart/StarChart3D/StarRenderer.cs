@@ -18,6 +18,9 @@ public class StarRenderer
     /// </summary>
     public const float CatalogueLabelDistance = 8f;
 
+    /// <summary>Smallest radius in pixels that a star counts as when it is clicked, so tiny distant stars can still be hit.</summary>
+    public const float ClickTolerance = 7f;
+
     /// <summary>Minimum gap in pixels kept between labels, so that names do not run into each other.</summary>
     private const int LabelGap = 4;
 
@@ -151,6 +154,47 @@ public class StarRenderer
             _labelAreas.Add(area);
             Raylib.DrawText(star.DisplayName, x, y, fontSize, star.HasProperName ? ProperNameColour : CatalogueNameColour);
         }
+    }
+
+    /// <summary>
+    /// Returns the visible star drawn at a point on the screen (for example where the user clicked),
+    /// or null if there is none. Each star counts as at least <see cref="ClickTolerance"/> pixels wide, so small,
+    /// distant stars can still be clicked. If several stars are under the point, the one nearest the camera wins.
+    /// </summary>
+    /// <param name="screenPoint">Point in window pixels, e.g. <c>Raylib.GetMousePosition()</c>.</param>
+    /// <param name="camera">The camera used to draw the 3D scene.</param>
+    public Star? StarAt(Vector2 screenPoint, Camera3D camera)
+    {
+        Vector3 viewDirection = Vector3.Normalize(camera.Target - camera.Position);
+        int screenHeight = Raylib.GetScreenHeight();
+        float pixelsPerUnitAtOneParsec = (screenHeight / 2f) / MathF.Tan(camera.FovY * MathF.PI / 360f);
+
+        Star? best = null;
+        float bestDistance = float.MaxValue;
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            if (!IsVisible(i))
+            {
+                continue;
+            }
+
+            Vector3 toStar = _positions[i] - camera.Position;
+            float distance = toStar.Length();
+            if (Vector3.Dot(toStar, viewDirection) <= 0 || distance >= bestDistance)
+            {
+                continue; // behind the camera, or further away than a star already found
+            }
+
+            Vector2 screen = Raylib.GetWorldToScreen(_positions[i], camera);
+            float pixelRadius = MathF.Max(ClickTolerance, StarRadius / distance * pixelsPerUnitAtOneParsec + 2f);
+            if (Vector2.Distance(screen, screenPoint) <= pixelRadius)
+            {
+                best = _stars[i];
+                bestDistance = distance;
+            }
+        }
+
+        return best;
     }
 
     /// <summary>
