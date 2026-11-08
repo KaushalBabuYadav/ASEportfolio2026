@@ -5904,3 +5904,805 @@ and when i press f its only shows star with name
 All Feature 2 requirements now work on my Mac: stars as small shapes, names, spectral class colours, filter for stars without a proper name, and zoom/pan/rotate with mouse and keyboard.
 
 ---
+
+### Entry 106 – 2026-11-08 04:11 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `git push`: 58ab3eb..b980243 feature2-visualising-star-chart]
+
+**AI actions:** The AI checked commit b980243 on GitHub (read-only): 3 files, code identical to what it tested, 107 headings, no duplicates; 6 commits ahead of main; main is an ancestor, so no conflicts.
+
+**AI response (full):**
+````
+The filter commit is verified: `b980243` has the 3 expected files, matching what I tested, and the log has 107 headings with no duplicates. Feature 2 has 6 commits, and `main` can take them with no conflicts.
+
+**Now the Feature 2 pull request**, on the GitHub website like last time. The spec doesn't give an exact message for Feature 2, so we'll use its heading: **"Feature 2 3D Visualising the Star Chart"**.
+
+1. Open **github.com/KaushalBabuYadav/ASEportfolio2026** → **Pull requests** → **New pull request**.
+2. Set **base: `main`** and **compare: `feature2-visualising-star-chart`**. It should say "Able to merge" and show 6 commits.
+3. Click **Create pull request**.
+   - **Title:**
+```
+Feature 2 3D Visualising the Star Chart
+```
+   - **Description:**
+```
+Feature 2 – 3D Visualising the Star Chart (Raylib-cs on macOS)
+
+- StarRenderer.cs: draws each star as a small sphere at its real 3D position (parsecs, Sun at the centre), with name labels (proper names always; catalogue names when the camera is near; no overlapping labels).
+- SpectralClass.cs: colours each star by spectral class (O, B, A, F, G, K, M, white dwarf, unknown) with an on-screen colour key.
+- Filter: press F to show only the 89 stars with a proper name.
+- CameraController.cs: zoom (mouse wheel or +/-), rotate (left-drag or arrows), pan (right-drag or W/A/S/D/Q/E), reset (R).
+- Fix: "Boötis" spelling and a gap between labels.
+
+AI use: all prompts, responses, code and critiques are in AI_programming_log.md (Entries 57–105).
+```
+   Then click **Create pull request**.
+4. Click **Merge pull request**. In the **Commit message** box, replace the text with:
+```
+Feature 2 3D Visualising the Star Chart
+```
+   and put this in **Extended description**:
+```
+Merge pull request #2 from KaushalBabuYadav/feature2-visualising-star-chart
+```
+5. Check the author shows **kaushalyadavkkyy@gmail.com**, then click **Confirm merge**.
+6. **Don't click "Delete branch"** afterwards.
+
+If anything on the page looks different, send me a screenshot before confirming. Otherwise, send me one after the merge.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI verified the commit on GitHub and checked main could take the branch without conflicts. The spec gives no exact merge message for Feature 2, so it used the spec's own heading.
+
+---
+
+### Entry 107 – 2026-11-08 04:13 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: GitHub "Open a pull request": base main, compare feature2-visualising-star-chart, "Able to merge"; title pre-filled "Feature2 visualising star chart"]
+
+**AI response (full):**
+````
+You're on the right page: **base: main**, **compare: feature2-visualising-star-chart**, and **"Able to merge"** is showing.
+
+1. **Title:** select the text "Feature2 visualising star chart" (**Cmd+A** in that box) and replace it with:
+```
+Feature 2 3D Visualising the Star Chart
+```
+2. **Description:** click in the big box and paste:
+```
+Feature 2 – 3D Visualising the Star Chart (Raylib-cs on macOS)
+
+- StarRenderer.cs: draws each star as a small sphere at its real 3D position (parsecs, Sun at the centre), with name labels (proper names always; catalogue names when the camera is near; no overlapping labels).
+- SpectralClass.cs: colours each star by spectral class (O, B, A, F, G, K, M, white dwarf, unknown) with an on-screen colour key.
+- Filter: press F to show only the 89 stars with a proper name.
+- CameraController.cs: zoom (mouse wheel or +/-), rotate (left-drag or arrows), pan (right-drag or W/A/S/D/Q/E), reset (R).
+- Fix: "Boötis" spelling and a gap between labels.
+
+AI use: all prompts, responses, code and critiques are in AI_programming_log.md (Entries 57–105).
+```
+3. Leave the right-hand side (Reviewers, Labels and so on) empty.
+4. Click the green **Create pull request** button (the main part, not the ▼ arrow).
+
+On the next page, click **Merge pull request** and send me a screenshot of the merge box **before** you click Confirm, so I can check the commit message.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues. Asking for a screenshot before confirming the merge was useful (see next entry).
+
+---
+
+### Entry 108 – 2026-11-08 04:15 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: merge box with Commit message "Merge pull request #2 from KaushalBabuYadav/feature2-visualising-star-chart" and Extended description "Feature 2 3D Visualising the Star Chart"]
+
+**AI response (full):**
+````
+Stop before confirming: the two boxes are the wrong way round, same as last time.
+
+1. Click in the **Commit message** box, press **Cmd+A**, and type:
+```
+Feature 2 3D Visualising the Star Chart
+```
+2. Click in **Extended description**, press **Cmd+A**, and type:
+```
+Merge pull request #2 from KaushalBabuYadav/feature2-visualising-star-chart
+```
+3. "Authored by kaushalyadavkkyy@gmail.com" is correct, so leave it.
+
+Then click **Confirm merge**. **Don't** click "Delete branch" afterwards. Send me a screenshot after the merge.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Same mistake as for Feature 1: GitHub fills the commit message box with its default text, and I had put my title in the description. Checking before confirming caught it.
+
+---
+
+### Entry 109 – 2026-11-08 04:16 – Branch: `feature2-visualising-star-chart` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: pull request #2 "Merged"; merge commit 984d525 into main; "Delete branch" button (not clicked)]
+
+**AI actions:** The AI checked main on GitHub (read-only): merge commit 984d525, parents 9455fb4 and b980243, message "Feature 2 3D Visualising the Star Chart", body "Merge pull request #2 ...", author KAUSHAL BABU YADAV <kaushalyadavkkyy@gmail.com>; feature2 branch still present.
+
+**AI response (full):**
+````
+**Feature 2 is merged.** I checked GitHub: `main` now has merge commit `984d525`, with message **"Feature 2 3D Visualising the Star Chart"**, by KAUSHAL BABU YADAV, combining all 6 Feature 2 commits. The `feature2` branch is still there. **Don't click "Delete branch".**
+
+**Next: Feature 3, 3D movement (20 marks).** Here's what the spec asks for, and how I plan to do it:
+1. **Animate towards the first star system:** at the start, the camera flies in from deep space to the Sun.
+2. **"Dust" animation:** small particles stream past while you move, giving a feeling of speed.
+3. **A list of the 10 nearest stars**, each showing **distance (light years)**, **bearing (degrees)** and **path (degrees)**.
+4. **Click a star in the list** (or press 1–9, 0): the camera flies there, and the list updates for the new position.
+
+Each of these gets its own commit.
+
+**Step 1: create the Feature 3 branch.** Run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+git checkout main
+```
+```
+git pull
+```
+```
+git log --oneline -1
+```
+It should show **`984d525 … Feature 2 3D Visualising the Star Chart`**. Then:
+```
+git checkout -b feature3-3d_movement
+```
+```
+git push -u origin feature3-3d_movement
+```
+
+**Step 2 (do this while I write the code):** "bearing" and "path" are astronomy terms the spec doesn't define, so it's a domain question for your **separate domain-expert chat**. Paste this there:
+```
+For a 3D star chart using the HYG database (x, y, z in parsecs, Sun at the origin, +x towards the vernal equinox, +z towards the north celestial pole): when travelling from one star to another, what do "bearing" and "path" (in degrees) usually mean, and how would you calculate them from the two stars' x, y, z positions?
+```
+Send me the answer here. I'll check it and use it for the bearing and path calculations, and I'll write it up as Entry 2 in your domain log.
+
+Send me a screenshot after `git push` as well.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI verified the merge on GitHub (message, author, both parents). It planned Feature 3 from the spec and noticed that "bearing" and "path" are not defined in the spec, so it asked me to put that question to the domain expert rather than guessing.
+
+---
+
+### Entry 110 – 2026-11-08 04:19 – Branch: `feature3-3d_movement` – Feature 3: 3D animation towards initial star system
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `git pull` fast-forwarded main to 984d525; `git log --oneline -1` showed 984d525 (HEAD -> main, origin/main) Feature 2 3D Visualising the Star Chart]
+
+**AI actions:** The AI checked its test copy matched main, added FlyTo/IsFlying/UpdateFlight to CameraController.cs and the start-up flight to Program.cs, built it, and wrote a script that captures the screen at set times after start-up (1, 3, 5 and 8 seconds). The 8-second frame showed the "Sol" label hidden on top of the Sun's sphere (same pale yellow colour, 6 px offset), so it changed StarRenderer.cs to offset labels by the star's projected radius, rebuilt and re-checked. It also confirmed my feature3-3d_movement branch had been pushed.
+
+**AI response (full):**
+````
+`main` is up to date on your Mac at `984d525 Feature 2 3D Visualising the Star Chart`. Now create the branch, one at a time:
+```
+git checkout -b feature3-3d_movement
+```
+```
+git push -u origin feature3-3d_movement
+```
+Then ask the domain question about **bearing and path** in your separate chat (it's in my previous message). Meanwhile, I'll write Feature 3 part 1, the fly-in animation.
+
+The fly-in works: it starts far out with the whole star field in view, flies in smoothly, and arrives at the Sun (the big yellow sphere).
+
+My screenshot also shows a **bug**: up close, the **"Sol" label is hidden**. It's drawn in pale yellow, 6 pixels right of the star's centre, which is now *on top of* the big yellow sphere. Labels need to move outwards as stars appear bigger, so I'll fix that:
+
+Fixed: "Sol" now sits just outside the sphere. Packaging Feature 3 part 1:
+
+Your `feature3-3d_movement` branch is on GitHub, and **Feature 3 part 1, the fly-in to the Sun**, is ready. I tested it frame by frame: `preview_flyin_1s_3s_5s_8s.png` shows the start (the whole star field far away), the flight in, and the arrival at the Sun after about 6 seconds.
+
+**What changed:**
+- **`CameraController.cs`**: a new `FlyTo` animation that moves the camera smoothly. It starts slowly, speeds up, then slows down before arriving. You can't steer while it's flying; pressing **R** cancels the flight.
+- **`Program.cs`**: the camera now starts far out in space and flies to the Sun when the program opens, showing "Flying to Sol..." on screen.
+- **`StarRenderer.cs`**: a fix for a bug the fly-in revealed. Close up, the Sun's "Sol" label was drawn **on top of** the big yellow sphere, in the same colour, so you couldn't see it. Labels now sit just outside a star's sphere, however big it looks.
+
+**Steps.** Download the three `.cs` files, then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+mv ~/Downloads/CameraController.cs ~/Downloads/Program.cs ~/Downloads/StarRenderer.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Watch the fly-in, take a screenshot after it arrives at the Sun, **press Esc in the star window**, and send me the screenshot. If you've got the domain expert's answer about **bearing and path**, send that too.
+````
+
+**What I did with it:** I created the branch, moved the three files into StarChart3D and ran the program. It opens with "Flying to Sol..." and flies in to the Sun, ending about 6.5 light years away (Entries 111–112).
+
+**Code sent as files (full):**
+
+`CameraController.cs` (changed – new fly-to animation: `IsFlying`, `FlyTo`, `UpdateFlight`; `Reset` cancels a flight; mouse/keyboard ignored while flying):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// An "orbit" camera that circles around a target point, controlled by mouse and keyboard.
+/// Mouse wheel zooms, left-drag rotates, right-drag pans; keys do the same for keyboard users.
+/// </summary>
+/// <remarks>
+/// The camera position is worked out from three numbers: how far it is from the target (distance),
+/// the angle around the vertical axis (yaw) and the angle up or down (pitch).
+/// This keeps the camera always looking at the target, so the user cannot get "lost" upside down.
+/// </remarks>
+public class CameraController
+{
+    private const float MinDistance = 0.5f;           // parsecs: closest the camera can get to the target
+    private const float MaxDistance = 150f;           // parsecs: far enough to see all 2,000 stars
+    private const float MaxPitch = 1.5f;              // radians (about 86°): stops the camera flipping over the top
+    private const float MouseRotateSpeed = 0.005f;    // radians per pixel of mouse movement
+    private const float KeyRotateSpeed = 1.5f;        // radians per second
+    private const float ZoomStep = 0.1f;              // each wheel notch changes the distance by 10%
+    private const float PanSpeed = 0.3f;              // fraction of the distance moved per second with the keys
+
+    private readonly Vector3 _startTarget;
+    private readonly float _startDistance;
+    private readonly float _startYaw;
+    private readonly float _startPitch;
+
+    private Vector3 _target;
+    private float _distance;
+    private float _yaw;
+    private float _pitch;
+
+    // Fly-to animation: the camera's target and distance move smoothly from "from" to "to".
+    private Vector3 _flyFromTarget;
+    private Vector3 _flyToTarget;
+    private float _flyFromDistance;
+    private float _flyToDistance;
+    private float _flyDuration;
+    private float _flyElapsed;
+
+    /// <summary>Creates a camera at <paramref name="startPosition"/> looking at <paramref name="startTarget"/>.</summary>
+    public CameraController(Vector3 startPosition, Vector3 startTarget)
+    {
+        Vector3 offset = startPosition - startTarget;
+        _startTarget = startTarget;
+        _startDistance = Math.Clamp(offset.Length(), MinDistance, MaxDistance);
+        _startYaw = MathF.Atan2(offset.Z, offset.X);
+        _startPitch = Math.Clamp(MathF.Asin(offset.Y / offset.Length()), -MaxPitch, MaxPitch);
+        Reset();
+    }
+
+    /// <summary>The Raylib camera to draw the 3D scene with, built from the current distance, yaw, pitch and target.</summary>
+    public Camera3D Camera => new(
+        position: _target + Offset(),
+        target: _target,
+        up: Vector3.UnitY,
+        fovY: 45f,
+        projection: CameraProjection.Perspective);
+
+    /// <summary>How far the camera is from the point it is looking at, in parsecs.</summary>
+    public float Distance => _distance;
+
+    /// <summary>True while a <see cref="FlyTo"/> animation is running. Mouse and keyboard are ignored until it ends.</summary>
+    public bool IsFlying { get; private set; }
+
+    /// <summary>
+    /// Starts a smooth animation that moves the camera to look at <paramref name="target"/>
+    /// from <paramref name="distance"/> parsecs away, taking <paramref name="seconds"/> seconds.
+    /// </summary>
+    public void FlyTo(Vector3 target, float distance, float seconds)
+    {
+        _flyFromTarget = _target;
+        _flyToTarget = target;
+        _flyFromDistance = _distance;
+        _flyToDistance = Math.Clamp(distance, MinDistance, MaxDistance);
+        _flyDuration = Math.Max(seconds, 0.01f);
+        _flyElapsed = 0f;
+        IsFlying = true;
+    }
+
+    /// <summary>Puts the camera back where it started.</summary>
+    public void Reset()
+    {
+        IsFlying = false;
+        _target = _startTarget;
+        _distance = _startDistance;
+        _yaw = _startYaw;
+        _pitch = _startPitch;
+    }
+
+    /// <summary>Reads the mouse and keyboard and moves the camera. Call once per frame, before drawing.</summary>
+    public void Update()
+    {
+        float seconds = Raylib.GetFrameTime(); // so keyboard speed is the same at any frame rate
+
+        if (Raylib.IsKeyPressed(KeyboardKey.R))
+        {
+            Reset();
+        }
+
+        if (IsFlying)
+        {
+            UpdateFlight(seconds);
+            return; // the user cannot steer while the camera is flying
+        }
+
+        // Zoom: mouse wheel, or +/- keys (PageUp/PageDown also work).
+        float zoom = Raylib.GetMouseWheelMove();
+        if (Raylib.IsKeyDown(KeyboardKey.Equal) || Raylib.IsKeyDown(KeyboardKey.PageUp)) zoom += 3f * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Minus) || Raylib.IsKeyDown(KeyboardKey.PageDown)) zoom -= 3f * seconds;
+        _distance = Math.Clamp(_distance * (1f - zoom * ZoomStep), MinDistance, MaxDistance);
+
+        // Rotate: left mouse drag, or the arrow keys.
+        Vector2 mouse = Raylib.GetMouseDelta();
+        if (Raylib.IsMouseButtonDown(MouseButton.Left))
+        {
+            _yaw += mouse.X * MouseRotateSpeed;
+            _pitch += mouse.Y * MouseRotateSpeed;
+        }
+        if (Raylib.IsKeyDown(KeyboardKey.Left)) _yaw -= KeyRotateSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Right)) _yaw += KeyRotateSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Up)) _pitch += KeyRotateSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Down)) _pitch -= KeyRotateSpeed * seconds;
+        _pitch = Math.Clamp(_pitch, -MaxPitch, MaxPitch);
+
+        // Pan (move the point the camera looks at): right mouse drag, or W/A/S/D and Q/E.
+        Vector3 forward = Vector3.Normalize(-Offset());
+        Vector3 right = Vector3.Normalize(Vector3.Cross(forward, Vector3.UnitY));
+        Vector3 up = Vector3.Cross(right, forward);
+
+        if (Raylib.IsMouseButtonDown(MouseButton.Right))
+        {
+            float pixelsToParsecs = _distance * 0.0015f; // pan more when zoomed out, less when zoomed in
+            _target += (-right * mouse.X + up * mouse.Y) * pixelsToParsecs;
+        }
+
+        float step = _distance * PanSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.W)) _target += forward * step;
+        if (Raylib.IsKeyDown(KeyboardKey.S)) _target -= forward * step;
+        if (Raylib.IsKeyDown(KeyboardKey.D)) _target += right * step;
+        if (Raylib.IsKeyDown(KeyboardKey.A)) _target -= right * step;
+        if (Raylib.IsKeyDown(KeyboardKey.E)) _target += Vector3.UnitY * step;
+        if (Raylib.IsKeyDown(KeyboardKey.Q)) _target -= Vector3.UnitY * step;
+    }
+
+    /// <summary>Moves the fly-to animation forward by <paramref name="seconds"/>.</summary>
+    private void UpdateFlight(float seconds)
+    {
+        _flyElapsed += seconds;
+        float progress = Math.Clamp(_flyElapsed / _flyDuration, 0f, 1f);
+
+        // "Smoothstep" easing: starts slowly, speeds up, then slows down before arriving.
+        float eased = progress * progress * (3f - 2f * progress);
+
+        _target = Vector3.Lerp(_flyFromTarget, _flyToTarget, eased);
+
+        // The distance changes by the same factor each moment (geometric), not by the same amount,
+        // so flying in from 150 parsecs to 1.5 parsecs does not rush through the last few parsecs.
+        _distance = _flyFromDistance * MathF.Pow(_flyToDistance / _flyFromDistance, eased);
+
+        if (progress >= 1f)
+        {
+            IsFlying = false;
+        }
+    }
+
+    /// <summary>The vector from the target to the camera, worked out from distance, yaw and pitch.</summary>
+    private Vector3 Offset()
+    {
+        return new Vector3(
+            _distance * MathF.Cos(_pitch) * MathF.Cos(_yaw),
+            _distance * MathF.Sin(_pitch),
+            _distance * MathF.Cos(_pitch) * MathF.Sin(_yaw));
+    }
+}
+```
+
+`Program.cs` (changed – camera starts at (90, 60, 90), about 148 parsecs out, and flies to the Sun; "Flying to Sol..." shown during the flight):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+using StarChart3D;
+
+// Load the 2,000 nearest stars.
+string dataFile = Path.Combine(AppContext.BaseDirectory, "Data", "stars_local_2000.csv");
+var stars = new StarCollection(dataFile);
+
+// Open a resizable window with anti-aliasing (smoother edges).
+Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint | ConfigFlags.ResizableWindow);
+Raylib.InitWindow(1280, 800, "StarChart3D");
+Raylib.SetTargetFPS(60);
+
+var renderer = new StarRenderer(stars);
+
+// The camera starts far outside the star field and then flies in to the first star system (the Sun).
+// After that it can be moved with mouse and keyboard.
+var cameraController = new CameraController(startPosition: new Vector3(90f, 60f, 90f), startTarget: Vector3.Zero);
+Star home = stars.FindById(0) ?? stars[0]; // HYG id 0 is the Sun
+const float ArrivalDistance = 2f;          // parsecs from the star when the camera arrives
+const float FlightSeconds = 6f;
+cameraController.FlyTo(StarRenderer.ToWorldPosition(home), ArrivalDistance, FlightSeconds);
+
+var spaceColour = new Color(5, 5, 15, 255);
+string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
+const string Help = "Mouse: wheel = zoom, left-drag = rotate, right-drag = pan\n" +
+                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, F filter named stars, Esc quit";
+
+while (!Raylib.WindowShouldClose())
+{
+    cameraController.Update();
+
+    // F switches between all stars and only the stars that have a proper name.
+    if (Raylib.IsKeyPressed(KeyboardKey.F))
+    {
+        renderer.ShowOnlyNamedStars = !renderer.ShowOnlyNamedStars;
+    }
+    Camera3D camera = cameraController.Camera;
+
+    Raylib.BeginDrawing();
+    Raylib.ClearBackground(spaceColour);
+
+    Raylib.BeginMode3D(camera);
+    Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
+    renderer.DrawStars();
+    Raylib.EndMode3D();
+
+    renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
+
+    // Dark panels behind the text, so star labels underneath do not make it unreadable.
+    var panelColour = new Color(0, 0, 0, 225);
+    Raylib.DrawRectangle(0, 0, 520, 104, panelColour);
+    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, 760, 50, panelColour);
+    Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
+    Raylib.DrawFPS(10, 36);
+    Raylib.DrawText($"Camera is {camera.Position.Length() * Star.LightYearsPerParsec:F1} light years from the Sun", 10, 62, 16, Color.LightGray);
+    string filterText = renderer.ShowOnlyNamedStars
+        ? $"Filter ON: showing {renderer.VisibleStarCount} named stars (F to show all)"
+        : $"Showing all {renderer.VisibleStarCount} stars (F to show only named stars)";
+    Raylib.DrawText(filterText, 10, 82, 16, renderer.ShowOnlyNamedStars ? Color.Yellow : Color.LightGray);
+
+    if (cameraController.IsFlying)
+    {
+        string flying = $"Flying to {home.DisplayName}...";
+        Raylib.DrawText(flying, (Raylib.GetScreenWidth() - Raylib.MeasureText(flying, 30)) / 2, 120, 30, Color.SkyBlue);
+    }
+    Raylib.DrawText(Help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
+    renderer.DrawLegend();
+    Raylib.EndDrawing();
+}
+
+Raylib.CloseWindow();
+```
+
+`StarRenderer.cs` (changed – labels are placed just outside the star's sphere as it appears on screen):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// Draws the stars of a <see cref="StarCollection"/> in 3D with Raylib.
+/// One world unit is one parsec, and the Sun is at (0, 0, 0).
+/// </summary>
+public class StarRenderer
+{
+    /// <summary>Radius of the small sphere drawn for each star, in parsecs.</summary>
+    public const float StarRadius = 0.08f;
+
+    /// <summary>
+    /// Stars without a proper name are only labelled when they are closer to the camera than this (in parsecs),
+    /// so that the screen is not covered by 1,900 catalogue names at once.
+    /// </summary>
+    public const float CatalogueLabelDistance = 8f;
+
+    /// <summary>Minimum gap in pixels kept between labels, so that names do not run into each other.</summary>
+    private const int LabelGap = 4;
+
+    private static readonly Color ProperNameColour = new(255, 230, 150, 255);
+    private static readonly Color CatalogueNameColour = new(150, 160, 180, 255);
+
+    private readonly IReadOnlyList<Star> _stars;
+    private readonly Vector3[] _positions;
+    private readonly Color[] _colours;
+    private readonly Dictionary<SpectralClass, int> _classCounts = new();
+    private readonly List<Rectangle> _labelAreas = new(); // screen areas already used by labels this frame
+
+    /// <summary>
+    /// When true, only stars with a proper name are drawn and labelled; stars that only have a
+    /// catalogue name are hidden. Toggled by the user (F key in Program.cs).
+    /// </summary>
+    public bool ShowOnlyNamedStars { get; set; }
+
+    /// <summary>Number of stars currently shown, taking <see cref="ShowOnlyNamedStars"/> into account.</summary>
+    public int VisibleStarCount => ShowOnlyNamedStars ? _stars.Count(star => star.HasProperName) : _stars.Count;
+
+    /// <summary>True if the star at this position in the list should be drawn with the current filter.</summary>
+    private bool IsVisible(int index) => !ShowOnlyNamedStars || _stars[index].HasProperName;
+
+    /// <summary>Creates a renderer and works out each star's 3D position and colour once, so they are not recalculated every frame.</summary>
+    /// <param name="stars">The stars to draw.</param>
+    public StarRenderer(IReadOnlyList<Star> stars)
+    {
+        _stars = stars;
+        _positions = new Vector3[stars.Count];
+        _colours = new Color[stars.Count];
+        for (int i = 0; i < stars.Count; i++)
+        {
+            _positions[i] = ToWorldPosition(stars[i]);
+
+            // Spectral class and colour are also worked out once, not every frame.
+            SpectralClass spectralClass = SpectralClasses.Parse(stars[i].SpectralType);
+            _colours[i] = SpectralClasses.ColourOf(spectralClass);
+            _classCounts[spectralClass] = _classCounts.GetValueOrDefault(spectralClass) + 1;
+        }
+    }
+
+    /// <summary>
+    /// Converts a star's HYG position to Raylib's 3D world.
+    /// HYG uses +Z towards the north celestial pole, but in Raylib +Y is "up",
+    /// so (x, y, z) becomes (x, z, -y). This is a rotation, not a mirror,
+    /// so the sky is not flipped left-to-right.
+    /// </summary>
+    public static Vector3 ToWorldPosition(Star star)
+    {
+        return new Vector3((float)star.X, (float)star.Z, (float)-star.Y);
+    }
+
+    /// <summary>
+    /// Draws every visible star as a small sphere in the colour of its spectral class
+    /// (all stars, or only named stars when <see cref="ShowOnlyNamedStars"/> is on). Must be called between
+    /// <c>Raylib.BeginMode3D</c> and <c>Raylib.EndMode3D</c>.
+    /// </summary>
+    public void DrawStars()
+    {
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            if (!IsVisible(i))
+            {
+                continue;
+            }
+
+            // Few rings and slices: each star is tiny on screen, and 2,000 detailed spheres would be slow.
+            Raylib.DrawSphereEx(_positions[i], StarRadius, 6, 8, _colours[i]);
+        }
+    }
+
+    /// <summary>
+    /// Writes star names next to the stars. Must be called after <c>Raylib.EndMode3D</c>,
+    /// because the names are 2D text drawn on top of the 3D scene.
+    /// Stars with a proper name are labelled; other stars get their catalogue name
+    /// only when they are within <see cref="CatalogueLabelDistance"/> of the camera.
+    /// A label is skipped if it would overlap a label already drawn. The stars are in
+    /// nearest-first order, so the nearer star keeps its label.
+    /// </summary>
+    /// <param name="camera">The camera used to draw the 3D scene.</param>
+    public void DrawLabels(Camera3D camera)
+    {
+        Vector3 viewDirection = Vector3.Normalize(camera.Target - camera.Position);
+        int screenWidth = Raylib.GetScreenWidth();
+        int screenHeight = Raylib.GetScreenHeight();
+        _labelAreas.Clear();
+
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            if (!IsVisible(i))
+            {
+                continue;
+            }
+
+            Star star = _stars[i];
+            Vector3 toStar = _positions[i] - camera.Position;
+
+            // Skip stars behind the camera: GetWorldToScreen would still give them a (wrong) screen position.
+            if (Vector3.Dot(toStar, viewDirection) <= 0)
+            {
+                continue;
+            }
+
+            if (!star.HasProperName && toStar.Length() > CatalogueLabelDistance)
+            {
+                continue;
+            }
+
+            Vector2 screen = Raylib.GetWorldToScreen(_positions[i], camera);
+            if (screen.X < 0 || screen.X > screenWidth || screen.Y < 0 || screen.Y > screenHeight)
+            {
+                continue;
+            }
+
+            int fontSize = star.HasProperName ? 14 : 10;
+            // Put the label just outside the star's sphere. Close up, a star covers many pixels, so a fixed
+            // offset would put the text on top of the star. Pixels per parsec at this distance =
+            // (half the screen height) / tan(half the field of view) / distance.
+            float pixelRadius = StarRadius / toStar.Length() * (screenHeight / 2f) / MathF.Tan(camera.FovY * MathF.PI / 360f);
+            int x = (int)(screen.X + MathF.Max(6f, pixelRadius + 4f));
+            int y = (int)screen.Y - fontSize / 2;
+            // The area is made a little bigger than the text, so that labels keep a gap between them.
+            var area = new Rectangle(x - LabelGap, y - LabelGap / 2, Raylib.MeasureText(star.DisplayName, fontSize) + 2 * LabelGap, fontSize + LabelGap);
+
+            if (OverlapsExistingLabel(area))
+            {
+                continue;
+            }
+
+            _labelAreas.Add(area);
+            Raylib.DrawText(star.DisplayName, x, y, fontSize, star.HasProperName ? ProperNameColour : CatalogueNameColour);
+        }
+    }
+
+    /// <summary>
+    /// Draws a colour key in the top-right corner: one coloured dot per spectral class,
+    /// with how many of the loaded stars are in that class.
+    /// </summary>
+    public void DrawLegend()
+    {
+        const int rowHeight = 20;
+        int width = 190;
+        int x = Raylib.GetScreenWidth() - width - 10;
+        int y = 10;
+        int height = 30 + SpectralClasses.LegendOrder.Length * rowHeight;
+
+        Raylib.DrawRectangle(x, y, width, height, new Color(0, 0, 0, 225));
+        Raylib.DrawText("Spectral class", x + 10, y + 8, 16, Color.RayWhite);
+
+        for (int i = 0; i < SpectralClasses.LegendOrder.Length; i++)
+        {
+            SpectralClass spectralClass = SpectralClasses.LegendOrder[i];
+            int rowY = y + 30 + i * rowHeight;
+            Raylib.DrawCircle(x + 18, rowY + 7, 6, SpectralClasses.ColourOf(spectralClass));
+            string text = $"{SpectralClasses.NameOf(spectralClass)}: {_classCounts.GetValueOrDefault(spectralClass)}";
+            Raylib.DrawText(text, x + 32, rowY, 16, Color.LightGray);
+        }
+    }
+
+    /// <summary>Returns true if the given screen area overlaps a label already drawn this frame.</summary>
+    private bool OverlapsExistingLabel(Rectangle area)
+    {
+        foreach (Rectangle used in _labelAreas)
+        {
+            if (Raylib.CheckCollisionRecs(area, used))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+```
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- `FlyTo(target, distance, seconds)` remembers where the camera is now (from) and where it should end up (to), and sets `IsFlying`.
+- Each frame, `UpdateFlight` adds the frame time to `_flyElapsed` and works out `progress` from 0 to 1. "Smoothstep" (3p² − 2p³) turns this into an eased value that starts and ends slowly. The target moves with `Vector3.Lerp`; the distance changes geometrically (`from × (to/from)^eased`), so the camera does not rush through the last few parsecs. When `progress` reaches 1 the flight ends.
+- While flying, `Update` returns early, so mouse and keyboard do not fight the animation; R calls `Reset`, which also stops the flight.
+- In `Program.cs` the camera starts far away and `FlyTo` is called once before the main loop, to the Sun (HYG id 0) at 2 parsecs, over 6 seconds.
+- In `StarRenderer.DrawLabels`, the star's radius in pixels is worked out from its distance and the camera's field of view (pixels per parsec = half the screen height ÷ tan(half the field of view) ÷ distance). The label is placed that many pixels plus 4 to the right, so it is never hidden on top of a large nearby star.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the AI tested the animation frame by frame at set times instead of only checking it compiled, and that found a real bug in its own earlier label code (Entry 79): a fixed 6-pixel offset puts the label on top of a star that is close to the camera, and the Sun's pale yellow label was invisible on its yellow sphere. The geometric distance change is a sensible choice for flying in from 148 parsecs to 2 parsecs. Weaknesses: (1) the camera keeps the same angle during the flight, so it is a straight zoom towards the Sun rather than a more interesting curved path; (2) the user cannot skip the 6-second flight except with R, which jumps back to the far start position; (3) R now returns to the far-away start view, not to the Sun; (4) the destination name in the "Flying to..." text is hard-coded to `home` in Program.cs, so it will need changing when flying to other stars in part 4.
+
+---
+
+### Entry 111 – 2026-11-08 04:24 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the StarChart3D window with no "Flying to Sol..." text, camera 198.3 light years from the Sun (the previous version)]
+
+**AI response (full):**
+````
+This looks like the **previous version**, not the new one. If the new files were in place, the window would open with **"Flying to Sol..."** in blue and fly in to the Sun, ending up close to it (about 6.5 light years away). Your screenshot shows the camera **198 light years** away with no flight. The screenshot time (4:23) is also from just before I sent the files.
+
+**Press Esc in the star window**, then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+ls ~/Downloads | grep -E "CameraController|Program|StarRenderer"
+```
+This should list the three files in Downloads. Then:
+```
+mv ~/Downloads/CameraController.cs ~/Downloads/Program.cs ~/Downloads/StarRenderer.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+Watch the flight from the start, take a screenshot after it arrives at the Sun, **press Esc**, and send me the screenshot.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI spotted from the missing text and the distance that the screenshot was from the old build (taken before the new files arrived).
+
+---
+
+### Entry 112 – 2026-11-08 04:25 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+yes it did this the window would open with "Flying to Sol..." in blue and fly in to the Sun, ending up close to it (about 6.5 light years away).
+```
+
+**AI response:** The AI confirmed Feature 3 part 1 works on my Mac, wrote Entries 106–112 (the Feature 2 pull request and Feature 3 part 1) and gave me the commit steps.
+
+**Critique (drafted with AI help, checked and edited by me):**
+I described the result in words at first; screenshots follow in Entry 114.
+
+---
+
+### Entry 113 – 2026-11-08 04:27 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+can i run it again and send you the scrwwnshot cause i only you the screeshot how would you now its zoom in into  or flying to sol?
+```
+
+**AI response (full):**
+````
+Yes, please do. That's a good idea: a screenshot is proof for the log, and right now Entry 112 says "no screenshot". **Don't add the log file or commit yet.** Once you've sent the screenshots, I'll update the file to describe them.
+
+Take **two** screenshots, because the flight lasts about 6 seconds:
+1. Run it (the star window must be closed first):
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+dotnet run
+```
+2. **During the flight:** as soon as the window appears, press **Cmd+Shift+3** (this captures the whole screen instantly, which is quicker than selecting the window) while **"Flying to Sol..."** is showing.
+3. **After it arrives:** wait a few seconds and press **Cmd+Shift+3** again. The top-left should say about **"Camera is 6.5 light years from the Sun"**, with Sol big in the middle.
+4. Press **Esc** in the star window, then send me both screenshots (they're saved on your Desktop).
+
+If you miss the flight, just close it with Esc and run it again. It starts the flight every time.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+My own idea: a screenshot is better evidence than my description. The AI agreed and held back the commit until the evidence was in the log.
+
+---
+
+### Entry 114 – 2026-11-08 04:29 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot 1, during the flight: "Flying to Sol..." in blue at the top, "Camera is 92.4 light years from the Sun", 25 FPS, many star labels; the label "Copernicus" overlaps the "Flying to Sol..." text]
+[Screenshot 2, after arrival: "Camera is 6.5 light years from the Sun", 58 FPS, Sol as a large yellow sphere in the centre with its "Sol" label beside it; nearby stars such as Ross 128, Luyten's Star and Gl 300 labelled]
+
+**AI response:** The AI confirmed both screenshots show the fly-in working, pointed out the frame-rate drop to 25 FPS during the flight and the "Copernicus" label overlapping the "Flying to Sol..." text, and added Entries 113–114 to this log file. (Paste the rest of its reply here.)
+
+**Critique (drafted with AI help, checked and edited by me):**
+The screenshots prove the camera flies in from about 92 light years to 6.5 light years and the Sol label is no longer hidden. Two weaknesses seen: (1) mid-flight the frame rate fell to 25 FPS, probably because many labels and catalogue names are being checked and drawn while the camera passes through the star field; (2) star labels are drawn before the "Flying to..." text but can still show through or crowd it – the message should have its own dark background like the other HUD text.
+
+---

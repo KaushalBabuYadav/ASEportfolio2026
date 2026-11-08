@@ -13,8 +13,13 @@ Raylib.SetTargetFPS(60);
 
 var renderer = new StarRenderer(stars);
 
-// The camera starts outside the star field looking at the Sun, and can then be moved with mouse and keyboard.
-var cameraController = new CameraController(startPosition: new Vector3(30f, 20f, 30f), startTarget: Vector3.Zero);
+// The camera starts far outside the star field and then flies in to the first star system (the Sun).
+// After that it can be moved with mouse and keyboard.
+var cameraController = new CameraController(startPosition: new Vector3(90f, 60f, 90f), startTarget: Vector3.Zero);
+Star home = stars.FindById(0) ?? stars[0]; // HYG id 0 is the Sun
+const float ArrivalDistance = 2f;          // parsecs from the star when the camera arrives
+const float FlightSeconds = 6f;
+cameraController.FlyTo(StarRenderer.ToWorldPosition(home), ArrivalDistance, FlightSeconds);
 
 var spaceColour = new Color(5, 5, 15, 255);
 string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
@@ -53,6 +58,12 @@ while (!Raylib.WindowShouldClose())
         ? $"Filter ON: showing {renderer.VisibleStarCount} named stars (F to show all)"
         : $"Showing all {renderer.VisibleStarCount} stars (F to show only named stars)";
     Raylib.DrawText(filterText, 10, 82, 16, renderer.ShowOnlyNamedStars ? Color.Yellow : Color.LightGray);
+
+    if (cameraController.IsFlying)
+    {
+        string flying = $"Flying to {home.DisplayName}...";
+        Raylib.DrawText(flying, (Raylib.GetScreenWidth() - Raylib.MeasureText(flying, 30)) / 2, 120, 30, Color.SkyBlue);
+    }
     Raylib.DrawText(Help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
     renderer.DrawLegend();
     Raylib.EndDrawing();

@@ -134,7 +134,11 @@ public class StarRenderer
             }
 
             int fontSize = star.HasProperName ? 14 : 10;
-            int x = (int)screen.X + 6;
+            // Put the label just outside the star's sphere. Close up, a star covers many pixels, so a fixed
+            // offset would put the text on top of the star. Pixels per parsec at this distance =
+            // (half the screen height) / tan(half the field of view) / distance.
+            float pixelRadius = StarRadius / toStar.Length() * (screenHeight / 2f) / MathF.Tan(camera.FovY * MathF.PI / 360f);
+            int x = (int)(screen.X + MathF.Max(6f, pixelRadius + 4f));
             int y = (int)screen.Y - fontSize / 2;
             // The area is made a little bigger than the text, so that labels keep a gap between them.
             var area = new Rectangle(x - LabelGap, y - LabelGap / 2, Raylib.MeasureText(star.DisplayName, fontSize) + 2 * LabelGap, fontSize + LabelGap);
