@@ -32,6 +32,14 @@ public class CameraController
     private float _yaw;
     private float _pitch;
 
+    // Fly-to animation: the camera's target and distance move smoothly from "from" to "to".
+    private Vector3 _flyFromTarget;
+    private Vector3 _flyToTarget;
+    private float _flyFromDistance;
+    private float _flyToDistance;
+    private float _flyDuration;
+    private float _flyElapsed;
+
     /// <summary>Creates a camera at <paramref name="startPosition"/> looking at <paramref name="startTarget"/>.</summary>
     public CameraController(Vector3 startPosition, Vector3 startTarget)
     {
@@ -54,9 +62,28 @@ public class CameraController
     /// <summary>How far the camera is from the point it is looking at, in parsecs.</summary>
     public float Distance => _distance;
 
+    /// <summary>True while a <see cref="FlyTo"/> animation is running. Mouse and keyboard are ignored until it ends.</summary>
+    public bool IsFlying { get; private set; }
+
+    /// <summary>
+    /// Starts a smooth animation that moves the camera to look at <paramref name="target"/>
+    /// from <paramref name="distance"/> parsecs away, taking <paramref name="seconds"/> seconds.
+    /// </summary>
+    public void FlyTo(Vector3 target, float distance, float seconds)
+    {
+        _flyFromTarget = _target;
+        _flyToTarget = target;
+        _flyFromDistance = _distance;
+        _flyToDistance = Math.Clamp(distance, MinDistance, MaxDistance);
+        _flyDuration = Math.Max(seconds, 0.01f);
+        _flyElapsed = 0f;
+        IsFlying = true;
+    }
+
     /// <summary>Puts the camera back where it started.</summary>
     public void Reset()
     {
+        IsFlying = false;
         _target = _startTarget;
         _distance = _startDistance;
         _yaw = _startYaw;
@@ -71,6 +98,12 @@ public class CameraController
         if (Raylib.IsKeyPressed(KeyboardKey.R))
         {
             Reset();
+        }
+
+        if (IsFlying)
+        {
+            UpdateFlight(seconds);
+            return; // the user cannot steer while the camera is flying
         }
 
         // Zoom: mouse wheel, or +/- keys (PageUp/PageDown also work).
@@ -110,6 +143,27 @@ public class CameraController
         if (Raylib.IsKeyDown(KeyboardKey.A)) _target -= right * step;
         if (Raylib.IsKeyDown(KeyboardKey.E)) _target += Vector3.UnitY * step;
         if (Raylib.IsKeyDown(KeyboardKey.Q)) _target -= Vector3.UnitY * step;
+    }
+
+    /// <summary>Moves the fly-to animation forward by <paramref name="seconds"/>.</summary>
+    private void UpdateFlight(float seconds)
+    {
+        _flyElapsed += seconds;
+        float progress = Math.Clamp(_flyElapsed / _flyDuration, 0f, 1f);
+
+        // "Smoothstep" easing: starts slowly, speeds up, then slows down before arriving.
+        float eased = progress * progress * (3f - 2f * progress);
+
+        _target = Vector3.Lerp(_flyFromTarget, _flyToTarget, eased);
+
+        // The distance changes by the same factor each moment (geometric), not by the same amount,
+        // so flying in from 150 parsecs to 1.5 parsecs does not rush through the last few parsecs.
+        _distance = _flyFromDistance * MathF.Pow(_flyToDistance / _flyFromDistance, eased);
+
+        if (progress >= 1f)
+        {
+            IsFlying = false;
+        }
     }
 
     /// <summary>The vector from the target to the camera, worked out from distance, yaw and pitch.</summary>
