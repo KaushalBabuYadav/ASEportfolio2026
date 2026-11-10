@@ -27,7 +27,11 @@ public static class FlightHud
     /// <param name="target">The chosen target star, or null if there is none.</param>
     public static void Draw(ShipController ship, Camera3D camera, Star? target)
     {
-        DrawCrosshair();
+        // The crosshair marks where the nose points: a point far ahead of the ship, seen through the current camera.
+        // In the cockpit view that is the middle of the screen; in the chase view the camera is above and behind
+        // the ship, so the point is a little higher up the screen.
+        Vector2 aim = Raylib.GetWorldToScreen(ship.Position + ship.Forward * 50f, camera);
+        DrawCrosshair(aim);
         if (target != null)
         {
             DrawTargetMarker(ship, camera, target);
@@ -35,11 +39,11 @@ public static class FlightHud
         DrawPanel(ship, target);
     }
 
-    /// <summary>Draws a small cross with a gap in the middle of the screen, showing where the nose points.</summary>
-    private static void DrawCrosshair()
+    /// <summary>Draws a small cross with a gap at <paramref name="aim"/>, showing where the nose points.</summary>
+    private static void DrawCrosshair(Vector2 aim)
     {
-        int cx = Raylib.GetScreenWidth() / 2;
-        int cy = Raylib.GetScreenHeight() / 2;
+        int cx = (int)aim.X;
+        int cy = (int)aim.Y;
         const int Gap = 6, Length = 16;
         Raylib.DrawLine(cx - Gap - Length, cy, cx - Gap, cy, HudColour);
         Raylib.DrawLine(cx + Gap, cy, cx + Gap + Length, cy, HudColour);

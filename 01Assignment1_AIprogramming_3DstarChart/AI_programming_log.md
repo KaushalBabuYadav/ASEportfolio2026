@@ -12206,3 +12206,1047 @@ Send me a screenshot before you commit.
 This run was flown by hand, so the list update after an autopilot arrival is still only shown in the AI's test. The AI said so plainly and chose to commit rather than keep asking for screenshots late at night; I will show it in my demo.
 
 ---
+
+### Entry 171 – 2026-11-10 02:35 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+HERE
+```
+[Screenshot: `grep -c` printed 172; `git add --dry-run .` listed the log, FlightHud.cs, Program.cs and ShipController.cs]
+
+**AI response (full):**
+````
+Both checks passed:
+- The log has **172** headings.
+- Exactly the **4 correct files** are listed: the log, `FlightHud.cs`, `Program.cs` and `ShipController.cs`.
+
+Now commit and push, one at a time.
+
+**Step 1.**
+```
+git add .
+```
+
+**Step 2.**
+```
+git commit -m "Feature 4: autopilot that flies the ship to the target star"
+```
+
+**Step 3.**
+```
+git push
+```
+
+**Step 4.** Send me a screenshot after `git push`, and I'll check the commit on GitHub. The last part of Feature 4 is the spaceship model with a chase camera. We can start it now, or tomorrow if you'd like to stop here.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 172 – 2026-11-10 02:36 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+HERE
+```
+[Screenshot: `git push`: 95deafb..28bac85 feature4-additional-facilities]
+
+**AI actions:** The AI checked commit 28bac85 on GitHub (read-only): 4 files, 172 headings, the 3 code files identical to what it tested.
+
+**AI response (full):**
+````
+Part 3 is on GitHub as commit **`28bac85`**. I checked it read-only: it has 4 files, the log has 172 headings, and the 3 code files are the same as the ones I tested.
+
+**Feature 4 so far, all committed:**
+- ✅ Spaceship flight mode (`7248afe`)
+- ✅ Flight display (`95deafb`)
+- ✅ Autopilot (`28bac85`)
+- ⬜ Spaceship model with a chase camera
+- ⬜ Pull request "Feature 4 Additional"
+
+**Still to do before the deadline (Monday 16 Nov, 12:00):** the ship model, the pull request, the README, the YouTube demo, the Google Form and the MyBeckett hand-in. That still leaves plenty of time this week.
+
+It's nearly 3am, so this is a good place to stop. Everything is saved in the handover note in your ASE project. When you're back, say "lets start" and I'll send the ship model straight away. If you'd rather keep going now, just say so.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues. It suggested stopping because of the time, but left the choice to me.
+
+---
+
+### Entry 173 – 2026-11-10 02:37 – Branch: `feature4-additional-facilities` – Feature 4: 3D spaceship model and chase camera
+
+**Prompt:**
+```
+CONTINUE PLEASE I WANT TO FINESH THISN TODAY
+```
+
+**AI actions:** The AI wrote ShipModel.cs, added the chase view to ShipController.cs, wired both into Program.cs, built with no warnings and tested in its virtual screen: chase view with the ship visible, engine glow when moving, turning and rolling, back to cockpit. The first test showed a bug in its own code: in the chase view the crosshair stayed in the middle of the screen, but the nose aimed higher (the camera is above the ship), so the crosshair was below the Sun while the ship was pointing at it. It changed FlightHud to draw the crosshair at the screen position of a point 50 pc ahead of the nose, rebuilt, and retested with T on the Sun and the autopilot in chase view ("Arrived at Sol", crosshair on the Sun).
+
+**AI response (full):**
+````
+The last Feature 4 part is ready: a 3D spaceship model with a chase camera.
+
+**What's new.** In ship mode, press **C** to switch between the **cockpit view** and the **chase view**:
+- The chase view puts the camera behind and above your spaceship. The ship has a grey arrow-shaped body, blue wings and a tail fin.
+- When the ship moves, an orange **engine glow** appears, and it gets bigger the faster you go.
+- The crosshair always marks where the nose points, in both views.
+- Steering, the flight display and the autopilot all work in the chase view too.
+- The top-left line shows which view you're in, for example "[chase view]".
+
+I tested it here (`preview_ship_model.png`). I also found and fixed a bug in my own first version: in the chase view, the crosshair sat in the middle of the screen, but the nose was actually aiming a little higher, because the camera is above the ship. Now the crosshair is placed where the nose really points. With the autopilot to the Sun, the ship arrived and showed "**Arrived at Sol**".
+
+**4 files changed: `ShipModel.cs` (new), `ShipController.cs`, `Program.cs` and `FlightHud.cs`.**
+
+**Steps (close the star window first).**
+
+1. Download all 4 `.cs` files and check they arrived:
+```
+ls ~/Downloads/*.cs
+```
+It must list exactly those 4 files.
+
+2. Move them into the project, build and run:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+mv ~/Downloads/ShipModel.cs ~/Downloads/ShipController.cs ~/Downloads/Program.cs ~/Downloads/FlightHud.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+3. Test it. After the fly-in, press **V**, then **C**:
+   - **Screenshot 1:** the spaceship seen from behind, with "[chase view]" at the top left.
+   - Press **T** to target the Sun, then **P**. **Screenshot 2:** while it flies, with the orange engine glow and "Autopilot: …".
+   - Press **C** again. **Screenshot 3:** back in the cockpit view.
+   - Press **Esc** and send me the 3 screenshots.
+````
+
+**Code sent as files (full):**
+
+`ShipModel.cs` (new):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// Draws the spaceship as a small 3D model built from triangles: an arrow-shaped hull with two wings,
+/// a tail fin and an engine glow that grows with speed. Only needed in the chase view, where the camera
+/// is behind the ship, so the ship itself is on screen.
+/// </summary>
+/// <remarks>
+/// The model is described in the ship's own frame (nose = −Z, top = +Y, right wing = +X), in parsecs, and each
+/// corner is turned into a world position with the ship's <see cref="ShipController.Right"/>,
+/// <see cref="ShipController.Up"/> and <see cref="ShipController.Forward"/> directions.
+/// It is drawn much bigger than a real ship would be (0.06 pc ≈ 12,000 times the Earth–Sun distance),
+/// otherwise it would be invisible next to the stars.
+/// </remarks>
+public static class ShipModel
+{
+    private static readonly Color HullColour = new(170, 180, 200, 255);
+    private static readonly Color DarkHullColour = new(110, 120, 140, 255);
+    private static readonly Color WingColour = new(70, 130, 200, 255);
+    private static readonly Color EdgeColour = new(230, 240, 255, 255);
+    private static readonly Color EngineColour = new(255, 150, 60, 255);
+
+    // Corners of the model in the ship's own frame (x = right, y = up, z = backwards), in parsecs.
+    private static readonly Vector3 Nose = new(0f, 0f, -0.030f);
+    private static readonly Vector3 Top = new(0f, 0.007f, 0.020f);
+    private static readonly Vector3 Bottom = new(0f, -0.005f, 0.020f);
+    private static readonly Vector3 LeftBody = new(-0.008f, 0f, 0.020f);
+    private static readonly Vector3 RightBody = new(0.008f, 0f, 0.020f);
+    private static readonly Vector3 LeftWingTip = new(-0.032f, -0.002f, 0.028f);
+    private static readonly Vector3 RightWingTip = new(0.032f, -0.002f, 0.028f);
+    private static readonly Vector3 WingRoot = new(0f, 0f, 0.000f);
+    private static readonly Vector3 FinTip = new(0f, 0.018f, 0.030f);
+    private static readonly Vector3 Engine = new(0f, 0.001f, 0.022f);
+
+    /// <summary>Draws the ship. Must be called between <c>BeginMode3D</c> and <c>EndMode3D</c>.</summary>
+    public static void Draw(ShipController ship)
+    {
+        Vector3 W(Vector3 local) => ship.Position + ship.Right * local.X + ship.Up * local.Y - ship.Forward * local.Z;
+
+        // Hull: a four-sided pyramid from the nose to the back, closed at the back.
+        Face(W(Nose), W(LeftBody), W(Top), HullColour);
+        Face(W(Nose), W(Top), W(RightBody), HullColour);
+        Face(W(Nose), W(RightBody), W(Bottom), DarkHullColour);
+        Face(W(Nose), W(Bottom), W(LeftBody), DarkHullColour);
+        Face(W(LeftBody), W(Bottom), W(Top), DarkHullColour);
+        Face(W(RightBody), W(Top), W(Bottom), DarkHullColour);
+
+        // Wings and tail fin: flat triangles.
+        Face(W(WingRoot), W(LeftWingTip), W(LeftBody), WingColour);
+        Face(W(WingRoot), W(RightBody), W(RightWingTip), WingColour);
+        Face(W(Top), W(FinTip), W(Top + new Vector3(0f, 0f, -0.012f)), WingColour);
+
+        // Outline, so the shape is clear against black space.
+        Vector3[] outline = { Nose, LeftWingTip, LeftBody, Top, RightBody, RightWingTip, Nose };
+        for (int i = 0; i < outline.Length - 1; i++)
+        {
+            Raylib.DrawLine3D(W(outline[i]), W(outline[i + 1]), EdgeColour);
+        }
+        Raylib.DrawLine3D(W(Nose), W(Top), EdgeColour);
+        Raylib.DrawLine3D(W(Top), W(FinTip), EdgeColour);
+
+        // Engine glow: bigger when the ship is going faster (up to about twice the size at full speed).
+        float glow = 0.003f + 0.004f * MathF.Min(1f, ship.Speed / 5f);
+        if (ship.Speed > 0f)
+        {
+            Raylib.DrawSphereEx(W(Engine), glow, 6, 8, EngineColour);
+        }
+    }
+
+    /// <summary>
+    /// Draws a filled triangle visible from both sides. Raylib only draws a triangle whose corners appear
+    /// anticlockwise on screen, so it is drawn once in each order.
+    /// </summary>
+    private static void Face(Vector3 a, Vector3 b, Vector3 c, Color colour)
+    {
+        Raylib.DrawTriangle3D(a, b, c, colour);
+        Raylib.DrawTriangle3D(a, c, b, colour);
+    }
+}
+```
+
+`ShipController.cs` (changed: `ChaseView` and `ViewCamera`):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// A spaceship that the user flies from the cockpit. Unlike the orbit camera, the ship can point in any
+/// direction (including upside down), because its orientation is stored as a quaternion.
+/// </summary>
+/// <remarks>
+/// The flying is "arcade" style, not real physics: the ship always moves in the direction its nose points,
+/// and its speed eases towards the speed the user has set with the throttle. Speeds are far faster than light,
+/// otherwise even the nearest star would take more than four years to reach.
+/// One world unit is one parsec, as in the rest of the program.
+/// </remarks>
+public class ShipController
+{
+    /// <summary>Slowest non-zero speed the throttle can be set to, in parsecs per second.</summary>
+    public const float MinSpeed = 0.01f;
+
+    /// <summary>Fastest speed the throttle can be set to, in parsecs per second.</summary>
+    public const float MaxSpeed = 20f;
+
+    /// <summary>One parsec per second expressed as a multiple of the speed of light (3.0857e13 km ÷ 299,792.458 km/s).</summary>
+    public const double LightSpeedsPerParsecPerSecond = 1.02927e8;
+
+    private const float ThrottleRate = 1.5f;          // holding W or S multiplies or divides the set speed by e^1.5 (about 4.5) per second
+    private const float SpeedResponse = 2.0f;         // how quickly the actual speed catches up with the set speed (per second)
+    private const float KeyTurnSpeed = 1.2f;          // radians per second for arrow keys and Q/E
+    private const float MouseTurnSpeed = 0.003f;      // radians per pixel of mouse movement while the left button is held
+
+    // In the ship's own frame the nose points along −Z, the top along +Y and the right wing along +X.
+    private static readonly Vector3 LocalForward = -Vector3.UnitZ;
+    private static readonly Vector3 LocalUp = Vector3.UnitY;
+    private static readonly Vector3 LocalRight = Vector3.UnitX;
+
+    private Quaternion _orientation = Quaternion.Identity;
+    private Vector3 _autopilotDestination;
+
+    /// <summary>
+    /// How far short of the destination star the autopilot stops, in parsecs (about 3.3 light years). The star spheres
+    /// are drawn far larger than real stars, so stopping much closer would fill the whole screen with the star.
+    /// </summary>
+    public const float AutopilotStopDistance = 1.0f;
+
+    private const float AutopilotTurnSpeed = 1.0f;     // radians per second the autopilot may turn the ship
+    private const float AutopilotSpeedGain = 0.5f;     // set speed (pc/s) per parsec of remaining distance
+    private const float ArrivalTolerance = 0.02f;      // parsecs from the stopping point that count as "arrived"
+
+    /// <summary>True while the autopilot is flying the ship.</summary>
+    public bool AutopilotOn { get; private set; }
+
+    /// <summary>What the autopilot is doing, for the flight display: "off", "turning towards target", "accelerating", "slowing down" or "arrived".</summary>
+    public string AutopilotStatus { get; private set; } = "off";
+
+    /// <summary>Where the ship is, in world coordinates (parsecs).</summary>
+    public Vector3 Position { get; private set; }
+
+    /// <summary>The speed the user has asked for with the throttle, in parsecs per second.</summary>
+    public float SetSpeed { get; private set; }
+
+    /// <summary>The ship's actual speed, in parsecs per second. It eases towards <see cref="SetSpeed"/>.</summary>
+    public float Speed { get; private set; }
+
+    /// <summary>The direction the nose points, as a unit vector in world coordinates.</summary>
+    public Vector3 Forward => Vector3.Transform(LocalForward, _orientation);
+
+    /// <summary>The direction the top of the ship points, as a unit vector in world coordinates.</summary>
+    public Vector3 Up => Vector3.Transform(LocalUp, _orientation);
+
+    /// <summary>The direction of the right wing, as a unit vector in world coordinates.</summary>
+    public Vector3 Right => Vector3.Transform(LocalRight, _orientation);
+
+    /// <summary>The ship's speed as a multiple of the speed of light.</summary>
+    public double SpeedInLightSpeeds => Speed * LightSpeedsPerParsecPerSecond;
+
+    /// <summary>The cockpit camera: at the ship's position, looking where the nose points, tilted with the ship.</summary>
+    public Camera3D Camera => new(
+        position: Position,
+        target: Position + Forward,
+        up: Up,
+        fovY: 45f, // same as the orbit camera, so switching views does not zoom
+        projection: CameraProjection.Perspective);
+
+    /// <summary>True when the camera follows the ship from behind (chase view) instead of sitting in the cockpit.</summary>
+    public bool ChaseView { get; set; }
+
+    /// <summary>Distance of the chase camera behind the ship, in parsecs (about four ship lengths).</summary>
+    private const float ChaseDistance = 0.22f;
+
+    /// <summary>Height of the chase camera above the ship's centre line, in parsecs.</summary>
+    private const float ChaseHeight = 0.06f;
+
+    /// <summary>
+    /// The camera to draw the scene with: the cockpit camera, or in chase view a camera behind and slightly
+    /// above the ship, looking at a point ahead of it and tilting with it.
+    /// </summary>
+    public Camera3D ViewCamera => ChaseView
+        ? new Camera3D(
+            position: Position - Forward * ChaseDistance + Up * ChaseHeight,
+            target: Position + Forward * 0.5f,
+            up: Up,
+            fovY: 45f,
+            projection: CameraProjection.Perspective)
+        : Camera;
+
+    /// <summary>
+    /// Describes a speed for the screen, e.g. "1.63 ly/s (51.5 million × light speed)".
+    /// </summary>
+    /// <param name="parsecsPerSecond">Speed in parsecs per second.</param>
+    public static string DescribeSpeed(float parsecsPerSecond)
+    {
+        if (parsecsPerSecond <= 0f)
+        {
+            return "stopped";
+        }
+
+        double lightYearsPerSecond = parsecsPerSecond * Star.LightYearsPerParsec;
+        double lightSpeeds = parsecsPerSecond * LightSpeedsPerParsecPerSecond;
+        string multiple = lightSpeeds switch
+        {
+            >= 1e9 => $"{lightSpeeds / 1e9:F1} billion",
+            >= 1e6 => $"{lightSpeeds / 1e6:F1} million",
+            _ => $"{lightSpeeds:N0}",
+        };
+        return $"{lightYearsPerSecond:F2} ly/s ({multiple} × light speed)";
+    }
+
+    /// <summary>
+    /// Puts the ship at <paramref name="position"/> pointing at <paramref name="lookAt"/>, level with the
+    /// equatorial plane (world +Y up), and stops it. Used when the user switches from the orbit view to the ship,
+    /// so the view does not jump.
+    /// </summary>
+    public void Place(Vector3 position, Vector3 lookAt)
+    {
+        Position = position;
+        Vector3 forward = lookAt - position;
+        if (forward.LengthSquared() < 1e-12f)
+        {
+            forward = LocalForward;
+        }
+
+        // CreateWorld builds a rotation whose −Z axis is "forward" and whose Y axis is as close to "up" as possible.
+        // If the ship would point straight up or down, a different "up" is used so the cross product is not zero.
+        Vector3 up = MathF.Abs(Vector3.Dot(Vector3.Normalize(forward), Vector3.UnitY)) > 0.999f ? Vector3.UnitZ : Vector3.UnitY;
+        Matrix4x4 world = Matrix4x4.CreateWorld(Vector3.Zero, Vector3.Normalize(forward), up);
+        _orientation = Quaternion.Normalize(Quaternion.CreateFromRotationMatrix(world));
+
+        SetSpeed = 0f;
+        Speed = 0f;
+    }
+
+    /// <summary>
+    /// Reads the keyboard and mouse, turns the ship and moves it. Call once per frame, before drawing.
+    /// W/S = throttle up/down, X = stop, arrow keys or left-drag = turn (up/down and left/right), Q/E = roll.
+    /// Any of these controls switches the autopilot off, so the pilot can always take over.
+    /// </summary>
+    /// <returns>True on the one frame in which the autopilot arrives at its destination.</returns>
+    public bool Update()
+    {
+        float seconds = Raylib.GetFrameTime();
+
+        // Turning. FPS-style: mouse up or the Up arrow lifts the nose; mouse right or the Right arrow turns right.
+        float pitch = 0f, yaw = 0f, roll = 0f;
+        if (Raylib.IsKeyDown(KeyboardKey.Up)) pitch += KeyTurnSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Down)) pitch -= KeyTurnSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Left)) yaw += KeyTurnSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Right)) yaw -= KeyTurnSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Q)) roll += KeyTurnSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.E)) roll -= KeyTurnSpeed * seconds;
+        if (Raylib.IsMouseButtonDown(MouseButton.Left))
+        {
+            Vector2 mouse = Raylib.GetMouseDelta();
+            pitch -= mouse.Y * MouseTurnSpeed;
+            yaw -= mouse.X * MouseTurnSpeed;
+        }
+
+        bool throttleUp = Raylib.IsKeyDown(KeyboardKey.W);
+        bool throttleDown = Raylib.IsKeyDown(KeyboardKey.S);
+        bool stop = Raylib.IsKeyPressed(KeyboardKey.X);
+
+        // The pilot takes over as soon as any flying control is used.
+        if (AutopilotOn && (pitch != 0f || yaw != 0f || roll != 0f || throttleUp || throttleDown || stop))
+        {
+            StopAutopilot();
+        }
+
+        Turn(pitch, yaw, roll);
+
+        // Throttle. The set speed changes by a factor per second (not a fixed amount), so the same key
+        // gives fine control at low speed and fast change at high speed.
+        if (throttleUp)
+        {
+            SetSpeed = SetSpeed < MinSpeed ? MinSpeed : MathF.Min(SetSpeed * MathF.Exp(ThrottleRate * seconds), MaxSpeed);
+        }
+        if (throttleDown)
+        {
+            SetSpeed *= MathF.Exp(-ThrottleRate * seconds);
+            if (SetSpeed < MinSpeed)
+            {
+                SetSpeed = 0f;
+            }
+        }
+        if (stop)
+        {
+            SetSpeed = 0f;
+        }
+
+        if (AutopilotOn)
+        {
+            RunAutopilot(seconds);
+        }
+
+        // The real speed eases towards the set speed, so the ship does not jump from stopped to full speed.
+        Speed += (SetSpeed - Speed) * MathF.Min(1f, SpeedResponse * seconds);
+        if (SetSpeed == 0f && Speed < MinSpeed * 0.1f)
+        {
+            Speed = 0f;
+        }
+
+        Position += Forward * Speed * seconds;
+
+        // Arrived: close enough to the stopping point. The ship is stopped and the autopilot switches itself off.
+        if (AutopilotOn && Vector3.Distance(Position, _autopilotDestination) - AutopilotStopDistance <= ArrivalTolerance)
+        {
+            SetSpeed = 0f;
+            Speed = 0f;
+            AutopilotOn = false;
+            AutopilotStatus = "arrived";
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Switches the autopilot on. It will turn the ship towards <paramref name="destination"/> (world coordinates),
+    /// fly there and stop <see cref="AutopilotStopDistance"/> parsecs short of it, so the ship does not end up inside the star.
+    /// </summary>
+    public void StartAutopilot(Vector3 destination)
+    {
+        _autopilotDestination = destination;
+        AutopilotOn = true;
+        AutopilotStatus = "turning towards target";
+    }
+
+    /// <summary>Switches the autopilot off. The ship keeps its current set speed.</summary>
+    public void StopAutopilot()
+    {
+        AutopilotOn = false;
+        AutopilotStatus = "off";
+    }
+
+    /// <summary>
+    /// One frame of autopilot: turn the nose towards the destination at a limited rate, and set the speed from the
+    /// remaining distance. The set speed is half the remaining distance per second; with the speed easing in
+    /// <see cref="Update"/> this approaches the stopping point smoothly without overshooting it
+    /// (a "critically damped" approach). While the nose is more than 30° off, the ship slows right down to turn.
+    /// </summary>
+    private void RunAutopilot(float seconds)
+    {
+        Vector3 toDestination = _autopilotDestination - Position;
+        float distance = toDestination.Length();
+        if (distance < 1e-6f)
+        {
+            return;
+        }
+        Vector3 direction = toDestination / distance;
+
+        // Turn towards the destination, at most AutopilotTurnSpeed radians per second.
+        float angle = MathF.Acos(Math.Clamp(Vector3.Dot(Forward, direction), -1f, 1f));
+        if (angle > 1e-4f)
+        {
+            Vector3 axis = Vector3.Cross(Forward, direction);
+            axis = axis.LengthSquared() < 1e-12f ? Up : Vector3.Normalize(axis); // exactly behind: turn over the top
+            float step = MathF.Min(angle, AutopilotTurnSpeed * seconds);
+            // Multiplying on the left applies the rotation in world axes (around "axis"), not the ship's own axes.
+            _orientation = Quaternion.Normalize(Quaternion.CreateFromAxisAngle(axis, step) * _orientation);
+        }
+
+        float angleDegrees = angle * 180f / MathF.PI;
+        float remaining = MathF.Max(0f, distance - AutopilotStopDistance);
+        float wanted = Math.Clamp(remaining * AutopilotSpeedGain, 0f, MaxSpeed);
+        float alignment = Math.Clamp(1f - angleDegrees / 30f, 0f, 1f); // 1 when pointing at it, 0 when 30° or more off
+        SetSpeed = wanted * alignment;
+
+        AutopilotStatus = angleDegrees > 5f ? "turning towards target"
+                        : SetSpeed < Speed ? "slowing down"
+                        : "accelerating";
+    }
+
+    /// <summary>
+    /// Rotates the ship around its own axes: <paramref name="pitch"/> around the right wing (nose up is positive),
+    /// <paramref name="yaw"/> around its top (nose left is positive) and <paramref name="roll"/> around its nose.
+    /// Angles are in radians.
+    /// </summary>
+    public void Turn(float pitch, float yaw, float roll)
+    {
+        // Multiplying on the right applies the rotation in the ship's own frame, not the world's.
+        Quaternion change = Quaternion.CreateFromAxisAngle(LocalRight, pitch)
+                          * Quaternion.CreateFromAxisAngle(LocalUp, yaw)
+                          * Quaternion.CreateFromAxisAngle(LocalForward, -roll);
+        _orientation = Quaternion.Normalize(_orientation * change);
+    }
+}
+```
+
+`Program.cs` (changed: C key, the ship model is drawn in chase view, clicks use the current view's camera, "[chase/cockpit view]" in the top-left line, help text):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+using StarChart3D;
+
+// Load the 2,000 nearest stars.
+string dataFile = Path.Combine(AppContext.BaseDirectory, "Data", "stars_local_2000.csv");
+var stars = new StarCollection(dataFile);
+
+// Open a resizable window with anti-aliasing (smoother edges).
+Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint | ConfigFlags.ResizableWindow);
+Raylib.InitWindow(1280, 800, "StarChart3D");
+Raylib.SetTargetFPS(60);
+
+var renderer = new StarRenderer(stars);
+var dust = new DustField();
+var ship = new ShipController(); // Feature 4: the spaceship the user can fly from the cockpit
+bool shipMode = false;           // false = orbit view (Features 2 and 3), true = flying the ship
+Star? shipTarget = null;         // the star chosen as the ship's target (T or click in ship mode), shown on the flight display
+Star? autopilotStar = null;      // the star the autopilot is flying to
+string arrivalMessage = "";      // "Arrived at ..." shown for a few seconds after the autopilot arrives
+float arrivalMessageSeconds = 0f;
+
+// The camera starts far outside the star field and then flies in to the first star system (the Sun).
+// After that it can be moved with mouse and keyboard.
+var cameraController = new CameraController(startPosition: new Vector3(90f, 60f, 90f), startTarget: Vector3.Zero);
+Star home = stars.FindById(0) ?? stars[0]; // HYG id 0 is the Sun
+const float ArrivalDistance = 2f;          // parsecs from the star when the camera arrives
+const float FlightSeconds = 6f;
+cameraController.FlyTo(StarRenderer.ToWorldPosition(home), ArrivalDistance, FlightSeconds);
+var nearbyPanel = new NearbyStarsPanel(stars, home); // the 10 nearest stars to the current location
+Star flightDestination = home;                       // the star the camera is flying to (or last arrived at)
+Vector2 leftPressPosition = Vector2.Zero;            // where the left mouse button went down, to tell a click from a drag
+const float MaxClickMovement = 5f;                   // pixels the mouse may move between press and release for a click
+
+// Starts a flight from the current location to another star. Longer trips take longer (3 to 8 seconds).
+void FlyToStar(Star destination)
+{
+    flightDestination = destination;
+    double lightYears = Course.Between(nearbyPanel.Location, destination).DistanceLightYears;
+    float seconds = Math.Clamp(2f + (float)lightYears * 0.3f, 3f, 8f);
+    cameraController.FlyTo(StarRenderer.ToWorldPosition(destination), ArrivalDistance, seconds);
+}
+
+var spaceColour = new Color(5, 5, 15, 255);
+string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
+const string Help = "Mouse: click a star = fly there, wheel = zoom, left-drag = rotate, right-drag = pan\n" +
+                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, F filter named stars, V fly ship, Esc quit";
+const string ShipHelp = "Ship: W/S throttle up/down, X stop, arrows or left-drag steer, Q/E roll\n" +
+                        "Keys: T target (or click a star), P autopilot, C cockpit/chase view, V chart view, R reset, F filter, Esc quit";
+
+while (!Raylib.WindowShouldClose())
+{
+    // V switches between the orbit view and flying the ship (not during an automatic flight).
+    // The new view starts where the old one was, so the picture does not jump.
+    if (Raylib.IsKeyPressed(KeyboardKey.V) && !cameraController.IsFlying)
+    {
+        if (shipMode)
+        {
+            // If the ship is parked at the current location's star (e.g. after the autopilot), orbit round that star;
+            // otherwise look at a point ahead of the ship.
+            Vector3 locationStar = StarRenderer.ToWorldPosition(nearbyPanel.Location);
+            Vector3 lookAt = Vector3.Distance(ship.Position, locationStar) < ShipController.AutopilotStopDistance + 0.5f
+                ? locationStar
+                : ship.Position + ship.Forward * ArrivalDistance;
+            cameraController.LookFrom(ship.Position, lookAt);
+            ship.StopAutopilot();
+        }
+        else
+        {
+            Camera3D orbitCamera = cameraController.Camera;
+            ship.Place(orbitCamera.Position, orbitCamera.Target);
+        }
+        shipMode = !shipMode;
+    }
+
+    // R always goes back to the starting orbit view (CameraController.Update does the reset itself).
+    if (shipMode && Raylib.IsKeyPressed(KeyboardKey.R))
+    {
+        shipMode = false;
+    }
+
+    // Remember where the left button went down, so a click (hardly any movement) can be told apart from a drag.
+    if (Raylib.IsMouseButtonPressed(MouseButton.Left))
+    {
+        leftPressPosition = Raylib.GetMousePosition();
+    }
+    bool leftClicked = Raylib.IsMouseButtonReleased(MouseButton.Left)
+        && Vector2.Distance(Raylib.GetMousePosition(), leftPressPosition) <= MaxClickMovement;
+
+    if (shipMode)
+    {
+        // C switches between the cockpit view and the chase view behind the ship.
+        if (Raylib.IsKeyPressed(KeyboardKey.C))
+        {
+            ship.ChaseView = !ship.ChaseView;
+        }
+
+        // P switches the autopilot on (towards the target) or off.
+        if (Raylib.IsKeyPressed(KeyboardKey.P) && shipTarget != null)
+        {
+            if (ship.AutopilotOn)
+            {
+                ship.StopAutopilot();
+            }
+            else
+            {
+                autopilotStar = shipTarget;
+                ship.StartAutopilot(StarRenderer.ToWorldPosition(autopilotStar));
+            }
+        }
+
+        bool arrived = ship.Update();
+        if (arrived && autopilotStar != null)
+        {
+            // The star reached becomes the current location, so the nearby-stars list is measured from it (press V to see it).
+            nearbyPanel.SetLocation(autopilotStar);
+            flightDestination = autopilotStar;
+            arrivalMessage = $"Arrived at {autopilotStar.DisplayName}";
+            arrivalMessageSeconds = 4f;
+        }
+
+        // T targets the star closest to the crosshair (within 15 degrees); clicking a star targets that star.
+        // Choosing a new target switches the autopilot off, so it never flies somewhere the pilot did not choose.
+        Star? newTarget = null;
+        if (Raylib.IsKeyPressed(KeyboardKey.T))
+        {
+            newTarget = renderer.StarNearestDirection(ship.Position, ship.Forward, 15f);
+        }
+        if (leftClicked)
+        {
+            newTarget = renderer.StarAt(Raylib.GetMousePosition(), ship.ViewCamera) ?? newTarget;
+        }
+        if (newTarget != null && newTarget != shipTarget)
+        {
+            shipTarget = newTarget;
+            ship.StopAutopilot();
+        }
+    }
+    else
+    {
+        // Choosing a star in the nearby list (click a row or press 1-9, 0) flies the camera there.
+        // This is checked before the camera update, so the click is not also treated as a camera drag.
+        Course? chosen = cameraController.IsFlying ? null : nearbyPanel.GetSelection();
+        if (chosen is Course course)
+        {
+            FlyToStar(course.Destination);
+        }
+
+        // Clicking a star in the 3D view also flies there. It only counts as a click if the mouse hardly moved
+        // between press and release; otherwise it was a left-drag to rotate the camera.
+        if (leftClicked && !cameraController.IsFlying && !nearbyPanel.IsMouseOver())
+        {
+            Star? clicked = renderer.StarAt(Raylib.GetMousePosition(), cameraController.Camera);
+            if (clicked != null && clicked.Id != nearbyPanel.Location.Id)
+            {
+                FlyToStar(clicked);
+            }
+        }
+
+        // R returns the camera to the starting view, so the list goes back to the Sun too.
+        if (Raylib.IsKeyPressed(KeyboardKey.R))
+        {
+            flightDestination = home;
+            nearbyPanel.SetLocation(home);
+        }
+
+        bool wasFlying = cameraController.IsFlying;
+        cameraController.Update();
+
+        // When a flight finishes, the destination becomes the new location and the list is recalculated.
+        if (wasFlying && !cameraController.IsFlying && nearbyPanel.Location.Id != flightDestination.Id)
+        {
+            nearbyPanel.SetLocation(flightDestination);
+        }
+    }
+
+    // F switches between all stars and only the stars that have a proper name.
+    if (Raylib.IsKeyPressed(KeyboardKey.F))
+    {
+        renderer.ShowOnlyNamedStars = !renderer.ShowOnlyNamedStars;
+    }
+    Camera3D camera = shipMode ? ship.ViewCamera : cameraController.Camera;
+    // In the ship the dust box grows with speed, so the streaks stay visible at high speed.
+    float dustScale = shipMode ? Math.Clamp(ship.Speed * 1.5f, 1f, 30f) : cameraController.Distance;
+    dust.Update(camera, dustScale);
+
+    Raylib.BeginDrawing();
+    Raylib.ClearBackground(spaceColour);
+
+    Raylib.BeginMode3D(camera);
+    Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
+    renderer.DrawStars();
+    dust.Draw(camera, dustScale); // faint particles that streak past when the camera moves
+    if (shipMode && ship.ChaseView)
+    {
+        ShipModel.Draw(ship); // the ship is only visible from outside it
+    }
+    Raylib.EndMode3D();
+
+    renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
+
+    // Dark panels behind the text, so star labels underneath do not make it unreadable.
+    var panelColour = new Color(0, 0, 0, 225);
+    Raylib.DrawRectangle(0, 0, 520, 126, panelColour);
+    string help = shipMode ? ShipHelp : Help;
+    int helpWidth = help.Split('\n').Max(line => Raylib.MeasureText(line, 16)) + 20; // fits the longest line
+    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, helpWidth, 50, panelColour);
+    Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
+    Raylib.DrawFPS(10, 36);
+    Raylib.DrawText($"Camera is {camera.Position.Length() * Star.LightYearsPerParsec:F1} light years from the Sun", 10, 62, 16, Color.LightGray);
+    string filterText = renderer.ShowOnlyNamedStars
+        ? $"Filter ON: showing {renderer.VisibleStarCount} named stars (F to show all)"
+        : $"Showing all {renderer.VisibleStarCount} stars (F to show only named stars)";
+    Raylib.DrawText(filterText, 10, 82, 16, renderer.ShowOnlyNamedStars ? Color.Yellow : Color.LightGray);
+    string modeText = shipMode
+        ? $"SHIP: {ShipController.DescribeSpeed(ship.Speed)}{(ship.AutopilotOn ? "  (autopilot)" : "")}  [{(ship.ChaseView ? "chase" : "cockpit")} view]"
+        : "Press V to fly the spaceship";
+    Raylib.DrawText(modeText, 10, 104, 16, shipMode ? Color.SkyBlue : Color.Gray);
+
+    if (shipMode && arrivalMessageSeconds > 0f)
+    {
+        arrivalMessageSeconds -= Raylib.GetFrameTime();
+        Raylib.DrawText(arrivalMessage, (Raylib.GetScreenWidth() - Raylib.MeasureText(arrivalMessage, 30)) / 2, 120, 30, Color.Green);
+    }
+    if (!shipMode && cameraController.IsFlying)
+    {
+        string flying = $"Flying to {flightDestination.DisplayName}...";
+        Raylib.DrawText(flying, (Raylib.GetScreenWidth() - Raylib.MeasureText(flying, 30)) / 2, 120, 30, Color.SkyBlue);
+    }
+    Raylib.DrawText(help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
+    renderer.DrawLegend();
+    if (shipMode)
+    {
+        FlightHud.Draw(ship, camera, shipTarget); // crosshair, target marker and flight panel (in place of the list)
+    }
+    else
+    {
+        nearbyPanel.Draw(); // the list is measured from the last star visited, so it is hidden while flying the ship
+    }
+    Raylib.EndDrawing();
+}
+
+Raylib.CloseWindow();
+```
+
+`FlightHud.cs` (changed: the crosshair is drawn where the nose really points):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// The spaceship's flight display (head-up display): a crosshair in the middle of the screen,
+/// a marker on the target star (or an arrow at the edge of the screen pointing to it), and a panel
+/// with the ship's heading and the distance, bearing, path, course error and arrival time to the target.
+/// </summary>
+/// <remarks>
+/// Bearing and path use the same definition as the nearby-stars list (<see cref="Course"/>), so the numbers can be compared.
+/// </remarks>
+public static class FlightHud
+{
+    private const int PanelWidth = 470;
+    private const int PanelTop = 236;                  // same place as the nearby-stars list, which is hidden while flying
+    private const int RightMargin = 10;
+    private const int LineHeight = 22;
+    private const int EdgeInset = 70;                  // how far from the window edge the off-screen arrow is drawn
+    private static readonly Color HudColour = new(120, 220, 255, 255);
+    private static readonly Color TargetColour = new(255, 210, 80, 255);
+
+    /// <summary>Draws the whole flight display. Call after <c>EndMode3D</c>, while drawing.</summary>
+    /// <param name="ship">The ship being flown.</param>
+    /// <param name="camera">The camera the 3D scene was drawn with (the cockpit camera).</param>
+    /// <param name="target">The chosen target star, or null if there is none.</param>
+    public static void Draw(ShipController ship, Camera3D camera, Star? target)
+    {
+        // The crosshair marks where the nose points: a point far ahead of the ship, seen through the current camera.
+        // In the cockpit view that is the middle of the screen; in the chase view the camera is above and behind
+        // the ship, so the point is a little higher up the screen.
+        Vector2 aim = Raylib.GetWorldToScreen(ship.Position + ship.Forward * 50f, camera);
+        DrawCrosshair(aim);
+        if (target != null)
+        {
+            DrawTargetMarker(ship, camera, target);
+        }
+        DrawPanel(ship, target);
+    }
+
+    /// <summary>Draws a small cross with a gap at <paramref name="aim"/>, showing where the nose points.</summary>
+    private static void DrawCrosshair(Vector2 aim)
+    {
+        int cx = (int)aim.X;
+        int cy = (int)aim.Y;
+        const int Gap = 6, Length = 16;
+        Raylib.DrawLine(cx - Gap - Length, cy, cx - Gap, cy, HudColour);
+        Raylib.DrawLine(cx + Gap, cy, cx + Gap + Length, cy, HudColour);
+        Raylib.DrawLine(cx, cy - Gap - Length, cx, cy - Gap, HudColour);
+        Raylib.DrawLine(cx, cy + Gap, cx, cy + Gap + Length, HudColour);
+    }
+
+    /// <summary>
+    /// Draws corner brackets round the target if it is on screen; otherwise an arrow at the edge of the
+    /// screen in the direction the ship would have to turn.
+    /// </summary>
+    private static void DrawTargetMarker(ShipController ship, Camera3D camera, Star target)
+    {
+        int width = Raylib.GetScreenWidth();
+        int height = Raylib.GetScreenHeight();
+        Vector3 toTarget = StarRenderer.ToWorldPosition(target) - camera.Position;
+
+        bool inFront = Vector3.Dot(toTarget, ship.Forward) > 0;
+        Vector2 screen = Raylib.GetWorldToScreen(StarRenderer.ToWorldPosition(target), camera);
+        bool onScreen = inFront && screen.X >= 0 && screen.X <= width && screen.Y >= 0 && screen.Y <= height;
+
+        if (onScreen)
+        {
+            // The brackets must fit round the star's sphere, which can be large when the ship is close.
+            float pixelsPerUnitAtOneParsec = (height / 2f) / MathF.Tan(camera.FovY * MathF.PI / 360f);
+            float sphereRadius = StarRenderer.StarRadius / toTarget.Length() * pixelsPerUnitAtOneParsec;
+            int halfSize = (int)MathF.Max(14f, sphereRadius + 8f);
+            DrawBrackets(screen, halfSize, TargetColour);
+
+            // The star's own label is drawn by StarRenderer, so the marker adds the distance underneath instead.
+            string distance = $"{toTarget.Length() * Star.LightYearsPerParsec:F2} ly";
+            Raylib.DrawText(distance, (int)screen.X - Raylib.MeasureText(distance, 16) / 2, (int)screen.Y + halfSize + 4, 16, TargetColour);
+            return;
+        }
+
+        // Off screen: find which way the target is in the ship's own view (right/up), and put an arrow
+        // on an ellipse just inside the window edge in that direction.
+        float right = Vector3.Dot(toTarget, ship.Right);
+        float up = Vector3.Dot(toTarget, ship.Up);
+        Vector2 direction = new(right, -up); // screen Y grows downwards
+        direction = direction.LengthSquared() < 1e-12f ? new Vector2(0, 1) : Vector2.Normalize(direction); // straight behind: point down
+
+        Vector2 centre = new(width / 2f, height / 2f);
+        float radiusX = width / 2f - EdgeInset;
+        float radiusY = height / 2f - EdgeInset;
+        float scale = 1f / MathF.Sqrt(direction.X * direction.X / (radiusX * radiusX) + direction.Y * direction.Y / (radiusY * radiusY));
+        Vector2 point = centre + direction * scale;
+
+        Vector2 side = new(-direction.Y, direction.X);
+        Vector2 tip = point + direction * 16;
+        Vector2 left = point - direction * 6 + side * 10;
+        Vector2 rightCorner = point - direction * 6 - side * 10;
+        Raylib.DrawTriangle(tip, left, rightCorner, TargetColour); // Raylib only fills triangles in one winding order,
+        Raylib.DrawTriangle(tip, rightCorner, left, TargetColour); // so both orders are drawn and one of them shows
+
+        string label = target.DisplayName;
+        int labelWidth = Raylib.MeasureText(label, 16);
+        Vector2 labelPosition = point - direction * 30 - new Vector2(labelWidth / 2f, 8);
+        Raylib.DrawText(label, (int)labelPosition.X, (int)labelPosition.Y, 16, TargetColour);
+    }
+
+    /// <summary>Draws four corner brackets (like a camera viewfinder) round a point.</summary>
+    private static void DrawBrackets(Vector2 centre, int halfSize, Color colour)
+    {
+        int x = (int)centre.X, y = (int)centre.Y, s = halfSize, l = halfSize / 2;
+        Raylib.DrawLine(x - s, y - s, x - s + l, y - s, colour); Raylib.DrawLine(x - s, y - s, x - s, y - s + l, colour);
+        Raylib.DrawLine(x + s, y - s, x + s - l, y - s, colour); Raylib.DrawLine(x + s, y - s, x + s, y - s + l, colour);
+        Raylib.DrawLine(x - s, y + s, x - s + l, y + s, colour); Raylib.DrawLine(x - s, y + s, x - s, y + s - l, colour);
+        Raylib.DrawLine(x + s, y + s, x + s - l, y + s, colour); Raylib.DrawLine(x + s, y + s, x + s, y + s - l, colour);
+    }
+
+    /// <summary>Draws the text panel with the ship's heading and the target information.</summary>
+    private static void DrawPanel(ShipController ship, Star? target)
+    {
+        int x = Raylib.GetScreenWidth() - PanelWidth - RightMargin;
+        var lines = new List<(string Text, Color Colour)>();
+
+        Vector3 heading = StarRenderer.ToHygPosition(ship.Forward);
+        (double headingBearing, double headingPath) = Course.AnglesOf(heading.X, heading.Y, heading.Z);
+        lines.Add(("FLIGHT DISPLAY", Color.RayWhite));
+        lines.Add(($"Heading: bearing {headingBearing:F1}°, path {headingPath:+0.0;-0.0;0.0}°", HudColour));
+
+        if (target == null)
+        {
+            lines.Add(("No target. Aim the crosshair at a star and", Color.LightGray));
+            lines.Add(("press T, or click a star.", Color.LightGray));
+        }
+        else
+        {
+            Vector3 ship3 = StarRenderer.ToHygPosition(ship.Position);
+            Course course = Course.FromPoint(ship3.X, ship3.Y, ship3.Z, target);
+
+            Vector3 toTarget = StarRenderer.ToWorldPosition(target) - ship.Position;
+            double offCourse = toTarget.LengthSquared() < 1e-12f
+                ? 0
+                : Math.Acos(Math.Clamp(Vector3.Dot(Vector3.Normalize(toTarget), ship.Forward), -1f, 1f)) * 180.0 / Math.PI;
+
+            lines.Add(($"Target: {target.DisplayName}", TargetColour));
+            lines.Add(($"Distance: {course.DistanceLightYears:F2} ly", TargetColour));
+            lines.Add(($"Bearing {course.BearingDegrees:F1}°, path {course.PathDegrees:+0.0;-0.0;0.0}°", TargetColour));
+            lines.Add(($"Off course: {offCourse:F1}°", offCourse < 2 ? Color.Green : TargetColour));
+            lines.Add(($"Arrival: {DescribeArrival(course.DistanceLightYears, ship.Speed, offCourse)}", TargetColour));
+            lines.Add(ship.AutopilotOn
+                ? ($"Autopilot: {ship.AutopilotStatus} (P to switch off)", Color.Green)
+                : ("Autopilot: off (press P to fly there)", Color.LightGray));
+        }
+
+        int height = 12 + lines.Count * LineHeight;
+        Raylib.DrawRectangle(x, PanelTop, PanelWidth, height, new Color(0, 0, 0, 225));
+        for (int i = 0; i < lines.Count; i++)
+        {
+            Raylib.DrawText(lines[i].Text, x + 10, PanelTop + 8 + i * LineHeight, i == 0 ? 18 : 16, lines[i].Colour);
+        }
+    }
+
+    /// <summary>
+    /// Describes how long the trip would take at the current speed, e.g. "12.3 s" or "2 min 05 s".
+    /// The time is only meaningful if the ship is pointing at the target, so that is said if it is not.
+    /// </summary>
+    public static string DescribeArrival(double distanceLightYears, float speedParsecsPerSecond, double offCourseDegrees)
+    {
+        if (speedParsecsPerSecond <= 0f)
+        {
+            return "never (ship stopped)";
+        }
+        if (offCourseDegrees > 90)
+        {
+            return "never (flying away)";
+        }
+
+        double seconds = distanceLightYears / (speedParsecsPerSecond * Star.LightYearsPerParsec);
+        string time = seconds < 60 ? $"{seconds:F1} s" : $"{(int)(seconds / 60)} min {(int)(seconds % 60):00} s";
+        return offCourseDegrees < 2 ? time : $"{time} if pointed at it";
+    }
+}
+```
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- `ShipModel` describes the ship as a few corner points in the ship's own frame (x = right wing, y = top, z = backwards), in parsecs. `W(local)` turns each corner into a world position: `Position + Right·x + Up·y − Forward·z`. Because it uses the ship's own axes, the model turns and rolls with the ship without needing a rotation matrix.
+- The hull is a four-sided pyramid from the nose to the back (six triangles), plus two flat wings and a tail fin. `Face` draws each triangle in both corner orders, because Raylib does not draw triangles seen from the back ("back-face culling"). White outline lines make the shape clear against black space. The engine glow is a small orange sphere at the back whose radius grows with speed.
+- `ViewCamera` is the cockpit camera, or in chase view a camera 0.22 pc behind and 0.06 pc above the ship, looking at a point 0.5 pc ahead and using the ship's `Up`, so the view rolls with the ship.
+- In `Program.cs`, C toggles `ChaseView`, the ship model is drawn only in chase view (in the cockpit you are inside it), and clicking a star now uses `ViewCamera` so it works in both views.
+- In `FlightHud`, the crosshair is drawn at `GetWorldToScreen(Position + Forward·50)`, a point far ahead of the nose. In the cockpit view this is exactly the screen centre (as before); in the chase view it is slightly higher, where the ship is really heading.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the model is built from simple triangles using the ship's own axes, so no 3D model file or extra library was needed, and it moves, turns and rolls correctly with the ship. The AI found a real bug in its own first version (the crosshair stayed at the screen centre in chase view although the nose aimed higher) and fixed it by working out where the nose points instead of assuming the centre; on my Mac the crosshair sits on the target Gl 352A in chase view. Weaknesses: (1) the ship is drawn about 0.06 pc long – about 12,000 times the Earth–Sun distance – so it is not to scale, but at real size it would be invisible; (2) the model has no lighting or shading, only flat colours, so it looks simple; (3) the chase camera is fixed to the ship, so it turns instantly with it instead of lagging behind smoothly like in games; (4) the arrival time and off-course angle in the flight display are still measured from the ship, not from the chase camera, which is correct but means the target brackets and the ship are in slightly different places on screen; (5) as before, there is no collision, so the ship can fly through stars.
+
+---
+
+### Entry 174 – 2026-11-10 02:41 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+HERE
+```
+[Screenshot: ship mode, "SHIP: stopped [cockpit view]", help text with "C cockpit/chase view", target GJ 3622 (brackets, 20.70 ly, off course 20.3°)]
+
+**AI response (full):**
+````
+The new code is running on your Mac. The top left says "**SHIP: stopped [cockpit view]**", the help text includes "**C cockpit/chase view**", and clicking GJ 3622 targeted it: brackets, 20.70 ly, off course 20.3°.
+
+Now I need to see the spaceship itself. The window is still open, so:
+
+1. Press **C**. The top left should change to "**[chase view]**", and the spaceship should appear in the lower middle of the screen, seen from behind. Take a screenshot.
+2. Press **P**. The autopilot turns the ship to GJ 3622 and flies there, with the orange engine glow. Take a screenshot while it's flying.
+3. Press **Esc** and send me the 2 screenshots.
+
+If pressing C doesn't show the ship, click once on the star window first so it has keyboard focus, then press C again.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+This proved the new code was running, but not the ship model, so the AI asked for one more step (C, then P).
+
+---
+
+### Entry 175 – 2026-11-10 02:43 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+HERE
+```
+[Screenshot 1: chart view at the start]
+[Screenshot 2: chase view: the 3D ship from behind with orange engine glow; "SHIP: 5.05 ly/s (159.3 million × light speed) (autopilot) [chase view]"; target Gl 352A 10.47 ly, heading 129.7°/−16.9° = bearing 129.7°/−16.9°, off course 0.0°, arrival 2.1 s, "Autopilot: slowing down"; crosshair on the target]
+
+**AI response (full):**
+````
+The spaceship works on your Mac. Your second screenshot shows everything together:
+- **The 3D ship model from behind**: grey body, blue wings, tail fin, and the **orange engine glow** at the back.
+- "**SHIP: 5.05 ly/s (159.3 million × light speed) (autopilot) [chase view]**".
+- **The autopilot flying to Gl 352A**: "Autopilot: slowing down", off course **0.0°**, heading 129.7°/−16.9° equal to the target's bearing, arrival 2.1 s.
+- **The crosshair sits on the target**, not in the middle of the screen, which shows my crosshair fix works in the chase view.
+
+(Your first screenshot is the chart view at the start, before pressing V.)
+
+**All four parts of Feature 4 are done.** Let's commit part 4. I've written the log entries in `log_entries_171_175.md` (Entries 171–175).
+
+**Steps (close the star window first).** Download the `.md` file and check it arrived:
+```
+ls ~/Downloads/log_entries_171_175.md
+```
+Then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+cat ~/Downloads/log_entries_171_175.md >> AI_programming_log.md
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+It should print **177**.
+```
+git add --dry-run .
+```
+It should list exactly 5 files:
+- `AI_programming_log.md`
+- `StarChart3D/FlightHud.cs`
+- `StarChart3D/Program.cs`
+- `StarChart3D/ShipController.cs`
+- `StarChart3D/ShipModel.cs`
+
+Send me a screenshot before you commit.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The ship model, chase view and autopilot all work together on my Mac.
+
+---

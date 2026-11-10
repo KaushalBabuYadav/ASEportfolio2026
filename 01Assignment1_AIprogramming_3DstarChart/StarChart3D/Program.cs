@@ -46,7 +46,7 @@ string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLigh
 const string Help = "Mouse: click a star = fly there, wheel = zoom, left-drag = rotate, right-drag = pan\n" +
                     "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, F filter named stars, V fly ship, Esc quit";
 const string ShipHelp = "Ship: W/S throttle up/down, X stop, arrows or left-drag steer, Q/E roll\n" +
-                        "Keys: T target star at crosshair (or click a star), P autopilot to target, V chart view, R reset, F filter, Esc quit";
+                        "Keys: T target (or click a star), P autopilot, C cockpit/chase view, V chart view, R reset, F filter, Esc quit";
 
 while (!Raylib.WindowShouldClose())
 {
@@ -89,6 +89,12 @@ while (!Raylib.WindowShouldClose())
 
     if (shipMode)
     {
+        // C switches between the cockpit view and the chase view behind the ship.
+        if (Raylib.IsKeyPressed(KeyboardKey.C))
+        {
+            ship.ChaseView = !ship.ChaseView;
+        }
+
         // P switches the autopilot on (towards the target) or off.
         if (Raylib.IsKeyPressed(KeyboardKey.P) && shipTarget != null)
         {
@@ -122,7 +128,7 @@ while (!Raylib.WindowShouldClose())
         }
         if (leftClicked)
         {
-            newTarget = renderer.StarAt(Raylib.GetMousePosition(), ship.Camera) ?? newTarget;
+            newTarget = renderer.StarAt(Raylib.GetMousePosition(), ship.ViewCamera) ?? newTarget;
         }
         if (newTarget != null && newTarget != shipTarget)
         {
@@ -173,7 +179,7 @@ while (!Raylib.WindowShouldClose())
     {
         renderer.ShowOnlyNamedStars = !renderer.ShowOnlyNamedStars;
     }
-    Camera3D camera = shipMode ? ship.Camera : cameraController.Camera;
+    Camera3D camera = shipMode ? ship.ViewCamera : cameraController.Camera;
     // In the ship the dust box grows with speed, so the streaks stay visible at high speed.
     float dustScale = shipMode ? Math.Clamp(ship.Speed * 1.5f, 1f, 30f) : cameraController.Distance;
     dust.Update(camera, dustScale);
@@ -185,6 +191,10 @@ while (!Raylib.WindowShouldClose())
     Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
     renderer.DrawStars();
     dust.Draw(camera, dustScale); // faint particles that streak past when the camera moves
+    if (shipMode && ship.ChaseView)
+    {
+        ShipModel.Draw(ship); // the ship is only visible from outside it
+    }
     Raylib.EndMode3D();
 
     renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
@@ -203,7 +213,7 @@ while (!Raylib.WindowShouldClose())
         : $"Showing all {renderer.VisibleStarCount} stars (F to show only named stars)";
     Raylib.DrawText(filterText, 10, 82, 16, renderer.ShowOnlyNamedStars ? Color.Yellow : Color.LightGray);
     string modeText = shipMode
-        ? $"SHIP: {ShipController.DescribeSpeed(ship.Speed)}{(ship.AutopilotOn ? "  (autopilot)" : "")}"
+        ? $"SHIP: {ShipController.DescribeSpeed(ship.Speed)}{(ship.AutopilotOn ? "  (autopilot)" : "")}  [{(ship.ChaseView ? "chase" : "cockpit")} view]"
         : "Press V to fly the spaceship";
     Raylib.DrawText(modeText, 10, 104, 16, shipMode ? Color.SkyBlue : Color.Gray);
 

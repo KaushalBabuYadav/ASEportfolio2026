@@ -82,6 +82,28 @@ public class ShipController
         fovY: 45f, // same as the orbit camera, so switching views does not zoom
         projection: CameraProjection.Perspective);
 
+    /// <summary>True when the camera follows the ship from behind (chase view) instead of sitting in the cockpit.</summary>
+    public bool ChaseView { get; set; }
+
+    /// <summary>Distance of the chase camera behind the ship, in parsecs (about four ship lengths).</summary>
+    private const float ChaseDistance = 0.22f;
+
+    /// <summary>Height of the chase camera above the ship's centre line, in parsecs.</summary>
+    private const float ChaseHeight = 0.06f;
+
+    /// <summary>
+    /// The camera to draw the scene with: the cockpit camera, or in chase view a camera behind and slightly
+    /// above the ship, looking at a point ahead of it and tilting with it.
+    /// </summary>
+    public Camera3D ViewCamera => ChaseView
+        ? new Camera3D(
+            position: Position - Forward * ChaseDistance + Up * ChaseHeight,
+            target: Position + Forward * 0.5f,
+            up: Up,
+            fovY: 45f,
+            projection: CameraProjection.Perspective)
+        : Camera;
+
     /// <summary>
     /// Describes a speed for the screen, e.g. "1.63 ly/s (51.5 million × light speed)".
     /// </summary>
