@@ -80,6 +80,26 @@ public class CameraController
         IsFlying = true;
     }
 
+    /// <summary>
+    /// Moves the camera to <paramref name="position"/>, looking at <paramref name="target"/>, without animation.
+    /// Used when the user leaves the spaceship, so the orbit view starts where the ship was.
+    /// </summary>
+    public void LookFrom(Vector3 position, Vector3 target)
+    {
+        Vector3 offset = position - target;
+        float length = offset.Length();
+        if (length < 1e-6f)
+        {
+            return; // position and target are the same point, so there is no direction to look in
+        }
+
+        IsFlying = false;
+        _target = target;
+        _distance = Math.Clamp(length, MinDistance, MaxDistance);
+        _yaw = MathF.Atan2(offset.Z, offset.X);
+        _pitch = Math.Clamp(MathF.Asin(offset.Y / length), -MaxPitch, MaxPitch);
+    }
+
     /// <summary>Puts the camera back where it started.</summary>
     public void Reset()
     {

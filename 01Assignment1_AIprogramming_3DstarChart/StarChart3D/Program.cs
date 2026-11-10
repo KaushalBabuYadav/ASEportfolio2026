@@ -13,6 +13,8 @@ Raylib.SetTargetFPS(60);
 
 var renderer = new StarRenderer(stars);
 var dust = new DustField();
+var ship = new ShipController(); // Feature 4: the spaceship the user can fly from the cockpit
+bool shipMode = false;           // false = orbit view (Features 2 and 3), true = flying the ship
 
 // The camera starts far outside the star field and then flies in to the first star system (the Sun).
 // After that it can be moved with mouse and keyboard.
@@ -38,48 +40,79 @@ void FlyToStar(Star destination)
 var spaceColour = new Color(5, 5, 15, 255);
 string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
 const string Help = "Mouse: click a star = fly there, wheel = zoom, left-drag = rotate, right-drag = pan\n" +
-                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, F filter named stars, Esc quit";
+                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, F filter named stars, V fly ship, Esc quit";
+const string ShipHelp = "Ship: W/S throttle up/down, X stop, arrows or left-drag steer, Q/E roll\n" +
+                        "Keys: V back to chart view, R reset, F filter named stars, Esc quit";
 
 while (!Raylib.WindowShouldClose())
 {
-    // Choosing a star in the nearby list (click a row or press 1-9, 0) flies the camera there.
-    // This is checked before the camera update, so the click is not also treated as a camera drag.
-    Course? chosen = cameraController.IsFlying ? null : nearbyPanel.GetSelection();
-    if (chosen is Course course)
+    // V switches between the orbit view and flying the ship (not during an automatic flight).
+    // The new view starts where the old one was, so the picture does not jump.
+    if (Raylib.IsKeyPressed(KeyboardKey.V) && !cameraController.IsFlying)
     {
-        FlyToStar(course.Destination);
-    }
-
-    // Clicking a star in the 3D view also flies there. It only counts as a click if the mouse hardly moved
-    // between press and release; otherwise it was a left-drag to rotate the camera.
-    if (Raylib.IsMouseButtonPressed(MouseButton.Left))
-    {
-        leftPressPosition = Raylib.GetMousePosition();
-    }
-    if (Raylib.IsMouseButtonReleased(MouseButton.Left) && !cameraController.IsFlying && !nearbyPanel.IsMouseOver()
-        && Vector2.Distance(Raylib.GetMousePosition(), leftPressPosition) <= MaxClickMovement)
-    {
-        Star? clicked = renderer.StarAt(Raylib.GetMousePosition(), cameraController.Camera);
-        if (clicked != null && clicked.Id != nearbyPanel.Location.Id)
+        if (shipMode)
         {
-            FlyToStar(clicked);
+            cameraController.LookFrom(ship.Position, ship.Position + ship.Forward * ArrivalDistance);
         }
+        else
+        {
+            Camera3D orbitCamera = cameraController.Camera;
+            ship.Place(orbitCamera.Position, orbitCamera.Target);
+        }
+        shipMode = !shipMode;
     }
 
-    // R returns the camera to the starting view, so the list goes back to the Sun too.
-    if (Raylib.IsKeyPressed(KeyboardKey.R))
+    // R always goes back to the starting orbit view (CameraController.Update does the reset itself).
+    if (shipMode && Raylib.IsKeyPressed(KeyboardKey.R))
     {
-        flightDestination = home;
-        nearbyPanel.SetLocation(home);
+        shipMode = false;
     }
 
-    bool wasFlying = cameraController.IsFlying;
-    cameraController.Update();
-
-    // When a flight finishes, the destination becomes the new location and the list is recalculated.
-    if (wasFlying && !cameraController.IsFlying && nearbyPanel.Location.Id != flightDestination.Id)
+    if (shipMode)
     {
-        nearbyPanel.SetLocation(flightDestination);
+        ship.Update();
+    }
+    else
+    {
+        // Choosing a star in the nearby list (click a row or press 1-9, 0) flies the camera there.
+        // This is checked before the camera update, so the click is not also treated as a camera drag.
+        Course? chosen = cameraController.IsFlying ? null : nearbyPanel.GetSelection();
+        if (chosen is Course course)
+        {
+            FlyToStar(course.Destination);
+        }
+
+        // Clicking a star in the 3D view also flies there. It only counts as a click if the mouse hardly moved
+        // between press and release; otherwise it was a left-drag to rotate the camera.
+        if (Raylib.IsMouseButtonPressed(MouseButton.Left))
+        {
+            leftPressPosition = Raylib.GetMousePosition();
+        }
+        if (Raylib.IsMouseButtonReleased(MouseButton.Left) && !cameraController.IsFlying && !nearbyPanel.IsMouseOver()
+            && Vector2.Distance(Raylib.GetMousePosition(), leftPressPosition) <= MaxClickMovement)
+        {
+            Star? clicked = renderer.StarAt(Raylib.GetMousePosition(), cameraController.Camera);
+            if (clicked != null && clicked.Id != nearbyPanel.Location.Id)
+            {
+                FlyToStar(clicked);
+            }
+        }
+
+        // R returns the camera to the starting view, so the list goes back to the Sun too.
+        if (Raylib.IsKeyPressed(KeyboardKey.R))
+        {
+            flightDestination = home;
+            nearbyPanel.SetLocation(home);
+        }
+
+        bool wasFlying = cameraController.IsFlying;
+        cameraController.Update();
+
+        // When a flight finishes, the destination becomes the new location and the list is recalculated.
+        if (wasFlying && !cameraController.IsFlying && nearbyPanel.Location.Id != flightDestination.Id)
+        {
+            nearbyPanel.SetLocation(flightDestination);
+        }
     }
 
     // F switches between all stars and only the stars that have a proper name.
@@ -87,8 +120,10 @@ while (!Raylib.WindowShouldClose())
     {
         renderer.ShowOnlyNamedStars = !renderer.ShowOnlyNamedStars;
     }
-    Camera3D camera = cameraController.Camera;
-    dust.Update(camera, cameraController.Distance);
+    Camera3D camera = shipMode ? ship.Camera : cameraController.Camera;
+    // In the ship the dust box grows with speed, so the streaks stay visible at high speed.
+    float dustScale = shipMode ? Math.Clamp(ship.Speed * 1.5f, 1f, 30f) : cameraController.Distance;
+    dust.Update(camera, dustScale);
 
     Raylib.BeginDrawing();
     Raylib.ClearBackground(spaceColour);
@@ -96,15 +131,17 @@ while (!Raylib.WindowShouldClose())
     Raylib.BeginMode3D(camera);
     Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
     renderer.DrawStars();
-    dust.Draw(camera, cameraController.Distance); // faint particles that streak past when the camera moves
+    dust.Draw(camera, dustScale); // faint particles that streak past when the camera moves
     Raylib.EndMode3D();
 
     renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
 
     // Dark panels behind the text, so star labels underneath do not make it unreadable.
     var panelColour = new Color(0, 0, 0, 225);
-    Raylib.DrawRectangle(0, 0, 520, 104, panelColour);
-    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, 760, 50, panelColour);
+    Raylib.DrawRectangle(0, 0, 520, 126, panelColour);
+    string help = shipMode ? ShipHelp : Help;
+    int helpWidth = help.Split('\n').Max(line => Raylib.MeasureText(line, 16)) + 20; // fits the longest line
+    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, helpWidth, 50, panelColour);
     Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
     Raylib.DrawFPS(10, 36);
     Raylib.DrawText($"Camera is {camera.Position.Length() * Star.LightYearsPerParsec:F1} light years from the Sun", 10, 62, 16, Color.LightGray);
@@ -112,15 +149,22 @@ while (!Raylib.WindowShouldClose())
         ? $"Filter ON: showing {renderer.VisibleStarCount} named stars (F to show all)"
         : $"Showing all {renderer.VisibleStarCount} stars (F to show only named stars)";
     Raylib.DrawText(filterText, 10, 82, 16, renderer.ShowOnlyNamedStars ? Color.Yellow : Color.LightGray);
+    string modeText = shipMode
+        ? $"SHIP: {ShipController.DescribeSpeed(ship.Speed)}"
+        : "Press V to fly the spaceship";
+    Raylib.DrawText(modeText, 10, 104, 16, shipMode ? Color.SkyBlue : Color.Gray);
 
-    if (cameraController.IsFlying)
+    if (!shipMode && cameraController.IsFlying)
     {
         string flying = $"Flying to {flightDestination.DisplayName}...";
         Raylib.DrawText(flying, (Raylib.GetScreenWidth() - Raylib.MeasureText(flying, 30)) / 2, 120, 30, Color.SkyBlue);
     }
-    Raylib.DrawText(Help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
+    Raylib.DrawText(help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
     renderer.DrawLegend();
-    nearbyPanel.Draw();
+    if (!shipMode)
+    {
+        nearbyPanel.Draw(); // the list is measured from the last star visited, so it is hidden while flying the ship
+    }
     Raylib.EndDrawing();
 }
 

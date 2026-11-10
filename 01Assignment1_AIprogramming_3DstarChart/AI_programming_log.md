@@ -8570,3 +8570,1683 @@ It should list exactly **4 files**: `AI_programming_log.md`, `StarChart3D/Nearby
 Clicking a star in 3D works on my Mac. The AI checked the result against the earlier trip in the other direction (Barnard's Star → Ross 154: 305.8°, −52.6°; Ross 154 → Barnard's Star: 125.8°, +52.6°), which shows the bearing and path are calculated consistently. Clicking a row also works on my Mac: the row under the mouse turns blue, which shows that the mouse position and the row positions match on the Mac's Retina screen too (the AI had only tested this in its virtual screen).
 
 ---
+
+### Entry 132 – 2026-11-08 05:32 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+HERE
+```
+[Screenshot: VS Code; `cat ~/Downloads/log_entries_126_131.md >> AI_programming_log.md` then `grep -c "^### Entry"` printed 133]
+
+**AI response (full):**
+````
+133 is correct, so the new entries went in properly.
+
+Two steps are left before committing.
+
+**1. Fill in Entry 126.** You're looking at a diff (comparison) view at the moment. To open the file normally:
+- Click the **Search** icon (magnifying glass) on the far left. In the **Search** box at the top left, type:
+  ```
+  Paste the AI's full reply
+  ```
+- Click the one result. It opens `AI_programming_log.md` at Entry 126.
+- Select that whole line, starting with `(Paste the AI's full reply...` and ending with `...git push`.)`. Replace it with my reply from 05:06, copied from this chat. To find it, scroll up to your 05:06 "here" message with the dry-run screenshot. My answer below it has the `git commit -m "Feature 3: list the 10 nearest stars with distance, bearing and path"` command. Hover over that reply, click its **copy** icon, then paste.
+- Keep the ```` lines just above and below it. Press **Cmd+S** to save.
+
+If you can't find that reply in the chat, tell me. I'll change Entry 126 to say honestly that the reply wasn't saved.
+
+**2. Check which files will be committed.** In the terminal:
+```
+git add --dry-run .
+```
+It should list exactly 4 files:
+- `AI_programming_log.md`
+- `StarChart3D/NearbyStarsPanel.cs`
+- `StarChart3D/Program.cs`
+- `StarChart3D/StarRenderer.cs`
+
+Send me a screenshot of that before you commit.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues with the check. But the instructions for editing Entry 126 by hand in VS Code were too long and confusing for me (next entry).
+
+---
+
+### Entry 133 – 2026-11-08 05:33 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+I DONT UNDERSTAND WHAT I. HAVE TO DO NOW TELL ME STEP BY STEP
+```
+
+**AI actions:** The AI tested the perl command on a copy of the log entries file first: it replaced the placeholder line in Entry 126 and left everything else unchanged.
+
+**AI response (full):**
+````
+Sorry, that was too complicated. You don't need to edit anything by hand. One command fixes Entry 126 for you.
+
+You're already in the right folder in the terminal. Do these one at a time.
+
+**Step 1.** Copy this whole command and paste it into the terminal, then press Enter:
+```
+perl -pi -e 's/^\(Paste the AI\x27s full reply.*/The AI confirmed the checks were correct and gave the commit commands one at a time: `git add .`, then `git commit -m "Feature 3: list the 10 nearest stars with distance, bearing and path"`, then `git push`, and asked for a screenshot after the push. (This is a summary: the AI\x27s exact wording of this reply was lost when its conversation memory was summarised.)/' AI_programming_log.md
+```
+It prints nothing. That's normal.
+
+**Step 2.** Check that it worked:
+```
+grep -c "This is a summary" AI_programming_log.md
+```
+It should print **1**.
+
+**Step 3.** See which files will be committed:
+```
+git add --dry-run .
+```
+It should list exactly 4 files:
+- `AI_programming_log.md`
+- `StarChart3D/NearbyStarsPanel.cs`
+- `StarChart3D/Program.cs`
+- `StarChart3D/StarRenderer.cs`
+
+**Step 4.** Send me one screenshot of the terminal. Don't commit yet. I'll check it first.
+
+Step 1 replaces the placeholder in Entry 126 with an honest summary of my 05:06 reply. I can't recover the exact words of that reply, so the entry now says so instead of pretending to be word for word.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Much better: one command instead of a manual edit, tested first. The AI was honest that it could not recover its exact 05:06 reply (lost when its memory of the conversation was summarised), so Entry 126 now says it is a summary instead of pretending to be word for word. Weakness: the earlier AI should have saved that reply in its log file at the time, as it did for the other entries.
+
+---
+
+### Entry 134 – 2026-11-08 05:35 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+HERE
+```
+[Screenshot: the perl command ran with no error]
+
+**AI response (full):**
+````
+Step 1 worked. The command finished without any error.
+
+Now do the next two steps in the terminal, one at a time.
+
+**Step 2.** Paste this and press Enter:
+```
+grep -c "This is a summary" AI_programming_log.md
+```
+It should print **1**.
+
+**Step 3.** Paste this and press Enter:
+```
+git add --dry-run .
+```
+It should list exactly 4 files:
+- `AI_programming_log.md`
+- `StarChart3D/NearbyStarsPanel.cs`
+- `StarChart3D/Program.cs`
+- `StarChart3D/StarRenderer.cs`
+
+**Step 4.** Send me a screenshot of the terminal showing both results. Don't commit yet.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 135 – 2026-11-08 05:36 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+HERE
+```
+[Screenshot: `grep -c "This is a summary"` printed 1; `git add --dry-run .` listed AI_programming_log.md, StarChart3D/NearbyStarsPanel.cs, StarChart3D/Program.cs, StarChart3D/StarRenderer.cs]
+
+**AI response (full):**
+````
+Everything checks out:
+- The summary is in Entry 126 (the check printed **1**).
+- Exactly the **4 correct files** are listed.
+
+Now commit and push. Run these one at a time.
+
+**Step 1.**
+```
+git add .
+```
+
+**Step 2.**
+```
+git commit -m "Feature 3: click a star or press a number to fly there and update the list"
+```
+
+**Step 3.**
+```
+git push
+```
+
+**Step 4.** Send me a screenshot after `git push`. I'll check the commit on GitHub, then we'll do the Feature 3 pull request.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 136 – 2026-11-08 05:38 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+HERE
+```
+[Screenshot: `git commit` (4 files changed, 1176 insertions, 4 deletions) and `git push`: 46062e7..21c3f24 feature3-3d_movement]
+
+**AI actions:** The AI checked commit 21c3f24 on GitHub (read-only): 4 files, code identical to what it tested, 133 headings, no duplicates, Entry 126 has the summary.
+
+**AI response (full):**
+````
+Your commit `21c3f24` is on GitHub and I've checked it. I only read the repo, I didn't change anything.
+- It changes exactly the 4 right files, and the code is the same as what I tested.
+- The log has **133** headings, with no duplicates.
+- Entry 126 contains the honest summary.
+
+**All four parts of Feature 3 are now committed:**
+- ✅ Fly-in to the Sun (`5dc5de6`)
+- ✅ Dust animation (`757c107`)
+- ✅ Nearest stars list with distance, bearing and path (`46062e7`)
+- ✅ Click a star or press a number to fly there, and the list updates (`21c3f24`)
+
+**Now the pull request.** Do it in your web browser, the same way as Feature 2. This will be pull request **#3**.
+
+**Step 1.** Go to `https://github.com/KaushalBabuYadav/ASEportfolio2026` and click **Pull requests** at the top. Then click the green **New pull request** button.
+
+**Step 2.** Set the two boxes:
+- **base:** `main`
+- **compare:** `feature3-3d_movement`
+
+It should show **4 commits**.
+
+**Step 3.** Click **Create pull request**. In the **title** box, type exactly:
+```
+Feature 3 3D movement
+```
+Click **Create pull request** again.
+
+**Step 4.** Click **Merge pull request** and take a screenshot of the two boxes **before** you click Confirm. They must be:
+- **Top box** (the commit message), exactly: `Feature 3 3D movement`
+- **Bottom box** (the description): `Merge pull request #3 from KaushalBabuYadav/feature3-3d_movement`
+
+GitHub fills these in itself and puts them the other way round. Last time the boxes got swapped twice, so **send me the screenshot and wait for my OK before clicking Confirm merge**.
+
+Don't delete the branch afterwards.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues. It warned me that the merge boxes were swapped twice before.
+
+---
+
+### Entry 137 – 2026-11-08 05:41 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+LETS REST NOW I PULL IT AFTER SOME HOURS ALSO DID YOU CHECK HOW MANY COMMITS I HAVE TO DO IN FEATURE 3 AS MY PROFESSOR NOTES TOLS US??
+```
+
+**AI response (full):**
+````
+Yes, have a rest. Everything is saved in the handover note in your ASE project, so we can carry on from here next time.
+
+**About the number of commits:** I checked the assignment brief (`2026ASEAssignment.pdf`). It doesn't give a number for Feature 3. It says "There should be a commit for each sub-facility" and "Several fully documented commits". Feature 3 lists 5 sub-facilities, and you have 4 commits:
+
+1. 3D animation towards initial star system → `5dc5de6`
+2. Dust animation → `757c107`
+3. List of local stars → `46062e7`
+4. Click on a star, animate to it and update the list → `21c3f24`
+5. Distance (light years), bearing and path → also in `46062e7`, together with the list
+
+So all 5 are done. The list and its distance/bearing/path columns went in one commit, because the list was built with those columns from the start. If someone asks, you can explain that in your demo. I wouldn't try to split that commit now: rewriting history that's already pushed could look like forging it, and the brief warns about that.
+
+Your professor's notes may say something different from the brief, and I haven't seen them. If they give a specific number, send me that part and I'll check it against your commits.
+
+**When you're back:**
+1. **Pull request #3**, "Feature 3 3D movement". Send me the screenshot before clicking Confirm.
+2. **README**: name, group, tutor, choice of AI, setup steps, project description and class structure, and the YouTube link.
+3. **YouTube demo**, the **Google Demo Form** and the **MyBeckett** hand-in.
+
+All of this has to be done before **Monday 9 Nov, 12pm**, with no commits after that.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI checked the brief instead of guessing and was honest that the list and the distance/bearing/path columns are in one commit. It advised against rewriting pushed history, which is correct because the brief says version control history must not be forged.
+
+---
+
+### Entry 138 – 2026-11-08 05:44 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+this is what my announcement says Hi all,
+
+week 7 is Creating and Managing Exceptions, so please watch the lecture video before the session.
+
+The hand in for the assignment is on Monday 9th November, but the self-certified deadline is a week later on the 16th (before 12:00PM). I expect most people to hand in then. See the Assessment folder but you don't need to tell me, or apply to do that. As an incentive to hand in on 9th, I will mark all of those first. You can also submit and edit the form as much as you like and submit to myBeckett as many times as you like.
+
+Enjoy Bon Fire night, but don't set any annoying fireworks off near me as I'm grumpy enough as it is,
+
+Duncan
+```
+
+**AI response (full):**
+````
+That's good news, and it changes the plan. Here's what Duncan's announcement says:
+
+- **The real deadline is Monday 16 November, before 12:00 noon.** You don't need to apply or tell him to use it.
+- **If you hand in on 9 November, your work gets marked first.** That's the only advantage.
+- **You can submit the Google Form and MyBeckett as many times as you like**, so a first submission can be updated later.
+
+It doesn't say anything about how many commits you need, so the brief's rule still applies: one commit per sub-facility, and Feature 3 already covers all of them.
+
+You have two options:
+
+- **Hand in on the 9th:** do pull request #3, the README, the demo and the form tomorrow morning. That gets you marked early, but without Feature 4.
+- **Hand in by the 16th:** use the extra week for **Feature 4, which is worth 30 marks**, the biggest section. The brief says it has to be "something very substantial", for example spaceship-style flying like the game Elite. You'd still do pull request #3 and the README first, so Features 1–3 are finished whatever happens.
+
+The second option gives you a chance at many more marks. One thing to check: if you submit on the 9th and then keep committing, I'm not sure which commit gets marked. The brief only says "the last commit… before the deadline". If you go with the 16th, it's worth checking the Assessment folder or asking Duncan.
+
+Have a good rest. When you're back, tell me which option you want, and we'll start with pull request #3 either way.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI summarised the announcement correctly and said honestly what it did not know (which commit is marked if I hand in on the 9th and keep committing).
+
+---
+
+### Entry 139 – 2026-11-08 05:47 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+i need everything to be perfect and score very good marks
+```
+
+**AI response (full):**
+````
+Then the best plan is to **use the extra week and hand in by Monday 16 November**. I'd aim to finish by Saturday 14th, so there are two days spare if anything goes wrong. Feature 4 alone is worth 30 marks, and you can't get those by handing in tomorrow.
+
+**The plan, in order:**
+
+1. **Pull request #3** for Feature 3, to close it off properly.
+2. **README** (Setting Up, 20 marks). This needs your name, group and tutor, a paragraph on why you chose Claude, how you set up your Mac (.NET, VS Code, Raylib and why not WPF), the star data source and licence, a project description, and the class structure. I'll also tidy two small things: your name in `docfx.json`, and Mac `.DS_Store` files.
+3. **Feature 4** (30 marks), on branch `feature4-additional-facilities`, with several commits and a pull request called "Feature 4 Additional". The brief wants something big, and gives "more like a 3D game… Elite… flying, spaceship models" as an example. My suggestion, which fits that and builds on what you have:
+   - **Spaceship flight mode:** a cockpit view where you steer and thrust yourself, with speed shown in light-speed units.
+   - **A flight display:** your heading, plus distance, bearing, path and arrival time to a chosen target star.
+   - **Autopilot** to a selected star.
+   - **Constellation lines and names**, so the sky looks like a real star chart. The astronomy questions for this would go to your domain expert chat and earn domain log entries.
+4. **Quality check:** go back over the critiques and explanations, since the first-class marks depend on them.
+5. **YouTube demo** (I'll write you a script), the **Google Form** and the **MyBeckett** hand-in.
+
+When you're back, start with pull request #3 and tell me whether you like the Feature 4 idea or have your own. I've saved this plan in the handover note in your ASE project, so nothing gets lost. Rest well.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+A clear plan. The constellation-lines idea was later dropped in favour of autopilot and a ship model (Entry 149), because my 2,000 stars are all within 67 light years and only a few of them are bright constellation stars, so constellation lines would be very sparse.
+
+---
+
+### Entry 140 – 2026-11-08 05:48 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+okay
+```
+
+**AI response (full):**
+````
+Great. When you're back, just say "lets start" and we'll begin with pull request #3.
+````
+
+---
+
+### Entry 141 – 2026-11-08 23:59 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+lets start
+```
+
+**AI actions:** The AI fetched the repo (read-only) and checked that main was still 984d525, feature3-3d_movement was 21c3f24 and there was no PR #3 yet.
+
+**AI response (full):**
+````
+Welcome back. I've checked GitHub, read-only: nothing has changed since this morning. `main` is still at the Feature 2 merge, `feature3-3d_movement` is at your last commit `21c3f24`, and there's no pull request #3 yet. So we start with that.
+
+**Pull request #3, step by step (in your web browser):**
+
+**Step 1.** Open this page:
+```
+https://github.com/KaushalBabuYadav/ASEportfolio2026/compare/main...feature3-3d_movement
+```
+It should already show **base: main ← compare: feature3-3d_movement**, and "**Able to merge**" in green. Lower down it should list **4 commits**:
+- Feature 3: animate the camera flying in to the initial star system (Sol)
+- Feature 3: add dust particles that streak past to show motion
+- Feature 3: list the 10 nearest stars with distance, bearing and path
+- Feature 3: click a star or press a number to fly there and update the list
+
+**Step 2.** Click the green **Create pull request** button.
+
+**Step 3.** Delete whatever is in the **title** box and type exactly:
+```
+Feature 3 3D movement
+```
+Leave the description empty, then click **Create pull request**.
+
+**Step 4.** On the next page, click **Merge pull request**. Two boxes appear. **Don't click Confirm yet.** Make them say:
+- **Top box:** `Feature 3 3D movement`
+- **Bottom box:** `Merge pull request #3 from KaushalBabuYadav/feature3-3d_movement`
+
+**Step 5.** Send me a screenshot of the two boxes. I'll check them before you click **Confirm merge**.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 142 – 2026-11-09 00:02 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: GitHub "Comparing changes" base: main ← compare: feature3-3d_movement, Able to merge, 4 commits, 8 files changed]
+
+**AI response (full):**
+````
+Everything on that page is correct:
+- **base: main ← compare: feature3-3d_movement**, and **Able to merge**.
+- **4 commits**: `5dc5de6`, `757c107`, `46062e7` and `21c3f24`. These are exactly the four Feature 3 commits.
+- **8 files changed**: both logs, plus `CameraController.cs`, `DustField.cs`, `Course.cs`, `NearbyStarsPanel.cs`, `StarRenderer.cs` and `Program.cs`.
+
+**Next steps:**
+
+**Step 2.** Click the green **Create pull request** button on the right.
+
+**Step 3.** On the page that opens, delete what's in the **title** box and type exactly:
+```
+Feature 3 3D movement
+```
+Leave the description empty. Click the green **Create pull request** button at the bottom.
+
+**Step 4.** On the next page, scroll down and click the green **Merge pull request** button. Two boxes appear. **Don't click Confirm yet.** Make them say:
+- **Top box:** `Feature 3 3D movement`
+- **Bottom box:** `Merge pull request #3 from KaushalBabuYadav/feature3-3d_movement`
+
+**Step 5.** Send me a screenshot of the two boxes.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 143 – 2026-11-09 00:02 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: "Open a pull request" with the title "Feature 3 3D movement" and an empty description]
+
+**AI response (full):**
+````
+The title is correct: **Feature 3 3D movement**.
+
+**Step 3 (continued).** Click the green **Create pull request** button at the bottom. Click the main part of the button, not the small ▾ arrow on its right.
+
+**Step 4.** On the next page, scroll down and click the green **Merge pull request** button. Two boxes appear. **Don't click Confirm yet.** Make them say:
+- **Top box:** `Feature 3 3D movement`
+- **Bottom box:** `Merge pull request #3 from KaushalBabuYadav/feature3-3d_movement`
+
+**Step 5.** Send me a screenshot of the two boxes.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 144 – 2026-11-09 00:03 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+and for description
+```
+
+**AI actions:** The AI read the descriptions of PR #1 and PR #2 on GitHub so that PR #3 would match their style.
+
+**AI response (full):**
+````
+Good question. Your Feature 1 and Feature 2 pull requests both had a description, so this one should have one too. Copy everything in the box below into the **description** box:
+
+```
+Feature 3 – 3D Movement (Raylib-cs on macOS)
+
+- CameraController.cs: FlyTo animation. At start-up the camera flies in from far outside the star field to the initial star system (Sol), with smooth easing; "Flying to <star>..." is shown during flights.
+- DustField.cs: dust animation. 400 faint particles around the camera that streak past while moving, giving the illusion of slow-speed motion.
+- Course.cs: distance (light years), bearing (degrees, 0–360) and path (degrees, −90 to +90) from one star to another, using the equatorial definition from the domain expert (checked against HYG RA/Dec for all 1,999 stars).
+- NearbyStarsPanel.cs: list of the 10 nearest stars to the current location with distance, bearing and path.
+- Navigation: click a star in the 3D view, click a row in the list, or press 1–9/0 to fly to that star; on arrival the list is recalculated from the new star. R resets to the Sun.
+- StarRenderer.cs: star labels placed outside the sphere; StarAt() finds the star under the mouse.
+
+AI use: all prompts, responses, code and critiques are in AI_programming_log.md (Entries 106–131) and AI_domainExpert_log.md (Entry 2).
+```
+
+Then:
+
+**Step 3 (continued).** Click the green **Create pull request** button. Click the main part, not the small ▾ arrow.
+
+**Step 4.** On the next page, scroll down and click **Merge pull request**. **Don't click Confirm yet.** Make the two boxes say:
+- **Top box:** `Feature 3 3D movement`
+- **Bottom box:** `Merge pull request #3 from KaushalBabuYadav/feature3-3d_movement`
+
+**Step 5.** Send me a screenshot of the two boxes.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI had first said to leave the description empty. When I asked, it checked my earlier PRs and changed its advice, so all three PRs are consistent.
+
+---
+
+### Entry 145 – 2026-11-09 00:05 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the merge boxes: Commit message "Merge pull request #3 from KaushalBabuYadav/feature3-3d_movement", Extended description "Feature 3 3D movement"]
+
+**AI response (full):**
+````
+**Stop, don't click Confirm yet.** The two boxes are the wrong way round, the same as last time. GitHub filled them in:
+- **Commit message:** `Merge pull request #3 from KaushalBabuYadav/feature3-3d_movement` ❌
+- **Extended description:** `Feature 3 3D movement` ❌
+
+The brief says the commit message must be "Feature 3 3D movement", so they need swapping.
+
+**Fix them like this:**
+
+**Step 1.** Click inside the **Commit message** box. Press **Cmd+A** to select everything in it, then **Delete**. Type exactly:
+```
+Feature 3 3D movement
+```
+
+**Step 2.** Click inside the **Extended description** box. Press **Cmd+A**, then **Delete**. Type exactly:
+```
+Merge pull request #3 from KaushalBabuYadav/feature3-3d_movement
+```
+
+**Step 3.** Send me a screenshot so I can check before you click **Confirm merge**.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+GitHub fills the boxes the opposite way to what the brief needs. The AI caught it before I clicked Confirm, as for PR #1 and PR #2.
+
+---
+
+### Entry 146 – 2026-11-09 00:06 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: Commit message "Feature 3 3D movement", Extended description "Merge pull request #3 from KaushalBabuYadav/feature3-3d_movement"]
+
+**AI response (full):**
+````
+Both boxes are correct now:
+- **Commit message:** `Feature 3 3D movement` ✅
+- **Extended description:** `Merge pull request #3 from KaushalBabuYadav/feature3-3d_movement` ✅
+
+**Step 4.** Click **Confirm merge**.
+
+**Step 5.** After it merges, GitHub shows a **Delete branch** button. **Don't click it**, because the branch has to stay as evidence of your work.
+
+Send me a screenshot after the merge and I'll check it on GitHub.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 147 – 2026-11-09 00:07 – Branch: `feature3-3d_movement` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: PR #3 "Merged"; KaushalBabuYadav merged commit 29c90bc into main; "Delete branch" button not clicked]
+
+**AI actions:** The AI checked on GitHub (read-only): main = 29c90bc, message "Feature 3 3D movement", description "Merge pull request #3 from KaushalBabuYadav/feature3-3d_movement", parents 984d525 and 21c3f24, branch still exists. It also read the README template on main.
+
+**AI response (full):**
+````
+The merge is on GitHub and I've checked it:
+- `main` now points to merge commit **`29c90bc`**, with the message "**Feature 3 3D movement**" and the description "Merge pull request #3 from KaushalBabuYadav/feature3-3d_movement".
+- It has two parents, the Feature 2 merge and your last Feature 3 commit, so all 4 Feature 3 commits are in `main`.
+- The `feature3-3d_movement` branch still exists, as it should. Don't click **Delete branch**.
+
+**Features 1, 2 and 3 are now all merged into main.**
+
+**Next is the README, worth 20 marks for Setting Up.** I've read the template currently in your repo. The marker checks for your name, group, course and tutor, so I need three things from you, exactly as they appear on your timetable or student portal:
+
+1. **Group**, for example the seminar group code on your timetable.
+2. **Course**, the full name, for example "BSc (Hons) Computer Science".
+3. **Tutor**, your seminar tutor's name. If it's Duncan Mullier himself, just say so.
+
+Your name I'll write as **Kaushal Babu Yadav**, the same as on your commits. Tell me if it should be written differently.
+
+While you look those up, I'll start writing the rest:
+- the paragraph on why you chose Claude
+- your Mac setup steps
+- the star data source and licence
+- the project description and class structure
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 148 – 2026-11-09 00:09 – Branch: `main` (no code)
+
+**Prompt:**
+```
+did feature 3 completed??????
+check once git
+```
+
+**AI actions:** The AI fetched all branches (read-only), listed the 4 Feature 3 commits and the merge, listed PRs #1–#3, checked the log numbering (Entries 1–131 in order, one quoted template heading inside Entry 53), and compared all 10 .cs files on main byte for byte with the files it had built and tested (all the same). A fresh `dotnet build` of main in its sandbox failed only because it could not download the Raylib-cs package there (no internet access to NuGet), not because of the code.
+
+**AI response (full):**
+````
+Yes, **Feature 3 is complete**. I checked everything on GitHub just now, read-only. Here it is against each line of the brief:
+
+| What the brief asks for | Status |
+|---|---|
+| Branch `feature3-3d_movement` | ✅ Exists, and still there after the merge |
+| 3D animation towards initial star system | ✅ `5dc5de6`, the fly-in to Sol |
+| "Dust animation" to give the illusion of motion | ✅ `757c107` |
+| List of local stars (5 or 10) | ✅ `46062e7`, the 10 nearest |
+| Lists distance (light years), bearing and path (degrees) | ✅ `46062e7`, using the domain expert's definition |
+| Click on a local star, animate to it, update the list | ✅ `21c3f24`. Works on your Mac by clicking a star, clicking a row, or pressing 1–0 |
+| Several fully documented commits | ✅ 4 commits, each with clear messages and log entries |
+| Full AI log with prompts and code, plus explanations | ✅ Entries 106–131 have prompts, full responses, full code, explanations and critiques. Domain log Entry 2 covers bearing and path |
+| Pull request to main with commit message "Feature 3 3D movement" | ✅ PR #3, merge commit `29c90bc`, message exactly **"Feature 3 3D movement"** |
+
+**Extra checks:**
+- **The code on main is the code I tested.** All 10 `.cs` files on `main` are byte-for-byte the same as the ones I built and ran.
+- **The log is in good order.** Entries 1–131 run in sequence with no gaps or duplicates. One heading-like line (`### Entry 1 – 2026-11-06 HH:MM`) is just the domain-log template quoted inside Entry 53, which we already knew about.
+- **All 3 pull requests are merged:** #1 Feature 1, #2 Feature 2, #3 Feature 3.
+
+What's left for Feature 3 is explaining it in your **YouTube demo** and filling in its section of the **Google Form**. Both come at the end.
+
+Now for the README, please send me your **group**, **course** and **tutor**.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+A thorough check against every line of the brief, with commit hashes as evidence.
+
+---
+
+### Entry 149 – 2026-11-09 00:11 – Branch: `main` (no code)
+
+**Prompt:**
+```
+we willl update readme after completting feature 4
+```
+
+**AI actions:** The AI read CameraController.cs, DustField.cs and the start of the star data file before planning Feature 4.
+
+**AI response (full):**
+````
+OK, the README waits until Feature 4 is done. Let's start Feature 4 (30 marks).
+
+**My plan for Feature 4: turn the star chart into a spaceship game, like the Elite example in the brief.** Each part below gets its own commit:
+1. **Spaceship flight mode.** Press **V** to switch between the current "orbit" view and a cockpit view. In the cockpit you fly yourself: steer with the mouse or arrow keys, roll with Q/E, throttle up and down, and stop. Your speed is shown as a multiple of the speed of light.
+2. **Flight display (HUD).** A crosshair, your own heading (bearing and path), and a target marker on the chosen star. When the star is off-screen, an arrow points to it. It also shows the distance and arrival time at your current speed.
+3. **Autopilot.** Choose a target star, and the ship turns, accelerates, slows down and arrives on its own. The nearby-stars list then updates.
+4. **A 3D spaceship model with a chase camera**, so you can see your ship from behind as it flies between stars.
+
+**Step 1: create the Feature 4 branch.** Run these one at a time in the VS Code terminal (the star window must be closed):
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+git status
+```
+It should say "nothing to commit, working tree clean". If it lists anything, stop and send me a screenshot. Otherwise carry on:
+```
+git checkout main
+```
+```
+git pull
+```
+```
+git log --oneline -1
+```
+That should show **`29c90bc … Feature 3 3D movement`**. Then:
+```
+git checkout -b feature4-additional-facilities
+```
+```
+git push -u origin feature4-additional-facilities
+```
+Send me a screenshot after the last command. Meanwhile, I'll build part 1, the spaceship flight mode.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good plan for "something very substantial", building on what already works. The AI asked for `git status` first so that switching branch would not fail because of uncommitted changes.
+
+---
+
+### Entry 150 – 2026-11-09 00:13 – Branch: `main` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `dotnet run` in 01Assignment1_AIprogramming_3DstarChart gave "Couldn't find a project to run" twice]
+
+**AI response (full):**
+````
+That red error is harmless. You ran `dotnet run` in the `01Assignment1_AIprogramming_3DstarChart` folder, and the project is one folder deeper, in `StarChart3D`. There's nothing new to run yet anyway.
+
+Right now we only need to **create the Feature 4 branch**. You're still on `feature3-3d_movement`, as the bottom bar shows. Run these one at a time; you're already in the right folder:
+```
+git status
+```
+It should say "nothing to commit, working tree clean". If it lists files, stop and send me a screenshot. Otherwise carry on:
+```
+git checkout main
+```
+```
+git pull
+```
+```
+git log --oneline -1
+```
+That should show **`29c90bc … Feature 3 3D movement`**. Then:
+```
+git checkout -b feature4-additional-facilities
+```
+```
+git push -u origin feature4-additional-facilities
+```
+Send me a screenshot of the terminal after the last one. I'm building the spaceship part in the meantime.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+My mistake (wrong folder). The AI explained why and brought me back to the branch steps.
+
+---
+
+### Entry 151 – 2026-11-09 00:15 – Branch: `main` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `git status` on feature3-3d_movement: only untracked ../.DS_Store]
+
+**AI actions:** Meanwhile the AI wrote ShipController.cs, added LookFrom to CameraController.cs and the ship mode to Program.cs, checked the rotation maths in a small separate test program, built and tested in its virtual screen (first test: the view zoomed when entering the ship and the help box was too narrow; both fixed and retested).
+
+**AI response (full):**
+````
+That's fine. The only thing listed is `../.DS_Store`, a hidden file macOS creates by itself in Finder folders. It isn't part of your project, and it won't get in the way. It's also outside your assignment folder, so `git add .` there won't pick it up. I'll add it to `.gitignore` later with the README.
+
+Carry on with the next commands, one at a time:
+```
+git checkout main
+```
+```
+git pull
+```
+```
+git log --oneline -1
+```
+That should show **`29c90bc … Feature 3 3D movement`**. Then:
+```
+git checkout -b feature4-additional-facilities
+```
+```
+git push -u origin feature4-additional-facilities
+```
+Send me a screenshot after the last one.
+
+---
+
+I've built part 1, the spaceship flight mode, and tested it here (`preview_ship_mode.png`, coming once your branch is ready):
+- Pressing **V** switches to the ship without the view jumping.
+- Holding **W** speeds up, to "0.40 ly/s (12.6 million × light speed)" in my test, and the dust streaks past as you fly.
+- The arrow keys turn the ship, **Q/E** roll it, and **X** stops it.
+- Pressing **V** again goes back to the chart view, with the nearest-stars list.
+
+I'll send you the 3 files as soon as you've created the `feature4-additional-facilities` branch. Send me the screenshot after `git push -u origin feature4-additional-facilities`.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Correct: .DS_Store is a macOS file that should be ignored, not committed.
+
+---
+
+### Entry 152 – 2026-11-09 00:17 – Branch: `feature4-additional-facilities` – Feature 4: spaceship flight mode
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `git checkout -b feature4-additional-facilities` and `git push -u origin feature4-additional-facilities`: * [new branch]]
+
+**AI actions:** The AI checked the new branch on GitHub (read-only): it points at 29c90bc. It sent the code it had built and tested (Entry 151).
+
+**AI response (full):**
+````
+The branch `feature4-additional-facilities` is on GitHub, starting from the Feature 3 merge `29c90bc`. The bottom bar in VS Code also shows you're on it now.
+
+**Feature 4 part 1, the spaceship flight mode.** 3 files changed:
+- **`ShipController.cs`** (new) is the spaceship. It can face any direction, even upside down, and it remembers your speed.
+- **`CameraController.cs`** has one new method, so that leaving the ship puts the chart view where the ship was.
+- **`Program.cs`** adds **V** to switch modes, a ship speed line at the top left, and a separate help text for flying.
+
+**Steps (close the star window first).** Download the 3 `.cs` files, then run these one at a time:
+```
+cd StarChart3D
+```
+```
+mv ~/Downloads/ShipController.cs ~/Downloads/CameraController.cs ~/Downloads/Program.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+**How to test it.** Wait for the fly-in to the Sun to finish, then:
+1. Press **V**. The bottom text changes to the ship controls, and the top left says "SHIP: stopped".
+2. **Hold W** for 2–3 seconds. The speed line goes up, for example "0.40 ly/s (12.6 million × light speed)", and the dust streaks past. Take a screenshot (**Cmd+Shift+3**).
+3. Use the **arrow keys** to turn, **Q/E** to roll, and **S** to slow down. You can also hold the left mouse button and move the mouse to steer. Take another screenshot while turned or rolled.
+4. Press **X** to stop, then **V** to go back to the chart view with the list. Take a screenshot.
+5. Press **Esc** and send me the screenshots.
+````
+
+**Code sent as files (full):**
+
+`ShipController.cs` (new):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// A spaceship that the user flies from the cockpit. Unlike the orbit camera, the ship can point in any
+/// direction (including upside down), because its orientation is stored as a quaternion.
+/// </summary>
+/// <remarks>
+/// The flying is "arcade" style, not real physics: the ship always moves in the direction its nose points,
+/// and its speed eases towards the speed the user has set with the throttle. Speeds are far faster than light,
+/// otherwise even the nearest star would take more than four years to reach.
+/// One world unit is one parsec, as in the rest of the program.
+/// </remarks>
+public class ShipController
+{
+    /// <summary>Slowest non-zero speed the throttle can be set to, in parsecs per second.</summary>
+    public const float MinSpeed = 0.01f;
+
+    /// <summary>Fastest speed the throttle can be set to, in parsecs per second.</summary>
+    public const float MaxSpeed = 20f;
+
+    /// <summary>One parsec per second expressed as a multiple of the speed of light (3.0857e13 km ÷ 299,792.458 km/s).</summary>
+    public const double LightSpeedsPerParsecPerSecond = 1.02927e8;
+
+    private const float ThrottleRate = 1.5f;          // holding W or S multiplies or divides the set speed by e^1.5 (about 4.5) per second
+    private const float SpeedResponse = 2.0f;         // how quickly the actual speed catches up with the set speed (per second)
+    private const float KeyTurnSpeed = 1.2f;          // radians per second for arrow keys and Q/E
+    private const float MouseTurnSpeed = 0.003f;      // radians per pixel of mouse movement while the left button is held
+
+    // In the ship's own frame the nose points along −Z, the top along +Y and the right wing along +X.
+    private static readonly Vector3 LocalForward = -Vector3.UnitZ;
+    private static readonly Vector3 LocalUp = Vector3.UnitY;
+    private static readonly Vector3 LocalRight = Vector3.UnitX;
+
+    private Quaternion _orientation = Quaternion.Identity;
+
+    /// <summary>Where the ship is, in world coordinates (parsecs).</summary>
+    public Vector3 Position { get; private set; }
+
+    /// <summary>The speed the user has asked for with the throttle, in parsecs per second.</summary>
+    public float SetSpeed { get; private set; }
+
+    /// <summary>The ship's actual speed, in parsecs per second. It eases towards <see cref="SetSpeed"/>.</summary>
+    public float Speed { get; private set; }
+
+    /// <summary>The direction the nose points, as a unit vector in world coordinates.</summary>
+    public Vector3 Forward => Vector3.Transform(LocalForward, _orientation);
+
+    /// <summary>The direction the top of the ship points, as a unit vector in world coordinates.</summary>
+    public Vector3 Up => Vector3.Transform(LocalUp, _orientation);
+
+    /// <summary>The direction of the right wing, as a unit vector in world coordinates.</summary>
+    public Vector3 Right => Vector3.Transform(LocalRight, _orientation);
+
+    /// <summary>The ship's speed as a multiple of the speed of light.</summary>
+    public double SpeedInLightSpeeds => Speed * LightSpeedsPerParsecPerSecond;
+
+    /// <summary>The cockpit camera: at the ship's position, looking where the nose points, tilted with the ship.</summary>
+    public Camera3D Camera => new(
+        position: Position,
+        target: Position + Forward,
+        up: Up,
+        fovY: 45f, // same as the orbit camera, so switching views does not zoom
+        projection: CameraProjection.Perspective);
+
+    /// <summary>
+    /// Describes a speed for the screen, e.g. "1.63 ly/s (51.5 million × light speed)".
+    /// </summary>
+    /// <param name="parsecsPerSecond">Speed in parsecs per second.</param>
+    public static string DescribeSpeed(float parsecsPerSecond)
+    {
+        if (parsecsPerSecond <= 0f)
+        {
+            return "stopped";
+        }
+
+        double lightYearsPerSecond = parsecsPerSecond * Star.LightYearsPerParsec;
+        double lightSpeeds = parsecsPerSecond * LightSpeedsPerParsecPerSecond;
+        string multiple = lightSpeeds switch
+        {
+            >= 1e9 => $"{lightSpeeds / 1e9:F1} billion",
+            >= 1e6 => $"{lightSpeeds / 1e6:F1} million",
+            _ => $"{lightSpeeds:N0}",
+        };
+        return $"{lightYearsPerSecond:F2} ly/s ({multiple} × light speed)";
+    }
+
+    /// <summary>
+    /// Puts the ship at <paramref name="position"/> pointing at <paramref name="lookAt"/>, level with the
+    /// equatorial plane (world +Y up), and stops it. Used when the user switches from the orbit view to the ship,
+    /// so the view does not jump.
+    /// </summary>
+    public void Place(Vector3 position, Vector3 lookAt)
+    {
+        Position = position;
+        Vector3 forward = lookAt - position;
+        if (forward.LengthSquared() < 1e-12f)
+        {
+            forward = LocalForward;
+        }
+
+        // CreateWorld builds a rotation whose −Z axis is "forward" and whose Y axis is as close to "up" as possible.
+        // If the ship would point straight up or down, a different "up" is used so the cross product is not zero.
+        Vector3 up = MathF.Abs(Vector3.Dot(Vector3.Normalize(forward), Vector3.UnitY)) > 0.999f ? Vector3.UnitZ : Vector3.UnitY;
+        Matrix4x4 world = Matrix4x4.CreateWorld(Vector3.Zero, Vector3.Normalize(forward), up);
+        _orientation = Quaternion.Normalize(Quaternion.CreateFromRotationMatrix(world));
+
+        SetSpeed = 0f;
+        Speed = 0f;
+    }
+
+    /// <summary>
+    /// Reads the keyboard and mouse, turns the ship and moves it. Call once per frame, before drawing.
+    /// W/S = throttle up/down, X = stop, arrow keys or left-drag = turn (up/down and left/right), Q/E = roll.
+    /// </summary>
+    public void Update()
+    {
+        float seconds = Raylib.GetFrameTime();
+
+        // Turning. FPS-style: mouse up or the Up arrow lifts the nose; mouse right or the Right arrow turns right.
+        float pitch = 0f, yaw = 0f, roll = 0f;
+        if (Raylib.IsKeyDown(KeyboardKey.Up)) pitch += KeyTurnSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Down)) pitch -= KeyTurnSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Left)) yaw += KeyTurnSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Right)) yaw -= KeyTurnSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Q)) roll += KeyTurnSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.E)) roll -= KeyTurnSpeed * seconds;
+        if (Raylib.IsMouseButtonDown(MouseButton.Left))
+        {
+            Vector2 mouse = Raylib.GetMouseDelta();
+            pitch -= mouse.Y * MouseTurnSpeed;
+            yaw -= mouse.X * MouseTurnSpeed;
+        }
+        Turn(pitch, yaw, roll);
+
+        // Throttle. The set speed changes by a factor per second (not a fixed amount), so the same key
+        // gives fine control at low speed and fast change at high speed.
+        if (Raylib.IsKeyDown(KeyboardKey.W))
+        {
+            SetSpeed = SetSpeed < MinSpeed ? MinSpeed : MathF.Min(SetSpeed * MathF.Exp(ThrottleRate * seconds), MaxSpeed);
+        }
+        if (Raylib.IsKeyDown(KeyboardKey.S))
+        {
+            SetSpeed *= MathF.Exp(-ThrottleRate * seconds);
+            if (SetSpeed < MinSpeed)
+            {
+                SetSpeed = 0f;
+            }
+        }
+        if (Raylib.IsKeyPressed(KeyboardKey.X))
+        {
+            SetSpeed = 0f;
+        }
+
+        // The real speed eases towards the set speed, so the ship does not jump from stopped to full speed.
+        Speed += (SetSpeed - Speed) * MathF.Min(1f, SpeedResponse * seconds);
+        if (SetSpeed == 0f && Speed < MinSpeed * 0.1f)
+        {
+            Speed = 0f;
+        }
+
+        Position += Forward * Speed * seconds;
+    }
+
+    /// <summary>
+    /// Rotates the ship around its own axes: <paramref name="pitch"/> around the right wing (nose up is positive),
+    /// <paramref name="yaw"/> around its top (nose left is positive) and <paramref name="roll"/> around its nose.
+    /// Angles are in radians.
+    /// </summary>
+    public void Turn(float pitch, float yaw, float roll)
+    {
+        // Multiplying on the right applies the rotation in the ship's own frame, not the world's.
+        Quaternion change = Quaternion.CreateFromAxisAngle(LocalRight, pitch)
+                          * Quaternion.CreateFromAxisAngle(LocalUp, yaw)
+                          * Quaternion.CreateFromAxisAngle(LocalForward, -roll);
+        _orientation = Quaternion.Normalize(_orientation * change);
+    }
+}
+```
+
+`CameraController.cs` (changed: new `LookFrom` method):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+
+namespace StarChart3D;
+
+/// <summary>
+/// An "orbit" camera that circles around a target point, controlled by mouse and keyboard.
+/// Mouse wheel zooms, left-drag rotates, right-drag pans; keys do the same for keyboard users.
+/// </summary>
+/// <remarks>
+/// The camera position is worked out from three numbers: how far it is from the target (distance),
+/// the angle around the vertical axis (yaw) and the angle up or down (pitch).
+/// This keeps the camera always looking at the target, so the user cannot get "lost" upside down.
+/// </remarks>
+public class CameraController
+{
+    private const float MinDistance = 0.5f;           // parsecs: closest the camera can get to the target
+    private const float MaxDistance = 150f;           // parsecs: far enough to see all 2,000 stars
+    private const float MaxPitch = 1.5f;              // radians (about 86°): stops the camera flipping over the top
+    private const float MouseRotateSpeed = 0.005f;    // radians per pixel of mouse movement
+    private const float KeyRotateSpeed = 1.5f;        // radians per second
+    private const float ZoomStep = 0.1f;              // each wheel notch changes the distance by 10%
+    private const float PanSpeed = 0.3f;              // fraction of the distance moved per second with the keys
+
+    private readonly Vector3 _startTarget;
+    private readonly float _startDistance;
+    private readonly float _startYaw;
+    private readonly float _startPitch;
+
+    private Vector3 _target;
+    private float _distance;
+    private float _yaw;
+    private float _pitch;
+
+    // Fly-to animation: the camera's target and distance move smoothly from "from" to "to".
+    private Vector3 _flyFromTarget;
+    private Vector3 _flyToTarget;
+    private float _flyFromDistance;
+    private float _flyToDistance;
+    private float _flyDuration;
+    private float _flyElapsed;
+
+    /// <summary>Creates a camera at <paramref name="startPosition"/> looking at <paramref name="startTarget"/>.</summary>
+    public CameraController(Vector3 startPosition, Vector3 startTarget)
+    {
+        Vector3 offset = startPosition - startTarget;
+        _startTarget = startTarget;
+        _startDistance = Math.Clamp(offset.Length(), MinDistance, MaxDistance);
+        _startYaw = MathF.Atan2(offset.Z, offset.X);
+        _startPitch = Math.Clamp(MathF.Asin(offset.Y / offset.Length()), -MaxPitch, MaxPitch);
+        Reset();
+    }
+
+    /// <summary>The Raylib camera to draw the 3D scene with, built from the current distance, yaw, pitch and target.</summary>
+    public Camera3D Camera => new(
+        position: _target + Offset(),
+        target: _target,
+        up: Vector3.UnitY,
+        fovY: 45f,
+        projection: CameraProjection.Perspective);
+
+    /// <summary>How far the camera is from the point it is looking at, in parsecs.</summary>
+    public float Distance => _distance;
+
+    /// <summary>True while a <see cref="FlyTo"/> animation is running. Mouse and keyboard are ignored until it ends.</summary>
+    public bool IsFlying { get; private set; }
+
+    /// <summary>
+    /// Starts a smooth animation that moves the camera to look at <paramref name="target"/>
+    /// from <paramref name="distance"/> parsecs away, taking <paramref name="seconds"/> seconds.
+    /// </summary>
+    public void FlyTo(Vector3 target, float distance, float seconds)
+    {
+        _flyFromTarget = _target;
+        _flyToTarget = target;
+        _flyFromDistance = _distance;
+        _flyToDistance = Math.Clamp(distance, MinDistance, MaxDistance);
+        _flyDuration = Math.Max(seconds, 0.01f);
+        _flyElapsed = 0f;
+        IsFlying = true;
+    }
+
+    /// <summary>
+    /// Moves the camera to <paramref name="position"/>, looking at <paramref name="target"/>, without animation.
+    /// Used when the user leaves the spaceship, so the orbit view starts where the ship was.
+    /// </summary>
+    public void LookFrom(Vector3 position, Vector3 target)
+    {
+        Vector3 offset = position - target;
+        float length = offset.Length();
+        if (length < 1e-6f)
+        {
+            return; // position and target are the same point, so there is no direction to look in
+        }
+
+        IsFlying = false;
+        _target = target;
+        _distance = Math.Clamp(length, MinDistance, MaxDistance);
+        _yaw = MathF.Atan2(offset.Z, offset.X);
+        _pitch = Math.Clamp(MathF.Asin(offset.Y / length), -MaxPitch, MaxPitch);
+    }
+
+    /// <summary>Puts the camera back where it started.</summary>
+    public void Reset()
+    {
+        IsFlying = false;
+        _target = _startTarget;
+        _distance = _startDistance;
+        _yaw = _startYaw;
+        _pitch = _startPitch;
+    }
+
+    /// <summary>Reads the mouse and keyboard and moves the camera. Call once per frame, before drawing.</summary>
+    public void Update()
+    {
+        float seconds = Raylib.GetFrameTime(); // so keyboard speed is the same at any frame rate
+
+        if (Raylib.IsKeyPressed(KeyboardKey.R))
+        {
+            Reset();
+        }
+
+        if (IsFlying)
+        {
+            UpdateFlight(seconds);
+            return; // the user cannot steer while the camera is flying
+        }
+
+        // Zoom: mouse wheel, or +/- keys (PageUp/PageDown also work).
+        float zoom = Raylib.GetMouseWheelMove();
+        if (Raylib.IsKeyDown(KeyboardKey.Equal) || Raylib.IsKeyDown(KeyboardKey.PageUp)) zoom += 3f * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Minus) || Raylib.IsKeyDown(KeyboardKey.PageDown)) zoom -= 3f * seconds;
+        _distance = Math.Clamp(_distance * (1f - zoom * ZoomStep), MinDistance, MaxDistance);
+
+        // Rotate: left mouse drag, or the arrow keys.
+        Vector2 mouse = Raylib.GetMouseDelta();
+        if (Raylib.IsMouseButtonDown(MouseButton.Left))
+        {
+            _yaw += mouse.X * MouseRotateSpeed;
+            _pitch += mouse.Y * MouseRotateSpeed;
+        }
+        if (Raylib.IsKeyDown(KeyboardKey.Left)) _yaw -= KeyRotateSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Right)) _yaw += KeyRotateSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Up)) _pitch += KeyRotateSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.Down)) _pitch -= KeyRotateSpeed * seconds;
+        _pitch = Math.Clamp(_pitch, -MaxPitch, MaxPitch);
+
+        // Pan (move the point the camera looks at): right mouse drag, or W/A/S/D and Q/E.
+        Vector3 forward = Vector3.Normalize(-Offset());
+        Vector3 right = Vector3.Normalize(Vector3.Cross(forward, Vector3.UnitY));
+        Vector3 up = Vector3.Cross(right, forward);
+
+        if (Raylib.IsMouseButtonDown(MouseButton.Right))
+        {
+            float pixelsToParsecs = _distance * 0.0015f; // pan more when zoomed out, less when zoomed in
+            _target += (-right * mouse.X + up * mouse.Y) * pixelsToParsecs;
+        }
+
+        float step = _distance * PanSpeed * seconds;
+        if (Raylib.IsKeyDown(KeyboardKey.W)) _target += forward * step;
+        if (Raylib.IsKeyDown(KeyboardKey.S)) _target -= forward * step;
+        if (Raylib.IsKeyDown(KeyboardKey.D)) _target += right * step;
+        if (Raylib.IsKeyDown(KeyboardKey.A)) _target -= right * step;
+        if (Raylib.IsKeyDown(KeyboardKey.E)) _target += Vector3.UnitY * step;
+        if (Raylib.IsKeyDown(KeyboardKey.Q)) _target -= Vector3.UnitY * step;
+    }
+
+    /// <summary>Moves the fly-to animation forward by <paramref name="seconds"/>.</summary>
+    private void UpdateFlight(float seconds)
+    {
+        _flyElapsed += seconds;
+        float progress = Math.Clamp(_flyElapsed / _flyDuration, 0f, 1f);
+
+        // "Smoothstep" easing: starts slowly, speeds up, then slows down before arriving.
+        float eased = progress * progress * (3f - 2f * progress);
+
+        _target = Vector3.Lerp(_flyFromTarget, _flyToTarget, eased);
+
+        // The distance changes by the same factor each moment (geometric), not by the same amount,
+        // so flying in from 150 parsecs to 1.5 parsecs does not rush through the last few parsecs.
+        _distance = _flyFromDistance * MathF.Pow(_flyToDistance / _flyFromDistance, eased);
+
+        if (progress >= 1f)
+        {
+            IsFlying = false;
+        }
+    }
+
+    /// <summary>The vector from the target to the camera, worked out from distance, yaw and pitch.</summary>
+    private Vector3 Offset()
+    {
+        return new Vector3(
+            _distance * MathF.Cos(_pitch) * MathF.Cos(_yaw),
+            _distance * MathF.Sin(_pitch),
+            _distance * MathF.Cos(_pitch) * MathF.Sin(_yaw));
+    }
+}
+```
+
+`Program.cs` (changed: ship mode, V key, speed line, help text):
+```csharp
+using System.Numerics;
+using Raylib_cs;
+using StarChart3D;
+
+// Load the 2,000 nearest stars.
+string dataFile = Path.Combine(AppContext.BaseDirectory, "Data", "stars_local_2000.csv");
+var stars = new StarCollection(dataFile);
+
+// Open a resizable window with anti-aliasing (smoother edges).
+Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint | ConfigFlags.ResizableWindow);
+Raylib.InitWindow(1280, 800, "StarChart3D");
+Raylib.SetTargetFPS(60);
+
+var renderer = new StarRenderer(stars);
+var dust = new DustField();
+var ship = new ShipController(); // Feature 4: the spaceship the user can fly from the cockpit
+bool shipMode = false;           // false = orbit view (Features 2 and 3), true = flying the ship
+
+// The camera starts far outside the star field and then flies in to the first star system (the Sun).
+// After that it can be moved with mouse and keyboard.
+var cameraController = new CameraController(startPosition: new Vector3(90f, 60f, 90f), startTarget: Vector3.Zero);
+Star home = stars.FindById(0) ?? stars[0]; // HYG id 0 is the Sun
+const float ArrivalDistance = 2f;          // parsecs from the star when the camera arrives
+const float FlightSeconds = 6f;
+cameraController.FlyTo(StarRenderer.ToWorldPosition(home), ArrivalDistance, FlightSeconds);
+var nearbyPanel = new NearbyStarsPanel(stars, home); // the 10 nearest stars to the current location
+Star flightDestination = home;                       // the star the camera is flying to (or last arrived at)
+Vector2 leftPressPosition = Vector2.Zero;            // where the left mouse button went down, to tell a click from a drag
+const float MaxClickMovement = 5f;                   // pixels the mouse may move between press and release for a click
+
+// Starts a flight from the current location to another star. Longer trips take longer (3 to 8 seconds).
+void FlyToStar(Star destination)
+{
+    flightDestination = destination;
+    double lightYears = Course.Between(nearbyPanel.Location, destination).DistanceLightYears;
+    float seconds = Math.Clamp(2f + (float)lightYears * 0.3f, 3f, 8f);
+    cameraController.FlyTo(StarRenderer.ToWorldPosition(destination), ArrivalDistance, seconds);
+}
+
+var spaceColour = new Color(5, 5, 15, 255);
+string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLightYears):F0} light years"; // worked out once, not every frame
+const string Help = "Mouse: click a star = fly there, wheel = zoom, left-drag = rotate, right-drag = pan\n" +
+                    "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, F filter named stars, V fly ship, Esc quit";
+const string ShipHelp = "Ship: W/S throttle up/down, X stop, arrows or left-drag steer, Q/E roll\n" +
+                        "Keys: V back to chart view, R reset, F filter named stars, Esc quit";
+
+while (!Raylib.WindowShouldClose())
+{
+    // V switches between the orbit view and flying the ship (not during an automatic flight).
+    // The new view starts where the old one was, so the picture does not jump.
+    if (Raylib.IsKeyPressed(KeyboardKey.V) && !cameraController.IsFlying)
+    {
+        if (shipMode)
+        {
+            cameraController.LookFrom(ship.Position, ship.Position + ship.Forward * ArrivalDistance);
+        }
+        else
+        {
+            Camera3D orbitCamera = cameraController.Camera;
+            ship.Place(orbitCamera.Position, orbitCamera.Target);
+        }
+        shipMode = !shipMode;
+    }
+
+    // R always goes back to the starting orbit view (CameraController.Update does the reset itself).
+    if (shipMode && Raylib.IsKeyPressed(KeyboardKey.R))
+    {
+        shipMode = false;
+    }
+
+    if (shipMode)
+    {
+        ship.Update();
+    }
+    else
+    {
+        // Choosing a star in the nearby list (click a row or press 1-9, 0) flies the camera there.
+        // This is checked before the camera update, so the click is not also treated as a camera drag.
+        Course? chosen = cameraController.IsFlying ? null : nearbyPanel.GetSelection();
+        if (chosen is Course course)
+        {
+            FlyToStar(course.Destination);
+        }
+
+        // Clicking a star in the 3D view also flies there. It only counts as a click if the mouse hardly moved
+        // between press and release; otherwise it was a left-drag to rotate the camera.
+        if (Raylib.IsMouseButtonPressed(MouseButton.Left))
+        {
+            leftPressPosition = Raylib.GetMousePosition();
+        }
+        if (Raylib.IsMouseButtonReleased(MouseButton.Left) && !cameraController.IsFlying && !nearbyPanel.IsMouseOver()
+            && Vector2.Distance(Raylib.GetMousePosition(), leftPressPosition) <= MaxClickMovement)
+        {
+            Star? clicked = renderer.StarAt(Raylib.GetMousePosition(), cameraController.Camera);
+            if (clicked != null && clicked.Id != nearbyPanel.Location.Id)
+            {
+                FlyToStar(clicked);
+            }
+        }
+
+        // R returns the camera to the starting view, so the list goes back to the Sun too.
+        if (Raylib.IsKeyPressed(KeyboardKey.R))
+        {
+            flightDestination = home;
+            nearbyPanel.SetLocation(home);
+        }
+
+        bool wasFlying = cameraController.IsFlying;
+        cameraController.Update();
+
+        // When a flight finishes, the destination becomes the new location and the list is recalculated.
+        if (wasFlying && !cameraController.IsFlying && nearbyPanel.Location.Id != flightDestination.Id)
+        {
+            nearbyPanel.SetLocation(flightDestination);
+        }
+    }
+
+    // F switches between all stars and only the stars that have a proper name.
+    if (Raylib.IsKeyPressed(KeyboardKey.F))
+    {
+        renderer.ShowOnlyNamedStars = !renderer.ShowOnlyNamedStars;
+    }
+    Camera3D camera = shipMode ? ship.Camera : cameraController.Camera;
+    // In the ship the dust box grows with speed, so the streaks stay visible at high speed.
+    float dustScale = shipMode ? Math.Clamp(ship.Speed * 1.5f, 1f, 30f) : cameraController.Distance;
+    dust.Update(camera, dustScale);
+
+    Raylib.BeginDrawing();
+    Raylib.ClearBackground(spaceColour);
+
+    Raylib.BeginMode3D(camera);
+    Raylib.DrawGrid(20, 2f); // 2-parsec grid on the plane of the celestial equator, to help judge depth
+    renderer.DrawStars();
+    dust.Draw(camera, dustScale); // faint particles that streak past when the camera moves
+    Raylib.EndMode3D();
+
+    renderer.DrawLabels(camera); // star names are 2D text, drawn after the 3D scene
+
+    // Dark panels behind the text, so star labels underneath do not make it unreadable.
+    var panelColour = new Color(0, 0, 0, 225);
+    Raylib.DrawRectangle(0, 0, 520, 126, panelColour);
+    string help = shipMode ? ShipHelp : Help;
+    int helpWidth = help.Split('\n').Max(line => Raylib.MeasureText(line, 16)) + 20; // fits the longest line
+    Raylib.DrawRectangle(0, Raylib.GetScreenHeight() - 50, helpWidth, 50, panelColour);
+    Raylib.DrawText(title, 10, 10, 20, Color.RayWhite);
+    Raylib.DrawFPS(10, 36);
+    Raylib.DrawText($"Camera is {camera.Position.Length() * Star.LightYearsPerParsec:F1} light years from the Sun", 10, 62, 16, Color.LightGray);
+    string filterText = renderer.ShowOnlyNamedStars
+        ? $"Filter ON: showing {renderer.VisibleStarCount} named stars (F to show all)"
+        : $"Showing all {renderer.VisibleStarCount} stars (F to show only named stars)";
+    Raylib.DrawText(filterText, 10, 82, 16, renderer.ShowOnlyNamedStars ? Color.Yellow : Color.LightGray);
+    string modeText = shipMode
+        ? $"SHIP: {ShipController.DescribeSpeed(ship.Speed)}"
+        : "Press V to fly the spaceship";
+    Raylib.DrawText(modeText, 10, 104, 16, shipMode ? Color.SkyBlue : Color.Gray);
+
+    if (!shipMode && cameraController.IsFlying)
+    {
+        string flying = $"Flying to {flightDestination.DisplayName}...";
+        Raylib.DrawText(flying, (Raylib.GetScreenWidth() - Raylib.MeasureText(flying, 30)) / 2, 120, 30, Color.SkyBlue);
+    }
+    Raylib.DrawText(help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
+    renderer.DrawLegend();
+    if (!shipMode)
+    {
+        nearbyPanel.Draw(); // the list is measured from the last star visited, so it is hidden while flying the ship
+    }
+    Raylib.EndDrawing();
+}
+
+Raylib.CloseWindow();
+```
+
+**Explanation of the code (drafted with AI help, checked by me):**
+- `ShipController` stores the ship's `Position`, its orientation as a `Quaternion`, the speed set with the throttle (`SetSpeed`) and the actual `Speed`. A quaternion is used instead of yaw/pitch angles because a spaceship must be able to point straight up, roll and fly upside down; angle-based cameras (like the orbit camera) get stuck or flip near straight up ("gimbal lock").
+- `Forward`, `Up` and `Right` turn the ship's own axes (nose = −Z, top = +Y, right wing = +X) into world directions with `Vector3.Transform`. The cockpit `Camera` sits at the ship's position, looks along `Forward` and uses the ship's `Up`, so the view rolls with the ship.
+- `Turn(pitch, yaw, roll)` builds a small rotation around the ship's own axes and multiplies it on the right of the current orientation, which makes it a rotation in the ship's frame (pitching up always lifts the nose as the pilot sees it, whatever direction the ship faces). The result is normalised so rounding errors do not build up.
+- `Update()` reads the keys: arrow keys or left-drag turn, Q/E roll, W/S multiply or divide the set speed by e^1.5 per second (so the throttle is fine at low speed and fast at high speed), X stops. The actual speed eases towards the set speed (`SpeedResponse`), and the ship moves along `Forward` by speed × frame time.
+- `Place(position, lookAt)` points the ship where the orbit camera was looking using `Matrix4x4.CreateWorld`, so switching to the ship does not change the picture. `DescribeSpeed` turns parsecs per second into light years per second and a multiple of the speed of light (1 pc/s ≈ 1.03 × 10⁸ c).
+- `CameraController.LookFrom` does the opposite when leaving the ship: it works out distance, yaw and pitch from the ship's position and a point 2 pc ahead of it.
+- In `Program.cs`, V switches `shipMode` (not during an automatic fly-to). In ship mode only `ship.Update()` runs; in orbit mode all the Feature 3 code runs as before. The dust box is scaled with the ship's speed so streaks stay visible. The help box now measures its text, and the nearby-stars list is hidden in ship mode because it is measured from the last star visited, not from the ship.
+
+**Critique (drafted with AI help, checked and edited by me):**
+Good: the AI chose a quaternion for a reason (free 3D orientation), checked the rotation maths with numbers in a separate test before using it (pitch up lifts the nose, yaw left turns left, Q tilts the top to the left, and rotations happen in the ship's frame after a 90° turn), and kept the orbit mode working unchanged. Bugs it introduced and fixed itself in testing: (1) the cockpit used a 60° field of view while the orbit camera uses 45°, so pressing V made the view jump, which contradicted its own code comment; changed to 45°; (2) the longer help text ran past its fixed 760-pixel background; now the box is sized with `MeasureText`. Weaknesses: (1) "arcade" flight, not real physics: there is no inertia, the ship always moves where the nose points; (2) speeds are millions of times faster than light, which is not physically possible but needed so that trips take seconds instead of years; (3) there is no collision, so the ship can fly straight through a star; (4) Q/E and the arrow keys mean different things in the two modes (pan/rotate in orbit mode, roll/steer in the ship), which could confuse users; (5) the nearby-stars list is hidden in ship mode, so you cannot see distances while flying yet (part 2, the flight display, will fix that); (6) my first "test" on my Mac was really of the old Feature 3 program, because I had never downloaded the new files (found in Entries 154–155); the real test is in Entries 157–159.
+
+---
+
+### Entry 153 – 2026-11-09 00:51 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+okay its working
+```
+
+**AI response (full):**
+````
+Great, Feature 4 part 1 works on your Mac. Next time, please also send the screenshots: the log is stronger with proof than with "it works". You can add them in your demo too.
+
+Let's commit part 1. I've written the log entries for everything since your last commit (Entries 132–153) in `log_entries_132_153.md`.
+
+**Steps (close the star window first).** Download the `.md` file, then run these one at a time. You're probably still in the `StarChart3D` folder, so the first command goes up one level:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+cat ~/Downloads/log_entries_132_153.md >> AI_programming_log.md
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+It should print **155**.
+```
+git add --dry-run .
+```
+It should list exactly **4 files**:
+- `AI_programming_log.md`
+- `StarChart3D/CameraController.cs`
+- `StarChart3D/Program.cs`
+- `StarChart3D/ShipController.cs`
+
+Send me a screenshot of these before you commit.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+This turned out to be wrong: I had not downloaded the three new files, so I was still running the Feature 3 program (found in Entries 154–155). The AI accepted "it's working" without proof and wrote log entries saying the ship worked on my Mac. It only noticed the problem because the dry run listed 1 file instead of 4. Lesson: always ask for a screenshot that shows the new feature (here, the "SHIP:" line) before writing that it works.
+
+---
+
+### Entry 154 – 2026-11-09 00:57 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: after appending log_entries_132_153.md, `grep -c` printed 155; `git add --dry-run .` listed only 01Assignment1_AIprogramming_3DstarChart/AI_programming_log.md]
+
+**AI response (full):**
+````
+**Stop, don't commit yet.** `git add --dry-run .` listed only **1 file**, `AI_programming_log.md`. The 3 code files (`ShipController.cs`, `CameraController.cs`, `Program.cs`) aren't there.
+
+That means the new spaceship code never reached your `StarChart3D` folder. Most likely the `mv` command didn't run, or the files went somewhere else. So the program you ran was probably the old Feature 3 version, without the spaceship. Let's find the files.
+
+Run these one at a time and send me a screenshot of the output:
+```
+ls -la StarChart3D/ShipController.cs
+```
+```
+ls -la ~/Downloads/*.cs
+```
+
+From the output:
+- If the first command says **"No such file or directory"**, the new code isn't in your project yet.
+- The second command shows whether the 3 files are still in Downloads, and what they're called. A Mac sometimes renames a second download to something like `Program (1).cs`.
+
+Once I see the output, I'll give you the exact command to move the right files. Then you'll test the ship properly with **V**, and we'll commit all 4 files together.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The dry-run check caught the problem before anything wrong was committed: the code files were missing.
+
+---
+
+### Entry 155 – 2026-11-09 00:58 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `ls -la StarChart3D/ShipController.cs` → "No such file or directory"; `ls -la ~/Downloads/*.cs` → "zsh: no matches found"]
+
+**AI response (full):**
+````
+Found it. The 3 new code files were **never downloaded**: there are no `.cs` files in your Downloads folder, and `ShipController.cs` isn't in your project. So when you tested, you were running the **old Feature 3 program**, without the spaceship.
+
+That also means the log entries you just added say something that isn't true: Entry 153 says the ship worked on your Mac. We'll undo that and test properly. Do these steps one at a time.
+
+**Step 1. Undo the log entries you just added.** This puts `AI_programming_log.md` back exactly as it was at your last commit:
+```
+git restore AI_programming_log.md
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+It should print **133**.
+
+**Step 2. Download the 3 code files.** Scroll up in this chat to my message after your branch screenshot, the one with the cards **ShipController.cs**, **CameraController.cs** and **Program.cs**. Click each card and download it, so it lands in your **Downloads** folder.
+
+Check that all three arrived:
+```
+ls ~/Downloads/*.cs
+```
+It should list exactly those 3 files.
+
+**Step 3. Move them into the project, build and run:**
+```
+cd StarChart3D
+```
+```
+mv ~/Downloads/ShipController.cs ~/Downloads/CameraController.cs ~/Downloads/Program.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+**Step 4. Test it.** After the fly-in arrives at the Sun:
+1. Press **V**. The help text at the bottom changes to "Ship: W/S throttle…", and the top left says "**SHIP: stopped**".
+2. **Hold W** for 2–3 seconds, then take a screenshot (**Cmd+Shift+3**).
+3. Turn with the **arrow keys** and roll with **Q/E**, then take a screenshot.
+4. Press **X**, then **V** to go back to the chart view, and take a screenshot.
+5. Press **Esc** and send me the 3 screenshots.
+
+After that I'll rewrite the log entries so they're accurate, and we'll commit all 4 files.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI did not just tell me to commit the log; it had me undo the wrong entries with `git restore` (safe, because they were not committed) so the log would not contain a false claim.
+
+---
+
+### Entry 156 – 2026-11-09 00:59 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+herre
+```
+[Screenshot: `git restore AI_programming_log.md`; `grep -c` printed 133; `ls ~/Downloads/*.cs` still "no matches found"]
+
+**AI actions:** The AI sent the same three files again (unchanged) so they were at the bottom of the chat.
+
+**AI response (full):**
+````
+Step 1 worked: the log is back to **133** entries.
+
+Downloads still has no `.cs` files, so here are the 3 files again: `ShipController.cs`, `CameraController.cs` and `Program.cs`.
+
+**Step 2. Download them.** Click each of the 3 file cards and choose **Download**. Then check that they've arrived:
+```
+ls ~/Downloads/*.cs
+```
+It should list all 3. If it still says "no matches found", send me a screenshot of what happens when you click a card.
+
+**Step 3. Move them into the project, build and run:**
+```
+cd StarChart3D
+```
+```
+mv ~/Downloads/ShipController.cs ~/Downloads/CameraController.cs ~/Downloads/Program.cs .
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+**Step 4. Test it.** After the fly-in arrives at the Sun:
+1. Press **V**. The top left should say "**SHIP: stopped**".
+2. **Hold W** for 2–3 seconds, then take a screenshot.
+3. Turn with the **arrow keys** and roll with **Q/E**, then take a screenshot.
+4. Press **X**, then **V** to go back to the chart view, and take a screenshot.
+5. Press **Esc** and send me the 3 screenshots.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 157 – 2026-11-09 01:01 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot 1: chart view with the new line "Press V to fly the spaceship" and help ending "V fly ship"]
+[Screenshot 2: after V: "SHIP: stopped" in blue, ship help text, nearby list hidden, same view]
+
+**AI response (full):**
+````
+The new code is running on your Mac now. Your screenshots show:
+1. **Chart view:** the top left has a new line, "**Press V to fly the spaceship**", and the help at the bottom ends with "V fly ship".
+2. **After pressing V:** it says "**SHIP: stopped**" in blue, the help changes to the ship controls, and the list disappears. The view stays exactly where it was, with no jump.
+
+The movement test is still missing, though. Let's finish it, because the log needs proof that the ship actually flies. The star window is still open, so you're in ship mode:
+
+1. Click once on the star window so it has focus. Then **hold W** for about 3 seconds. The top left should change to something like "**SHIP: 0.40 ly/s (12.6 million × light speed)**", and Sol should get closer. Take a screenshot (**Cmd+Shift+3**) while it's moving.
+2. **Hold the Left or Right arrow** for a second, then **Q** for a second, so the view turns and tilts. Take a screenshot.
+3. Press **X** (it should say "SHIP: stopped" again), then **V** to go back to the chart view. Take a screenshot.
+4. Press **Esc** and send me the 3 screenshots.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+This proves the new code is running, but not yet that the ship moves, so the AI asked for one more test.
+
+---
+
+### Entry 158 – 2026-11-09 01:06 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot 1: chart view, camera 85.8 light years from the Sun]
+[Screenshot 2: chart view, camera 313.5 light years from the Sun, only dust visible]
+
+**AI response (full):**
+````
+Thanks. Both screenshots are in the **chart view**: the top left says "Press V to fly the spaceship", the help text is the chart one, and the list is showing. They do show the camera **85.8** and then **313.5 light years** from the Sun, so the ship clearly flew you a long way out. But they were taken after you'd pressed V to go back, so they don't show the ship flying, which is what the log needs.
+
+Here's an easier way. You don't need to keep holding W while taking the screenshot: the throttle stays where you leave it, like a car's cruise control.
+
+1. Press **R** to reset to the starting view. Wait for the fly-in to finish.
+2. Press **V**. The top left says "**SHIP: stopped**".
+3. **Hold W for 2 seconds, then let go.** The ship keeps flying at that speed, and the top left shows something like "**SHIP: 0.40 ly/s (12.6 million × light speed)**".
+4. Now take a screenshot (**Cmd+Shift+3**) while the blue SHIP line is showing.
+5. Press the **Right arrow** for half a second and **Q** for half a second, so the view turns and tilts. Take another screenshot, still in ship mode.
+6. Press **X** to stop, then **Esc**. Send me the 2 screenshots.
+
+Take both screenshots before you press V again. If you get lost far away, **R** always brings you back to the start.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+My screenshots were taken after going back to the chart view. The AI explained that the throttle stays set after releasing W, which made it possible to take a screenshot while flying.
+
+---
+
+### Entry 159 – 2026-11-09 01:08 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot 1: chart view at the start, camera 6.6 ly from the Sun]
+[Screenshot 2: after V, "SHIP: stopped", same view]
+[Screenshot 3: ship mode, "SHIP: 1.86 ly/s (58.7 million × light speed)", camera 2.0 ly from the Sun, dust streaks]
+
+**AI response (full):**
+````
+Now we have proof that the spaceship flies on your Mac:
+1. **Chart view** at the start, with "Press V to fly the spaceship".
+2. **After V**, "**SHIP: stopped**" in exactly the same view.
+3. **Flying**: "**SHIP: 1.86 ly/s (58.7 million × light speed)**". The camera has gone from 6.6 to **2.0 light years** from the Sun, and the dust is streaking past. The numbers also agree with each other: 1.86 ly/s ÷ 3.26156 = 0.570 parsecs per second, and × 102.9 million = 58.7 million times light speed.
+
+Let's commit part 1. I've rewritten the log entries so they're accurate: Entry 153 now says honestly that the first "it's working" was the old program, and Entries 154–159 show how we found that and tested properly. They're all in `log_entries_132_159.md`. Ignore the earlier `log_entries_132_153.md`.
+
+**Steps (close the star window first).** Download `log_entries_132_159.md`, then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart
+```
+```
+cat ~/Downloads/log_entries_132_159.md >> AI_programming_log.md
+```
+```
+grep -c "^### Entry" AI_programming_log.md
+```
+It should print **161**.
+```
+git add --dry-run .
+```
+It should list exactly 4 files:
+- `AI_programming_log.md`
+- `StarChart3D/CameraController.cs`
+- `StarChart3D/Program.cs`
+- `StarChart3D/ShipController.cs`
+
+Send me a screenshot of these before you commit.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Real proof now. The AI also checked that the two speed numbers agree (1.86 ly/s ÷ 3.26156 × 1.02927 × 10⁸ = 58.7 million × light speed).
+
+---
