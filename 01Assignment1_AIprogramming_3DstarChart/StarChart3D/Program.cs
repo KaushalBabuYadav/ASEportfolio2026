@@ -15,6 +15,7 @@ var renderer = new StarRenderer(stars);
 var dust = new DustField();
 var ship = new ShipController(); // Feature 4: the spaceship the user can fly from the cockpit
 bool shipMode = false;           // false = orbit view (Features 2 and 3), true = flying the ship
+Star? shipTarget = null;         // the star chosen as the ship's target (T or click in ship mode), shown on the flight display
 
 // The camera starts far outside the star field and then flies in to the first star system (the Sun).
 // After that it can be moved with mouse and keyboard.
@@ -42,7 +43,7 @@ string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLigh
 const string Help = "Mouse: click a star = fly there, wheel = zoom, left-drag = rotate, right-drag = pan\n" +
                     "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, F filter named stars, V fly ship, Esc quit";
 const string ShipHelp = "Ship: W/S throttle up/down, X stop, arrows or left-drag steer, Q/E roll\n" +
-                        "Keys: V back to chart view, R reset, F filter named stars, Esc quit";
+                        "Keys: T target star at crosshair (or click a star), V back to chart view, R reset, F filter, Esc quit";
 
 while (!Raylib.WindowShouldClose())
 {
@@ -68,9 +69,27 @@ while (!Raylib.WindowShouldClose())
         shipMode = false;
     }
 
+    // Remember where the left button went down, so a click (hardly any movement) can be told apart from a drag.
+    if (Raylib.IsMouseButtonPressed(MouseButton.Left))
+    {
+        leftPressPosition = Raylib.GetMousePosition();
+    }
+    bool leftClicked = Raylib.IsMouseButtonReleased(MouseButton.Left)
+        && Vector2.Distance(Raylib.GetMousePosition(), leftPressPosition) <= MaxClickMovement;
+
     if (shipMode)
     {
         ship.Update();
+
+        // T targets the star closest to the crosshair (within 15 degrees); clicking a star targets that star.
+        if (Raylib.IsKeyPressed(KeyboardKey.T))
+        {
+            shipTarget = renderer.StarNearestDirection(ship.Position, ship.Forward, 15f) ?? shipTarget;
+        }
+        if (leftClicked)
+        {
+            shipTarget = renderer.StarAt(Raylib.GetMousePosition(), ship.Camera) ?? shipTarget;
+        }
     }
     else
     {
@@ -84,12 +103,7 @@ while (!Raylib.WindowShouldClose())
 
         // Clicking a star in the 3D view also flies there. It only counts as a click if the mouse hardly moved
         // between press and release; otherwise it was a left-drag to rotate the camera.
-        if (Raylib.IsMouseButtonPressed(MouseButton.Left))
-        {
-            leftPressPosition = Raylib.GetMousePosition();
-        }
-        if (Raylib.IsMouseButtonReleased(MouseButton.Left) && !cameraController.IsFlying && !nearbyPanel.IsMouseOver()
-            && Vector2.Distance(Raylib.GetMousePosition(), leftPressPosition) <= MaxClickMovement)
+        if (leftClicked && !cameraController.IsFlying && !nearbyPanel.IsMouseOver())
         {
             Star? clicked = renderer.StarAt(Raylib.GetMousePosition(), cameraController.Camera);
             if (clicked != null && clicked.Id != nearbyPanel.Location.Id)
@@ -161,7 +175,11 @@ while (!Raylib.WindowShouldClose())
     }
     Raylib.DrawText(help, 10, Raylib.GetScreenHeight() - 44, 16, Color.Gray);
     renderer.DrawLegend();
-    if (!shipMode)
+    if (shipMode)
+    {
+        FlightHud.Draw(ship, camera, shipTarget); // crosshair, target marker and flight panel (in place of the list)
+    }
+    else
     {
         nearbyPanel.Draw(); // the list is measured from the last star visited, so it is hidden while flying the ship
     }

@@ -75,6 +75,51 @@ public class StarRenderer
     }
 
     /// <summary>
+    /// Converts a point or direction in Raylib's 3D world back to HYG axes (the opposite of <see cref="ToWorldPosition"/>):
+    /// world (x, y, z) becomes HYG (x, −z, y).
+    /// </summary>
+    public static Vector3 ToHygPosition(Vector3 world)
+    {
+        return new Vector3(world.X, -world.Z, world.Y);
+    }
+
+    /// <summary>
+    /// Returns the visible star whose direction, seen from <paramref name="from"/>, is closest to
+    /// <paramref name="direction"/>, if it is within <paramref name="maxAngleDegrees"/>; otherwise null.
+    /// Used to pick the star under the spaceship's crosshair. Stars closer than 0.01 pc are ignored
+    /// (the ship is sitting on them).
+    /// </summary>
+    public Star? StarNearestDirection(Vector3 from, Vector3 direction, float maxAngleDegrees)
+    {
+        Vector3 aim = Vector3.Normalize(direction);
+        float bestCosine = MathF.Cos(maxAngleDegrees * MathF.PI / 180f);
+        Star? best = null;
+        for (int i = 0; i < _positions.Length; i++)
+        {
+            if (!IsVisible(i))
+            {
+                continue;
+            }
+
+            Vector3 toStar = _positions[i] - from;
+            float distance = toStar.Length();
+            if (distance < 0.01f)
+            {
+                continue;
+            }
+
+            float cosine = Vector3.Dot(toStar / distance, aim); // cosine of the angle between the aim and the star
+            if (cosine > bestCosine)
+            {
+                bestCosine = cosine;
+                best = _stars[i];
+            }
+        }
+
+        return best;
+    }
+
+    /// <summary>
     /// Draws every visible star as a small sphere in the colour of its spectral class
     /// (all stars, or only named stars when <see cref="ShowOnlyNamedStars"/> is on). Must be called between
     /// <c>Raylib.BeginMode3D</c> and <c>Raylib.EndMode3D</c>.

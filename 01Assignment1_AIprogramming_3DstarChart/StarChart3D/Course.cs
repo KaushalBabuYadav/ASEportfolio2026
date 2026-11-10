@@ -20,14 +20,28 @@ namespace StarChart3D;
 public readonly record struct Course(Star Destination, double DistanceLightYears, double BearingDegrees, double PathDegrees)
 {
     /// <summary>Works out the course from <paramref name="from"/> to <paramref name="to"/> using their HYG x, y, z (parsecs).</summary>
-    public static Course Between(Star from, Star to)
+    public static Course Between(Star from, Star to) => FromPoint(from.X, from.Y, from.Z, to);
+
+    /// <summary>
+    /// Works out the course from any point (HYG x, y, z in parsecs, e.g. the spaceship's position) to the star <paramref name="to"/>.
+    /// </summary>
+    public static Course FromPoint(double x, double y, double z, Star to)
     {
-        double dx = to.X - from.X;
-        double dy = to.Y - from.Y;
-        double dz = to.Z - from.Z;
+        double dx = to.X - x;
+        double dy = to.Y - y;
+        double dz = to.Z - z;
 
         double distanceParsecs = Math.Sqrt(dx * dx + dy * dy + dz * dz);
+        (double bearing, double path) = AnglesOf(dx, dy, dz);
+        return new Course(to, distanceParsecs * Star.LightYearsPerParsec, bearing, path);
+    }
 
+    /// <summary>
+    /// Returns the bearing (0–360°) and path (−90° to +90°) of a direction given in HYG axes.
+    /// Used both for the course to a star and for the direction the spaceship is pointing.
+    /// </summary>
+    public static (double Bearing, double Path) AnglesOf(double dx, double dy, double dz)
+    {
         // Atan2 gets the quarter of the circle right and does not divide by zero.
         double bearing = Math.Atan2(dy, dx) * 180.0 / Math.PI;
         if (bearing < 0)
@@ -36,8 +50,7 @@ public readonly record struct Course(Star Destination, double DistanceLightYears
         }
 
         double path = Math.Atan2(dz, Math.Sqrt(dx * dx + dy * dy)) * 180.0 / Math.PI;
-
-        return new Course(to, distanceParsecs * Star.LightYearsPerParsec, bearing, path);
+        return (bearing, path);
     }
 
     /// <summary>
