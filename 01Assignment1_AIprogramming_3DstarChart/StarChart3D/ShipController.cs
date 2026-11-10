@@ -35,6 +35,23 @@ public class ShipController
     private static readonly Vector3 LocalRight = Vector3.UnitX;
 
     private Quaternion _orientation = Quaternion.Identity;
+    private Vector3 _autopilotDestination;
+
+    /// <summary>
+    /// How far short of the destination star the autopilot stops, in parsecs (about 3.3 light years). The star spheres
+    /// are drawn far larger than real stars, so stopping much closer would fill the whole screen with the star.
+    /// </summary>
+    public const float AutopilotStopDistance = 1.0f;
+
+    private const float AutopilotTurnSpeed = 1.0f;     // radians per second the autopilot may turn the ship
+    private const float AutopilotSpeedGain = 0.5f;     // set speed (pc/s) per parsec of remaining distance
+    private const float ArrivalTolerance = 0.02f;      // parsecs from the stopping point that count as "arrived"
+
+    /// <summary>True while the autopilot is flying the ship.</summary>
+    public bool AutopilotOn { get; private set; }
+
+    /// <summary>What the autopilot is doing, for the flight display: "off", "turning towards target", "accelerating", "slowing down" or "arrived".</summary>
+    public string AutopilotStatus { get; private set; } = "off";
 
     /// <summary>Where the ship is, in world coordinates (parsecs).</summary>
     public Vector3 Position { get; private set; }
@@ -114,8 +131,10 @@ public class ShipController
     /// <summary>
     /// Reads the keyboard and mouse, turns the ship and moves it. Call once per frame, before drawing.
     /// W/S = throttle up/down, X = stop, arrow keys or left-drag = turn (up/down and left/right), Q/E = roll.
+    /// Any of these controls switches the autopilot off, so the pilot can always take over.
     /// </summary>
-    public void Update()
+    /// <returns>True on the one frame in which the autopilot arrives at its destination.</returns>
+    public bool Update()
     {
         float seconds = Raylib.GetFrameTime();
 
@@ -133,15 +152,26 @@ public class ShipController
             pitch -= mouse.Y * MouseTurnSpeed;
             yaw -= mouse.X * MouseTurnSpeed;
         }
+
+        bool throttleUp = Raylib.IsKeyDown(KeyboardKey.W);
+        bool throttleDown = Raylib.IsKeyDown(KeyboardKey.S);
+        bool stop = Raylib.IsKeyPressed(KeyboardKey.X);
+
+        // The pilot takes over as soon as any flying control is used.
+        if (AutopilotOn && (pitch != 0f || yaw != 0f || roll != 0f || throttleUp || throttleDown || stop))
+        {
+            StopAutopilot();
+        }
+
         Turn(pitch, yaw, roll);
 
         // Throttle. The set speed changes by a factor per second (not a fixed amount), so the same key
         // gives fine control at low speed and fast change at high speed.
-        if (Raylib.IsKeyDown(KeyboardKey.W))
+        if (throttleUp)
         {
             SetSpeed = SetSpeed < MinSpeed ? MinSpeed : MathF.Min(SetSpeed * MathF.Exp(ThrottleRate * seconds), MaxSpeed);
         }
-        if (Raylib.IsKeyDown(KeyboardKey.S))
+        if (throttleDown)
         {
             SetSpeed *= MathF.Exp(-ThrottleRate * seconds);
             if (SetSpeed < MinSpeed)
@@ -149,9 +179,14 @@ public class ShipController
                 SetSpeed = 0f;
             }
         }
-        if (Raylib.IsKeyPressed(KeyboardKey.X))
+        if (stop)
         {
             SetSpeed = 0f;
+        }
+
+        if (AutopilotOn)
+        {
+            RunAutopilot(seconds);
         }
 
         // The real speed eases towards the set speed, so the ship does not jump from stopped to full speed.
@@ -162,6 +197,74 @@ public class ShipController
         }
 
         Position += Forward * Speed * seconds;
+
+        // Arrived: close enough to the stopping point. The ship is stopped and the autopilot switches itself off.
+        if (AutopilotOn && Vector3.Distance(Position, _autopilotDestination) - AutopilotStopDistance <= ArrivalTolerance)
+        {
+            SetSpeed = 0f;
+            Speed = 0f;
+            AutopilotOn = false;
+            AutopilotStatus = "arrived";
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Switches the autopilot on. It will turn the ship towards <paramref name="destination"/> (world coordinates),
+    /// fly there and stop <see cref="AutopilotStopDistance"/> parsecs short of it, so the ship does not end up inside the star.
+    /// </summary>
+    public void StartAutopilot(Vector3 destination)
+    {
+        _autopilotDestination = destination;
+        AutopilotOn = true;
+        AutopilotStatus = "turning towards target";
+    }
+
+    /// <summary>Switches the autopilot off. The ship keeps its current set speed.</summary>
+    public void StopAutopilot()
+    {
+        AutopilotOn = false;
+        AutopilotStatus = "off";
+    }
+
+    /// <summary>
+    /// One frame of autopilot: turn the nose towards the destination at a limited rate, and set the speed from the
+    /// remaining distance. The set speed is half the remaining distance per second; with the speed easing in
+    /// <see cref="Update"/> this approaches the stopping point smoothly without overshooting it
+    /// (a "critically damped" approach). While the nose is more than 30° off, the ship slows right down to turn.
+    /// </summary>
+    private void RunAutopilot(float seconds)
+    {
+        Vector3 toDestination = _autopilotDestination - Position;
+        float distance = toDestination.Length();
+        if (distance < 1e-6f)
+        {
+            return;
+        }
+        Vector3 direction = toDestination / distance;
+
+        // Turn towards the destination, at most AutopilotTurnSpeed radians per second.
+        float angle = MathF.Acos(Math.Clamp(Vector3.Dot(Forward, direction), -1f, 1f));
+        if (angle > 1e-4f)
+        {
+            Vector3 axis = Vector3.Cross(Forward, direction);
+            axis = axis.LengthSquared() < 1e-12f ? Up : Vector3.Normalize(axis); // exactly behind: turn over the top
+            float step = MathF.Min(angle, AutopilotTurnSpeed * seconds);
+            // Multiplying on the left applies the rotation in world axes (around "axis"), not the ship's own axes.
+            _orientation = Quaternion.Normalize(Quaternion.CreateFromAxisAngle(axis, step) * _orientation);
+        }
+
+        float angleDegrees = angle * 180f / MathF.PI;
+        float remaining = MathF.Max(0f, distance - AutopilotStopDistance);
+        float wanted = Math.Clamp(remaining * AutopilotSpeedGain, 0f, MaxSpeed);
+        float alignment = Math.Clamp(1f - angleDegrees / 30f, 0f, 1f); // 1 when pointing at it, 0 when 30° or more off
+        SetSpeed = wanted * alignment;
+
+        AutopilotStatus = angleDegrees > 5f ? "turning towards target"
+                        : SetSpeed < Speed ? "slowing down"
+                        : "accelerating";
     }
 
     /// <summary>

@@ -142,6 +142,9 @@ public static class FlightHud
             lines.Add(($"Bearing {course.BearingDegrees:F1}°, path {course.PathDegrees:+0.0;-0.0;0.0}°", TargetColour));
             lines.Add(($"Off course: {offCourse:F1}°", offCourse < 2 ? Color.Green : TargetColour));
             lines.Add(($"Arrival: {DescribeArrival(course.DistanceLightYears, ship.Speed, offCourse)}", TargetColour));
+            lines.Add(ship.AutopilotOn
+                ? ($"Autopilot: {ship.AutopilotStatus} (P to switch off)", Color.Green)
+                : ("Autopilot: off (press P to fly there)", Color.LightGray));
         }
 
         int height = 12 + lines.Count * LineHeight;

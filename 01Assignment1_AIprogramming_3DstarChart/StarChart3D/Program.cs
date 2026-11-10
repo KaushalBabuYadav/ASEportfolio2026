@@ -16,6 +16,9 @@ var dust = new DustField();
 var ship = new ShipController(); // Feature 4: the spaceship the user can fly from the cockpit
 bool shipMode = false;           // false = orbit view (Features 2 and 3), true = flying the ship
 Star? shipTarget = null;         // the star chosen as the ship's target (T or click in ship mode), shown on the flight display
+Star? autopilotStar = null;      // the star the autopilot is flying to
+string arrivalMessage = "";      // "Arrived at ..." shown for a few seconds after the autopilot arrives
+float arrivalMessageSeconds = 0f;
 
 // The camera starts far outside the star field and then flies in to the first star system (the Sun).
 // After that it can be moved with mouse and keyboard.
@@ -43,7 +46,7 @@ string title = $"{stars.Count} stars within {stars.Max(star => star.DistanceLigh
 const string Help = "Mouse: click a star = fly there, wheel = zoom, left-drag = rotate, right-drag = pan\n" +
                     "Keys: +/- zoom, arrows rotate, W/A/S/D/Q/E pan, R reset, F filter named stars, V fly ship, Esc quit";
 const string ShipHelp = "Ship: W/S throttle up/down, X stop, arrows or left-drag steer, Q/E roll\n" +
-                        "Keys: T target star at crosshair (or click a star), V back to chart view, R reset, F filter, Esc quit";
+                        "Keys: T target star at crosshair (or click a star), P autopilot to target, V chart view, R reset, F filter, Esc quit";
 
 while (!Raylib.WindowShouldClose())
 {
@@ -53,7 +56,14 @@ while (!Raylib.WindowShouldClose())
     {
         if (shipMode)
         {
-            cameraController.LookFrom(ship.Position, ship.Position + ship.Forward * ArrivalDistance);
+            // If the ship is parked at the current location's star (e.g. after the autopilot), orbit round that star;
+            // otherwise look at a point ahead of the ship.
+            Vector3 locationStar = StarRenderer.ToWorldPosition(nearbyPanel.Location);
+            Vector3 lookAt = Vector3.Distance(ship.Position, locationStar) < ShipController.AutopilotStopDistance + 0.5f
+                ? locationStar
+                : ship.Position + ship.Forward * ArrivalDistance;
+            cameraController.LookFrom(ship.Position, lookAt);
+            ship.StopAutopilot();
         }
         else
         {
@@ -79,16 +89,45 @@ while (!Raylib.WindowShouldClose())
 
     if (shipMode)
     {
-        ship.Update();
+        // P switches the autopilot on (towards the target) or off.
+        if (Raylib.IsKeyPressed(KeyboardKey.P) && shipTarget != null)
+        {
+            if (ship.AutopilotOn)
+            {
+                ship.StopAutopilot();
+            }
+            else
+            {
+                autopilotStar = shipTarget;
+                ship.StartAutopilot(StarRenderer.ToWorldPosition(autopilotStar));
+            }
+        }
+
+        bool arrived = ship.Update();
+        if (arrived && autopilotStar != null)
+        {
+            // The star reached becomes the current location, so the nearby-stars list is measured from it (press V to see it).
+            nearbyPanel.SetLocation(autopilotStar);
+            flightDestination = autopilotStar;
+            arrivalMessage = $"Arrived at {autopilotStar.DisplayName}";
+            arrivalMessageSeconds = 4f;
+        }
 
         // T targets the star closest to the crosshair (within 15 degrees); clicking a star targets that star.
+        // Choosing a new target switches the autopilot off, so it never flies somewhere the pilot did not choose.
+        Star? newTarget = null;
         if (Raylib.IsKeyPressed(KeyboardKey.T))
         {
-            shipTarget = renderer.StarNearestDirection(ship.Position, ship.Forward, 15f) ?? shipTarget;
+            newTarget = renderer.StarNearestDirection(ship.Position, ship.Forward, 15f);
         }
         if (leftClicked)
         {
-            shipTarget = renderer.StarAt(Raylib.GetMousePosition(), ship.Camera) ?? shipTarget;
+            newTarget = renderer.StarAt(Raylib.GetMousePosition(), ship.Camera) ?? newTarget;
+        }
+        if (newTarget != null && newTarget != shipTarget)
+        {
+            shipTarget = newTarget;
+            ship.StopAutopilot();
         }
     }
     else
@@ -164,10 +203,15 @@ while (!Raylib.WindowShouldClose())
         : $"Showing all {renderer.VisibleStarCount} stars (F to show only named stars)";
     Raylib.DrawText(filterText, 10, 82, 16, renderer.ShowOnlyNamedStars ? Color.Yellow : Color.LightGray);
     string modeText = shipMode
-        ? $"SHIP: {ShipController.DescribeSpeed(ship.Speed)}"
+        ? $"SHIP: {ShipController.DescribeSpeed(ship.Speed)}{(ship.AutopilotOn ? "  (autopilot)" : "")}"
         : "Press V to fly the spaceship";
     Raylib.DrawText(modeText, 10, 104, 16, shipMode ? Color.SkyBlue : Color.Gray);
 
+    if (shipMode && arrivalMessageSeconds > 0f)
+    {
+        arrivalMessageSeconds -= Raylib.GetFrameTime();
+        Raylib.DrawText(arrivalMessage, (Raylib.GetScreenWidth() - Raylib.MeasureText(arrivalMessage, 30)) / 2, 120, 30, Color.Green);
+    }
     if (!shipMode && cameraController.IsFlying)
     {
         string flying = $"Flying to {flightDestination.DisplayName}...";
