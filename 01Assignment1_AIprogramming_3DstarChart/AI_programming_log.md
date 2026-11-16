@@ -13250,3 +13250,718 @@ Send me a screenshot before you commit.
 The ship model, chase view and autopilot all work together on my Mac.
 
 ---
+
+### Entry 176 – 2026-11-10 02:45 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+HERE
+```
+[Screenshot: `grep -c` printed 177; `git add --dry-run .` listed the log, FlightHud.cs, Program.cs, ShipController.cs and ShipModel.cs]
+
+**AI response (full):**
+````
+Both checks passed:
+- The log has **177** headings.
+- Exactly the **5 correct files** are listed: the log, `FlightHud.cs`, `Program.cs`, `ShipController.cs` and `ShipModel.cs`.
+
+Now commit and push, one at a time.
+
+**Step 1.**
+```
+git add .
+```
+
+**Step 2.**
+```
+git commit -m "Feature 4: 3D spaceship model and chase camera (C to switch)"
+```
+
+**Step 3.**
+```
+git push
+```
+
+**Step 4.** Send me a screenshot after `git push`. I'll check the commit on GitHub, then we'll do the Feature 4 pull request, "Feature 4 Additional".
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 177 – 2026-11-10 02:46 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+HERE
+```
+[Screenshot: `git push`: 28bac85..654ef22 feature4-additional-facilities]
+
+**AI actions:** The AI checked commit 654ef22 on GitHub (read-only): 5 files, 177 headings, the 4 code files identical to what it tested, and the branch contains exactly the 4 Feature 4 commits on top of main.
+
+**AI response (full):**
+````
+Part 4 is on GitHub and I've checked it: commit **`654ef22`** has the 5 files, the log has 177 headings, and all 4 code files are the same as the ones I tested.
+
+**All four Feature 4 commits are on the branch:**
+- `7248afe` Spaceship flight mode
+- `95deafb` Flight display
+- `28bac85` Autopilot
+- `654ef22` 3D spaceship model and chase camera
+
+**Now pull request #4.** Do this in your web browser.
+
+**Step 1.** Open this page:
+```
+https://github.com/KaushalBabuYadav/ASEportfolio2026/compare/main...feature4-additional-facilities
+```
+It should show **base: main ← compare: feature4-additional-facilities**, "**Able to merge**", and **4 commits**.
+
+**Step 2.** Click **Create pull request**. Set the **title** to exactly:
+```
+Feature 4 Additional
+```
+
+**Step 3.** Paste this into the **description** box:
+```
+Feature 4 – Additional facilities: a spaceship game (Raylib-cs on macOS)
+
+- ShipController.cs: spaceship flight mode (V to switch). Free 3D orientation with a quaternion; W/S throttle, X stop, arrow keys or left-drag to steer, Q/E roll. Speed shown in ly/s and as a multiple of light speed.
+- FlightHud.cs: flight display with crosshair, own heading (bearing/path), target marker (brackets on screen, arrow at the edge when off screen), distance, bearing, path, off-course angle and arrival time. T targets the star at the crosshair, or click a star.
+- Autopilot (P): turns the ship towards the target, accelerates, slows down and stops 1 pc away; the nearby-stars list updates to the star reached. Any manual control takes over.
+- ShipModel.cs: 3D spaceship model with an engine glow, and a chase camera behind the ship (C to switch between cockpit and chase view).
+- Course.cs / StarRenderer.cs: shared bearing/path maths (AnglesOf, FromPoint), HYG conversion and crosshair targeting.
+
+AI use: all prompts, responses, code and critiques are in AI_programming_log.md (Entries 149–175).
+```
+Then click **Create pull request**.
+
+**Step 4.** Click **Merge pull request**. **Don't click Confirm yet.** Make the two boxes say:
+- **Commit message (top box):** `Feature 4 Additional`
+- **Extended description (bottom box):** `Merge pull request #4 from KaushalBabuYadav/feature4-additional-facilities`
+
+GitHub fills these in the other way round, the same as last time.
+
+**Step 5.** Send me a screenshot of the two boxes before you click **Confirm merge**.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues. It warned in advance that GitHub swaps the two merge boxes.
+
+---
+
+### Entry 178 – 2026-11-10 02:48 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: `dotnet run` in 01Assignment1_AIprogramming_3DstarChart: "Couldn't find a project to run"]
+
+**AI response (full):**
+````
+That red error is harmless. You ran `dotnet run` from the assignment folder, but the project is one folder deeper, in `StarChart3D`. Nothing is broken, and you don't need to run the program now. Everything is already committed and pushed.
+
+The next step happens in your **web browser**, not in the terminal: the pull request on GitHub.
+
+**Step 1.** Open this address in Safari or Chrome:
+```
+https://github.com/KaushalBabuYadav/ASEportfolio2026/compare/main...feature4-additional-facilities
+```
+It should show **base: main ← compare: feature4-additional-facilities**, "**Able to merge**", and **4 commits**.
+
+**Step 2.** Click the green **Create pull request** button. Set the **title** to exactly:
+```
+Feature 4 Additional
+```
+
+**Step 3.** Paste the description from my previous message into the **description** box (the text that starts "Feature 4 – Additional facilities…"). Then click **Create pull request**.
+
+**Step 4.** Click **Merge pull request**. **Don't click Confirm yet.** Make the two boxes say:
+- **Top box:** `Feature 4 Additional`
+- **Bottom box:** `Merge pull request #4 from KaushalBabuYadav/feature4-additional-facilities`
+
+**Step 5.** Send me a screenshot of the two boxes.
+
+If you want to run the program again later, first go into the project folder with `cd StarChart3D`, then run `dotnet run`.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+My mistake (wrong folder). The AI explained it and moved me on to the pull request.
+
+---
+
+### Entry 179 – 2026-11-10 02:50 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: PR #4 "Feature 4 Additional", 4 commits; Commit message "Merge pull request #4 from KaushalBabuYadav/feature4-additional-facilities", Extended description "Feature 4 Additional"]
+
+**AI response (full):**
+````
+**Stop, don't click Confirm merge yet.** The two boxes are the wrong way round again. Everything else on the page is right: pull request **#4 "Feature 4 Additional"**, and **4 commits** (7248afe, 95deafb, 28bac85 and 654ef22).
+
+Swap the two boxes:
+
+**Step 1.** Click in the **Commit message** box. Press **Cmd+A**, then **Delete**. Type exactly:
+```
+Feature 4 Additional
+```
+
+**Step 2.** Click in the **Extended description** box. Press **Cmd+A**, then **Delete**. Type exactly:
+```
+Merge pull request #4 from KaushalBabuYadav/feature4-additional-facilities
+```
+
+**Step 3.** Send me a screenshot before you click **Confirm merge**.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI caught the swapped boxes before I clicked Confirm, as for PRs #1–#3.
+
+---
+
+### Entry 180 – 2026-11-10 02:51 – Branch: `feature4-additional-facilities` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: Commit message "Feature 4 Additional", Extended description "Merge pull request #4 from KaushalBabuYadav/feature4-additional-facilities"]
+
+**AI response (full):**
+````
+Both boxes are correct now:
+- **Commit message:** `Feature 4 Additional` ✅
+- **Extended description:** `Merge pull request #4 from KaushalBabuYadav/feature4-additional-facilities` ✅
+
+**Step 4.** Click **Confirm merge**.
+
+**Step 5.** After it merges, GitHub shows a **Delete branch** button. **Don't click it.** The branch stays as evidence of your work.
+
+Send me a screenshot after the merge, and I'll check it on GitHub.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 181 – 2026-11-10 02:51 – Branch: `main` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: PR #4 Merged; merged commit e810eed into main; "Delete branch" not clicked]
+
+**AI actions:** The AI checked on GitHub (read-only): main = e810eed, message "Feature 4 Additional", description "Merge pull request #4 …", parents 29c90bc and 654ef22, branch kept. It also read README.md, docfx.json and .gitignore on main and found the template placeholders.
+
+**AI response (full):**
+````
+**Feature 4 is merged.** I checked it on GitHub:
+- `main` is now at **`e810eed`**, with the message "**Feature 4 Additional**" and the description "Merge pull request #4 from KaushalBabuYadav/feature4-additional-facilities".
+- Its two parents are the Feature 3 merge and your last Feature 4 commit, so all 4 Feature 4 commits are in `main`.
+- The `feature4-additional-facilities` branch is still there, which is correct. Don't click **Delete branch**.
+
+**All four features are now finished and merged:** PR #1 Feature 1, #2 Feature 2, #3 Feature 3 and #4 Feature 4.
+
+**Next is the README**, worth 20 marks for "Setting Up". I've checked your repo, and three things on `main` still need fixing:
+1. The README still has the template placeholders: "[Your Name]", "[Your Group]" and "[Your Course]".
+2. `docfx.json` still says "[put my name here]".
+3. `.gitignore` doesn't ignore the Mac's `.DS_Store` files yet.
+
+I'll write the whole README for you. That covers your choice of AI and why, the setup steps, the data source, the project description and the class structure. I only need four things from you, exactly as they appear on your timetable or student portal:
+
+1. **Group** (the code on your timetable)
+2. **Course**, the full name, for example "BSc (Hons) Computer Science"
+3. **Tutor**, your seminar tutor's name
+4. **YouTube link**, if you've recorded the demo yet. If not, I'll leave a clear placeholder and we'll fill it in after recording.
+
+Your name will be written as **Kaushal Babu Yadav**, the same as on your commits.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues. It asked for my details instead of guessing them.
+
+---
+
+### Entry 182 – 2026-11-10 02:53 – Branch: `main` (no code)
+
+**Prompt:**
+```
+okay let me make youtube video first then well do it
+```
+
+**AI response (full):**
+````
+Recording the video first is fine. Here's a plan so it covers everything the brief asks for. The brief says the demo must **show the Google Demo Form**, **explain your code**, **declare your use of AI**, and explain each section. You may also be asked to **fix a coding issue** on camera.
+
+**Before recording**
+- Open these and arrange them: the **Google Demo Form** (from the Assessment folder on MyBeckett), your **GitHub repo**, **VS Code** with the project, and a terminal in `StarChart3D`.
+- Record with **Cmd+Shift+5** → "Record Entire Screen". Under **Options**, choose your **MacBook microphone**.
+- Aim for about 15–20 minutes. Talk naturally; you don't need to read word for word.
+
+**Suggested order**
+
+1. **Intro and AI declaration (1 min).** "I'm Kaushal Babu Yadav. This is Component 1, the 3D star chart. I used AI: Claude (Opus 5.5) in the Claude app as my programming assistant, and a separate Claude chat as my astronomy domain expert. Every prompt and response is in `AI_programming_log.md` and `AI_domainExpert_log.md`."
+
+2. **Google Demo Form (1 min).** Show it on screen and say you'll go through each section.
+
+3. **Setting up (2 min).** Show the repo: the two logs, the branches, and the 4 merged pull requests. Explain your setup: macOS, VS Code, .NET 10, and Raylib-cs. Say that WPF/Helix Toolkit from the tutorial only runs on Windows, so you used Raylib, and that the data is HYG v4.4, the 2,000 nearest stars.
+
+4. **Feature 1 (2–3 min).** Open `Star.cs`, `StarCollection.cs` and `CatalogueNames.cs`. Explain how the CSV is read by column name, and the naming order: Bayer → Flamsteed → Gliese → HIP, with A/B for double stars. Give one AI bug from your critique, for example "Boötis" and the font.
+
+5. **Feature 2 (2–3 min).** Run the program. Show the colours and the colour key, the labels, **F** to filter named stars, and zoom/rotate/pan. Open `StarRenderer.cs`, `SpectralClass.cs` and `CameraController.cs`. Give one AI bug, for example `DrawPoint3D` being a tiny line, or labels overlapping.
+
+6. **Feature 3 (3 min).** Show the fly-in, the dust, the nearest-stars list, and clicking a star or row to fly there while the list updates. Explain bearing and path from `Course.cs`, and that the definition came from your domain expert and was checked against the HYG RA/Dec. Mention the bug: the AI first made only the list rows clickable, not the stars.
+
+7. **Feature 4 (4 min).** Press **V**, fly with W/S, steer with the arrows, roll with Q/E. Press **T** to target and show the flight display. Press **P** for the autopilot and wait for "Arrived at…", then **V** to show the list updated. *This also gives you the proof that was missing in the log.* Press **C** for the chase view. Explain `ShipController.cs` (quaternion, autopilot), `FlightHud.cs` and `ShipModel.cs`. Give one bug, for example the chase-view crosshair, or the autopilot stopping too close.
+
+8. **Fixing a coding issue (1–2 min).** Show one fix live. An easy one is in `ShipController.cs`: change `AutopilotStopDistance` from `1.0f` to `0.25f`, run it, and show the star filling the screen. Then explain why `1.0f` is the right value and put it back. **Don't commit this change.**
+
+9. **Close (30 s).** Repeat the AI declaration and thank the viewer.
+
+**Afterwards**
+- Upload it to YouTube as **Unlisted** and copy the link.
+- Send me your **group, course, tutor and the link**. I'll write the README, fix `docfx.json` and `.gitignore`, and write the last log entries, which you'll commit together.
+- Then submit the **Google Form**, and hand in on **MyBeckett**: repo link, YouTube link, and the source code folder (zipped). All of this before **Monday 16 Nov, 12:00**.
+
+Good luck with the recording!
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Useful plan, but the AI should have said at once that the README must be finished before recording, because the form asks to show the README and its class structure. It only noticed this later (Entry 187).
+
+---
+
+### Entry 183 – 2026-11-10 02:55 – Branch: `main` (no code)
+
+**Prompt:**
+```
+why cant my code running here?
+```
+[Screenshot: `dotnet run` in the assignment folder: "Couldn't find a project to run"]
+
+**AI response (full):**
+````
+It's just the folder. You're in `01Assignment1_AIprogramming_3DstarChart`, but the project file (`StarChart3D.csproj`) is one folder deeper, in `StarChart3D`. `dotnet run` only looks in the folder you're in, so it says "Couldn't find a project to run". Your code is fine.
+
+Run these one at a time:
+```
+cd StarChart3D
+```
+```
+dotnet run
+```
+
+The star window should open.
+
+**Tip for the video:** before you start recording, run `cd StarChart3D` in the terminal. Then `dotnet run` will work straight away during the demo. If the terminal ever shows `01Assignment1_AIprogramming_3DstarChart %` at the end of the line, you're one folder too high.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Clear explanation of the folder problem.
+
+---
+
+### Entry 184 – 2026-11-10 02:57 – Branch: `main` (no code)
+
+**Prompt:**
+```
+everytime i want to run it do i have to write these two line code?
+```
+
+**AI response (full):**
+````
+No. `cd StarChart3D` only moves you into the folder, and you stay there until you close the terminal. So:
+
+- **In the same terminal:** just type `dotnet run` each time. You only need `cd StarChart3D` once.
+- **In a new terminal**, or after reopening VS Code: it starts in the assignment folder again, so do `cd StarChart3D` once, then `dotnet run` as many times as you like.
+
+You can always check where you are from the end of the prompt line:
+- `StarChart3D %` means you're in the right place, so `dotnet run` works.
+- `01Assignment1_AIprogramming_3DstarChart %` means you're one folder too high, so run `cd StarChart3D` first.
+
+There's also a one-line version that works from the assignment folder without moving:
+```
+dotnet run --project StarChart3D
+```
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues; it also gave the one-line `dotnet run --project StarChart3D`.
+
+---
+
+### Entry 185 – 2026-11-10 02:58 – Branch: `main` (no code)
+
+**Prompt:**
+```
+give me a pdf of my project feature like everything about it press v for this press p for this entire feature!!!
+```
+
+**AI actions:** The AI listed every key and mouse check in the final code (grep for IsKeyPressed/IsKeyDown/IsMouseButton in all .cs files) and the help texts in Program.cs, used screenshots from its own test runs, wrote the guide as HTML and turned it into a 7-page PDF. It changed one example label ("Bet Cas") to labels actually seen in the program ("GJ 3622", "HIP 52596").
+
+**AI response (full):**
+````
+[File sent: StarChart3D_User_Guide.pdf – a 7-page user guide with screenshots]
+
+I've made `StarChart3D_User_Guide.pdf`, a 7-page guide with screenshots of the chart view, the cockpit and the chase view. It covers:
+
+- **How to start it:** the folder, `dotnet run`, and the fly-in.
+- **The two modes**, and switching between them with **V**.
+- **Every chart-view control:** zoom, rotate, pan, clicking a star or a list row, **1–0**, **F**, **R**.
+- **Every ship control:** **W/S** throttle, **X** stop, arrows to steer, **Q/E** roll, **T** target, **P** autopilot, **C** chase view.
+- **The flight display and autopilot**, step by step.
+- **What everything on screen means:** colours, labels, grid, dust, the list, and how bearing and path are calculated.
+- **Which feature is in which code file**, branch by branch.
+- **A 2-minute demo route** you can follow while recording.
+- **Troubleshooting** and the known limitations.
+
+Every key in it was taken from your final code, so it matches exactly what the program does. Keep it open next to you while you record. Once the video is up, send me your group, course, tutor and the YouTube link, and we'll do the README.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Every control in the guide was taken from the code, not from memory. Weakness: the screenshots are from the AI's virtual screen, not my Mac.
+
+---
+
+### Entry 186 – 2026-11-10 03:02 – Branch: `main` (no code)
+
+**Prompt:**
+```
+how many commits have i done in my entire project
+```
+
+**AI actions:** The AI counted the commits on main on GitHub (git rev-list, read-only): 25 in total, 21 normal and 4 merges.
+
+**AI response (full):**
+````
+I counted on GitHub: your project has **25 commits** in total, all by you on `main`. That's **21 normal commits** plus **4 pull-request merges**.
+
+| Part | Commits | Merge |
+|---|---|---|
+| Setup (incl. "Initial commit" on 17 Oct) | 3 | – |
+| Feature 1: Star Chart | 4 | PR #1 "Feature 1 Star Chart" |
+| Feature 2: Visualising | 6 (5 features + 1 fix) | PR #2 "Feature 2 3D Visualising the Star Chart" |
+| Feature 3: 3D Movement | 4 | PR #3 "Feature 3 3D movement" |
+| Feature 4: Additional | 4 | PR #4 "Feature 4 Additional" |
+| **Total** | **21** | **4** |
+
+The history fits what the brief asks for:
+- **One branch per feature**, all four still on GitHub.
+- **A commit for each sub-feature**, each with a clear message such as "Feature 3: add dust particles that streak past to show motion".
+- **A pull request per feature** with the required merge message.
+- **Spread over time**: 5, 6, 8, 9 and 10 November. That shows the work wasn't all dumped at the end. The brief checks this against the log timestamps.
+
+The README commit will make it **26**.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Counted from the real history, with the hash of every commit available.
+
+---
+
+### Entry 187 – 2026-11-15 00:59 – Branch: `main` (no code)
+
+**Prompt:**
+```
+these are my demo assignment form!! and i dont know how to make videos i mean what to speak what to show and how to fill up all these section while also showing everything is asked in this form side by side in the video help me!!!!
+```
+[13 screenshots of the Google Demo Form "ASE Assignment part 1 AI Programming 2026": personal details, tutor group, the "I understand" questions, Setting Up questions, and the questions for Features 1–4]
+
+**AI actions:** The AI fetched the repo (read-only) and listed the commits merged by each pull request (Feature 1: 4 plus a docs commit, Feature 2: 6, Feature 3: 4, Feature 4: 4), then wrote a 6-page script and answer sheet following the form question by question.
+
+**AI response (full):**
+````
+[File sent: Demo_Script_and_Form_Answers.pdf – a 6-page demo script that follows the form, with the form answers]
+
+I've made `Demo_Script_and_Form_Answers.pdf`, your step-by-step guide for the video. It follows your form from top to bottom. For every question it tells you **what to show**, **what to say** (in blue boxes you can read aloud) and **when to tick Yes**. It also has the answers to type into the form, including the commit count for each feature, which I've checked on GitHub.
+
+**The easiest way to record it:**
+1. **Before recording**, type all the text answers into the form, but don't submit. Google saves your progress.
+2. **During the video**, go down the form one question at a time. Read the question, switch to VS Code, the running program or GitHub to show it, come back, and tick **Yes**.
+3. **At the end of the video**, click Submit. After uploading to YouTube as **Unlisted**, edit your response to add the link.
+
+**The README has to be done before you record.** The form asks you to show it and its class structure, and on GitHub it's still the empty template. Send me these 3 things so I can write it straight away:
+1. **Your course**, the full name
+2. **Your tutor group**, which of the form's options is yours
+3. **Your tutor's name**
+
+**The deadline is tomorrow, Monday 16 Nov, at 12:00 noon.** Here's the order for the rest:
+1. Write the README and commit it.
+2. Record the video.
+3. Upload it and add the link to the form.
+4. Add the link to the README and commit again before 12:00.
+5. Hand in on MyBeckett.
+
+**One thing to check:** the brief says your repo must be in the **ASE Classroom50 classroom**. Your repo is under your own GitHub account. If you created it from the module's classroom invitation link, it's fine. If you're not sure, check MyBeckett or ask your tutor before Monday.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Detailed and correct, but too long and wordy for me to follow (Entry 188). It also flagged that the repo must be in the ASE Classroom50 classroom.
+
+---
+
+### Entry 188 – 2026-11-16 02:50 – Branch: `main` (no code)
+
+**Prompt:**
+```
+I DONT UNDERSTAND THE DEMO SCRIPT CAN YOU GIVE ME VERY EASY ONE WITH NO FANCY WORDS AND EASY TO UNDERSTAND AND NATURAL
+```
+
+**AI actions:** The AI checked GitHub again (README still the template) and rewrote the script in short, plain sentences (5 pages).
+
+**AI response (full):**
+````
+[File sent: Easy_Demo_Script.pdf – a 5-page demo script in simple words]
+
+I've made `Easy_Demo_Script.pdf`, a simpler script in plain, everyday words. It works like this:
+- **Blue boxes** are what to say. Say them in your own words; you don't need to read them exactly.
+- **"Show"** lines tell you what to click or open.
+- **Green lines** tell you when to tick **Yes** on the form.
+
+It goes in the same order as your form: hello, setting up, then Features 1, 2, 3 and 4, a quick live fix, and finish. The video should be about 20 minutes.
+
+**Important, because today is the deadline (12:00 noon):** your README on GitHub is **still the empty template**. The form asks you to show it in the video, so it has to be done **before you record**. Send me these 3 things now and I'll write it for you straight away:
+1. **Your course** (full name)
+2. **Your tutor group** (which option on the form)
+3. **Your tutor's name**
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The simpler version is much easier to use. The first version should have been written this way.
+
+---
+
+### Entry 189 – 2026-11-16 02:56 – Branch: `main` (no code)
+
+**Prompt:**
+```
+Student ID: 77750990 | MSc Information Technology, Group 4 Wednesday 9am, TUTOS NAME- Duncan Mullier
+```
+
+**AI actions:** The AI read the README template, docfx.json, .gitignore, StarChart3D.csproj and the public members of every class on main, and the log entry that records how the 2,000-star file was made, then wrote the README. It kept the template's top section (replacing the placeholders) and the template's module information below its own sections.
+
+**AI response (full):**
+````
+[Files sent: README.md (full new README) and log_entries_176_189.md]
+
+Your README is ready. It now has:
+- **Name:** Kaushal Babu Yadav · **Group:** Group 4 (Wednesday 9am) · **Course:** MSc Information Technology · **Tutor:** Dr Duncan Mullier
+- **My choice of AI and approach:** the paragraph you also paste into the form
+- **Setting up:** macOS, VS Code, .NET 10, Raylib-cs, and why not WPF
+- **Star data:** HYG v4.4, its licence, and the exact command used to keep the 2,000 nearest stars
+- **What the program does:** all 4 features and their keys
+- **Class structure:** a table of every class, plus how they fit together
+- **Branches and pull requests**, known limitations and references
+
+I left the template's own sections below it, as the template asks. I didn't put your student ID in the README, because the repo is public; it only goes in the form. The YouTube link is still the placeholder, and we'll add it after you upload.
+
+I also fixed the two small things: your name in `docfx.json`, and `.DS_Store` added to `.gitignore`. These are done with commands, so you don't need to download hidden files.
+
+**Steps (close the star window first).** Download `README.md` and `log_entries_176_189.md`, then run these one at a time:
+```
+cd ~/Desktop/ASEportfolio2026
+```
+```
+git checkout main
+```
+```
+git pull
+```
+```
+git log --oneline -1
+```
+It should show **e810eed Feature 4 Additional**.
+```
+ls ~/Downloads/README*.md ~/Downloads/log_entries_176_189.md
+```
+It must show `README.md` (not `README (1).md`) and the log file.
+```
+mv ~/Downloads/README.md README.md
+```
+```
+cat ~/Downloads/log_entries_176_189.md >> 01Assignment1_AIprogramming_3DstarChart/AI_programming_log.md
+```
+```
+sed -i '' 's/\[put my name here\]/Kaushal Babu Yadav/' docfx.json
+```
+```
+printf '\n# macOS Finder files\n.DS_Store\n' >> .gitignore
+```
+```
+grep -c "^### Entry" 01Assignment1_AIprogramming_3DstarChart/AI_programming_log.md
+```
+It should print **191**.
+```
+git add --dry-run .
+```
+It should list exactly 4 files: `.gitignore`, `01Assignment1_AIprogramming_3DstarChart/AI_programming_log.md`, `README.md` and `docfx.json`.
+
+Send me a screenshot before you commit.
+````
+
+**README.md written by the AI (full):**
+````markdown
+# Advanced Software Engineering
+## Semester 1 2026
+
+# Name: Kaushal Babu Yadav
+# Group: Group 4 (Wednesday 9am)
+# Course: MSc Information Technology
+# Tutor: Dr Duncan Mullier
+
+### [YouTube Demo Link for Assignment1](https://insertYourLinkHere)
+
+### [YouTube Demo Link for Assignment2](https://insertYourLinkHere)
+
+
+---
+
+# Assignment 1: AI Programming – 3D Star Chart (StarChart3D)
+
+All the code is in [`01Assignment1_AIprogramming_3DstarChart/StarChart3D`](01Assignment1_AIprogramming_3DstarChart/StarChart3D).
+The logs are [`AI_programming_log.md`](01Assignment1_AIprogramming_3DstarChart/AI_programming_log.md) (every programming prompt, full response, code, explanation and critique) and [`AI_domainExpert_log.md`](01Assignment1_AIprogramming_3DstarChart/AI_domainExpert_log.md) (astronomy questions).
+
+## My choice of AI system and approach
+
+I used **Claude (Anthropic), model Claude Opus 5.5, through the Claude app on my Mac** as my AI programming assistant, and a **separate Claude chat as my astronomy domain expert**. I chose Claude because it can read my GitHub repository and the assignment brief, explain the code it writes in plain English, test its own code before giving it to me, and work step by step with me. I used a cloud model instead of a local LLM so that I did not have to install and run a large model on my MacBook Air. My approach was to treat the AI as a junior developer: I asked for one sub-feature at a time, ran and checked the result on my own Mac, and only then committed it with its log entry. I ran every git command myself – the AI only read my repository to check my commits. I questioned the AI's answers and recorded the bugs and misconceptions it introduced in the critique of each log entry, for example a misread data column, a click feature that only worked on the list and not on the stars, and a "working" test that was really running the old program. Domain questions (how stars are named, what "bearing" and "path" mean) were asked in the separate chat, and the AI checked the expert's answer against the real star data before using it.
+
+## Setting up my environment
+
+I developed on **macOS (MacBook Air)**, so I could not use the tutorial's WPF and Helix Toolkit, which only run on Windows. I used **Raylib-cs**, a cross-platform C# wrapper for the raylib graphics library, instead.
+
+1. Install **.NET SDK 10** (I used 10.0.403) from https://dotnet.microsoft.com/download and check it with `dotnet --version`.
+2. Install **Visual Studio Code** and its **C# Dev Kit** extension.
+3. Clone this repo and create the project:
+   ```
+   cd 01Assignment1_AIprogramming_3DstarChart
+   dotnet new console -n StarChart3D
+   cd StarChart3D
+   dotnet add package Raylib-cs --version 8.1.0
+   ```
+4. The star data file is in `StarChart3D/Data/` and is copied next to the program when it builds (see `StarChart3D.csproj`).
+5. Run it:
+   ```
+   cd 01Assignment1_AIprogramming_3DstarChart/StarChart3D
+   dotnet run
+   ```
+AI set-up: no installation is needed – I used the Claude app (claude.ai) with my account, with one chat for programming and one for domain questions.
+
+## Star data
+
+The stars come from the **HYG database v4.4** by astronexus (https://codeberg.org/astronexus/hyg), licensed **CC BY-SA 4.0**. The full file has 119,614 stars and 37 columns. I kept the header and the **2,000 nearest stars** (including the Sun) by sorting on the distance column:
+```
+(head -1 hyg_v44.csv; tail -n +2 hyg_v44.csv | LC_ALL=C sort -t, -k10,10g | head -2000) > stars_local_2000.csv
+```
+The farthest of these is GJ 3925A at 20.53 parsecs (about 67 light years). 89 of the stars have a proper name.
+
+## What the program does
+
+StarChart3D shows the 2,000 real stars nearest the Sun in 3D and lets you fly between them.
+
+- **Feature 1 – Star chart:** reads the star file into `Star` objects held in a `StarCollection`, and gives stars without a proper name a catalogue name (Bayer, then Flamsteed, Gliese, HIP, HYG; A/B for double stars), e.g. "Alpha Centauri", "61 Cygni", "GJ 3622".
+- **Feature 2 – 3D visualising:** each star is a small sphere at its real position, coloured by spectral class (O, B, A, F, G, K, M, white dwarf, unknown), with a colour key and name labels. **F** shows only named stars. Zoom, rotate and pan with the mouse (wheel, left-drag, right-drag) or keyboard (+/-, arrows, W/A/S/D/Q/E). **R** resets.
+- **Feature 3 – 3D movement:** at start-up the camera flies in to the Sun; "dust" particles streak past to show motion; a list shows the 10 nearest stars with **distance (light years), bearing and path (degrees)**. Click a star, click a row, or press **1–9, 0** to fly there; on arrival the list is worked out from the new star.
+- **Feature 4 – Additional (a spaceship game):** **V** switches to a spaceship (W/S throttle, X stop, arrows or mouse to steer, Q/E roll); a flight display shows heading, target, distance, bearing, path, off-course angle and arrival time (**T** or a click picks the target); **P** autopilot flies to the target and stops; **C** switches between cockpit view and a chase view of a 3D ship model.
+
+Bearing and path follow the domain expert's definition (AI_domainExpert_log.md, Entry 2): bearing is the angle in the equatorial plane from the vernal equinox direction, `atan2(dy, dx)` (0–360°); path is the angle above or below that plane, `atan2(dz, horizontal distance)` (−90° to +90°).
+
+## Class structure
+
+| Class / file | Feature | What it does |
+|---|---|---|
+| `Program.cs` | all | Top-level program: loads the stars, opens the Raylib window and runs the main loop (reads keys, switches between chart view and ship mode, draws each frame). |
+| `Star` (`Star.cs`) | 1 | One star from the HYG data: id, catalogue numbers, proper name, distance, position (x, y, z in parsecs), spectral type. `DisplayName` gives the proper name or else the `CatalogueName`. |
+| `StarCollection` (`StarCollection.cs`) | 1 | Reads the CSV file by column name into a list of `Star`s; implements `IReadOnlyList<Star>`; `FindById`; keeps any skipped lines. |
+| `CatalogueNames` (static) | 1 | Builds a catalogue name for stars without a proper name (Bayer → Flamsteed → Gliese → HIP → HYG), with Greek letters, constellation genitives and A/B components. |
+| `SpectralClass` (enum) and `SpectralClasses` (static) | 2 | The spectral classes; `Parse` reads the class from the spectral type text; `ColourOf` and `NameOf` for drawing and the key. |
+| `StarRenderer` | 2, 3, 4 | Draws the stars, labels and colour key; the named-star filter; converts between HYG and Raylib coordinates; `StarAt` finds the star under the mouse; `StarNearestDirection` finds the star at the crosshair. |
+| `CameraController` | 2, 3 | The orbit camera (distance, yaw, pitch, target): zoom/rotate/pan from mouse and keyboard, the animated `FlyTo` with easing, `Reset` and `LookFrom`. |
+| `DustField` | 3 | 400 faint particles in a box around the camera that streak past when the camera moves. |
+| `Course` (record struct) | 3, 4 | Distance, bearing and path from one star (or any point) to another; `ToNearest` finds the nearest stars. |
+| `NearbyStarsPanel` | 3 | The list of the 10 nearest stars to the current location; selecting a row by click or number key; recalculates when the location changes. |
+| `ShipController` | 4 | The spaceship: position, quaternion orientation, throttle and speed, steering and roll, autopilot, cockpit and chase cameras. |
+| `FlightHud` (static) | 4 | The flight display: crosshair, target marker or edge arrow, heading, distance, bearing, path, off-course angle, arrival time and autopilot status. |
+| `ShipModel` (static) | 4 | Draws the 3D spaceship from triangles, with an engine glow that grows with speed. |
+
+How they fit together: `Program` creates a `StarCollection` (made of `Star`s, named by `CatalogueNames`), a `StarRenderer`, a `CameraController`, a `DustField`, a `NearbyStarsPanel` (which uses `Course`) and a `ShipController`. Each frame it updates either the camera or the ship, then draws the stars, dust, ship model, labels and panels.
+
+## Branches and pull requests
+
+| Feature | Branch | Commits | Pull request (merge message) |
+|---|---|---|---|
+| 1 | `feature1-create-star-chart` | 4 | #1 "Feature 1 Star Chart" |
+| 2 | `feature2-visualising-star-chart` | 6 | #2 "Feature 2 3D Visualising the Star Chart" |
+| 3 | `feature3-3d_movement` | 4 | #3 "Feature 3 3D movement" |
+| 4 | `feature4-additional-facilities` | 4 | #4 "Feature 4 Additional" |
+
+## Known limitations
+
+Stars and the ship are drawn much larger than real scale so they can be seen; ship speeds are far faster than light so trips take seconds; there is no collision, so you can fly through stars; the autopilot flies in a straight line; errors in the HYG data are kept as they are (e.g. Capella is listed as class M1).
+
+## References
+
+- Hipparcos, Yale, Gliese (HYG) database v4.4, astronexus, CC BY-SA 4.0 – https://codeberg.org/astronexus/hyg
+- Raylib-cs 8.1.0 (zlib licence) – https://github.com/ChrisDill/Raylib-cs
+- Claude (Anthropic), Claude Opus 5.5, used as AI programming assistant and domain expert – all use recorded in the two log files.
+
+---
+
+Feel free to delete any of the information below to tidy up your readme, but do not delete the above information as it is used for marking and do not delete any files in the repo as some are used for building documentation for your assignments.
+
+
+[Details on how to create a project in these repo directories.](https://github.com/LeedsBeckettUniversityASE/ASEresources/blob/main/VisualStudioProjects.md)
+
+## Assignments
+
+You must be logged into myBeckett to view the assignment spec. Sync your browswer with your LBU account.
+
+[Assignment Specification](https://leedsbeckett-my.sharepoint.com/:b:/g/personal/d_mullier_leedsbeckett_ac_uk/IQAfMN9DgVEdQJIvbNKtkIhCAe4herw6o4nj_Iun4tXZeNU?e=JiytOR)
+
+**See The Assignment Specification for assignment dates**. They are not repeated here becuase software engineers do not repeat things as this leads to bugs.
+### [Useful Links for the Assignments](https://github.com/LeedsBeckettUniversityASE/ASEresources/blob/main/UsefulLinks.md).
+These links are likely to be updated as more information is added, so check reqularly.
+## Assignment 1: AI Programming 3D Star Chart
+See the assignment spec for details. You are expected to implement a 3D star chart using AI programming techniques. The star chart should allow users to visualise stars in a three-dimensional space, with features such as zooming, rotating and filtering based on star properties.
+
+You must explain your code in your demo or you will be asked to do it again/a live demo.
+
+Edit the YouTube Link above, the part in the square brackets is the text you see and doesn't need to change. Put the url of your demo inside the round brackets and check it clicks through to your demo.
+
+## Assignment 2: BOOSE Programming Language interpreter
+See the assignment spec for details. You are expected to implement an interpreter for the BOOSE programming language. The interpreter should be able to parse and execute BOOSE code, handling various constructs such as variables, loops, conditionals, and functions.
+
+You must explain your code in your demo or you will be asked to do it again/a live demo.
+
+Edit the YouTube Links above, the part in the square brackets is the text you see and doesn't need to change. Put the url of your demo inside the round brackets and check it clicks through to your demo.
+
+# Submitting Assignments
+This applies to **both** assignments.
+
+**You MUST do all of these steps or you will lose marks**. All details are in the **Assignment Specification**.
+
+Apologies if this all seems a bit patronising but every year I get a handful who take longer to process than everyone else combined because they don't read instructions.
+### All code must be part of the Classroom50 Classroom, using the this template repo. You should not commit after the deadline.
+### You must provide a YouTube Demo that is uploaded as public but unlistable and the link must be provided in this README.md file above (edit the link). 
+The demo should showcase the functionality of your assignments and demonstrate your understanding of the code. You must use a microphone and explain your code. 
+See Assignment Specification and [YouTube demo software document](https://github.com/LeedsBeckettUniversityASE/ASEresources/blob/main/Recording_A_YouTube_Demo.md)
+### You MUST submit links to your video, repo and upload your source code directory to **myBeckett**, this is the official submission that records your hand in time, 
+If you do not do this on time it is officially not handed in/late.
+
+[University's Flexible Submission Policy](https://drive.google.com/file/d/108-9vWaaakjDZKFBI6SffSGaSzmYbNJk/view?usp=sharing)
+
+[University's Extenuating Circumstance Policy](https://www.leedsbeckett.ac.uk/student-information/exams-assessments-and-awards/mitigation-and-extenuating-circumstances/)
+
+**Module Leaders cannot give out extensions, so don't ask, instead click the above link**
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The class structure table was checked against the real public members of each class. The AI left my student ID out of the public README on purpose. Weakness: the YouTube link is still a placeholder until I upload the video.
+
+---
