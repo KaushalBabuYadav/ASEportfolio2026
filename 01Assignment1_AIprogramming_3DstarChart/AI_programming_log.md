@@ -13965,3 +13965,519 @@ If you do not do this on time it is officially not handed in/late.
 The class structure table was checked against the real public members of each class. The AI left my student ID out of the public README on purpose. Weakness: the YouTube link is still a placeholder until I upload the video.
 
 ---
+
+### Entry 190 – 2026-11-16 03:02 – Branch: `main` (no code)
+
+**Prompt:**
+```
+HERE
+```
+[Screenshot: `git pull` fast-forwarded main (8 files changed); `git log --oneline -1` showed e810eed (HEAD -> main, origin/main) Feature 4 Additional]
+
+**AI response (full):**
+````
+The first steps worked. You're on **main** at **e810eed Feature 4 Additional**, the same as GitHub, and `git pull` brought in all the Feature 3 and 4 files.
+
+You're already in the right folder (`ASEportfolio2026 %`). Carry on with the next commands, one at a time.
+
+**1. Check that both files are in Downloads:**
+```
+ls ~/Downloads/README*.md ~/Downloads/log_entries_176_189.md
+```
+It must show `README.md` (not `README (1).md`) and `log_entries_176_189.md`. If one is missing, download it again from my last message.
+
+**2. Put the README in place and add the log entries:**
+```
+mv ~/Downloads/README.md README.md
+```
+```
+cat ~/Downloads/log_entries_176_189.md >> 01Assignment1_AIprogramming_3DstarChart/AI_programming_log.md
+```
+
+**3. Fix the two small files:**
+```
+sed -i '' 's/\[put my name here\]/Kaushal Babu Yadav/' docfx.json
+```
+```
+printf '\n# macOS Finder files\n.DS_Store\n' >> .gitignore
+```
+
+**4. Check:**
+```
+grep -c "^### Entry" 01Assignment1_AIprogramming_3DstarChart/AI_programming_log.md
+```
+It should print **191**.
+```
+git add --dry-run .
+```
+It should list exactly 4 files: `.gitignore`, `01Assignment1_AIprogramming_3DstarChart/AI_programming_log.md`, `README.md` and `docfx.json`.
+
+Send me a screenshot before you commit.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 191 – 2026-11-16 03:04 – Branch: `main` (no code)
+
+**Prompt:**
+```
+HERE
+```
+[Screenshot: mv README, cat log entries, sed docfx.json, printf .gitignore; `grep -c` printed 191; `git add --dry-run .` listed .gitignore, AI_programming_log.md, README.md and docfx.json]
+
+**AI response (full):**
+````
+Everything checks out:
+- The log has **191** headings.
+- Exactly the **4 correct files** are listed: `.gitignore`, the log, `README.md` and `docfx.json`.
+
+Now commit and push, one at a time.
+
+**Step 1.**
+```
+git add .
+```
+
+**Step 2.**
+```
+git commit -m "Setup: complete README (details, AI choice, setup, class structure), add name to docfx.json, ignore .DS_Store"
+```
+
+**Step 3.**
+```
+git push
+```
+
+Send me a screenshot after `git push`, and I'll check the README on GitHub. After that you can record the video with `Easy_Demo_Script.pdf`.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues. The AI had rehearsed these exact commands on a copy of main before sending them.
+
+---
+
+### Entry 192 – 2026-11-16 03:05 – Branch: `main` (no code)
+
+**Prompt:**
+```
+HERE
+```
+[Screenshot: `git push`: e810eed..06cd496 main -> main]
+
+**AI actions:** The AI checked commit 06cd496 on GitHub (read-only): 4 files, README identical to the one it wrote, 191 headings, name in docfx.json, .DS_Store in .gitignore.
+
+**AI response (full):**
+````
+Your README is now live on GitHub, and I've checked it. Commit **`06cd496`** changed exactly the 4 files. The README matches what I wrote, the log has 191 entries, your name is in `docfx.json`, and `.DS_Store` is now ignored.
+
+**Now record the video.** Follow `Easy_Demo_Script.pdf`.
+
+**Before you press record:**
+- Fill in the form's text boxes first, but don't submit yet. For the AI paragraph, copy the "My choice of AI system and approach" paragraph from your README on GitHub.
+- In the VS Code terminal, type `cd 01Assignment1_AIprogramming_3DstarChart/StarChart3D` so that `dotnet run` works straight away.
+- Leave enough battery: you're at 35%, so plug in your charger.
+
+**After recording (all before 12:00 today):**
+1. Upload to YouTube as **Unlisted** and copy the link.
+2. Edit your form response, paste the link, and submit.
+3. Send me the link. I'll give you a short command to put it in the README, plus the last log entry, to commit and push.
+4. On MyBeckett, hand in the repo link, the YouTube link and a zip of your project folder.
+
+Good luck with the recording!
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues. The README was committed to main directly because it is setup, not part of a feature.
+
+---
+
+### Entry 193 – 2026-11-16 03:26 – Branch: `main` (no code)
+
+**Prompt:**
+```
+GIVE ME THESE KINDA DEMO SCRIPT BUT THE DEMO SCRIPT CAN YOU GIVE ME VERY EASY ONE WITH NO FANCY WORDS AND EASY TO UNDERSTAND AND NATURAL
+```
+[Attached: a classmate's demo script PDF for a different project, used only as an example of the layout]
+
+**AI actions:** The AI read the example only for its layout. It then collected everything from my own repo: the log entry range for each branch (Feature 1: 25–63, Feature 2: 65–109, Feature 3: 110–147, Feature 4: 152–180), the critiques of the Feature 1 and 2 entries, and the line numbers of the methods in every class on main. It checked the entry numbers it cites (e.g. the sort command in Entry 35, DrawPoint3D in Entries 115–120) and built a 12-page PDF.
+
+**AI response (full):**
+````
+[File sent: StarChart3D_Demo_Script_Kaushal.pdf – a 12-page demo script in SHOW / SAY / FORM style, following the form question by question]
+
+I've made `StarChart3D_Demo_Script_Kaushal.pdf` in the same style as the example you sent, but in simple words and all about **your** project. The example was for someone else's project (different code, different numbers), so I didn't copy anything from it.
+
+It goes through your form question by question. Each question has up to three labels:
+- **SHOW:** what to open, with the exact file and line number, e.g. `Course.cs` line 43. In VS Code, press **Ctrl+G** and type the line number to jump there.
+- **SAY:** short, natural sentences to say in your own words.
+- **FORM:** exactly what to type or tick.
+
+Everything in it is checked against your real code and log on GitHub:
+- **The commit count for each feature**, with the commit codes.
+- **Real mistakes the AI made**, with their log entry numbers, so you can show them on screen. For example: the wrong column in Entry 45, only the list being clickable in Entry 130, and the old program in Entries 153–155.
+- **The AI paragraph**, ready to paste into the form.
+- **The answer for the "explain each facility" box**, ready to type.
+- **A short live fix**, in case they ask you to fix something.
+
+There's one small difference from my earlier sheet: on GitHub, **PR #1's commit list shows 5 commits**, because one log commit was also on that branch. The script now says 5, so it matches what the marker sees.
+
+You have until **12:00 today**. Record, upload as **Unlisted**, then send me the YouTube link and I'll give you the last README step.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI did not copy the other student's content; every line number, entry number and commit in my script comes from my own repo. It corrected its earlier commit count for Feature 1 (PR #1 shows 5 commits, not 4, because a log commit was on that branch).
+
+---
+
+### Entry 194 – 2026-11-16 03:51 – Branch: `main` (no code)
+
+**Prompt:**
+```
+I WANT TO RUN MY CODE
+```
+
+**AI response (full):**
+````
+Run these in the VS Code terminal, one at a time:
+
+```
+cd ~/Desktop/ASEportfolio2026/01Assignment1_AIprogramming_3DstarChart/StarChart3D
+```
+```
+dotnet run
+```
+
+The star window opens and flies in to the Sun. Press **Esc** to close it.
+
+To run it again in the same terminal, you only need `dotnet run`. The prompt ending in `StarChart3D %` means you're in the right folder.
+
+If you get an error, send me a screenshot.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 195 – 2026-11-16 04:34 – Branch: `main` (no code)
+
+**Prompt:**
+```
+why my camera isint enable
+```
+[Screenshot: OBS with Video Capture Device, Display Capture and Window Capture sources; the preview showed an "infinite tunnel" of OBS windows and no camera picture]
+
+**AI response (full):**
+````
+There are two common reasons the camera doesn't show in OBS on a Mac. Try them in this order.
+
+**1. Give OBS permission to use the camera** (this is the most likely cause)
+1. Open **System Settings → Privacy & Security → Camera**.
+2. Turn **OBS** on. If OBS isn't in the list, skip to step 2 below first, then come back.
+3. **Quit OBS completely** with **Cmd+Q**, then open it again. A Mac only applies the new permission after a restart.
+
+**2. Choose the camera in the source**
+1. In OBS, under **Sources**, **double-click "Video Capture Device"**.
+2. Next to **Device**, choose your Mac's camera, for example "MacBook Air Camera".
+3. Click **OK**.
+
+The camera picture should now appear on top of your screen. Drag it into a corner, and drag its red corner handles to make it small, so it doesn't cover your code.
+
+**Two more things I can see in your screenshot:**
+- **The "tunnel" of OBS windows inside each other is normal.** OBS is recording the screen while OBS itself is on the screen. When you switch to the form, VS Code or the star window, it goes away. Start recording, then click away from OBS.
+- **Turn off "Window Capture"** by clicking its eye icon. You only need **Display Capture** (your screen) and **Video Capture Device** (your camera).
+
+**Your microphone works:** the green bars move under **Mic/Aux**.
+
+You don't actually need the camera. The brief only asks for a screen recording with your voice. So if the camera still won't work after those two steps, record without it rather than losing time. You have until **12:00**. Your battery is at 19%, so keep the charger plugged in.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Correct diagnosis steps. The AI also said honestly that a camera is not required by the brief, so I should not lose time on it.
+
+---
+
+### Entry 196 – 2026-11-16 04:35 – Branch: `main` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: System Settings → Privacy & Security → Camera listed Brave Browser, Microsoft PowerPoint, WhatsApp and Zoom, but not OBS]
+
+**AI response (full):**
+````
+OBS isn't in the list yet. A Mac only adds an app there after the app has asked for the camera, and OBS hasn't asked. Here's how to make it ask:
+
+1. **Quit OBS completely:** click on OBS, then press **Cmd+Q**.
+2. **Open OBS again.**
+3. Under **Sources**, **double-click "Video Capture Device"**. In the window that opens, next to **Device**, choose your Mac's camera, for example "MacBook Air Camera".
+4. A pop-up should appear: **"OBS would like to access the camera"**. Click **Allow**.
+
+If no pop-up appears, run this in the Terminal app to reset OBS's camera permission:
+```
+tccutil reset Camera com.obsproject.obs-studio
+```
+Then repeat steps 1–4.
+
+If OBS now shows up in **Privacy & Security → Camera**, switch it **on**, then quit and reopen OBS once more.
+
+**If it still doesn't work after one try, skip the camera.** The brief doesn't ask for it: you only need your screen and your voice, and your microphone already works. It's 4:35 and the deadline is **12:00**, so recording the demo matters more than the camera.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 197 – 2026-11-16 04:42 – Branch: `main` (no code)
+
+**Prompt:**
+```
+here while recording scrren its zoomed out and not showing entire screen
+```
+[Screenshot: OBS with a working camera (Video Capture Device 2) in the corner; the Display Capture did not fill the canvas]
+
+**AI response (full):**
+````
+Good news first: **your camera works now.** You can see yourself in the bottom-right corner.
+
+The screen is too big for the recording area, so part of it is cut off. Fix it like this:
+
+**1. Make the screen fit**
+- Under **Sources**, **right-click "Display Capture"** and choose **Transform → Fit to screen** (or click it and press **Cmd+F**). The whole screen should now fit inside the preview.
+
+**2. If it still doesn't fill the area properly, match the size to your Mac's screen**
+- Click **Settings** (bottom right) → **Video**.
+- **Base (Canvas) Resolution:** `1470x956`
+- **Output (Scaled) Resolution:** `1470x956`
+- Click **OK**, then do step 1 again (**Transform → Fit to screen**).
+
+**3. Tidy the sources**
+- **Delete "Video Capture Device"** (the old one that didn't work): click it, then the **bin icon**. Keep **"Video Capture Device 2"**, which is your working camera.
+- **Turn off "Window Capture"** by clicking its eye icon.
+- Keep "Video Capture Device 2" **at the top of the list**, so your face shows on top of the screen.
+
+**4. Put the camera in a corner**
+- Click your camera picture and drag it into the **bottom-right corner**.
+- Make it small using the red corner handles, so it doesn't cover the code or the form.
+
+The "tunnel" of OBS windows in the preview is normal while OBS is on screen. Once you click **Start Recording** and switch to the form, VS Code or the star window, the recording shows that instead.
+
+**Before your real recording:** do a **10-second test**. Start Recording, say a few words, Stop Recording, then watch it, which is saved in your Movies folder. Check that the whole screen and your voice are there. You have until **12:00**.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The camera worked after re-adding the device. The AI's first fix (Transform → Fit to screen) was right in principle, but it did not notice that the real cause was the Crop setting (next entries).
+
+---
+
+### Entry 198 – 2026-11-16 04:44 – Branch: `main` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: Display Capture properties with Crop set to "To window and manual" and no window chosen]
+
+**AI response (full):**
+````
+That **Crop** setting is the problem. It's set to **"To window and manual"**, but no window is chosen, so the screen is cut down and the preview has gone black.
+
+**Fix:**
+1. In that dropdown menu, click **None**.
+2. Check that **Display** says **"Built-in Retina Display"**.
+3. Click **OK**.
+4. Back in OBS, **right-click "Display Capture"** in Sources → **Transform → Fit to screen**.
+
+Your whole screen should now show in the preview, with your camera in the corner.
+
+Then:
+- Click the old **"Video Capture Device"** (the one that isn't working), then the **bin icon** to delete it.
+- Click the **eye** next to **"Window Capture"** to hide it.
+
+Do a 10-second test recording, check it, then record the real demo.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI found the real cause from the screenshot.
+
+---
+
+### Entry 199 – 2026-11-16 04:46 – Branch: `main` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: the Window list of Display Capture open, with "[Dock] Wallpaper-" ticked]
+
+**AI response (full):**
+````
+You've opened the **Window** list. That's the wrong box, and it's currently set to "[Dock] Wallpaper", which is why only part of the screen shows. Don't pick anything from this list.
+
+**Easiest fix:**
+1. Press **Esc** to close this list.
+2. Click the **Defaults** button at the bottom left of this window. That resets Display Capture to record your whole screen.
+3. Check that **Crop** now says **None**. If it doesn't, click the Crop box and choose **None**.
+4. Click **OK**.
+5. In OBS, **right-click "Display Capture"** → **Transform** → **Fit to screen**.
+
+Your whole screen should now fill the preview, with your camera in the corner. Then do a quick 10-second test recording.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Using the Defaults button was the simplest reset.
+
+---
+
+### Entry 200 – 2026-11-16 04:47 – Branch: `main` (no code)
+
+**Prompt:**
+```
+here
+```
+[Screenshot: Display Capture properties: Display "Built-in Retina Display: 1470x956 @ 0,0", Show cursor ticked, Crop "None"]
+
+**AI response (full):**
+````
+That's exactly right now:
+- **Display:** Built-in Retina Display (your whole screen)
+- **Crop:** None
+
+The small preview at the top already shows your whole screen.
+
+**Next:**
+1. Click **OK**.
+2. In OBS, **right-click "Display Capture"** → **Transform** → **Fit to screen**.
+3. **Delete the old "Video Capture Device"**, the greyed-out one: click it, then the **bin icon**. Keep the camera that shows your face.
+4. Click the **eye** next to **"Window Capture"** to hide it.
+5. Drag your camera picture into a corner and make it small.
+
+Then do a **10-second test**: click **Start Recording**, say "testing", click **Stop Recording**, and watch the video in your **Movies** folder. If the whole screen and your voice are there, you're ready to record the real demo. You have until **12:00**.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues.
+
+---
+
+### Entry 201 – 2026-11-16 04:47 – Branch: `main` (no code)
+
+**Prompt:**
+```
+there is nothing like this here In OBS, right-click “Display Capture” → Transform → Fit to screen.
+```
+
+**AI response (full):**
+````
+No problem, there's another way to get to the same option. First click **OK** to close the properties window, then try these in order.
+
+**Option A: the menu bar**
+1. In the **Sources** list, click **"Display Capture"** once, so it's highlighted in blue.
+2. In the menu bar at the very top of your screen, click **Edit** → **Transform** → **Fit to screen**.
+
+**Option B: the keyboard**
+1. Click **"Display Capture"** in Sources.
+2. Press **Cmd+F**.
+
+**Option C: right-click the picture**
+- Right-click the **big preview picture** itself (not the Sources list), then **Transform** → **Fit to screen**.
+
+If **Fit to screen** isn't there, choose **Stretch to screen** instead. It does almost the same thing.
+
+If none of these change anything, it may already fit. After clicking OK, look at the big preview. If it shows your **whole screen**, from the menu bar at the top to the bottom, you don't need to do anything. Just do the 10-second test recording.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+The AI's earlier instruction did not match what I saw in OBS; it gave alternatives (Edit menu, Cmd+F, right-click the preview) and said the step may not be needed.
+
+---
+
+### Entry 202 – 2026-11-16 07:02 – Branch: `main` (no code)
+
+**Prompt:**
+```
+ive done my recording
+```
+
+**AI response (full):**
+````
+Well done, the hardest part is finished. Here's what's left, all before **12:00**.
+
+**1. Upload to YouTube**
+1. Go to **studio.youtube.com** and sign in. If your university asks for it, use your student YouTube account.
+2. Click **Create → Upload videos** and choose your recording. OBS saves it in your **Movies** folder by default.
+3. **Title:** `ASE Component 1 – 3D Star Chart Demo – Kaushal Babu Yadav`
+4. Click **Next** until you reach **Visibility**, choose **Unlisted** (not Private), then click **Save**.
+5. Copy the video link. It looks like `https://youtu.be/...`
+
+**Check the link:** open it in a **private window** in your browser (Cmd+Shift+N). If the video plays there, the marker can see it too.
+
+**2. Send me the link.** I'll give you two commands: one puts the link in your README, the other adds the last log entry. Then you commit and push.
+
+**3. Edit your Google Form response.** Use the link in your confirmation email, or the "Edit your response" link. Paste the YouTube link in the demo-link box and **Submit** again.
+
+**4. Hand in on MyBeckett**
+- Your repo link: `https://github.com/KaushalBabuYadav/ASEportfolio2026`
+- Your YouTube link
+- A zip of your source code folder. In Finder, right-click the `ASEportfolio2026` folder on your Desktop → **Compress**.
+
+The upload can take a while, so start it now. Send me the link as soon as you have it.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+Clear list of the remaining hand-in steps, with the check that an Unlisted video opens in a private window.
+
+---
+
+### Entry 203 – 2026-11-16 07:19 – Branch: `main` (no code)
+
+**Prompt:**
+```
+https://youtu.be/0e3MlUKFqxY
+```
+
+**AI actions:** The AI checked GitHub (main = 06cd496, README line 9 still had the placeholder, 191 headings), wrote these log entries and a sed command that only changes line 9 (the Assignment 1 link, not the Assignment 2 one), and rehearsed it on a copy of main.
+
+**AI response (full):**
+````
+I've put your link into the README command and written the last log entries.
+
+**Steps.** Download `log_entries_190_203.md`, then run these one at a time in the VS Code terminal:
+```
+cd ~/Desktop/ASEportfolio2026
+```
+```
+git status
+```
+It should say "On branch main" and "nothing to commit, working tree clean".
+```
+sed -i '' '9s#https://insertYourLinkHere#https://youtu.be/0e3MlUKFqxY#' README.md
+```
+```
+grep -n "youtu.be" README.md
+```
+It should show line **9** with your link.
+```
+cat ~/Downloads/log_entries_190_203.md >> 01Assignment1_AIprogramming_3DstarChart/AI_programming_log.md
+```
+```
+grep -c "^### Entry" 01Assignment1_AIprogramming_3DstarChart/AI_programming_log.md
+```
+It should print **205**.
+```
+git add --dry-run .
+```
+It should list exactly 2 files: `01Assignment1_AIprogramming_3DstarChart/AI_programming_log.md` and `README.md`.
+
+Send me a screenshot before you commit.
+````
+
+**Critique (drafted with AI help, checked and edited by me):**
+No issues. Changing only line 9 avoids the Entry 40 mistake, where a find-and-replace changed more than one line.
+
+---
